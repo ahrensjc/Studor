@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
 		BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46972204EEA800E0D510 /* AppDelegate.swift */; };
 		BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46992204EEA800E0D510 /* ViewController.swift */; };
 		BEBA469D2204EEA800E0D510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBA469B2204EEA800E0D510 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BEBA46942204EEA800E0D510 /* Studor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBA46972204EEA800E0D510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBA46992204EEA800E0D510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				49A1D8DD22066A170039EE3F /* ProfileViewController.swift */,
 				BEBA46AB2206674D00E0D510 /* ExploreTableViewCell.swift */,
 				BEBA46A92206665D00E0D510 /* ExploreTableViewController.swift */,
 				BEBA469E2204EEAA00E0D510 /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 			files = (
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
+				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
 				BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */,
 			);
