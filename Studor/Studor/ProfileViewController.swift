@@ -3,7 +3,7 @@
 //  Studor
 //
 //  Created by JJ Swar on 2/2/19.
-//  Copyright © 2019 James Ahrens. All rights reserved.
+//  Copyright © 2019 JJ Swar. All rights reserved.
 //
 
 import UIKit
