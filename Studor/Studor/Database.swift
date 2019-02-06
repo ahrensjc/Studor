@@ -7,8 +7,35 @@
 //
 
 import Foundation
-//import Firebase
+import FirebaseDatabase
 
-class Database{
+//https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
+
+class Database {
+    var ref: DatabaseReference!
     
+    init(){
+        //ref = Database.database().reference()
+        ref = ref.database.reference()
+    }
+
+    
+    func createUser(username: String, email: String, password: String){
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            // ...
+            guard let user = authResult?.user else { return }
+        }
+    }
+    
+    func addTag(for user: String){
+        
+    }
+    
+    /*
+    func getContacted(for user: String) -> [String]{
+        return
+    }
+    */
 }
+
