@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+/*
+ Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+
+    guard let user = authResult?.user else { return }
+ }
+ */

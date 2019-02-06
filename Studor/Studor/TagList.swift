@@ -14,8 +14,4 @@ class TagList{
     func getList() -> [String]{
         return data
     }
-    
-    func add(tag: String){
-        data.append(tag)
-    }
 }

@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class SignInSignUp : UIViewController {
 
-    @IBOutlet weak var usernameBox : UITextField?
+    @IBOutlet weak var usernameBox : UITextField!
 
-    @IBOutlet weak var passwordBox : UITextField?
+    @IBOutlet weak var passwordBox : UITextField!
+    
+    let handle: AuthStateDidChangeListenerHandle? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +23,19 @@ class SignInSignUp : UIViewController {
     }
 
     @IBAction func tapSignIn() {
-        if(usernameBox.text?.count <= 0 || passwordBox.text?.count <= 0) {
+        if(usernameBox.text!.count <= 0 || passwordBox.text!.count <= 0) {
+            signInUser(email: usernameBox.text!, password: passwordBox.text!)
             return
         }
+    }
+    
+    func signInUser(email: String, password: String){
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // get current user data here
     }
 }
