@@ -22,9 +22,9 @@ class Database {
     
     func createUser(username: String, email: String, password: String){
         
-        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+        //Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             // ...
-            guard let user = authResult?.user else { return }
+            //guard let user = authResult?.user else { return }
         }
     }
     
