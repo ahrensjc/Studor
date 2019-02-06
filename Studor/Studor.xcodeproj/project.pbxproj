@@ -13,6 +13,7 @@
 		0D032B7E220A6B74001ED51E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D032B7D220A6B74001ED51E /* Tag.swift */; };
 		0D2C8FD2220A7A4200FC2AEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D032B82220A6D39001ED51E /* GoogleService-Info.plist */; };
 		0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C8FD3220A887800FC2AEA /* TagList.swift */; };
+		0D829552220B23F6008D72CB /* ViewController 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D82954E220B23F5008D72CB /* ViewController 2.swift */; };
 		3C81CC1B50DDC746DCEB9EA8 /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399BE7EBDB39893E19488E5F /* Pods_Studor.framework */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
 		BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46972204EEA800E0D510 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 		0D032B7D220A6B74001ED51E /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		0D032B82220A6D39001ED51E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D2C8FD3220A887800FC2AEA /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
+		0D82954E220B23F5008D72CB /* ViewController 2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController 2.swift"; sourceTree = "<group>"; };
 		399BE7EBDB39893E19488E5F /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		64637E5AADA09C087FC9E60B /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				0D82954E220B23F5008D72CB /* ViewController 2.swift */,
 				0D032B77220A6AC6001ED51E /* Database.swift */,
 				0D2C8FD3220A887800FC2AEA /* TagList.swift */,
 				0D032B7F220A6B82001ED51E /* UserObjects */,
@@ -314,6 +317,7 @@
 				0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */,
 				0D032B7C220A6B00001ED51E /* Event.swift in Sources */,
 				0D032B78220A6AC6001ED51E /* Database.swift in Sources */,
+				0D829552220B23F6008D72CB /* ViewController 2.swift in Sources */,
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
