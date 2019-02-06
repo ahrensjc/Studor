@@ -1,5 +1,5 @@
 //
-//  SignInSignUp.swift
+//  SignUp.swift
 //  Studor
 //
 //  Created by Sean Bamford on 2/5/19.
