@@ -23,6 +23,7 @@
 		BEBA46A22204EEAA00E0D510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBA46A02204EEAA00E0D510 /* LaunchScreen.storyboard */; };
 		BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46A92206665D00E0D510 /* ExploreTableViewController.swift */; };
 		BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46AB2206674D00E0D510 /* ExploreTableViewCell.swift */; };
+		BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB95F220BADA6005903C1 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		BEBA46A32204EEAA00E0D510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEBA46A92206665D00E0D510 /* ExploreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewController.swift; sourceTree = "<group>"; };
 		BEBA46AB2206674D00E0D510 /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewCell.swift; sourceTree = "<group>"; };
+		BEDFB95F220BADA6005903C1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D2C8FD3220A887800FC2AEA /* TagList.swift */,
 				0D032B7F220A6B82001ED51E /* UserObjects */,
 				49A1D8DD22066A170039EE3F /* ProfileViewController.swift */,
@@ -324,6 +327,7 @@
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
+				BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */,
 				0D032B7E220A6B74001ED51E /* Tag.swift in Sources */,
 				BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */,
 				0D032B7A220A6AEB001ED51E /* User.swift in Sources */,

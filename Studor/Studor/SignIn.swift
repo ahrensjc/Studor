@@ -8,12 +8,15 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class SignInSignUp : UIViewController {
 
     @IBOutlet weak var usernameBox : UITextField!
 
     @IBOutlet weak var passwordBox : UITextField!
+    
+    let ref: DatabaseReference = Database.database().reference()
     
     let handle: AuthStateDidChangeListenerHandle? = nil
 
