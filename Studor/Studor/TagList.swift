@@ -9,9 +9,31 @@
 import Foundation
 
 class TagList{
-    var data: [String] = ["COMP 222", "ACCT 101", "MATH 214"]
     
-    func getList() -> [String]{
-        return data
+    static var db: [String] = ["write script data here"]
+    
+    /*
+    
+    func parseRtf(){
+        
+        var contents: String = "none"
+        
+        if let filepath = Bundle.main.path(forResource: "TagData", ofType: "rtf") {
+            do {
+                contents = try String(contentsOfFile: filepath)
+                print(contents)
+                rawFileToArray(contents: contents)
+            } catch {
+                print("file error")
+            }
+        } else {
+            print("file not found")
+        }
     }
+    
+    func rawFileToArray(contents: String){
+        //var data: [String] = String(contents.split(separator: ","))
+        
+    }
+ */
 }
