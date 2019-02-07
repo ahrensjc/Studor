@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class SignInSignUp : UIViewController {
+class SignIn : UIViewController {
 
     @IBOutlet weak var usernameBox : UITextField!
 
@@ -26,7 +26,7 @@ class SignInSignUp : UIViewController {
     }
 
     @IBAction func tapSignIn() {
-        if(usernameBox.text!.count > 0 && passwordBox.text!.count > 0) {
+        if(usernameBox!.text!.count > 0 && passwordBox!.text!.count > 0) {
             signInUser(email: usernameBox.text!, password: passwordBox.text!)
             return
         }
