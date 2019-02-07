@@ -38,7 +38,7 @@ class SignInSignUp : UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        // get current user data here
+    override func viewDidAppear(_ animated: Bool) {
+        <#code#>
     }
 }
