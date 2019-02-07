@@ -29,7 +29,6 @@
 		0D2C8FD3220A887800FC2AEA /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		0D7D25B4220B9D01004A87C3 /* SignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
-		0D7D25B6220B9D01004A87C3 /* SignInSignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInSignUp.h; sourceTree = "<group>"; };
 		0D7D25BA220BA6A1004A87C3 /* TagData.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TagData.rtf; sourceTree = "<group>"; };
 		399BE7EBDB39893E19488E5F /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +90,6 @@
 			children = (
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				0D7D25B4220B9D01004A87C3 /* SignIn.swift */,
-				0D7D25B6220B9D01004A87C3 /* SignInSignUp.h */,
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
@@ -314,7 +312,6 @@
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
 				BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */,
-				0D032B7E220A6B74001ED51E /* Tag.swift in Sources */,
 				BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
