@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
+    
+    var db: DatabaseReference!
     
     @IBAction func nicknameEdit(_ sender: Any) {
         // TODO
@@ -45,6 +48,11 @@ class ProfileViewController: UIViewController {
         // get and set nickname data label text
         // get and set bio data text
         // get and set tag data
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        db = Database.database().reference()
+    
     }
     
 
