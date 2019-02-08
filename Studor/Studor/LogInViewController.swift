@@ -72,7 +72,7 @@ class LogInViewController: UIViewController {
      }
      */
 
-    func showMessagePrompt(withString: String, title: String){
+   /* func showMessagePrompt(withString: String, title: String){
         let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
 
         // add an action (button)
