@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SendBirdSDK
 
 class ViewController: UIViewController {
 

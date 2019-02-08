@@ -40,6 +40,7 @@
 #import "FUISortedArray.h"
 #import "FUITableViewDataSource.h"
 #import "FirebaseEmailAuthUI.h"
+#import "FUIConfirmEmailViewController.h"
 #import "FUIEmailAuth.h"
 #import "FUIEmailEntryViewController.h"
 #import "FUIPasswordRecoveryViewController.h"

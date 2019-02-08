@@ -76,39 +76,40 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (6.0.1):
-    - FirebaseUI/Anonymous (= 6.0.1)
-    - FirebaseUI/Auth (= 6.0.1)
-    - FirebaseUI/Database (= 6.0.1)
-    - FirebaseUI/Email (= 6.0.1)
-    - FirebaseUI/Facebook (= 6.0.1)
-    - FirebaseUI/Firestore (= 6.0.1)
-    - FirebaseUI/Google (= 6.0.1)
-    - FirebaseUI/Phone (= 6.0.1)
-    - FirebaseUI/Storage (= 6.0.1)
-    - FirebaseUI/Twitter (= 6.0.1)
-  - FirebaseUI/Anonymous (6.0.1):
+  - FirebaseUI (6.1.0):
+    - FirebaseUI/Anonymous (= 6.1.0)
+    - FirebaseUI/Auth (= 6.1.0)
+    - FirebaseUI/Database (= 6.1.0)
+    - FirebaseUI/Email (= 6.1.0)
+    - FirebaseUI/Facebook (= 6.1.0)
+    - FirebaseUI/Firestore (= 6.1.0)
+    - FirebaseUI/Google (= 6.1.0)
+    - FirebaseUI/Phone (= 6.1.0)
+    - FirebaseUI/Storage (= 6.1.0)
+    - FirebaseUI/Twitter (= 6.1.0)
+  - FirebaseUI/Anonymous (6.1.0):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (6.0.1):
+  - FirebaseUI/Auth (6.1.0):
     - Firebase/Auth (~> 5.0)
-  - FirebaseUI/Database (6.0.1):
+    - GoogleUtilities/UserDefaults
+  - FirebaseUI/Database (6.1.0):
     - Firebase/Database (~> 5.0)
-  - FirebaseUI/Email (6.0.1):
+  - FirebaseUI/Email (6.1.0):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (6.0.1):
+  - FirebaseUI/Facebook (6.1.0):
     - FBSDKLoginKit (~> 4.35)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (6.0.1):
+  - FirebaseUI/Firestore (6.1.0):
     - Firebase/Firestore
-  - FirebaseUI/Google (6.0.1):
+  - FirebaseUI/Google (6.1.0):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/Phone (6.0.1):
+  - FirebaseUI/Phone (6.1.0):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (6.0.1):
+  - FirebaseUI/Storage (6.1.0):
     - Firebase/Storage (~> 5.0)
     - SDWebImage (~> 4.0)
-  - FirebaseUI/Twitter (6.0.1):
+  - FirebaseUI/Twitter (6.1.0):
     - FirebaseUI/Auth
     - TwitterKit (~> 3.0)
   - GoogleAppMeasurement (5.5.0):
@@ -174,6 +175,7 @@ PODS:
   - SDWebImage (4.4.5):
     - SDWebImage/Core (= 4.4.5)
   - SDWebImage/Core (4.4.5)
+  - SendBirdSDK (3.0.130)
   - TwitterCore (3.2.0)
   - TwitterKit (3.4.2):
     - TwitterCore (>= 3.2.0)
@@ -184,6 +186,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FirebaseUI
+  - SendBirdSDK
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -212,6 +215,7 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - SDWebImage
+    - SendBirdSDK
     - TwitterCore
     - TwitterKit
 
@@ -229,7 +233,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 6f2b93b4f7bb8416628142763c91ccc00fa04c86
   FirebaseInstanceID: 97ea7a5dca9afd72c79bfcdddb7a44aa1cbb42a1
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
-  FirebaseUI: dc1a1d1b461f56aad18336640bfb2167a30df1c8
+  FirebaseUI: 9107a94d6637ca22eedd307a7e3d38c1a450f93a
   GoogleAppMeasurement: 621f3bc6211d5ba548debe01fafad30cf5ab6859
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
@@ -241,9 +245,10 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
+  SendBirdSDK: 150b73dd76574dd050cf283d8e5db5554c62339c
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 8ea309020300ba41baf91baf9a66018bd24fc7db
+PODFILE CHECKSUM: 1b72fabf57b7741e7507f0fac1d5d1beb1461610
 
 COCOAPODS: 1.6.0
