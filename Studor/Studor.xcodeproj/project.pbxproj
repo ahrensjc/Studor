@@ -22,6 +22,8 @@
 		BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46A92206665D00E0D510 /* ExploreTableViewController.swift */; };
 		BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46AB2206674D00E0D510 /* ExploreTableViewCell.swift */; };
 		BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB95F220BADA6005903C1 /* LogInViewController.swift */; };
+		BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */; };
+		BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		BEBA46A92206665D00E0D510 /* ExploreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewController.swift; sourceTree = "<group>"; };
 		BEBA46AB2206674D00E0D510 /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTableViewCell.swift; sourceTree = "<group>"; };
 		BEDFB95F220BADA6005903C1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
+		BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
+				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D2C8FD3220A887800FC2AEA /* TagList.swift */,
 				0D7D25BA220BA6A1004A87C3 /* TagData.rtf */,
@@ -195,7 +201,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -234,7 +240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4963B1CC858F07E81DF19154 /* [CP] Check Pods Manifest.lock */ = {
@@ -267,7 +273,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseEmailAuthUI.bundle",
@@ -294,7 +300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -306,10 +312,12 @@
 			files = (
 				0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */,
 				0D7D25B8220B9D02004A87C3 /* SignIn.swift in Sources */,
+				BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */,
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
 				0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
+				BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
 				BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */,
 				BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */,
