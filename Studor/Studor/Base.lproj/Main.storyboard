@@ -129,6 +129,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Explore" id="eMd-Bn-iIC"/>
+                    <connections>
+                        <outlet property="searchBar" destination="eBL-Wf-eIb" id="rNQ-ai-N71"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jg4-Nd-93m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
