@@ -54,6 +54,10 @@ class LogInViewController: UIViewController {
         
     }
     
+    @IBAction func cancelSignUpSegue(_ segue: UIStoryboardSegue){
+        print("Returning from sign up")
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if let user = Auth.auth().currentUser { // user is already logged in, so forward them to the home screen automatically
             self.performSegue(withIdentifier: "loginSuccess", sender: self)

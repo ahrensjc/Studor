@@ -142,7 +142,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jg4-Nd-93m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="-854"/>
+            <point key="canvasLocation" x="2636" y="-854.1229385307347"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sNb-z7-Ane">
@@ -200,7 +200,7 @@
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpButtonTapped:" destination="Ib6-tw-mOS" eventType="touchUpInside" id="bXH-Rv-Oju"/>
-                                    <segue destination="BEZ-zt-9L7" kind="show" identifier="" id="OAn-qa-9A6"/>
+                                    <segue destination="ss7-0Q-09W" kind="show" identifier="" id="OAn-qa-9A6"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Don't Have an Account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoN-kI-JIs">
@@ -294,6 +294,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="GGE-Pb-RDI"/>
                     </view>
+                    <navigationItem key="navigationItem" id="mxv-mI-lqO">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bfh-y6-8ij">
+                            <connections>
+                                <segue destination="z3K-4X-QnC" kind="unwind" unwindAction="cancelSignUpSegue:" id="fbW-VK-zO0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="accountType" destination="xUa-Xb-2Lt" id="YKU-SI-RfK"/>
                         <outlet property="confirmPasswordBox" destination="Q4S-D2-wsc" id="Lwx-dP-DO6"/>
@@ -303,8 +310,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mOE-lD-Ksw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="z3K-4X-QnC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-455.19999999999999" y="-655.32233883058473"/>
+            <point key="canvasLocation" x="268" y="-655"/>
         </scene>
         <!--Messages Table View Controller-->
         <scene sceneID="0d3-kd-ZQa">
@@ -346,7 +354,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-Vn-m8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="-117"/>
+            <point key="canvasLocation" x="2636" y="-117.39130434782609"/>
         </scene>
         <!--Chat Table View Controller-->
         <scene sceneID="2jL-KJ-ynk">
@@ -386,7 +394,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LqV-ES-bDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2628" y="-117"/>
+            <point key="canvasLocation" x="3567.1999999999998" y="-117.39130434782609"/>
         </scene>
         <!--Schedule Table View Controller-->
         <scene sceneID="rvR-wM-gMC">
@@ -465,7 +473,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2IU-qs-bPI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="-854"/>
+            <point key="canvasLocation" x="1792.8" y="-854.1229385307347"/>
         </scene>
         <!--Messages-->
         <scene sceneID="UW4-4l-pT2">
@@ -484,7 +492,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6q-XL-q1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="-117"/>
+            <point key="canvasLocation" x="1792.8" y="-117.39130434782609"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="DRp-on-wKf">
@@ -505,8 +513,26 @@
             </objects>
             <point key="canvasLocation" x="872.79999999999995" y="546.47676161919048"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ddG-rd-muc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ss7-0Q-09W" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6DC-Co-fTK">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BEZ-zt-9L7" kind="relationship" relationship="rootViewController" id="QjV-Rm-BlB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="66c-CT-5Fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-455.19999999999999" y="-655.32233883058473"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dwS-zY-wM5"/>
+        <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
 </document>
