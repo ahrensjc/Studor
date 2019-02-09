@@ -13,10 +13,8 @@ class SignUp : UIViewController {
     
     @IBOutlet weak var emailBox : UITextField!
 
-    @IBOutlet weak var usernameBox : UITextField!
-
-    @IBOutlet weak var passwordBox : UITextField!
-
+    @IBOutlet weak var passwordBox: UITextField!
+    
     @IBOutlet weak var confirmPasswordBox : UITextField!
 
     @IBOutlet weak var accountType : UISegmentedControl!
@@ -26,7 +24,7 @@ class SignUp : UIViewController {
     }
 
     @IBAction func tapSignUp(_ sender: Any){
-        if let email = emailBox.text, let password = passwordBox.text, let passwordConfirm = confirmPasswordBox.text {
+        if let email = emailBox?.text, let password = passwordBox?.text, let passwordConfirm = confirmPasswordBox?.text {
             
             if !isValidPassword(password: password, confirmPassword: passwordConfirm) && !isValidEmail(email: email){
                 return
