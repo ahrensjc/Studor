@@ -83,6 +83,7 @@
                         <outlet property="bioText" destination="wOm-T5-OYd" id="Vih-yx-VNo"/>
                         <outlet property="nicknameLabel" destination="p9n-Oj-KZI" id="s72-5J-GVm"/>
                         <outlet property="usernameLabel" destination="cad-3c-9pz" id="m4m-29-OO2"/>
+                        <segue destination="Ib6-tw-mOS" kind="show" identifier="logoutSuccess" id="ZqN-gz-AFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8G3-uP-K8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
