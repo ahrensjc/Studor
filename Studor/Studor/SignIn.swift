@@ -34,7 +34,11 @@ class SignIn : UIViewController {
     
     func signInUser(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
             
+            //if let us
         }
     }
     
