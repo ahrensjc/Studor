@@ -54,7 +54,10 @@ class LogInViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        if let user = Auth.auth().currentUser { // user is already logged in, so forward them to the home screen automatically
+            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+        }
     }
 
     func showMessagePrompt(withString: String, title: String){

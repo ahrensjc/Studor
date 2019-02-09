@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController {
             try firebaseAuth.signOut()
             print("Success logging out")
             self.performSegue(withIdentifier: "logoutSuccess", sender: self)
+            
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
             print("Fuck you you cant leave")
