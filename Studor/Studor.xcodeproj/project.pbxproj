@@ -23,6 +23,10 @@
 		BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB95F220BADA6005903C1 /* LogInViewController.swift */; };
 		BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */; };
 		BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */; };
+		BEDFB968220DC801005903C1 /* ChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB967220DC801005903C1 /* ChatTableViewController.swift */; };
+		BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */; };
+		BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */; };
+		BEDFB96E220E4788005903C1 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +49,12 @@
 		BEDFB95F220BADA6005903C1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		BEDFB967220DC801005903C1 /* ChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewController.swift; sourceTree = "<group>"; };
+		BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
+		BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
+		BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		C3F2A43405E5A6339E092E11 /* Pods-Studor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.release.xcconfig"; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +111,8 @@
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				BEDFB970220E47C1005903C1 /* Chat */,
+				BEDFB96F220E479E005903C1 /* Messages */,
 				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
 				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
@@ -116,6 +127,32 @@
 				0D032B82220A6D39001ED51E /* GoogleService-Info.plist */,
 			);
 			path = Studor;
+			sourceTree = "<group>";
+		};
+		BEDFB96F220E479E005903C1 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */,
+				BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		BEDFB970220E47C1005903C1 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */,
+				BEDFB967220DC801005903C1 /* ChatTableViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		E96DE104446B7209ECB69D81 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				399BE7EBDB39893E19488E5F /* Pods_Studor.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,12 +350,16 @@
 				BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */,
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
 				0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */,
+				BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
+				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,
 				BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
 				BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */,
+				BEDFB96E220E4788005903C1 /* ChatTableViewCell.swift in Sources */,
 				BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */,
+				BEDFB968220DC801005903C1 /* ChatTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
