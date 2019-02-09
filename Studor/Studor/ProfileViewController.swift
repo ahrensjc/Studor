@@ -24,6 +24,20 @@ class ProfileViewController: UIViewController {
         // set database to new nickname
     }
     
+    @IBAction func handleLogOut(_ sender: UIBarButtonItem) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            print("Success logging out")
+            self.dismiss(animated: false, completion: nil)
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+            print("Fuck you you cant leave")
+            
+        }
+
+    }
+    
     @IBAction func bioEdit(_ sender: Any) {
         // TODO
         // call up modal?
@@ -48,11 +62,6 @@ class ProfileViewController: UIViewController {
         // get and set nickname data label text
         // get and set bio data text
         // get and set tag data
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        db = Database.database().reference()
-    
     }
     
 

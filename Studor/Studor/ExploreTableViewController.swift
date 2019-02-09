@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ExploreTableViewController: UITableViewController, UITextFieldDelegate {
+class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
     
     //autofill function
     
     @IBOutlet weak var textField: UITextField!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     var autoCompleteCharacterCount = 0
@@ -25,7 +27,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate {
         if subString.count == 0 { // 3 when a user clears the textField
             resetValues()
         } else {
-            searchAutocompleteEntriesWIthSubstring(substring: subString) //4
+            searchAutocompleteEntriesWithSubstring(substring: subString) //4
         }
         return true
     }
@@ -39,7 +41,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate {
         textField.text = ""
     }
     
-    func searchAutocompleteEntriesWIthSubstring(substring: String) {
+    func searchAutocompleteEntriesWithSubstring(substring: String) {
         let userQuery = substring
         let suggestions = getAutocompleteSuggestions(userText: substring) //1
         
@@ -93,7 +95,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        searchBar.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -111,16 +113,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 10
-        
-        
     }
-
-    
-   
-    
-    
-    
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreTableViewCell
@@ -131,6 +124,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
 
     /*
     // Override to support conditional editing of the table view.
