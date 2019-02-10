@@ -7,17 +7,18 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class TagSearchViewController: UIViewController {
 
     @IBOutlet weak var textThing: UITextField!
     
-    var ref:DatabaseReference?
+    let db = Firestore.firestore()
     
     @IBAction func addTag(_ sender: Any) {
-        ref = Database.database().reference()
-        ref?.child("Users").child("y1HXINHR8y5n954qes7r").child("tags").setValue("new")
+        db.collection("Users").document(Auth.auth().currentUser!.uid).setData([
+            "tags": "Los Angeles",
+        ])
 
     }
     
