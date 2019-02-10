@@ -11,6 +11,8 @@ import Firebase
 
 class SignUp : UIViewController {
     
+    var db: Firestore!
+    
     @IBOutlet weak var emailBox : UITextField!
 
     @IBOutlet weak var passwordBox: UITextField!
@@ -21,10 +23,13 @@ class SignUp : UIViewController {
 
     override func viewDidLoad(){
         super.viewDidLoad()
+        db = Firestore.firestore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
     }
+    
+    
 
     @IBAction func tapSignUp(_ sender: Any){
         if let email = emailBox?.text, let password = passwordBox?.text, let passwordConfirm = confirmPasswordBox?.text {
@@ -36,7 +41,9 @@ class SignUp : UIViewController {
                 
                 if error == nil && authResult != nil {
                     print("Account created")
-
+                    
+                    self.initializeUserAccount(accountType: self.getAccountType())
+                    
                     self.performSegue(withIdentifier: "signUpSuccess", sender: self)
                 } else {
                     print("ERROR: \(error!.localizedDescription)")
@@ -50,19 +57,27 @@ class SignUp : UIViewController {
         
     }
     
-    func initializeUserAccount(){ // to firestore
+    func getAccountType() -> String{
+        return accountType.selectedSegmentIndex == 0 ? "Student" : "Tutor"
+    }
+    
+    func initializeUserAccount(accountType: String){ // to firestore
         let db = Firestore.firestore()
-        FirebaseApp.configure()
-        var ref: DocumentReference? = nil
-        let curUser = Auth.auth().currentUser
+        //var ref: DocumentReference? = nil
         
         let data: [String : Any] = [
             "email" : Auth.auth().currentUser?.email!,
-            "username": Auth.auth().currentUser?.email!.replacingOccurrences(of: "@gcc.edu", with: "")
+            "username": Auth.auth().currentUser?.email!.dropLast("@gcc.edu".count),
+            "accountType" : getAccountType()
         ]
         
-        ref = db.collection("Users").addDocument(data: data)
-        
+        db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
+            if let err = err {
+                print(": \(err)")
+            } else {
+                print("User data document created with ID: \(Auth.auth().currentUser!.uid)")
+            }
+        }
     }
     
     func showMessagePrompt(withString: String, title: String) {
