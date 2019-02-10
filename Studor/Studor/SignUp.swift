@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SendBirdSDK
 
 class SignUp : UIViewController {
     
@@ -62,6 +63,8 @@ class SignUp : UIViewController {
         ]
         
         ref = db.collection("Users").addDocument(data: data)
+        
+        SBDMain.initWithApplicationId(<#8414C656-F939-4B34-B56E-B2EBD373A6DC#>)
         
     }
     
