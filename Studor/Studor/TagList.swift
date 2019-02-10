@@ -8,10 +8,15 @@
 
 import Foundation
 
+
+
 class TagList{
     
-    static var db: [String] = ["write script data here"]
     
+    // TODO FOR SPRINT 2
+    // Scrape all class course codes and add to list array
+    
+    var list: [String] = ["COMP 314", "COMP 443", "ACCT 101", "HUMA 301"]
     /*
     
     func parseRtf(){
@@ -37,3 +42,5 @@ class TagList{
     }
  */
 }
+
+let tagDB = TagList()
