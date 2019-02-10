@@ -10,6 +10,7 @@
 		0D2C8FD2220A7A4200FC2AEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D032B82220A6D39001ED51E /* GoogleService-Info.plist */; };
 		0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C8FD3220A887800FC2AEA /* TagList.swift */; };
 		0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762B9220F8F8D00A0F980 /* TabBarController.swift */; };
+		0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762BD2210D94500A0F980 /* StudorFirestore.swift */; };
 		0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D25B5220B9D01004A87C3 /* SignUp.swift */; };
 		0D7D25BB220BA6A1004A87C3 /* TagData.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D25BA220BA6A1004A87C3 /* TagData.rtf */; };
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
@@ -35,6 +36,7 @@
 		0D032B82220A6D39001ED51E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D2C8FD3220A887800FC2AEA /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		0D4762B9220F8F8D00A0F980 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0D4762BD2210D94500A0F980 /* StudorFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudorFirestore.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0D7D25BA220BA6A1004A87C3 /* TagData.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TagData.rtf; sourceTree = "<group>"; };
 		49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
+				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
 				BEDFB970220E47C1005903C1 /* Chat */,
@@ -349,6 +352,7 @@
 				0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */,
 				0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */,
 				BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */,
+				0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,
