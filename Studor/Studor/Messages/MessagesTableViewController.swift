@@ -116,7 +116,7 @@ class MessagesTableViewController: UITableViewController {
             // ...
             // Grab a list of channels the user is in
             let query = SBDGroupChannel.createMyGroupChannelListQuery()
-            query?.includeEmptyChannel = false
+            query?.includeEmptyChannel = true
             query?.loadNextPage(completionHandler: { (channels, error) in
                 guard error == nil else {   // Error.
                     print("error grabbing channel list")

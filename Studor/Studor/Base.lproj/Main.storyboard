@@ -33,11 +33,10 @@
                                     <action selector="bioEdit:" destination="FTr-9N-yEr" eventType="touchUpInside" id="uOO-RH-zf0"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wOm-T5-OYd">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Bio info ... and stuff so here's a little thing about me" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wOm-T5-OYd">
                                 <rect key="frame" x="16" y="345" width="343" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Bio info ... and stuff so here's a little thing about me I like to nasjkfnaskfnsa nasklfn aslkfn aksnfka naksfn aksnf amnf akskf asmkd maskdm asknfka nfansdfkmas klamsdk askfnask dnsakl mafsknaslkf n</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -80,13 +79,80 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bioPopover" destination="IcJ-Xb-7Sj" id="sBK-yK-Q1O"/>
                         <outlet property="bioText" destination="wOm-T5-OYd" id="Vih-yx-VNo"/>
+                        <outlet property="bioTextView" destination="xzg-W0-lOb" id="MHw-Oy-I9N"/>
                         <outlet property="nicknameLabel" destination="p9n-Oj-KZI" id="s72-5J-GVm"/>
+                        <outlet property="nicknamePopover" destination="Z1F-lf-H1W" id="Kr1-Qy-1zi"/>
+                        <outlet property="nicknameTextField" destination="Ohc-SX-6Vu" id="QQY-aM-QID"/>
                         <outlet property="usernameLabel" destination="cad-3c-9pz" id="m4m-29-OO2"/>
                         <segue destination="V3x-rd-T0V" kind="show" identifier="logoutSuccess" id="ZqN-gz-AFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8G3-uP-K8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Z1F-lf-H1W">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34t-nJ-wCb">
+                            <rect key="frame" x="15" y="78" width="48" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="nicknameCancel:" destination="FTr-9N-yEr" eventType="touchUpInside" id="84y-TV-YY8"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Nickname" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ohc-SX-6Vu">
+                            <rect key="frame" x="72" y="20" width="97" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hc8-Ly-hPF">
+                            <rect key="frame" x="183" y="78" width="37" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="nicknameDone:" destination="FTr-9N-yEr" eventType="touchUpInside" id="XTo-Ln-E1m"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="M3r-OS-J1P"/>
+                </view>
+                <view contentMode="scaleToFill" id="IcJ-Xb-7Sj">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DlH-Sb-4Lr">
+                            <rect key="frame" x="183" y="78" width="37" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="bioDone:" destination="FTr-9N-yEr" eventType="touchUpInside" id="V8y-sU-qym"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8BC-lq-JFa">
+                            <rect key="frame" x="15" y="78" width="48" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="bioCancel:" destination="FTr-9N-yEr" eventType="touchUpInside" id="sh3-BV-7GL"/>
+                            </connections>
+                        </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xzg-W0-lOb">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="b8n-hd-SpI"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2332" y="1369"/>
         </scene>

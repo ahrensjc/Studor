@@ -104,11 +104,54 @@ class ChatTableViewController: UITableViewController {
                 return
             }
             
+            
+            /*// In case of accepting an invitation
+            let autoAccept = false // If true, a user will automatically join a group channel with no choice of accepting and declining an invitation.
+            SBDMain.setChannelInvitationPreferenceAutoAccept(autoAccept) { (error) in
+                guard error == nil else {   // Error.
+                    return
+                }
+                
+                let ids = [String]()
+                // Creates a group channel, delete this after one run
+                SBDGroupChannel.createChannel(withUserIds: ids, isDistinct: false) { (channel, error) in
+                    guard error == nil else {   // Error.
+                        print("error creating channel")
+                        print(error)
+                        return
+                    }
+                    print("no error creating channel?")
+                    
+                    
+                    
+                }
+                
+            }*/
+
+            /*let userIds = ["joe"]
+            groupChannel!.inviteUserIds(userIds) { (error) in
+                guard error == nil else {   // Error.
+                    print("error inviting users")
+                    return
+                }
+                
+                print("invited users")
+                // ...
+            }*/
+            
+            
             //print(groupChannel)
             //self.messages.append(groupChannel?.lastMessage?.description ?? "no last message found")
             //self.tableView.reloadData()
 
             self.channel = groupChannel
+            var a = groupChannel!.myRole
+            var b = groupChannel!.myMemberState
+            var ba = groupChannel!.myMutedState
+            var c = groupChannel!.members
+            var d = groupChannel!.memberCount
+            var e = groupChannel!.joinedMemberCount
+            
             
             /*let msg = "lovely weather today"
             
