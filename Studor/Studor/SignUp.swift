@@ -11,6 +11,9 @@ import Firebase
 
 class SignUp : UIViewController {
     
+    var db: Firestore!
+    var emailSuffix: String!
+    
     @IBOutlet weak var emailBox : UITextField!
 
     @IBOutlet weak var passwordBox: UITextField!
@@ -21,22 +24,25 @@ class SignUp : UIViewController {
 
     override func viewDidLoad(){
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+        db = Firestore.firestore()
+        emailSuffix = "@gcc.edu"
     }
 
     @IBAction func tapSignUp(_ sender: Any){
         if let email = emailBox?.text, let password = passwordBox?.text, let passwordConfirm = confirmPasswordBox?.text {
             
-            if !isValidPassword(password: password, confirmPassword: passwordConfirm) && !isValidEmail(email: email){
+            if !credentialsValid(password: password, confirmPassword: passwordConfirm, email: email){
                 return
             }
+            
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                 
                 if error == nil && authResult != nil {
-                    print("Account created")
-                    //Auth.auth().currentUser?.displayName = 
+                    
+                    
+                    self.initializeUserAccount()
+                    print("Account created for user \(email.dropLast(self.emailSuffix.count))")
+                    
                     self.performSegue(withIdentifier: "signUpSuccess", sender: self)
                 } else {
                     print("ERROR: \(error!.localizedDescription)")
@@ -45,12 +51,69 @@ class SignUp : UIViewController {
             }
         }
     }
-    
-    func chooseRandomProfileIcon(){
+
+    func initializeUserAccount(){ // to firestore
         
+        let data: [String : Any] = [
+            "email" : Auth.auth().currentUser?.email!,
+            "username": Auth.auth().currentUser?.email!.dropLast(emailSuffix.count),
+            "accountType" : getAccountType(),
+            "biography" : "A new user of Studor",
+            "groups" : [],
+            "profImgSpecifier" : [0, 0],
+            "sendbirdID" : "agoodusername",
+            "tags" : ["COMP 314", "COMP 435", "COMP 420"]
+        ]
+        
+        db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
+            if let err = err {
+                print("Error: \(err)")
+            } else {
+                print("User data document created with uID: \(Auth.auth().currentUser!.uid)")
+            }
+        }
     }
     
-    func uploadUserData(){ // to firebase
+    func getAccountType() -> String{
+        return accountType.selectedSegmentIndex == 0 ? "Student" : "Tutor"
+    }
+    
+    /*
+     *      Error checking and input validation methods
+     *
+     */
+    
+    
+func credentialsValid(password: String, confirmPassword: String, email: String) -> Bool{
+        
+        if !passwordsMatch(password: password, confirmPassword: confirmPassword) {
+            showMessagePrompt(withString: "Password fields do not match", title: "Error")
+            return false
+        }
+        
+        if !isPasswordValidLength(password: password) {
+            showMessagePrompt(withString: "Password must be at least 7 characters", title: "Error")
+            return false
+        }
+        
+        if !isValidEmail(email: email){
+            showMessagePrompt(withString: "Studor is restricted to GCC students only.", title: "Error")
+            return false
+        }
+        
+        return true
+    }
+    
+    func passwordsMatch(password: String, confirmPassword: String) -> Bool{
+        return password == confirmPassword ? true : false
+    }
+    
+    func isPasswordValidLength(password: String) -> Bool {
+        return password.count >= 6 ? true : false
+    }
+    
+    func isValidEmail(email: String) -> Bool {
+        return email.hasSuffix(emailSuffix) ? true : false
     }
     
     func showMessagePrompt(withString: String, title: String) {
@@ -58,25 +121,5 @@ class SignUp : UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func isValidPassword(password: String, confirmPassword: String) -> Bool{
-        if password != confirmPassword {
-            showMessagePrompt(withString: "Password fields do not match", title: "Error")
-            return false
-        }
-        
-        if password.count < 7 {
-            showMessagePrompt(withString: "Password must be at least 7 characters", title: "Error")
-            return false
-        }
-        return true
-    }
-    
-    func isValidEmail(email: String) -> Bool {
-        if !email.hasSuffix("@gcc.edu") {
-            showMessagePrompt(withString: "Studor is restricted to GCC students only", title: "Error")
-            return false
-        }
-        return true
-    }
 }
+

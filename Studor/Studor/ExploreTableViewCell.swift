@@ -29,7 +29,7 @@ class ExploreTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        initialiseData()
+        //initialiseData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

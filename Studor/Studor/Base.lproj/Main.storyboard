@@ -173,7 +173,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="MUZ-7K-9YM" id="mUf-XY-B10"/>
+                                    <outlet property="delegate" destination="MUZ-7K-9YM" id="zWe-I5-M6O"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaI-pk-NZf">
@@ -454,7 +454,7 @@
                             <outlet property="delegate" destination="0K9-rE-HCB" id="nat-oR-1uW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="waV-Sa-ia2"/>
+                    <navigationItem key="navigationItem" title="Messages" id="waV-Sa-ia2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-Vn-m8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -508,9 +508,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="ge9-4z-w6g">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Schedule" id="L7M-xz-Mxg">
+                                    <barButtonItem key="rightBarButtonItem" title="Add Event" id="OZI-QZ-klb">
+                                        <connections>
+                                            <action selector="addEventButtonTapped:" destination="KxB-dP-VfG" id="YPL-Wy-vka"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" id="JbW-HQ-1RH" customClass="ScheduleTableViewCell" customModule="Studor" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JbW-HQ-1RH" id="JdZ-o5-ZmW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
