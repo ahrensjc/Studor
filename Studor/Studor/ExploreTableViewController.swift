@@ -21,6 +21,12 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var rowCount = 1
     
+    var names : [String] = []
+    
+    var types : [String] = []
+    
+    var rates : [String] = []
+    
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     var autoCompleteCharacterCount = 0
     var timer = Timer()
@@ -125,6 +131,10 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
         // Configure the cell...
         //cell.connect.text = String(indexPath.item)
+        cell.nameText = names[indexPath.row]
+        cell.typeText = types[indexPath.row]
+        cell.rateText = rates[indexPath.row]
+        cell.initialiseData()
         return cell
     }
     
