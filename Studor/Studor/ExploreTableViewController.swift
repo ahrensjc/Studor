@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
     
@@ -15,6 +16,10 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     @IBOutlet weak var textField: UITextField!
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    let db = Database.database().reference()
+    
+    var rowCount = 1
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     var autoCompleteCharacterCount = 0
@@ -112,20 +117,19 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return rowCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreTableViewCell
 
         // Configure the cell...
-        cell.connect.text = String(indexPath.item)
-
+        //cell.connect.text = String(indexPath.item)
         return cell
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        tableView.reloadData()
     }
 
     /*

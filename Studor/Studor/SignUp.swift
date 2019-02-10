@@ -34,7 +34,7 @@ class SignUp : UIViewController {
 /*
 
  if let email = emailTextField, let password = passwordTextField.text, let passwordConfirm = passwordConfirmTextField.text {
-    if !email.endsWith("gcc.edu) {
+    if !email.endsWith("gcc.edu") {
     showMessagePrompt(withString: "Studor is restricted to GCC students only", title: "Error")
     return
     }
