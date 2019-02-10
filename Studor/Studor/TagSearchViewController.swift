@@ -13,12 +13,19 @@ class TagSearchViewController: UIViewController {
 
     @IBOutlet weak var textThing: UITextField!
 
-    let db = Firestore.firestore()
-
     @IBAction func addTag(_ sender: Any) {
         let db = Firestore.firestore()
-
-
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "tags": FieldValue.arrayUnion([textThing.text])
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        
     }
 
 
