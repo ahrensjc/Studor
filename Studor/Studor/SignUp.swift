@@ -36,16 +36,22 @@ class SignUp : UIViewController {
                 
                 if error == nil && authResult != nil {
                     print("Account created")
+                    //Auth.auth().currentUser?.displayName = 
                     self.performSegue(withIdentifier: "signUpSuccess", sender: self)
                 } else {
-                    print("Here it is: \(error!.localizedDescription)")
-                    print("THERE IS SOMETHING WRONG AHHHH")
+                    print("ERROR: \(error!.localizedDescription)")
                     self.showMessagePrompt(withString: error!.localizedDescription, title: "Error")
                 }
             }
         }
     }
+    
+    func chooseRandomProfileIcon(){
         
+    }
+    
+    func uploadUserData(){ // to firebase
+    }
     
     func showMessagePrompt(withString: String, title: String) {
         let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
