@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
     
+    
     var db: DatabaseReference!
     
     @IBAction func nicknameEdit(_ sender: Any) {
@@ -24,7 +25,7 @@ class ProfileViewController: UIViewController {
         // set database to new nickname
     }
     
-    @IBAction func handleLogOut(_ sender: UIBarButtonItem) {
+    @IBAction func logOutButton(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -33,11 +34,11 @@ class ProfileViewController: UIViewController {
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
-            print("Fuck you you cant leave")
             
         }
-
     }
+
+    
     
     @IBAction func bioEdit(_ sender: Any) {
         // TODO

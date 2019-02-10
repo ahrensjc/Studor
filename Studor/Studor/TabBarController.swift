@@ -21,6 +21,11 @@ class TabBarController: UITabBarController {
         if Auth.auth().currentUser == nil {
             performSegue(withIdentifier: "requireLogin", sender: self)
         }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.hidesBackButton = true
     }
     
 
