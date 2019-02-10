@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class TagSearchViewController: UIViewController {
 
@@ -16,8 +16,8 @@ class TagSearchViewController: UIViewController {
     var ref:DatabaseReference?
     
     @IBAction func addTag(_ sender: Any) {
-        ref = Database.database().reference()
-        ref?.child("Users").child("y1HXINHR8y5n954qes7r").child("tags").setValue("new")
+        let db = Firestore.firestore()
+        
 
     }
     

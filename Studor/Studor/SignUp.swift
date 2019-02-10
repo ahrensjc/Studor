@@ -36,7 +36,7 @@ class SignUp : UIViewController {
                 
                 if error == nil && authResult != nil {
                     print("Account created")
-                    //Auth.auth().currentUser?.displayName = 
+
                     self.performSegue(withIdentifier: "signUpSuccess", sender: self)
                 } else {
                     print("ERROR: \(error!.localizedDescription)")
@@ -50,7 +50,19 @@ class SignUp : UIViewController {
         
     }
     
-    func uploadUserData(){ // to firebase
+    func initializeUserAccount(){ // to firestore
+        let db = Firestore.firestore()
+        FirebaseApp.configure()
+        var ref: DocumentReference? = nil
+        let curUser = Auth.auth().currentUser
+        
+        let data: [String : Any] = [
+            "email" : Auth.auth().currentUser?.email!,
+            "username": Auth.auth().currentUser?.email!.replacingOccurrences(of: "@gcc.edu", with: "")
+        ]
+        
+        ref = db.collection("Users").addDocument(data: data)
+        
     }
     
     func showMessagePrompt(withString: String, title: String) {

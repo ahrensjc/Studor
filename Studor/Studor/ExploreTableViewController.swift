@@ -16,9 +16,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     @IBOutlet weak var textField: UITextField!
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    let db = Database.database().reference()
-    
+
     var rowCount = 1
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
