@@ -11,37 +11,28 @@ import Firebase
 
 class LogInViewController: UIViewController {
 
-    // PLEASE READ
-    // I don't know how to automatically redirect past this page if the user has already signed in
-    // Probably a sprint 2 task but for now it is something to think about
-
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
 
     @IBOutlet weak var passwordTextField: UITextField!
-
-    @IBAction func forgotUsernameButtonTapped(_ sender: Any) {
-        //Make google do this part
-    }
 
     @IBAction func forgotPasswordButtonTapped(_ sender: Any) {
         // Make google do this part
     }
     @IBAction func logInButtonTapped(_ sender: Any) {
-        // Grab username and pw and send them to the db
-        // Encrypt them or does google handle that?
 
-        if let email = emailTextField.text, let password = passwordTextField.text {
+        if let email = usernameTextField.text, let password = passwordTextField.text {
 
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
 
 
-                if let error = error {
-                    // show message function call to user, additional method needed
-                    self.showMessagePrompt(withString: error.localizedDescription, title: "Error")
-                    return
+                if user != nil && error == nil {
+                    print("Login success")
+                    self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                } else {
+                    print("Error:\(error!.localizedDescription)")
                 }
 
-                // performSegue(withIdentifier: exploreViewController, sender: self)
+                
             }
         }
         else {
@@ -49,39 +40,28 @@ class LogInViewController: UIViewController {
         }
 
     }
+    
     @IBAction func signUpButtonTapped(_ sender: Any) {
-        // performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+        //performSegue(withIdentifier: "", sender: self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // TODO
-        // autofill form data if user has already signed up/in?
-        // redirect to main page if user has already signed in?
+        
     }
-
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-
-   /* func showMessagePrompt(withString: String, title: String){
-        let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
-
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-
-        // show the alert
-        self.present(alert, animated: true, completion: nil)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if let user = Auth.auth().currentUser { // user is already logged in, so forward them to the home screen automatically
+            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+        }
     }
-    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !navigationItem.hidesBackButton {
+            navigationItem.hidesBackButton = true
+        }
+    }
 
     func showMessagePrompt(withString: String, title: String){
         let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
@@ -94,3 +74,14 @@ class LogInViewController: UIViewController {
     }
 
 }
+
+/*
+ func signout(){
+     let firebaseAuth = Auth.auth()
+     do {
+        try firebaseAuth.signOut()
+     } catch let signOutError as NSError {
+        print ("Error signing out: %@", signOutError)
+     }
+ }
+ */
