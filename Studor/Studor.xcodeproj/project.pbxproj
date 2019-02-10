@@ -13,6 +13,7 @@
 		0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D25B5220B9D01004A87C3 /* SignUp.swift */; };
 		0D7D25BB220BA6A1004A87C3 /* TagData.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D25BA220BA6A1004A87C3 /* TagData.rtf */; };
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
+		49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
 		BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46972204EEA800E0D510 /* AppDelegate.swift */; };
 		BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46992204EEA800E0D510 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		0D4762B9220F8F8D00A0F980 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0D7D25BA220BA6A1004A87C3 /* TagData.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TagData.rtf; sourceTree = "<group>"; };
+		49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		933E2813286819B28FAFF75F /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
+				49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */,
 				0D2C8FD3220A887800FC2AEA /* TagList.swift */,
 				0D7D25BA220BA6A1004A87C3 /* TagData.rtf */,
 				49A1D8DD22066A170039EE3F /* ProfileViewController.swift */,
@@ -349,6 +352,7 @@
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,
+				49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */,
 				BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
 				BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */,
