@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D2C8FD2220A7A4200FC2AEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D032B82220A6D39001ED51E /* GoogleService-Info.plist */; };
 		0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C8FD3220A887800FC2AEA /* TagList.swift */; };
+		0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762B9220F8F8D00A0F980 /* TabBarController.swift */; };
 		0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D25B5220B9D01004A87C3 /* SignUp.swift */; };
 		0D7D25BB220BA6A1004A87C3 /* TagData.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D25BA220BA6A1004A87C3 /* TagData.rtf */; };
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		0D032B82220A6D39001ED51E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D2C8FD3220A887800FC2AEA /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
+		0D4762B9220F8F8D00A0F980 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0D7D25BA220BA6A1004A87C3 /* TagData.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TagData.rtf; sourceTree = "<group>"; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 		BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
 		BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		C3F2A43405E5A6339E092E11 /* Pods-Studor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.release.xcconfig"; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +117,7 @@
 				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
 				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
+				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
 				0D2C8FD3220A887800FC2AEA /* TagList.swift */,
 				0D7D25BA220BA6A1004A87C3 /* TagData.rtf */,
 				49A1D8DD22066A170039EE3F /* ProfileViewController.swift */,
@@ -145,14 +147,6 @@
 				BEDFB967220DC801005903C1 /* ChatTableViewController.swift */,
 			);
 			path = Chat;
-			sourceTree = "<group>";
-		};
-		E96DE104446B7209ECB69D81 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				399BE7EBDB39893E19488E5F /* Pods_Studor.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +343,7 @@
 				0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */,
 				BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */,
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
+				0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */,
 				0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */,
 				BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,

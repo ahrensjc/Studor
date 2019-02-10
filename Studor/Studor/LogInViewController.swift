@@ -15,10 +15,6 @@ class LogInViewController: UIViewController {
 
     @IBOutlet weak var passwordTextField: UITextField!
 
-    @IBAction func forgotUsernameButtonTapped(_ sender: Any) {
-        //Make google do this part
-    }
-
     @IBAction func forgotPasswordButtonTapped(_ sender: Any) {
         // Make google do this part
     }
@@ -54,13 +50,16 @@ class LogInViewController: UIViewController {
         
     }
     
-    @IBAction func cancelSignUpSegue(_ segue: UIStoryboardSegue){
-        print("Returning from sign up")
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
+        
         if let user = Auth.auth().currentUser { // user is already logged in, so forward them to the home screen automatically
             self.performSegue(withIdentifier: "loginSuccess", sender: self)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !navigationItem.hidesBackButton {
+            navigationItem.hidesBackButton = true
         }
     }
 

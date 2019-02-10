@@ -127,6 +127,10 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //navigationItem.hidesBackButton = true  
+    }
 
     /*
     // Override to support conditional editing of the table view.

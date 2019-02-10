@@ -22,6 +22,9 @@ class SignUp : UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
 
     @IBAction func tapSignUp(_ sender: Any){
         if let email = emailBox?.text, let password = passwordBox?.text, let passwordConfirm = confirmPasswordBox?.text {
