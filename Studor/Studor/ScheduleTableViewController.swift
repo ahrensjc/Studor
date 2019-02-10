@@ -10,6 +10,11 @@ import UIKit
 
 class ScheduleTableViewController: UITableViewController {
 
+    @IBAction func addEventButtonTapped(_ sender: Any) {
+        print("adding event with button")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

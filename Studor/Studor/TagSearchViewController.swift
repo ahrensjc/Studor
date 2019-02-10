@@ -12,28 +12,28 @@ import Firebase
 class TagSearchViewController: UIViewController {
 
     @IBOutlet weak var textThing: UITextField!
-    
-    var ref:DatabaseReference?
-    
+
+    let db = Firestore.firestore()
+
     @IBAction func addTag(_ sender: Any) {
         let db = Firestore.firestore()
-        
+
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
 
     /*
     // MARK: - Navigation
