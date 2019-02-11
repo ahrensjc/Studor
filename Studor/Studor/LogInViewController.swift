@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SendBirdSDK
 
 class LogInViewController: UIViewController {
 
