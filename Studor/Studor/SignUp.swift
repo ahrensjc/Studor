@@ -62,7 +62,7 @@ class SignUp : UIViewController {
             "biography" : "A new user of Studor",
             "groups" : [],
             "profImgSpecifier" : [0, 0],
-            "sendbirdID" : "agoodusername",
+            "sendbirdID" : "abadusername",
             "tags" : ["COMP 314", "COMP 435", "COMP 420"]
         ]
         db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
@@ -72,6 +72,21 @@ class SignUp : UIViewController {
                 print("User data document created with uID: \(Auth.auth().currentUser!.uid)")
             }
         }
+        
+        SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
+        
+        //login()
+        
+        SBDMain.connect(withUserId: data["sendbirdID"] as! String) { (user, error) in
+            guard error == nil else {   // Error.
+                print(error)
+                return
+            }
+            print("worked")
+        }
+        
+        //SBDMain.connect(withUserId: data["sendbirdID"] as! String, accessToken: "accessToken")
+
     }
     
     func getAccountType() -> String{

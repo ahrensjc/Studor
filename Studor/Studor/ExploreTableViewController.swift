@@ -17,7 +17,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var rowCount = 1
+    var rowCount = 0
     
     var names : [String] = []
     
