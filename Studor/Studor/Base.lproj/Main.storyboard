@@ -401,6 +401,11 @@
                                     <segment title="Tutor"/>
                                 </segments>
                             </segmentedControl>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6H9-uD-orp">
+                                <rect key="frame" x="177" y="360" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="1" y="0.0" width="0.90000000000000002" height="1"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="GGE-Pb-RDI"/>
@@ -409,6 +414,7 @@
                     <connections>
                         <outlet property="accountType" destination="xUa-Xb-2Lt" id="YKU-SI-RfK"/>
                         <outlet property="confirmPasswordBox" destination="Q4S-D2-wsc" id="Lwx-dP-DO6"/>
+                        <outlet property="createAccountAI" destination="6H9-uD-orp" id="116-wE-nvN"/>
                         <outlet property="emailBox" destination="boa-rZ-3KQ" id="et9-Gx-1se"/>
                         <outlet property="passwordBox" destination="9xE-Vc-zu0" id="DDK-hM-LJv"/>
                         <segue destination="Gwo-q4-5OV" kind="presentation" identifier="signUpSuccess" id="TKL-oa-ub7"/>
@@ -614,6 +620,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ZqN-gz-AFu"/>
-        <segue reference="dwS-zY-wM5"/>
+        <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
 </document>

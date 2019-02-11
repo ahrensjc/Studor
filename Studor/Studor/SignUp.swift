@@ -23,13 +23,19 @@ class SignUp : UIViewController {
 
     @IBOutlet weak var accountType : UISegmentedControl!
 
+    @IBOutlet weak var createAccountAI: UIActivityIndicatorView!
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         db = Firestore.firestore()
         emailSuffix = "@gcc.edu"
+        createAccountAI.isHidden = true
     }
 
     @IBAction func tapSignUp(_ sender: Any){
+        
+        createAccountAI.startAnimating()
+        
         if let email = emailBox?.text, let password = passwordBox?.text, let passwordConfirm = confirmPasswordBox?.text {
             
             if !credentialsValid(password: password, confirmPassword: passwordConfirm, email: email){
@@ -44,6 +50,7 @@ class SignUp : UIViewController {
                     self.initializeUserAccount()
                     print("Account created for user \(email.dropLast(self.emailSuffix.count))")
                     
+                    self.createAccountAI.stopAnimating()
                     self.performSegue(withIdentifier: "signUpSuccess", sender: self)
                 } else {
                     print("ERROR: \(error!.localizedDescription)")
@@ -51,6 +58,7 @@ class SignUp : UIViewController {
                 }
             }
         }
+        self.createAccountAI.stopAnimating()
     }
 
     func initializeUserAccount(){ // to firestore
@@ -62,7 +70,7 @@ class SignUp : UIViewController {
             "biography" : "A new user of Studor",
             "groups" : [],
             "profImgSpecifier" : [0, 0],
-            "sendbirdID" : "agoodusername",
+            "sendbirdID" : Auth.auth().currentUser!.uid,
             "tags" : ["COMP 314", "COMP 435", "COMP 420"]
         ]
         db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
