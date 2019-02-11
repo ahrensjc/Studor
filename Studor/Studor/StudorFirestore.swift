@@ -17,10 +17,30 @@ class StudorFunctions {
         db = Firestore.firestore()
     }
     
-    func createEvent(with users: [String], on date: Date, with description: String) -> Bool {
+    // creates an event
+    func createEvent(with users: [String], o date: Date, with description: String) -> Bool {
         return false
     }
     
+    
+    // Returns profile information of the user with the given firestore uID (bio, tags, nickname, etc.) in a [String : Any] if successful and nil otherwise
+    func getProfileData(forUserWith uid: String) -> [String : Any]{
+        
+        let ref = db.collection("Users").document(uid)
+        
+        var profileInfo: [String : Any] = [:]
+        
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                profileInfo = document.data()!
+            } else {
+                print("Error retrieving profile data for user \(uid)")
+            }
+        }
+        return profileInfo
+    }
     
     // to create or OVERWRITE data for a current user
     func add(toFireStoreCollectionWith data: [String : Any]) -> Bool{
