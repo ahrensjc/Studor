@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/tylerfehr/Documents/GitHub/Studor-Team/Studor/Studor/Studor/StudorFirestore.swift">
-   </FileRef>
-   <FileRef
       location = "group:Studor.xcodeproj">
    </FileRef>
    <FileRef
