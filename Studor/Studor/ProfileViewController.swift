@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -18,6 +18,18 @@ class ProfileViewController: UIViewController {
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBAction func nicknameDone(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "NickName": nicknameTextField.text
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            }
+            else {
+                self.nicknameLabel.text = self.nicknameTextField.text
+                print("Document successfully written!")
+            }
+        }
         self.nicknamePopover.removeFromSuperview()
     }
     @IBAction func nicknameCancel(_ sender: Any) {
@@ -30,6 +42,18 @@ class ProfileViewController: UIViewController {
         self.bioPopover.removeFromSuperview()
     }
     @IBAction func bioDone(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "Bio": bioTextView.text
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            }
+            else {
+                self.bioText.text = self.bioTextView.text
+                print("Document successfully written!")
+            }
+        }
         self.bioPopover.removeFromSuperview()
     }
     
