@@ -14,6 +14,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var textThing: UITextField!
 
     
+    
     @IBAction func updateTagsArray(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
@@ -25,16 +26,14 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
                 print("Document successfully written!")
             }
         }
-        
-        
     }
-
+    
 
     
 // autofill
     var rowCount = 1
     
-    var autoCompletionPossibilities = ["Comp", "Acct", "Orange"] //This is what we need to populate using the data base
+    var autoCompletionPossibilities = ["Comp", "Acct", "Fnce", "Bio"] //This is what we need to populate
     var autoCompleteCharacterCount = 0
     var timer = Timer()
     

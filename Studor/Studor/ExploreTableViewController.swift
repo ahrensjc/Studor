@@ -17,7 +17,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var rowCount = 1
+    var rowCount = 0
     
     var names : [String] = []
     
@@ -28,7 +28,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     var searchBarTextCount : Int
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
+    
     var autoCompleteCharacterCount = 0
+    
     var timer = Timer()
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { //1
@@ -131,10 +133,12 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
         // Configure the cell...
         //cell.connect.text = String(indexPath.item)
+        
         cell.nameText = names[indexPath.row]
         cell.typeText = types[indexPath.row]
         cell.rateText = rates[indexPath.row]
         cell.initialiseData()
+        
         return cell
     }
     
