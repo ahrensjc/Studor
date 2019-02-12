@@ -25,7 +25,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var rates : [String] = []
     
-    var searchBarTextCount : Int
+    var searchBarTextCount : Int = 0
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     
