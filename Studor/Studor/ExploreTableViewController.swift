@@ -25,6 +25,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var rates : [String] = []
     
+    var searchBarTextCount : Int = 0
+    
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     
     var autoCompleteCharacterCount = 0
@@ -140,7 +142,17 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         return cell
     }
     
+    //this one is called whenever the text changes at all
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText.count > searchBarTextCount || (searchText.count == 0 && searchBarTextCount != 0)){
+            searchBarTextCount = searchText.count;
+            
+            tableView.reloadData()
+        }
+    }
+    
+    //this one is called when search/enter is hit
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         tableView.reloadData()
     }
     
