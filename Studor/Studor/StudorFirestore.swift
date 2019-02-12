@@ -11,6 +11,10 @@ import Firebase
 
 class StudorFunctions {
     
+    // Can get a list of events that a user is in
+    // Be able to add an event
+    
+    
     var db: Firestore!
     
     init(){
@@ -18,13 +22,54 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(with users: [String], o date: Date, with description: String) -> Bool {
-        return false
+    func createEvent(users: [String], date: Date, description: String, tags: [String]){
+        
+        //var ret: Bool?
+        
+        let dataToAdd: [String : Any] = [
+            "creator" : getId(),
+            "participants" : users,
+            "date" : date,
+            "description" : description,
+            "event_tags" : tags
+        ]
+        
+        let eventId = getId() + "-e"
+        
+        db.collection("Events").document(eventId).setData(dataToAdd) { err in
+            if let err = err {
+                print("Error: \(err)")
+                print("WE GOT HERE")
+                //ret = false
+                
+            } else {
+                print("AND ALSO HERE")
+                print("Event created with event id: \(eventId)")
+                //ret = true
+                /*
+                if addEvents(users: users) {
+                    ret = true
+                }
+                */
+            }
+        }
+        //return ret!
     }
     
     
+    /* TODO: Sprint 2, update array in user object of current events.
+    func addEvents(to users: String){
+        
+        for u in users {
+            
+        }
+        
+    }
+ */
+    
+    
     // Returns profile information of the user with the given firestore uID (bio, tags, nickname, etc.) in a [String : Any] if successful and nil otherwise
-    func getProfileData(forUserWith uid: String) -> [String : Any]{
+    func getProfileData(uid: String) -> [String : Any]{
         
         let ref = db.collection("Users").document(uid)
         
@@ -43,10 +88,10 @@ class StudorFunctions {
     }
     
     // to create or OVERWRITE data for a current user
-    func add(toFireStoreCollectionWith data: [String : Any]) -> Bool{
+    func add(data: [String : Any], user: String) -> Bool{
         
         var ret = false
-        db.collection("Users").document(getFirestoreID()).setData(data) { err in
+        db.collection("Users").document(user).setData(data) { err in
             if let err = err {
                 print("Error: \(err)")
             } else {
@@ -57,54 +102,7 @@ class StudorFunctions {
         return ret
     }
     
-    // create a group in firestore. The creator should be the first element in the array passed in
-    func createGroup(with users: [String]) -> Bool {
-        let groupRef = db.collection("Groups")
-        
-        
-        
-        /*
-         let sfReference = db.collection("cities").document("SF")
-         
-         db.runTransaction({ (transaction, errorPointer) -> Any? in
-         let sfDocument: DocumentSnapshot
-         do {
-         try sfDocument = transaction.getDocument(sfReference)
-         } catch let fetchError as NSError {
-         errorPointer?.pointee = fetchError
-         return nil
-         }
-         
-         guard let oldPopulation = sfDocument.data()?["population"] as? Int else {
-         let error = NSError(
-         domain: "AppErrorDomain",
-         code: -1,
-         userInfo: [
-         NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
-         ]
-         )
-         errorPointer?.pointee = error
-         return nil
-         }
-         
-         transaction.updateData(["population": oldPopulation + 1], forDocument: sfReference)
-         return nil
-         }) { (object, error) in
-         if let error = error {
-         print("Transaction failed: \(error)")
-         } else {
-         print("Transaction successfully committed!")
-         }
-         }
- */
-        return false
-    }
-    
-    private func addUserToGroup(withId: String, forUser id: String) -> Bool{
-        return false
-    }
-    
-    private func getFirestoreID() -> String {
+    private func getId() -> String {
         return Auth.auth().currentUser!.uid
     }
     

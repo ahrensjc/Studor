@@ -10,8 +10,22 @@ import UIKit
 
 class ScheduleTableViewController: UITableViewController {
 
+    var studor: StudorFunctions?
+    
     @IBAction func addEventButtonTapped(_ sender: Any) {
         print("adding event with button")
+        
+        studor = StudorFunctions()
+        
+        let date = Date()
+        
+        studor!.createEvent(users: ["Billy's uID", "Tim's uID", "Jim's uID"], date: date, description: "A new event for studor", tags: ["COMP 311", "COMP 512", "ACCT 101"])
+        
+            
+        print("Event creation successful")
+            
+        
+        
     }
     
     

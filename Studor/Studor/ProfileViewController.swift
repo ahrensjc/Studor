@@ -11,9 +11,17 @@ import Firebase
 
 class ProfileViewController: UIViewController, UITextFieldDelegate {
 
+    var commands: StudorFunctions!
+    var profileData: [String : Any]!
+    
+    var tagX: Double!
+    var tagY: Double!
+    
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
+    
+    //TODO: Pricing label for all users (will hide if student user)
     
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
@@ -99,6 +107,43 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         // set tags
         // set database to new tags
     }
+    /*
+    
+    func frameOfTextInRange(range: NSRange, tag: UITextView) -> CGRect {
+        let beginning = tag.beginningOfDocument
+        let start = tag.positionFromPosition(beginning, offset: range.location)!
+        let end = tag.positionFromPosition(start, offset: range.length)!
+        let textRange = tag.textRangeFromPosition(start, toPosition: end)!
+        let rect = tag.firstRectForRange(textRange)
+        return tag.convertRect(rect, fromView: textView)
+    }
+    
+    func drawTags(){
+        let pattern = "[a-zA-Z0-9]+"
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex.matchesInString(string, options: [], range: NSMakeRange(0, string.characters.count))
+        
+        for m in matches {
+            let range = m.range
+            let frame = frameOfTextInRange(range, inTextView: textView)
+            let v = UIView(frame: frame)
+            v.layer.borderWidth = 1
+            v.layer.borderColor = UIColor.blueColor().CGColor
+            textView.addSubview(v)
+        }
+    }
+ */
+    
+    func updateProfileUI(){
+        nicknameLabel.text = String(describing: profileData["username"])
+        bioText.text! = String(describing: profileData["biography"])
+        
+        let tags = profileData["tags"]
+    }
+    
+    func appendTags(arr: [String]) -> String {
+        return arr.joined(separator: " ")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +151,11 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.nicknamePopover.layer.cornerRadius = 10
         self.bioPopover.layer.cornerRadius = 10
         
+        commands = StudorFunctions()
+        profileData = commands.getProfileData(uid: Auth.auth().currentUser!.uid)
+        
+        updateProfileUI()
+
         // This function runs when the page is opened for the first time in app
         // TODO
         // get and set username data label text

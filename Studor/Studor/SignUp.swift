@@ -64,14 +64,13 @@ class SignUp : UIViewController {
     func initializeUserAccount(){ // to firestore
 
         let data: [String : Any] = [
-            "email" : Auth.auth().currentUser?.email!,
-            "username": Auth.auth().currentUser?.email!.dropLast(emailSuffix.count),
+            "email" : String(describing: Auth.auth().currentUser?.email!),
+            "username": String(describing: Auth.auth().currentUser?.email!.dropLast(emailSuffix.count)),
             "accountType" : getAccountType(),
-            "biography" : "A new user of Studor",
             "groups" : [],
             "profImgSpecifier" : [0, 0],
             "sendbirdID" : Auth.auth().currentUser!.uid,
-            "tags" : ["COMP 314", "COMP 435", "COMP 420"]
+            "tags" : ["COMP 314", "COMP 435", "COMP 311"]
         ]
         db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
             if let err = err {
