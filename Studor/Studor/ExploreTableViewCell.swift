@@ -10,26 +10,18 @@ import UIKit
 
 class ExploreTableViewCell: UITableViewCell {
     
-    var thing = 0
-
-    @IBOutlet weak var connect: UILabel!
-    
     @IBOutlet weak var name: UILabel!
     
     @IBOutlet weak var type: UILabel!
-    
-    @IBOutlet weak var rate: UILabel!
     
     var nameText : String!
     
     var typeText : String!
     
-    var rateText : String!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //initialiseData()
+        initialiseData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,8 +31,7 @@ class ExploreTableViewCell: UITableViewCell {
     }
 
     func initialiseData(){
-        name!.text! = nameText
-        type!.text! = typeText
-        rate!.text! = rateText
+        name.text = nameText ?? ""
+        type.text = typeText ?? ""
     }
 }
