@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SendBirdSDK
 
 class ProfileViewController: UIViewController, UITextFieldDelegate {
 
@@ -83,6 +84,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             print("Success logging out")
             self.performSegue(withIdentifier: "logoutSuccess", sender: self)
             
+            SBDMain.disconnect(completionHandler: {
+                //Disconnects user from the SendBird server
+            })
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
             
