@@ -41,19 +41,11 @@ class StudorFunctions {
         db.collection("Events").document(eventId).setData(dataToAdd) { err in
             if let err = err {
                 print("Error: \(err)")
-                //ret = false
                 
             } else {
                 print("Event created with event id: \(eventId)")
-                //ret = true
-                /*
-                if addEvents(users: users) {
-                    ret = true
-                }
-                */
             }
         }
-        //return ret!
     }
     
     
@@ -102,9 +94,7 @@ class StudorFunctions {
         return ret
     }
     
-    private func getId() -> String {
+    func getId() -> String {
         return Auth.auth().currentUser!.uid
     }
-    
-    
 }

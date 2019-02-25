@@ -10,6 +10,7 @@
 		0D2C8FD2220A7A4200FC2AEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D032B82220A6D39001ED51E /* GoogleService-Info.plist */; };
 		0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C8FD3220A887800FC2AEA /* TagList.swift */; };
 		0D3A0E17221AFA790049DCE2 /* StudorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3A0E16221AFA790049DCE2 /* StudorUITests.swift */; };
+		0D3A0E1A222383080049DCE2 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D3A0E19222383070049DCE2 /* like.png */; };
 		0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762B9220F8F8D00A0F980 /* TabBarController.swift */; };
 		0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762BD2210D94500A0F980 /* StudorFirestore.swift */; };
 		0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D25B5220B9D01004A87C3 /* SignUp.swift */; };
@@ -37,6 +38,7 @@
 		0D032B82220A6D39001ED51E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D2C8FD3220A887800FC2AEA /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		0D3A0E16221AFA790049DCE2 /* StudorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudorUITests.swift; sourceTree = "<group>"; };
+		0D3A0E19222383070049DCE2 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = like.png; path = ../../../../../../Downloads/like.png; sourceTree = "<group>"; };
 		0D4762B9220F8F8D00A0F980 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0D4762BD2210D94500A0F980 /* StudorFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudorFirestore.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
+				0D3A0E19222383070049DCE2 /* like.png */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
 				BEDFB970220E47C1005903C1 /* Chat */,
@@ -237,6 +240,7 @@
 			files = (
 				0D7D25BB220BA6A1004A87C3 /* TagData.rtf in Resources */,
 				BEBA46A22204EEAA00E0D510 /* LaunchScreen.storyboard in Resources */,
+				0D3A0E1A222383080049DCE2 /* like.png in Resources */,
 				0D2C8FD2220A7A4200FC2AEA /* GoogleService-Info.plist in Resources */,
 				BEBA469F2204EEAA00E0D510 /* Assets.xcassets in Resources */,
 				BEBA469D2204EEA800E0D510 /* Main.storyboard in Resources */,

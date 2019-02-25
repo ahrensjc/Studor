@@ -17,18 +17,20 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     var tagX: Double!
     var tagY: Double!
     
+    @IBOutlet weak var tagTextView: UITextView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
     
     //TODO: Pricing label for all users (will hide if student user)
-    
+    @IBOutlet weak var pricingTextLabel: UILabel!
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
+    
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "NickName": nicknameTextField.text
+            "NickName": nicknameTextField.text!
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -40,6 +42,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         }
         self.nicknamePopover.removeFromSuperview()
     }
+    
     @IBAction func nicknameCancel(_ sender: Any) {
         self.nicknamePopover.removeFromSuperview()
     }
@@ -85,11 +88,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
-            
         }
     }
-
-    
     
     @IBAction func bioEdit(_ sender: Any) {
         // TODO
@@ -107,31 +107,85 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         // set tags
         // set database to new tags
     }
-    /*
     
+    
+    /*
     func frameOfTextInRange(range: NSRange, tag: UITextView) -> CGRect {
         let beginning = tag.beginningOfDocument
         let start = tag.positionFromPosition(beginning, offset: range.location)!
         let end = tag.positionFromPosition(start, offset: range.length)!
         let textRange = tag.textRangeFromPosition(start, toPosition: end)!
         let rect = tag.firstRectForRange(textRange)
-        return tag.convertRect(rect, fromView: textView)
+        return tag.convertRect(rect, fromView: tagTextView)
     }
     
     func drawTags(){
         let pattern = "[a-zA-Z0-9]+"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
-        let matches = regex.matchesInString(string, options: [], range: NSMakeRange(0, string.characters.count))
+        let matches = regex.matches(in: tagTextView.text!, options: [], range: NSMakeRange(0, tagTextView.text!.characters.count))
         
         for m in matches {
             let range = m.range
-            let frame = frameOfTextInRange(range, inTextView: textView)
+            let frame = frameOfTextInRange(range: range, tag: tagTextView)
             let v = UIView(frame: frame)
             v.layer.borderWidth = 1
-            v.layer.borderColor = UIColor.blueColor().CGColor
-            textView.addSubview(v)
+            v.layer.borderColor = UIColor.blue.cgColor
+            tagTextView.addSubview(v)
         }
     }
+ */
+    /*
+    func frameOfTextInRange(range:NSRange, inTextView textView:UITextView) -> CGRect {
+        let beginning = textView.beginningOfDocument
+        let start = textView.positionFromPosition(beginning, offset: range.location)!
+        let end = textView.positionFromPosition(start, offset: range.length)!
+        let textRange = textView.textRangeFromPosition(start, toPosition: end)!
+        let rect = textView.firstRectForRange(textRange)
+        return textView.convertRect(rect, fromView: textView)
+    }
+    
+    let string = "Lorem ipsum dolor sit amet"
+    
+    let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    textView.backgroundColor = UIColor.clearColor()
+    
+    textView.attributedText = {
+    let attributedString = NSMutableAttributedString(string: string)
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineHeightMultiple = 1.25
+    attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, string.characters.count))
+    attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, string.characters.count))
+    
+    let regex = try! NSRegularExpression(pattern: "\\s", options: [])
+    let matches = regex.matchesInString(string, options: [], range: NSMakeRange(0, string.characters.count))
+    for m in matches {
+    attributedString.addAttribute(NSKernAttributeName, value: 6, range: m.range)
+    }
+    return NSAttributedString(attributedString: attributedString)
+    }()
+    
+    let textViewBG = UIView(frame: textView.bounds)
+    textViewBG.backgroundColor = UIColor.whiteColor()
+    
+    
+    let pattern = "[^ ]+"
+    let regex = try! NSRegularExpression(pattern: pattern, options: [])
+    let matches = regex.matchesInString(string, options: [], range: NSMakeRange(0, string.characters.count))
+    
+    for m in matches {
+    textViewBG.addSubview({
+    let range = m.range
+    var frame = frameOfTextInRange(range, inTextView: textView)
+    frame = CGRectInset(frame, CGFloat(-3), CGFloat(2))
+    frame = CGRectOffset(frame, CGFloat(0), CGFloat(3))
+    let v = UIView(frame: frame)
+    v.layer.cornerRadius = 2
+    v.backgroundColor = UIColor(hue: 211.0/360.0, saturation: 0.35, brightness: 0.78    , alpha: 1)
+    return v
+    }())
+    }
+    
+    textViewBG.addSubview(textView)
  */
     
     func updateProfileUI(){
@@ -152,9 +206,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.bioPopover.layer.cornerRadius = 10
         
         commands = StudorFunctions()
-        profileData = commands.getProfileData(uid: Auth.auth().currentUser!.uid)
+        profileData = commands.getProfileData(uid: commands.getId())
         
         updateProfileUI()
+        
+        if String(describing: profileData["accountType"]) == "Student" {
+            pricingTextLabel.isHidden = true
+        }
 
         // This function runs when the page is opened for the first time in app
         // TODO
@@ -176,3 +234,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     */
 
 }
+
+// Icon made by [author link] from www.flaticon.com
+// Icon made by [author link] from www.flaticon.com
