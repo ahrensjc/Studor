@@ -232,22 +232,33 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBm-iz-Wjv">
-                                            <rect key="frame" x="16" y="12" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBm-iz-Wjv">
+                                            <rect key="frame" x="16" y="0.0" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgs-OG-2bi">
+                                            <rect key="frame" x="16" y="24" width="343" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="leading" secondItem="x4M-W6-Dqw" secondAttribute="leadingMargin" id="Pxd-43-mX6"/>
-                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="centerY" secondItem="x4M-W6-Dqw" secondAttribute="centerY" id="cds-LY-J2w"/>
-                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="bottom" secondItem="x4M-W6-Dqw" secondAttribute="bottomMargin" id="t0V-by-Y42"/>
+                                        <constraint firstItem="Jgs-OG-2bi" firstAttribute="top" secondItem="NBm-iz-Wjv" secondAttribute="bottom" constant="3" id="6CZ-Kl-hLq"/>
+                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="top" secondItem="x4M-W6-Dqw" secondAttribute="top" id="Jqt-xE-feV"/>
+                                        <constraint firstItem="Jgs-OG-2bi" firstAttribute="trailing" secondItem="x4M-W6-Dqw" secondAttribute="trailingMargin" id="OO2-t4-qcy"/>
+                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="leading" secondItem="x4M-W6-Dqw" secondAttribute="leading" constant="16" id="S6E-TI-JD6"/>
+                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="leading" secondItem="Jgs-OG-2bi" secondAttribute="leading" id="Zvz-d9-zW7"/>
+                                        <constraint firstItem="Jgs-OG-2bi" firstAttribute="leading" secondItem="x4M-W6-Dqw" secondAttribute="leading" constant="16" id="dFr-0t-4Aq"/>
+                                        <constraint firstItem="NBm-iz-Wjv" firstAttribute="leading" secondItem="x4M-W6-Dqw" secondAttribute="leadingMargin" id="xc3-vh-uem"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="accessoryView" destination="x4M-W6-Dqw" id="7KI-NM-sWm"/>
-                                    <outlet property="connect" destination="NBm-iz-Wjv" id="4nY-K9-eqW"/>
+                                    <outlet property="name" destination="NBm-iz-Wjv" id="nOe-H2-ZvV"/>
+                                    <outlet property="type" destination="Jgs-OG-2bi" id="c3F-RR-9Jd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

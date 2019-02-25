@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 
+let functionSingleton = StudorFunctions()
+
 class StudorFunctions {
     
     // Can get a list of events that a user is in
