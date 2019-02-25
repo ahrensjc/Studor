@@ -15,6 +15,7 @@
 		0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762BD2210D94500A0F980 /* StudorFirestore.swift */; };
 		0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D25B5220B9D01004A87C3 /* SignUp.swift */; };
 		0D7D25BB220BA6A1004A87C3 /* TagData.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D25BA220BA6A1004A87C3 /* TagData.rtf */; };
+		0F29069022237318009E1B64 /* ViewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29068F22237318009E1B64 /* ViewProfileViewController.swift */; };
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
 		49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
@@ -32,6 +33,7 @@
 		BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */; };
 		BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */; };
 		BEDFB96E220E4788005903C1 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */; };
+		BEFEBDEA22234EBB00EE9847 /* MessageKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,7 @@
 		0D4762BD2210D94500A0F980 /* StudorFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudorFirestore.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0D7D25BA220BA6A1004A87C3 /* TagData.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TagData.rtf; sourceTree = "<group>"; };
+		0F29068F22237318009E1B64 /* ViewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileViewController.swift; sourceTree = "<group>"; };
 		49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +66,7 @@
 		BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
 		BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageKitViewController.swift; sourceTree = "<group>"; };
 		C3F2A43405E5A6339E092E11 /* Pods-Studor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +143,7 @@
 				0D3A0E19222383070049DCE2 /* like.png */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				0F29068F22237318009E1B64 /* ViewProfileViewController.swift */,
 				BEDFB970220E47C1005903C1 /* Chat */,
 				BEDFB96F220E479E005903C1 /* Messages */,
 				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
@@ -173,6 +178,7 @@
 			children = (
 				BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */,
 				BEDFB967220DC801005903C1 /* ChatTableViewController.swift */,
+				BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -258,7 +264,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseEmailAuthUI.bundle",
@@ -285,7 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BF48AEEE767EF5E4627C739D /* [CP] Check Pods Manifest.lock */ = {
@@ -318,7 +324,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -326,9 +332,12 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework",
+				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework.dSYM",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -347,9 +356,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendBirdSDK.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/SendBirdSDK.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -359,7 +371,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -370,10 +382,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */,
+				0F29069022237318009E1B64 /* ViewProfileViewController.swift in Sources */,
 				BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */,
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
 				0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */,
 				0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */,
+				BEFEBDEA22234EBB00EE9847 /* MessageKitViewController.swift in Sources */,
 				BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */,
 				0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,

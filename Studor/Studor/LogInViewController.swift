@@ -15,13 +15,15 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
 
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var sendbirdTextField: UITextField!
 
     @IBAction func forgotPasswordButtonTapped(_ sender: Any) {
         // Make google do this part
     }
     @IBAction func logInButtonTapped(_ sender: Any) {
 
-        if let email = usernameTextField.text, let password = passwordTextField.text {
+        if let email = usernameTextField.text, let password = passwordTextField.text, let sendbird = sendbirdTextField {
 
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
 
@@ -29,6 +31,10 @@ class LogInViewController: UIViewController {
                 if user != nil && error == nil {
                     print("Login success")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                    
+                    //SBDMain.connect(withUserId: "ZWPnpW3pBjTUXP9bEfLE3TMu8l23", completionHandler: { (user, error) in
+                        // ...
+                    //})
                 } else {
                     print("Error:\(error!.localizedDescription)")
                 }
