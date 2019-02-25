@@ -9,6 +9,18 @@
 import UIKit
 import FirebaseDatabase
 
+class SearchResult {
+    var name: String
+    var type: String
+    var id: String
+    
+    init(_ _name : String, _ _type : String, _ _id : String){
+        name = _name
+        type = _type
+        id = _id
+    }
+}
+
 class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
     
     //autofill function
@@ -23,9 +35,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var types : [String] = []
     
-    var rates : [String] = []
+    var searchResults : [SearchResult] = []
     
-    var searchBarTextCount : Int = 0
+    var selectedResult : SearchResult!
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     
@@ -109,6 +121,15 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        let ref = functionSingleton.db.collection("Users")
+        ref.getDocuments { (document, error) in
+            if let document = document, document.count > 0 {
+                for entry in document.documents {
+                    self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID))
+                }
+                self.tableView.reloadData()
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -125,7 +146,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return rowCount
+        return searchResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,10 +154,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
         // Configure the cell...
         //cell.connect.text = String(indexPath.item)
-        
-        cell.nameText = names[indexPath.row]
-        cell.typeText = types[indexPath.row]
-        cell.rateText = rates[indexPath.row]
+        cell.nameText = searchResults[indexPath.row].name
+        cell.typeText = searchResults[indexPath.row].type
         cell.initialiseData()
         
         return cell
@@ -144,20 +163,53 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     //this one is called whenever the text changes at all
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.count > searchBarTextCount || (searchText.count == 0 && searchBarTextCount != 0)){
+        //reset the table view
+        if searchText.count == 0 {
+            let ref = functionSingleton.db.collection("Users")
+            ref.getDocuments { (document, error) in
+                if let document = document, document.count > 0 {
+                    for entry in document.documents {
+                        self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String, entry.documentID))
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        /*
+        if searchText.count > searchBarTextCount {
             searchBarTextCount = searchText.count;
             
             tableView.reloadData()
         }
+         */
     }
     
     //this one is called when search/enter is hit
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchResults.removeAll()
         tableView.reloadData()
+        //search through everywhere to find the search term
+        /*
+        let ref = functionSingleton.db.collection("Users")
+        searchResults.removeAll()
+        ref.getDocuments { (document, error) in
+            if let document = document, document.count > 0 {
+                for entry in document.documents {
+                    self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
+                }
+                self.tableView.reloadData()
+            }
+        }
+         */
     }
     
     override func viewDidAppear(_ animated: Bool) {
         //navigationItem.hidesBackButton = true  
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedResult = searchResults[indexPath.row]
+        return indexPath;
     }
 
     /*
@@ -195,14 +247,28 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let destination = segue.destination as! ViewProfileViewController
+        let ref = functionSingleton.db.collection("Users").document(selectedResult.id)
+        var profileInfo: [String : Any] = [:]
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                profileInfo = document.data()!
+                print(profileInfo["username"] as? String ?? "No username")
+                destination.bio = profileInfo["Bio"] as? String ?? ""
+                destination.nickname = profileInfo["NickName"] as? String ?? ""
+                destination.tags = profileInfo["tags"] as? [String] ?? []
+                destination.username = profileInfo["username"] as? String ?? ""
+                destination.initialiseFields()
+            } else {
+                print("Error retrieving profile data for user \(self.selectedResult.id)")
+            }
+        }
     }
-    */
 
 }

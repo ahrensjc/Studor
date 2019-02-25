@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SendBirdSDK
 
 class ProfileViewController: UIViewController, UITextFieldDelegate {
 
@@ -28,7 +29,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "NickName": nicknameTextField.text
+            "NickName": nicknameTextField.text!
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -83,6 +84,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             print("Success logging out")
             self.performSegue(withIdentifier: "logoutSuccess", sender: self)
             
+            SBDMain.disconnect(completionHandler: {
+                //Disconnects user from the SendBird server
+            })
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
             
