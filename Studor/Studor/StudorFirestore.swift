@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 
+let functionSingleton = StudorFunctions()
+
 class StudorFunctions {
     
     // Can get a list of events that a user is in
@@ -39,11 +41,9 @@ class StudorFunctions {
         db.collection("Events").document(eventId).setData(dataToAdd) { err in
             if let err = err {
                 print("Error: \(err)")
-                print("WE GOT HERE")
                 //ret = false
                 
             } else {
-                print("AND ALSO HERE")
                 print("Event created with event id: \(eventId)")
                 //ret = true
                 /*

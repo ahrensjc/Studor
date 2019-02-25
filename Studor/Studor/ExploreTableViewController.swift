@@ -9,6 +9,16 @@
 import UIKit
 import FirebaseDatabase
 
+class SearchResult {
+    var name: String
+    var type: String
+    
+    init(_ _name : String, _ _type : String){
+        name = _name
+        type = _type
+    }
+}
+
 class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
     
     //autofill function
@@ -23,9 +33,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var types : [String] = []
     
-    var rates : [String] = []
-    
-    var searchBarTextCount : Int = 0
+    var searchResults : [SearchResult] = []
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     
@@ -109,6 +117,15 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        let ref = functionSingleton.db.collection("Users")
+        ref.getDocuments { (document, error) in
+            if let document = document, document.count > 0 {
+                for entry in document.documents {
+                    self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
+                }
+                self.tableView.reloadData()
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -125,7 +142,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return rowCount
+        return searchResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,10 +150,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
 
         // Configure the cell...
         //cell.connect.text = String(indexPath.item)
-        
-        cell.nameText = names[indexPath.row]
-        cell.typeText = types[indexPath.row]
-        cell.rateText = rates[indexPath.row]
+        cell.nameText = searchResults[indexPath.row].name
+        cell.typeText = searchResults[indexPath.row].type
         cell.initialiseData()
         
         return cell
@@ -144,16 +159,44 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     //this one is called whenever the text changes at all
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.count > searchBarTextCount || (searchText.count == 0 && searchBarTextCount != 0)){
+        //reset the table view
+        if searchText.count == 0 {
+            let ref = functionSingleton.db.collection("Users")
+            ref.getDocuments { (document, error) in
+                if let document = document, document.count > 0 {
+                    for entry in document.documents {
+                        self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        /*
+        if searchText.count > searchBarTextCount {
             searchBarTextCount = searchText.count;
             
             tableView.reloadData()
         }
+         */
     }
     
     //this one is called when search/enter is hit
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchResults.removeAll()
         tableView.reloadData()
+        //search through everywhere to find the search term
+        /*
+        let ref = functionSingleton.db.collection("Users")
+        searchResults.removeAll()
+        ref.getDocuments { (document, error) in
+            if let document = document, document.count > 0 {
+                for entry in document.documents {
+                    self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
+                }
+                self.tableView.reloadData()
+            }
+        }
+         */
     }
     
     override func viewDidAppear(_ animated: Bool) {
