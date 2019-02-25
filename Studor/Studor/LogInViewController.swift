@@ -36,10 +36,10 @@ class LogInViewController: UIViewController {
                 
             }
         }
+            
         else {
             self.showMessagePrompt(withString: "Username or password fields are missing", title: "Error")
         }
-
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
