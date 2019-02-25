@@ -32,9 +32,9 @@ class LogInViewController: UIViewController {
                     print("Login success")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
                     
-                    SBDMain.connect(withUserId: , completionHandler: { (user, error) in
+                    //SBDMain.connect(withUserId: "ZWPnpW3pBjTUXP9bEfLE3TMu8l23", completionHandler: { (user, error) in
                         // ...
-                    })
+                    //})
                 } else {
                     print("Error:\(error!.localizedDescription)")
                 }
