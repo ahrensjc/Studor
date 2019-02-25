@@ -12,10 +12,12 @@ import FirebaseDatabase
 class SearchResult {
     var name: String
     var type: String
+    var id: String
     
-    init(_ _name : String, _ _type : String){
+    init(_ _name : String, _ _type : String, _ _id : String){
         name = _name
         type = _type
+        id = _id
     }
 }
 
@@ -34,6 +36,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     var types : [String] = []
     
     var searchResults : [SearchResult] = []
+    
+    var selectedResult : SearchResult!
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     
@@ -121,7 +125,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         ref.getDocuments { (document, error) in
             if let document = document, document.count > 0 {
                 for entry in document.documents {
-                    self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
+                    self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID))
                 }
                 self.tableView.reloadData()
             }
@@ -165,7 +169,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
                     for entry in document.documents {
-                        self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
+                        self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String, entry.documentID))
                     }
                     self.tableView.reloadData()
                 }
@@ -201,6 +205,11 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func viewDidAppear(_ animated: Bool) {
         //navigationItem.hidesBackButton = true  
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedResult = searchResults[indexPath.row]
+        return indexPath;
     }
 
     /*
@@ -238,14 +247,28 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let destination = segue.destination as! ViewProfileViewController
+        let ref = functionSingleton.db.collection("Users").document(selectedResult.id)
+        var profileInfo: [String : Any] = [:]
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                profileInfo = document.data()!
+                print(profileInfo["username"] as? String ?? "No username")
+                destination.bio = profileInfo["Bio"] as? String ?? ""
+                destination.nickname = profileInfo["NickName"] as? String ?? ""
+                destination.tags = profileInfo["tags"] as? [String] ?? []
+                destination.username = profileInfo["username"] as? String ?? ""
+                destination.initialiseFields()
+            } else {
+                print("Error retrieving profile data for user \(self.selectedResult.id)")
+            }
+        }
     }
-    */
 
 }

@@ -13,6 +13,7 @@
 		0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4762BD2210D94500A0F980 /* StudorFirestore.swift */; };
 		0D7D25B9220B9D02004A87C3 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D25B5220B9D01004A87C3 /* SignUp.swift */; };
 		0D7D25BB220BA6A1004A87C3 /* TagData.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D25BA220BA6A1004A87C3 /* TagData.rtf */; };
+		0F29069022237318009E1B64 /* ViewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29068F22237318009E1B64 /* ViewProfileViewController.swift */; };
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
 		49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
@@ -39,6 +40,7 @@
 		0D4762BD2210D94500A0F980 /* StudorFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudorFirestore.swift; sourceTree = "<group>"; };
 		0D7D25B5220B9D01004A87C3 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0D7D25BA220BA6A1004A87C3 /* TagData.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TagData.rtf; sourceTree = "<group>"; };
+		0F29068F22237318009E1B64 /* ViewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileViewController.swift; sourceTree = "<group>"; };
 		49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
 				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
+				0F29068F22237318009E1B64 /* ViewProfileViewController.swift */,
 				BEDFB970220E47C1005903C1 /* Chat */,
 				BEDFB96F220E479E005903C1 /* Messages */,
 				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
@@ -347,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */,
+				0F29069022237318009E1B64 /* ViewProfileViewController.swift in Sources */,
 				BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */,
 				BEBA46AA2206665D00E0D510 /* ExploreTableViewController.swift in Sources */,
 				0D4762BA220F8F8D00A0F980 /* TabBarController.swift in Sources */,

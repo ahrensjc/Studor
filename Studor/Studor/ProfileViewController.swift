@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "NickName": nicknameTextField.text
+            "NickName": nicknameTextField.text!
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
