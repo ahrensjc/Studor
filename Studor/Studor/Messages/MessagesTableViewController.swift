@@ -13,6 +13,10 @@ class MessagesTableViewController: UITableViewController {
     
     var myChannels = [SBDGroupChannel]()
     var selected = -1
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +65,7 @@ class MessagesTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let child = segue.destination as! ChatTableViewController
+        let child = segue.destination as! MessageKitViewController
         child.channelURL = myChannels[selected].channelUrl
     }
 

@@ -465,7 +465,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="titleLabel" destination="hp5-gB-JyC" id="ZEx-fy-Fti"/>
-                                    <segue destination="9Sm-DJ-2P7" kind="show" id="NsF-En-jf6"/>
+                                    <segue destination="lRi-3w-uOb" kind="show" id="Kx8-iB-CSX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -518,7 +518,22 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LqV-ES-bDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4508" y="-66.11694152923539"/>
+            <point key="canvasLocation" x="4622" y="-390"/>
+        </scene>
+        <!--Message Kit View Controller-->
+        <scene sceneID="5Tb-Z1-kW4">
+            <objects>
+                <viewController id="lRi-3w-uOb" customClass="MessageKitViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E8Y-8O-h5z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="nUw-TI-5K1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kyv-yp-wOK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4602" y="290"/>
         </scene>
         <!--Events-->
         <scene sceneID="rvR-wM-gMC">
