@@ -23,7 +23,11 @@ class LogInViewController: UIViewController {
     }
     @IBAction func logInButtonTapped(_ sender: Any) {
 
-        if let email = usernameTextField.text, let password = passwordTextField.text, let sendbird = sendbirdTextField {
+        if let email = usernameTextField.text, let password = passwordTextField.text{
+            
+            // Make sure whatever you put into the if let field actually exists or it will skip this block every time
+            
+            // if let sendbirdId = sendBirdTextField.text
 
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
 

@@ -193,7 +193,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
  */
     
     func updateProfileUI(){
-        nicknameLabel.text = String(describing: profileData["username"])
+//        nicknameLabel.text = String(describing: profileData["username"])
         bioText.text! = String(describing: profileData["biography"])
         
         let tags = profileData["tags"]
