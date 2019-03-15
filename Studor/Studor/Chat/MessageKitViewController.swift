@@ -160,7 +160,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
                     
                     if item is SBDUserMessage {
                         // Do something when the received message is a UserMessage.
-                        print("user")
+                        //print("user")
                         let thing = item as! SBDUserMessage
                         let sender = thing.sender as! SBDUser
                         let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
@@ -169,11 +169,11 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
                     }
                     else if item is SBDFileMessage {
                         // Do something when the received message is a FileMessage.
-                        print("file")
+                        //print("file")
                     }
                     else if item is SBDAdminMessage {
                         // Do something when the received message is an AdminMessage.
-                        print("admin")
+                        //print("admin")
                         let thing = item as! SBDAdminMessage
                         let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
                         //self.messages.append(thing.message!)

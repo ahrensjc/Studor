@@ -73,8 +73,13 @@ class MessagesTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let child = segue.destination as! MessageKitViewController
-        child.channelURL = myChannels[selected].channelUrl
+        if segue.destination is MessageKitViewController{
+            let child = segue.destination as! MessageKitViewController
+            child.channelURL = myChannels[selected].channelUrl
+            print("checked correctly")
+        } else if segue.destination is CreateGroupViewController {
+            //let child = segue.destination as! CreateGroupViewController
+        }
     }
 
     /*

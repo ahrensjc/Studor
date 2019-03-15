@@ -14,12 +14,18 @@ class EventViewController: UIViewController {
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventLocationLabel: UILabel!
     @IBOutlet weak var eventOwnerLabel: UILabel!
+    @IBOutlet weak var editEventButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // TODO: Hide edit event button if user is not owner of event
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let child = segue.destination as! EditEventViewController
+        child.eventID = "" // TODO: Get the eventID
     }
     
 
