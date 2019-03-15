@@ -20,6 +20,7 @@
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
 		BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */; };
 		BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */; };
+		BE1547EE223B52BB00CA5A64 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547ED223B52BB00CA5A64 /* EventViewController.swift */; };
 		BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46972204EEA800E0D510 /* AppDelegate.swift */; };
 		BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46992204EEA800E0D510 /* ViewController.swift */; };
 		BEBA469D2204EEA800E0D510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBA469B2204EEA800E0D510 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		933E2813286819B28FAFF75F /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
 		BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreatorViewController.swift; sourceTree = "<group>"; };
+		BE1547ED223B52BB00CA5A64 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		BEBA46942204EEA800E0D510 /* Studor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBA46972204EEA800E0D510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBA46992204EEA800E0D510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BE1547EF223B52D100CA5A64 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
+				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
+				BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */,
+				BE1547ED223B52BB00CA5A64 /* EventViewController.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
 		BEBA468B2204EEA800E0D510 = {
 			isa = PBXGroup;
 			children = (
@@ -147,9 +160,7 @@
 				0F29068F22237318009E1B64 /* ViewProfileViewController.swift */,
 				BEDFB970220E47C1005903C1 /* Chat */,
 				BEDFB96F220E479E005903C1 /* Messages */,
-				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
-				BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */,
-				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
+				BE1547EF223B52D100CA5A64 /* Events */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
 				49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */,
@@ -392,6 +403,7 @@
 				BEFEBDEA22234EBB00EE9847 /* MessageKitViewController.swift in Sources */,
 				BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */,
 				BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */,
+				BE1547EE223B52BB00CA5A64 /* EventViewController.swift in Sources */,
 				0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,

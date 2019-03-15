@@ -705,6 +705,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="eventLabel" destination="xr9-kw-uT7" id="y67-U6-qn5"/>
+                                    <segue destination="qYe-AM-gV1" kind="show" id="Ty1-UY-a8Z"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -719,6 +720,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqJ-xf-JYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2065" y="632"/>
+        </scene>
+        <!--Event View Controller-->
+        <scene sceneID="h4V-xk-hPP">
+            <objects>
+                <viewController id="qYe-AM-gV1" customClass="EventViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H4E-dS-bpb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef1-lR-0ls">
+                                <rect key="frame" x="126" y="88" width="81" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Date &amp; Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW3-qj-3NR">
+                                <rect key="frame" x="95" y="153" width="142" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wip-dN-8qL">
+                                <rect key="frame" x="110" y="217" width="113" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Owner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBK-eF-m4v">
+                                <rect key="frame" x="145" y="377" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="kgD-tL-mz1"/>
+                    </view>
+                    <connections>
+                        <outlet property="eventDateLabel" destination="aW3-qj-3NR" id="knv-dH-3x9"/>
+                        <outlet property="eventLocationLabel" destination="wip-dN-8qL" id="6df-An-6jT"/>
+                        <outlet property="eventNameLabel" destination="ef1-lR-0ls" id="gJR-Rg-9lP"/>
+                        <outlet property="eventOwnerLabel" destination="fBK-eF-m4v" id="pce-ZE-auM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wIX-OU-bhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3047" y="632"/>
         </scene>
         <!--Event Creator View Controller-->
         <scene sceneID="gsU-Yw-BTd">
