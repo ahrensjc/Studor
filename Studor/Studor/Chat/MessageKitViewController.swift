@@ -37,7 +37,13 @@ extension Message: MessageType {
     }
 }
 
-class MessageKitViewController: MessagesViewController {
+class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
+    
+    
+    
+    // ...
+    
+    var delegateIdentifier : String!
     
     //var messages: [Message] = []
     var member: Member!
@@ -54,6 +60,7 @@ class MessageKitViewController: MessagesViewController {
         
         getMessages()
 
+        //TODO: how to get current user nickname
         member = Member(name: "bluemoon", color: .blue)
         //member = Member(name: .randomName, color: .random)
 
@@ -61,6 +68,8 @@ class MessageKitViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
     }
     
 
@@ -177,6 +186,26 @@ class MessageKitViewController: MessagesViewController {
         }
     }
 
+    func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
+        if message is SBDUserMessage {
+            // Do something when the received message is a UserMessage.
+            let thing = message as! SBDUserMessage
+            let sender = thing.sender as! SBDUser
+            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
+            //self.messages.append(thing.message!)
+            self.messages.append(myMsg)
+        }
+        else if message is SBDFileMessage {
+            // Do something when the received message is a FileMessage.
+        }
+        else if message is SBDAdminMessage {
+            // Do something when the received message is an AdminMessage.
+            let thing = message as! SBDAdminMessage
+            let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
+            //self.messages.append(thing.message!)
+            self.messages.append(myMsg)
+        }
+    }
 }
 
 extension MessageKitViewController: MessagesDataSource {
@@ -251,5 +280,14 @@ extension MessageKitViewController: MessageInputBarDelegate {
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
+        
+        channel.sendUserMessage(text, data: nil, completionHandler: { (userMessage, error) in
+            guard error == nil else {   // Error.
+                print("failure sending message")
+                return
+            }
+            
+            // ...
+        })
     }
 }
