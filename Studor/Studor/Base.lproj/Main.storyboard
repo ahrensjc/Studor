@@ -237,7 +237,6 @@
         <!--Explore-->
         <scene sceneID="nEW-7G-fji">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kQK-TT-2DG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Sxc-y2-Ozh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" id="hoj-gh-4XE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -249,6 +248,7 @@
                         <segue destination="QbF-nJ-xMD" kind="relationship" relationship="rootViewController" id="8QA-Zq-3oh"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQK-TT-2DG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3004" y="-761"/>
         </scene>
@@ -526,11 +526,82 @@
                             <outlet property="delegate" destination="0K9-rE-HCB" id="nat-oR-1uW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Messages" id="waV-Sa-ia2"/>
+                    <navigationItem key="navigationItem" title="Messages" id="waV-Sa-ia2">
+                        <barButtonItem key="rightBarButtonItem" title="Create Group" id="DHC-f5-gcf">
+                            <connections>
+                                <action selector="createGroupButtonTapped:" destination="0K9-rE-HCB" id="Xyj-Q2-STZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-Vn-m8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3751.1999999999998" y="-66.11694152923539"/>
+        </scene>
+        <!--Create Group View Controller-->
+        <scene sceneID="uUU-ba-hRf">
+            <objects>
+                <viewController storyboardIdentifier="cgvc" id="SMX-YB-nTd" customClass="CreateGroupViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Nr-mU-w9J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpa-mZ-20X">
+                                <rect key="frame" x="43" y="91" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVV-XR-8NK">
+                                <rect key="frame" x="43" y="211" width="126" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HdN-zx-3aF">
+                                <rect key="frame" x="43" y="240" width="275" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUl-jW-coe">
+                                <rect key="frame" x="72" y="557" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmButtonTapped:" destination="SMX-YB-nTd" eventType="touchUpInside" id="Pm2-3q-Nfv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30V-cw-SA8">
+                                <rect key="frame" x="243" y="557" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="SMX-YB-nTd" eventType="touchUpInside" id="x1R-hz-eet"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BoM-xc-qva">
+                                <rect key="frame" x="43" y="120" width="275" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="vXw-oT-r12"/>
+                    </view>
+                    <connections>
+                        <outlet property="addParticipantsTextField" destination="HdN-zx-3aF" id="1gX-IJ-V68"/>
+                        <outlet property="groupNameTextField" destination="BoM-xc-qva" id="PKP-py-nA9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HDz-fx-yDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4488.8000000000002" y="-65.217391304347828"/>
         </scene>
         <!--Chat Table View Controller-->
         <scene sceneID="2jL-KJ-ynk">
@@ -570,7 +641,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LqV-ES-bDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4622" y="-390"/>
+            <point key="canvasLocation" x="5366" y="-991"/>
         </scene>
         <!--Message Kit View Controller-->
         <scene sceneID="5Tb-Z1-kW4">
@@ -585,7 +656,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kyv-yp-wOK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4602" y="290"/>
+            <point key="canvasLocation" x="4489" y="653"/>
         </scene>
         <!--Events-->
         <scene sceneID="rvR-wM-gMC">
@@ -797,6 +868,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ZqN-gz-AFu"/>
-        <segue reference="dwS-zY-wM5"/>
+        <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
 </document>

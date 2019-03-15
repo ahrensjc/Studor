@@ -63,6 +63,14 @@ class MessagesTableViewController: UITableViewController {
         selected = indexPath.item // Keep track of what is selected so you can send it in the segue
         return indexPath
     }
+    @IBAction func createGroupButtonTapped(_ sender: Any) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cgvc") as? CreateGroupViewController {
+                //viewController.newsObj = newsObj
+                if let navigator = navigationController {
+                    navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let child = segue.destination as! MessageKitViewController
