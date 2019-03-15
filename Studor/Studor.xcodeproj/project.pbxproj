@@ -19,6 +19,7 @@
 		49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
 		BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */; };
+		BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */; };
 		BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46972204EEA800E0D510 /* AppDelegate.swift */; };
 		BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46992204EEA800E0D510 /* ViewController.swift */; };
 		BEBA469D2204EEA800E0D510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBA469B2204EEA800E0D510 /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		933E2813286819B28FAFF75F /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
 		BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreatorViewController.swift; sourceTree = "<group>"; };
 		BEBA46942204EEA800E0D510 /* Studor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBA46972204EEA800E0D510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBA46992204EEA800E0D510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				BEDFB970220E47C1005903C1 /* Chat */,
 				BEDFB96F220E479E005903C1 /* Messages */,
 				BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */,
+				BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */,
 				BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
@@ -392,6 +395,7 @@
 				0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */,
 				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
+				BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */,
 				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,
 				49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */,
 				BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */,
