@@ -39,7 +39,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func updateSearchResults(for searchController: UISearchController) {
         //do something here
-        filterContentForSearchText(searchController.searchBar.text!)
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -47,15 +49,24 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
+        return searchController.isActive && !searchBarIsEmpty() || searchController.searchBar.selectedScopeButtonIndex != 0
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All"){
         filteredResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
-            return searchResult.name.lowercased().contains(searchText.lowercased()) ||
-                searchResult.type.lowercased().contains(searchText.lowercased())
+            let matcher = (scope == "All") || (searchResult.type == scope)
+            if searchBarIsEmpty() {
+                return matcher
+            }
+            else {
+                return matcher && searchResult.name.lowercased().contains(searchText.lowercased())
+            }
         })
         tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
     
     override func viewDidLoad() {
@@ -63,6 +74,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.scopeButtonTitles = ["All", "Student", "Tutor"]
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         navigationController?.navigationBar.isTranslucent = false
