@@ -65,7 +65,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
-        navigationItem.titleView = searchController.searchBar
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         let ref = firebaseSingleton.db.collection("Users")
         ref.getDocuments { (document, error) in
