@@ -119,6 +119,7 @@
                         <outlet property="bioPopover" destination="IcJ-Xb-7Sj" id="sBK-yK-Q1O"/>
                         <outlet property="bioText" destination="wOm-T5-OYd" id="Vih-yx-VNo"/>
                         <outlet property="bioTextView" destination="xzg-W0-lOb" id="MHw-Oy-I9N"/>
+                        <outlet property="initializeBio" destination="wOm-T5-OYd" id="0Ve-9R-Q7M"/>
                         <outlet property="nicknamePopover" destination="Z1F-lf-H1W" id="Kr1-Qy-1zi"/>
                         <outlet property="nicknameTextField" destination="Ohc-SX-6Vu" id="QQY-aM-QID"/>
                         <outlet property="pricingTextLabel" destination="a2Q-g7-Fb6" id="h1f-G6-FdF"/>
@@ -1086,7 +1087,7 @@
         <image name="profile" width="37.5" height="37.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ccL-Gp-Dot"/>
+        <segue reference="ZqN-gz-AFu"/>
         <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
 </document>
