@@ -193,7 +193,7 @@
                     <viewLayoutGuide key="safeArea" id="b8n-hd-SpI"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2260" y="1369"/>
+            <point key="canvasLocation" x="2260" y="1368.6656671664168"/>
         </scene>
         <!--Tag Search View Controller-->
         <scene sceneID="iwb-M3-jv1">
