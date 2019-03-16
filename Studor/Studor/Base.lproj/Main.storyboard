@@ -677,9 +677,10 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Schedule" id="L7M-xz-Mxg">
-                                    <barButtonItem key="rightBarButtonItem" title="Add Event" id="OZI-QZ-klb">
+                                    <barButtonItem key="rightBarButtonItem" title="Add Event" image="Add Event" id="OZI-QZ-klb">
                                         <connections>
                                             <action selector="addEventButtonTapped:" destination="KxB-dP-VfG" id="YPL-Wy-vka"/>
+                                            <segue destination="qYe-AM-gV1" kind="show" id="CRb-Xq-Nh9"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -1079,6 +1080,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add Event" width="36" height="36"/>
         <image name="Events" width="37.5" height="37.5"/>
         <image name="Explore" width="37.5" height="37.5"/>
         <image name="Messages" width="37.5" height="37.5"/>
@@ -1086,6 +1088,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZqN-gz-AFu"/>
+        <segue reference="CRb-Xq-Nh9"/>
         <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
 </document>
