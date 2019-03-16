@@ -23,6 +23,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
     
+    @IBOutlet weak var initializeBio: UITextView! //pull bio info from database to initialize
+    
+    
     //TODO: Pricing label for all users (will hide if student user)
     @IBOutlet weak var pricingTextLabel: UILabel!
     @IBOutlet var nicknamePopover: UIView!
@@ -105,12 +108,28 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         // set database to new bio text
     }
     
+    
     @IBAction func tagEdit(_ sender: Any) {
         // TODO
         // call up modal?
         // set tags
         // set database to new tags
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     /*
@@ -205,25 +224,26 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        var profileData = [String : Any]()
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                profileData = document.data()!
+                self.bioText.text = profileData["Bio"] as? String ?? ""
+                self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
+                self.usernameLabel.text = profileData["username"] as? String ?? ""
+                if profileData["accountType"] as! String == "Student" {
+                    self.pricingTextLabel.isHidden = true
+                }
+                self.updateProfileUI()
+                self.initializeBio.text = self.bioText.text!
+                //do something to handle fetching tags
+            }
+        }
         self.nicknamePopover.layer.cornerRadius = 10
         self.bioPopover.layer.cornerRadius = 10
         
-        commands = StudorFunctions()
-        profileData = commands.getProfileData(uid: commands.getId())
-        
-        updateProfileUI()
-        
-        if String(describing: profileData["accountType"]) == "Student" {
-            pricingTextLabel.isHidden = true
-        }
-
-        // This function runs when the page is opened for the first time in app
-        // TODO
-        // get and set username data label text
-        // get and set nickname data label text
-        // get and set bio data text
-        // get and set tag data
+    
     }
     
 

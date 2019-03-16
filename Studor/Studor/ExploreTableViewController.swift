@@ -21,23 +21,181 @@ class SearchResult {
     }
 }
 
-class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
+class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
-    //autofill function
-    
-    @IBOutlet weak var textField: UITextField!
-    
-    @IBOutlet weak var searchBar: UISearchBar!
-
     var rowCount = 0
     
     var names : [String] = []
     
     var types : [String] = []
     
-    var searchResults : [SearchResult] = []
+    var searchResults = [SearchResult]()
+    
+    var filteredResults = [SearchResult]()
     
     var selectedResult : SearchResult!
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        //do something here
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All"){
+        filteredResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
+            return searchResult.name.lowercased().contains(searchText.lowercased()) ||
+                searchResult.type.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        let ref = firebaseSingleton.db.collection("Users")
+        ref.getDocuments { (document, error) in
+            if let document = document, document.count > 0 {
+                for entry in document.documents {
+                    self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID))
+                }
+                self.tableView.reloadData()
+            }
+        }
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // We may need more than this but get it later
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return filteredResults.count
+        }
+        return searchResults.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreTableViewCell
+        
+        // Configure the cell...
+        //cell.connect.text = String(indexPath.item)
+        if isFiltering() {
+            cell.nameText = filteredResults[indexPath.row].name
+            cell.typeText = filteredResults[indexPath.row].type
+        }
+        else{
+            cell.nameText = searchResults[indexPath.row].name
+            cell.typeText = searchResults[indexPath.row].type
+        }
+        cell.initialiseData()
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //navigationItem.hidesBackButton = true
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if isFiltering() {
+            selectedResult = filteredResults[indexPath.row]
+        }
+        else {
+            selectedResult = searchResults[indexPath.row]
+        }
+        return indexPath;
+    }
+    
+    /*
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
+    /*
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
+    /*
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        let destination = segue.destination as! ViewProfileViewController
+        let ref = firebaseSingleton.db.collection("Users").document(selectedResult.id)
+        var profileInfo: [String : Any] = [:]
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                profileInfo = document.data()!
+                print(profileInfo["username"] as? String ?? "No username")
+                destination.bio = profileInfo["Bio"] as? String ?? ""
+                destination.nickname = profileInfo["NickName"] as? String ?? ""
+                destination.tags = profileInfo["tags"] as? [String] ?? []
+                destination.username = profileInfo["username"] as? String ?? ""
+                destination.initialiseFields()
+            } else {
+                print("Error retrieving profile data for user \(self.selectedResult.id)")
+            }
+        }
+    }
+    
+    //autofill function
+    
+    @IBOutlet weak var textField: UITextField!
     
     var autoCompletionPossibilities = ["Apple", "Pineapple", "Orange"] //This is what we need to populate using the data base
     
@@ -117,158 +275,4 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         return autoCompleteResult
     }
     //// end of autofil////
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        searchBar.delegate = self
-        let ref = functionSingleton.db.collection("Users")
-        ref.getDocuments { (document, error) in
-            if let document = document, document.count > 0 {
-                for entry in document.documents {
-                    self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID))
-                }
-                self.tableView.reloadData()
-            }
-        }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // We may need more than this but get it later
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return searchResults.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreTableViewCell
-
-        // Configure the cell...
-        //cell.connect.text = String(indexPath.item)
-        cell.nameText = searchResults[indexPath.row].name
-        cell.typeText = searchResults[indexPath.row].type
-        cell.initialiseData()
-        
-        return cell
-    }
-    
-    //this one is called whenever the text changes at all
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //reset the table view
-        if searchText.count == 0 {
-            let ref = functionSingleton.db.collection("Users")
-            ref.getDocuments { (document, error) in
-                if let document = document, document.count > 0 {
-                    for entry in document.documents {
-                        self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String, entry.documentID))
-                    }
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        /*
-        if searchText.count > searchBarTextCount {
-            searchBarTextCount = searchText.count;
-            
-            tableView.reloadData()
-        }
-         */
-    }
-    
-    //this one is called when search/enter is hit
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchResults.removeAll()
-        tableView.reloadData()
-        //search through everywhere to find the search term
-        /*
-        let ref = functionSingleton.db.collection("Users")
-        searchResults.removeAll()
-        ref.getDocuments { (document, error) in
-            if let document = document, document.count > 0 {
-                for entry in document.documents {
-                    self.searchResults.append(SearchResult(entry.data()["username"]! as! String, entry.data()["accountType"]! as! String))
-                }
-                self.tableView.reloadData()
-            }
-        }
-         */
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //navigationItem.hidesBackButton = true  
-    }
-    
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        selectedResult = searchResults[indexPath.row]
-        return indexPath;
-    }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        let destination = segue.destination as! ViewProfileViewController
-        let ref = functionSingleton.db.collection("Users").document(selectedResult.id)
-        var profileInfo: [String : Any] = [:]
-        ref.getDocument { (document, error) in
-            if let document = document, document.exists {
-                profileInfo = document.data()!
-                print(profileInfo["username"] as? String ?? "No username")
-                destination.bio = profileInfo["Bio"] as? String ?? ""
-                destination.nickname = profileInfo["NickName"] as? String ?? ""
-                destination.tags = profileInfo["tags"] as? [String] ?? []
-                destination.username = profileInfo["username"] as? String ?? ""
-                destination.initialiseFields()
-            } else {
-                print("Error retrieving profile data for user \(self.selectedResult.id)")
-            }
-        }
-    }
-
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import SendBirdSDK
 
 class ViewProfileViewController: UIViewController {
     
