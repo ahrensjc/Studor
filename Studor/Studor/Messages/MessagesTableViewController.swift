@@ -11,7 +11,8 @@ import SendBirdSDK
 
 class MessagesTableViewController: UITableViewController {
     
-    var myChannels = [SBDGroupChannel]()
+    //var myChannels = [SBDGroupChannel]()
+    var myChannels = [(chan: SBDGroupChannel, accepted: Bool)]()
     var selected = -1
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +55,12 @@ class MessagesTableViewController: UITableViewController {
 
         // This should instead be the title of the channel if its a group or the person's nickname if it is 1:1 chat ???
         //cell.titleLabel.text = myChannels[indexPath.count].name
-        cell.titleLabel.text = myChannels[indexPath.item].name
+        //cell.titleLabel.text = myChannels[indexPath.item].name
+        if myChannels[indexPath.item].accepted {
+            cell.titleLabel.text = myChannels[indexPath.item].chan.name
+        } else {
+            cell.titleLabel.text = "INVITITATION: " + myChannels[indexPath.item].chan.name
+        }
         
         return cell
     }
@@ -63,6 +69,7 @@ class MessagesTableViewController: UITableViewController {
         selected = indexPath.item // Keep track of what is selected so you can send it in the segue
         return indexPath
     }
+    
     @IBAction func createGroupButtonTapped(_ sender: Any) {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cgvc") as? CreateGroupViewController {
                 //viewController.newsObj = newsObj
@@ -75,7 +82,7 @@ class MessagesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is MessageKitViewController{
             let child = segue.destination as! MessageKitViewController
-            child.channelURL = myChannels[selected].channelUrl
+            child.channelURL = myChannels[selected].chan.channelUrl
             print("checked correctly")
         } else if segue.destination is CreateGroupViewController {
             //let child = segue.destination as! CreateGroupViewController
@@ -129,7 +136,7 @@ class MessagesTableViewController: UITableViewController {
     
     func login() {
         // Again this should go in the login page... (logs in user)
-        SBDMain.connect(withUserId: "rando1", completionHandler: { (user, error) in
+        SBDMain.connect(withUserId: "joe", completionHandler: { (user, error) in
             // ...
             // Grab a list of channels the user is in
             let query = SBDGroupChannel.createMyGroupChannelListQuery()
@@ -140,8 +147,38 @@ class MessagesTableViewController: UITableViewController {
                     print(error)
                     return
                 }
-                self.myChannels = channels ?? [SBDGroupChannel]()
-                self.tableView.reloadData()
+                //self.myChannels = channels ?? [SBDGroupChannel]()
+                
+                
+                for myChannel in channels! {
+                    //SBDOpenChannel.getWithUrl(myChannel.channelUrl) { (channel, error) in
+                        //let keys : NSArray = ["key1", "key2"]
+                        let keys = ["joe"] // TODO: change this to current user id
+                        
+                        myChannel.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+                            guard error == nil else {   // Error.
+                                print("error getting channel metadata")
+                                print(error)
+                                return
+                            }
+                            if metaData!.count == 0 {
+                                    self.myChannels.append((myChannel, true))
+                            } else {
+                                for data in metaData! {
+                                    if data.value as! String == "invited" {
+                                        self.myChannels.append((myChannel, false))
+                                    } else {
+                                        self.myChannels.append((myChannel, true))
+                                    }
+                                }
+                            }
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        })
+                    //}
+                    self.tableView.reloadData()
+                }
             })
         })
     }

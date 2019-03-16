@@ -583,6 +583,21 @@
                                     <action selector="cancelButtonTapped:" destination="SMX-YB-nTd" eventType="touchUpInside" id="x1R-hz-eet"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-n7-AhI">
+                                <rect key="frame" x="172" y="278" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addParticipantButtonTapped:" destination="SMX-YB-nTd" eventType="touchUpInside" id="nS5-Mk-x0w"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="rando1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rhd-1v-MpU">
+                                <rect key="frame" x="60" y="335" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BoM-xc-qva">
                                 <rect key="frame" x="43" y="120" width="275" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -597,11 +612,12 @@
                     <connections>
                         <outlet property="addParticipantsTextField" destination="HdN-zx-3aF" id="1gX-IJ-V68"/>
                         <outlet property="groupNameTextField" destination="BoM-xc-qva" id="PKP-py-nA9"/>
+                        <outlet property="participantsTextView" destination="rhd-1v-MpU" id="8jl-3i-UdU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDz-fx-yDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4488.8000000000002" y="-65.217391304347828"/>
+            <point key="canvasLocation" x="5262" y="-273"/>
         </scene>
         <!--Chat Table View Controller-->
         <scene sceneID="2jL-KJ-ynk">
@@ -663,7 +679,7 @@
                     </navigationItem>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="4455" y="659"/>
+            <point key="canvasLocation" x="5194" y="436"/>
         </scene>
         <!--Events-->
         <scene sceneID="rvR-wM-gMC">
@@ -924,7 +940,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXL-ca-Kr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5262" y="659"/>
+            <point key="canvasLocation" x="5940" y="436"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Ber-kp-wTi">

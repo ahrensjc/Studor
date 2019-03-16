@@ -130,23 +130,24 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
             //self.tableView.reloadData()
             
             self.channel = groupChannel
-            /*var a = groupChannel!.myRole
-             var b = groupChannel!.myMemberState
-             var ba = groupChannel!.myMutedState
-             var c = groupChannel!.members
-             var d = groupChannel!.memberCount
-             var e = groupChannel!.joinedMemberCount
-             */
             
-            /*let msg = "lovely weather today"
-             
-             self.channel.sendUserMessage(msg, data: nil, completionHandler: { (userMessage, error) in
-             guard error == nil else {   // Error.
-             return
-             }
-             
-             // ...
-             })*/
+            let keys = ["joe"] // TODO: change this to current user id
+            
+            groupChannel!.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+                guard error == nil else {   // Error.
+                    print("error getting channel metadata")
+                    print(error)
+                    return
+                }
+                for data in metaData! {
+                    if data.value as! String == "invited" {
+                        print("OPEN MODAL TO ACCEPT INVITE")
+                        // Open new
+                    }
+                }
+            })
+            
+            
             
             let previousMessageQuery = self.channel.createPreviousMessageListQuery()
             previousMessageQuery?.loadPreviousMessages(withLimit: 30, reverse: true, completionHandler: { (oldMessages, error) in
