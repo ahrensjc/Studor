@@ -213,7 +213,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     func updateProfileUI(){
 //        nicknameLabel.text = String(describing: profileData["username"])
-        bioText.text! = String(describing: profileData["biography"])
+        bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
     }
@@ -225,14 +225,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
-        var profileData = [String : Any]()
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
-                profileData = document.data()!
-                self.bioText.text = profileData["Bio"] as? String ?? ""
-                self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
-                self.usernameLabel.text = profileData["username"] as? String ?? ""
-                if profileData["accountType"] as! String == "Student" {
+                self.profileData = document.data()!
+                self.bioText.text = self.profileData["Bio"] as? String ?? ""
+                //self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
+                self.usernameLabel.text = self.profileData["username"] as? String ?? ""
+                if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
                 }
                 self.updateProfileUI()
