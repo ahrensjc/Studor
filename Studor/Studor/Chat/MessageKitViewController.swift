@@ -61,7 +61,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         getMessages()
 
         //TODO: how to get current user nickname
-        member = Member(name: "bluemoon", color: .blue)
+        member = Member(name: "rand", color: .blue)
         //member = Member(name: .randomName, color: .random)
 
         messagesCollectionView.messagesDataSource = self
@@ -141,9 +141,6 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                 }
                 for data in metaData! {
                     if data.value as! String == "invited" {
-                        print("OPEN MODAL TO ACCEPT INVITE")
-                        // Open new
-                        
                         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                         let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
                         invViewController.delegate = self
@@ -162,8 +159,6 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                     return
                 }
                 
-                // ..
-                
                 for item in oldMessages ?? [SBDBaseMessage]() {
                     
                     if item is SBDUserMessage {
@@ -171,24 +166,27 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                         //print("user")
                         let thing = item as! SBDUserMessage
                         let sender = thing.sender as! SBDUser
-                        let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
-                        //self.messages.append(thing.message!)
-                        self.messages.append(myMsg)
+                        if sender.nickname ?? "" == self.member.name {
+                            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.blue), text: thing.message!, messageId: thing.requestId!)
+                            self.messages.append(myMsg)
+                        } else {
+                            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
+                            self.messages.append(myMsg)
+                        }
                     }
                     else if item is SBDFileMessage {
                         // Do something when the received message is a FileMessage.
-                        //print("file")
                     }
                     else if item is SBDAdminMessage {
-                        // Do something when the received message is an AdminMessage.
-                        //print("admin")
                         let thing = item as! SBDAdminMessage
                         let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
-                        //self.messages.append(thing.message!)
                         self.messages.append(myMsg)
                     }
                 }
                 //self.tableView.reloadData()
+                self.messages.reverse()
+                self.messagesCollectionView.reloadData()
+                self.messagesCollectionView.scrollToBottom(animated: true)
             })
             
         }
@@ -209,10 +207,12 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         else if message is SBDAdminMessage {
             // Do something when the received message is an AdminMessage.
             let thing = message as! SBDAdminMessage
-            let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
+            let myMsg = Message(member: Member(name: "Admin", color: UIColor.green), text: thing.message!, messageId: "")
             //self.messages.append(thing.message!)
             self.messages.append(myMsg)
         }
+        self.messagesCollectionView.reloadData()
+        self.messagesCollectionView.scrollToBottom(animated: true)
     }
     
     func declined(child: InvitationViewController) {
