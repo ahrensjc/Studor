@@ -229,7 +229,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
  */
     
     func updateProfileUI(){
-      //nicknameLabel.text = String(describing: profileData["username"]
+        nicknameLabel.text = profileData["NickName"] as? String ?? ""
         bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
