@@ -8,12 +8,17 @@
 
 import UIKit
 import SendBirdSDK
+import Firebase
 
 class MessagesTableViewController: UITableViewController {
     
     //var myChannels = [SBDGroupChannel]()
     var myChannels = [(chan: SBDGroupChannel, accepted: Bool)]()
     var selected = -1
+    var sendbirdID: String!
+    var profileData: [String : Any]!
+    var sendbirdUser: SBDUser!
+
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
@@ -31,7 +36,19 @@ class MessagesTableViewController: UITableViewController {
         // This should go in the login page later... (connects app to our sendbird project)
         SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
         
-        login()
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.profileData = document.data()!
+                self.sendbirdID = self.profileData["sendbirdID"] as? String ?? "" //Initialize bio from firebase
+                self.login()
+            } else {
+                print("ERROR GETTING DATA")
+            }
+        }
+        
+        
+        
         
         
         //print("attempting to print channels: \(String(describing: channelQuery))")
@@ -83,9 +100,15 @@ class MessagesTableViewController: UITableViewController {
         if segue.destination is MessageKitViewController{
             let child = segue.destination as! MessageKitViewController
             child.channelURL = myChannels[selected].chan.channelUrl
+            child.nickname = self.profileData["NickName"] as? String ?? ""
+            child.sendbirdID = self.sendbirdID
+            child.sendbirdUser = self.sendbirdUser
             print("checked correctly")
         } else if segue.destination is CreateGroupViewController {
-            //let child = segue.destination as! CreateGroupViewController
+            let child = segue.destination as! CreateGroupViewController
+            child.nickname = self.profileData["NickName"] as? String ?? ""
+            child.sendbirdID = self.sendbirdID
+            child.sendbirdUser = self.sendbirdUser
         }
     }
 
@@ -136,9 +159,10 @@ class MessagesTableViewController: UITableViewController {
     
     func login() {
         // Again this should go in the login page... (logs in user)
-        SBDMain.connect(withUserId: "joe", completionHandler: { (user, error) in
+        SBDMain.connect(withUserId: sendbirdID, completionHandler: { (user, error) in
             // ...
             // Grab a list of channels the user is in
+            self.sendbirdUser = user
             let query = SBDGroupChannel.createMyGroupChannelListQuery()
             query?.includeEmptyChannel = true
             query?.loadNextPage(completionHandler: { (channels, error) in
@@ -153,12 +177,12 @@ class MessagesTableViewController: UITableViewController {
                 for myChannel in channels! {
                     //SBDOpenChannel.getWithUrl(myChannel.channelUrl) { (channel, error) in
                         //let keys : NSArray = ["key1", "key2"]
-                        let keys = ["joe"] // TODO: change this to current user id
+                    let keys = [self.sendbirdID] 
                         
-                        myChannel.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+                    myChannel.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
                             guard error == nil else {   // Error.
                                 print("error getting channel metadata")
-                                print(error)
+                                print(error as Any)
                                 return
                             }
                             if metaData!.count == 0 {
