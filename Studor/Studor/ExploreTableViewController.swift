@@ -8,16 +8,19 @@
 
 import UIKit
 import FirebaseDatabase
+import Firebase
 
 class SearchResult {
     var name: String
     var type: String
     var id: String
+    var tags: [String] = []
     
-    init(_ _name : String, _ _type : String, _ _id : String){
+    init(_ _name : String, _ _type : String, _ _id : String, _ _tags: [String]){
         name = _name
         type = _type
         id = _id
+        tags.append(contentsOf: _tags)
     }
 }
 
@@ -31,9 +34,17 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var searchResults = [SearchResult]()
     
+    var commonTagResults = [SearchResult]()
+    
     var filteredResults = [SearchResult]()
     
     var selectedResult : SearchResult!
+    
+    var profileDataCollected : Bool = false
+    
+    var profileData : [String : Any] = [:]
+    
+    var grabDataTimer : Timer!
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -53,7 +64,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All"){
-        filteredResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
+        filteredResults = commonTagResults.filter({(searchResult : SearchResult) -> Bool in
             let matcher = (scope == "All") || (searchResult.type == scope)
             if searchBarIsEmpty() {
                 return matcher
@@ -80,20 +91,47 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        let ref = firebaseSingleton.db.collection("Users")
-        ref.getDocuments { (document, error) in
-            if let document = document, document.count > 0 {
-                for entry in document.documents {
-                    self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID))
+        if Auth.auth().currentUser != nil {
+            let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+            ref1.getDocument {(document, error) in
+                if let document = document, document.exists {
+                    self.profileData = document.data()!
+                    self.profileDataCollected = true
                 }
-                self.tableView.reloadData()
             }
+            grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherData), userInfo: nil, repeats: true)
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func grabOtherData() {
+        if profileDataCollected {
+        let ref = firebaseSingleton.db.collection("Users")
+            ref.getDocuments { (document, error) in
+                if let document = document, document.count > 0 {
+                    for entry in document.documents {
+                        self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
+                    }
+                    self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
+                        
+                        if(self.profileData["username"] as! String != searchResult.name) {
+                            for tag in self.profileData["tags"] as? [String] ?? []{
+                                if searchResult.tags.contains(tag) {
+                                    return true
+                                }
+                            }
+                        }
+                        return false
+                    })
+                    self.grabDataTimer!.invalidate()
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -108,7 +146,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         if isFiltering() {
             return filteredResults.count
         }
-        return searchResults.count
+        return commonTagResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,8 +159,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             cell.typeText = filteredResults[indexPath.row].type
         }
         else{
-            cell.nameText = searchResults[indexPath.row].name
-            cell.typeText = searchResults[indexPath.row].type
+            cell.nameText = commonTagResults[indexPath.row].name
+            cell.typeText = commonTagResults[indexPath.row].type
         }
         cell.initialiseData()
         return cell
@@ -141,7 +179,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             selectedResult = filteredResults[indexPath.row]
         }
         else {
-            selectedResult = searchResults[indexPath.row]
+            selectedResult = commonTagResults[indexPath.row]
         }
         return indexPath;
     }

@@ -14,7 +14,10 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     let notificationCenter: NotificationCenter = .default
 
     @IBOutlet weak var textThing: UITextField!
-
+    @IBOutlet weak var tagPageTags: UITextView!
+    
+    var tagUpdatedList: String!
+    
     @IBAction func updateTagsArray(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
@@ -114,6 +117,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //tagPageTags.text = tagUpdatedList
 
         // Do any additional setup after loading the view.
     }
