@@ -123,9 +123,14 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                             i = i + 1
                         }
                         if(self.profileData["username"] as! String != searchResult.name) {
-                            for tag in self.profileData["tags"] as? [String] ?? []{
-                                if searchResult.tags.contains(tag.lowercased()) {
-                                    return true
+                            if self.profileData["tags"] == nil || (self.profileData["tags"] as! [String]).count == 0 {
+                                return true
+                            }
+                            else {
+                                for tag in self.profileData["tags"] as! [String]{
+                                    if searchResult.tags.contains(tag.lowercased()) {
+                                        return true
+                                    }
                                 }
                             }
                         }
