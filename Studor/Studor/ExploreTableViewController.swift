@@ -117,10 +117,14 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                         self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
                     self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
-                        
+                        var i = 0
+                        for tag in searchResult.tags {
+                            searchResult.tags[i] = tag.lowercased()
+                            i = i + 1
+                        }
                         if(self.profileData["username"] as! String != searchResult.name) {
                             for tag in self.profileData["tags"] as? [String] ?? []{
-                                if searchResult.tags.contains(tag) {
+                                if searchResult.tags.contains(tag.lowercased()) {
                                     return true
                                 }
                             }
