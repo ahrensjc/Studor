@@ -30,7 +30,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
 
     
-// autofill
+    // autofill
     var rowCount = 1
     
     var autoCompletionPossibilities = ["Comp", "Acct", "Fnce", "Bio"] //This is what we need to populate
@@ -61,6 +61,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     func searchAutocompleteEntriesWithSubstring(substring: String) {
         let userQuery = substring
         let suggestions = getAutocompleteSuggestions(userText: substring) //1
+        // variable for timer interval; get rid of "magic number"
         
         if suggestions.count > 0 {
             timer = .scheduledTimer(withTimeInterval: 0.01, repeats: false, block: { (timer) in //2
@@ -108,7 +109,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
         autoCompleteCharacterCount = autoCompleteResult.count
         return autoCompleteResult
     }
-    //// end of autofil////
+    //// end of autofill ////
     
     override func viewDidLoad() {
         super.viewDidLoad()
