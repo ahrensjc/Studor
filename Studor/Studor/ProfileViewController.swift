@@ -137,7 +137,12 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         // set database to new tags
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as? DeleteTagsViewController ?? nil
+        if(destination != nil){
+            destination!.tagList = profileData["tags"] as? [String] ?? []
+        }
+    }
     
     
     
@@ -286,6 +291,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         if ProfileViewController.tagListDirty {
             ProfileViewController.tagListDirty = false
             onTagListDirty()
+            ExploreTableViewController.profileTagListDirty = true
         }
     }
     
