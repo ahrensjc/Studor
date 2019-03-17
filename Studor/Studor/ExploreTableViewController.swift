@@ -245,6 +245,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 destination.nickname = profileInfo["NickName"] as? String ?? ""
                 destination.tags = profileInfo["tags"] as? [String] ?? []
                 destination.username = profileInfo["username"] as? String ?? ""
+                destination.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
                 destination.initialiseFields()
             } else {
                 print("Error retrieving profile data for user \(self.selectedResult.id)")
