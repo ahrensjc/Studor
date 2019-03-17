@@ -91,14 +91,16 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
-        ref1.getDocument {(document, error) in
-            if let document = document, document.exists {
-                self.profileData = document.data()!
-                self.profileDataCollected = true
+        if Auth.auth().currentUser != nil {
+            let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+            ref1.getDocument {(document, error) in
+                if let document = document, document.exists {
+                    self.profileData = document.data()!
+                    self.profileDataCollected = true
+                }
             }
+            grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherData), userInfo: nil, repeats: true)
         }
-        grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherData), userInfo: nil, repeats: true)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
