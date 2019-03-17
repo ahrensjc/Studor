@@ -21,6 +21,9 @@ class ViewProfileViewController: UIViewController {
     var nickname : String!
     var bio : String!
     var tags : [String] = []
+    var sendbirdID: String!
+    var profileData: [String : Any]!
+    var thisSendbirdID: String!
     
     //TODO: Pricing label for all users (will hide if student user)
     
@@ -39,6 +42,33 @@ class ViewProfileViewController: UIViewController {
             tagText.text!.append("\(tag)\n")
         }
     }
+    
+    @IBAction func messageButtonTapped(_ sender: Any) {
+        // Get sendbird id for self and person
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.profileData = document.data()!
+                self.sendbirdID = self.profileData["sendbirdID"] as? String ?? "" //Initialize bio from firebase
+                print(self.thisSendbirdID)
+                print(self.sendbirdID)
+                
+                SBDGroupChannel.createChannel(withUserIds: [self.sendbirdID, self.thisSendbirdID], isDistinct: true) { (channel, error) in
+                    guard error == nil else {   // Error.
+                        print("Error creating 1:1 channel")
+                        print(error as Any)
+                        return
+                    }
+                    
+                }
+            } else {
+                print("ERROR GETTING DATA")
+            }
+        }
+        
+        
+    }
+    
     
     /*
     // MARK: - Navigation

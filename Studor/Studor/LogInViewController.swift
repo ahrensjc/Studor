@@ -37,9 +37,15 @@ class LogInViewController: UIViewController {
                     print("Login success")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
                     
-                    //SBDMain.connect(withUserId: "ZWPnpW3pBjTUXP9bEfLE3TMu8l23", completionHandler: { (user, error) in
-                        // ...
-                    //})
+                    SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
+                    
+                    SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+                        guard error == nil else {
+                            print(error)
+                            return
+                        }
+                        print("worked")
+                    }
                 } else {
                     print("Error:\(error!.localizedDescription)")
                 }

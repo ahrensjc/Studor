@@ -63,9 +63,7 @@ class CreateGroupViewController: UIViewController {
                     return
                 }
 
-                var newMetaData = [
-                    self.sendbirdID : "accepted" // TODO: rando1 should be replaced by current user sendbird id
-                ]
+                var newMetaData = [self.sendbirdID : "accepted"]
                 for participant in self.participants {
                     newMetaData[participant] = "invited"
                 }
