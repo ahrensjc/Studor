@@ -120,6 +120,7 @@
                         <outlet property="bioText" destination="wOm-T5-OYd" id="Vih-yx-VNo"/>
                         <outlet property="bioTextView" destination="xzg-W0-lOb" id="MHw-Oy-I9N"/>
                         <outlet property="initializeBio" destination="wOm-T5-OYd" id="0Ve-9R-Q7M"/>
+                        <outlet property="nicknameLabel" destination="cad-3c-9pz" id="Bib-2o-VFq"/>
                         <outlet property="nicknamePopover" destination="Z1F-lf-H1W" id="Kr1-Qy-1zi"/>
                         <outlet property="nicknameTextField" destination="Ohc-SX-6Vu" id="QQY-aM-QID"/>
                         <outlet property="pricingTextLabel" destination="a2Q-g7-Fb6" id="h1f-G6-FdF"/>
