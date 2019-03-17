@@ -35,10 +35,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   /* override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let child = segue.destination as! TagSearchViewController
         child.tagUpdatedList = tagTextView.text
-    }
+    } */
    
     @IBAction func nicknameCancel(_ sender: Any) {
         self.nicknamePopover.removeFromSuperview()
