@@ -18,6 +18,8 @@ class TabBarController: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        // If user is not logged in while loading this view, log them out and navigate to login screen
         if Auth.auth().currentUser == nil {
             performSegue(withIdentifier: "requireLogin", sender: self)
         }
@@ -25,7 +27,6 @@ class TabBarController: UITabBarController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //navigationItem.hidesBackButton = true
     }
     
 

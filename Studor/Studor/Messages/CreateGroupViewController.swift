@@ -19,12 +19,16 @@ class CreateGroupViewController: UIViewController {
     
     var groupName: String!
     var participants: [String]! // should have userID's, may also want to make this a tuple and contain nickname as well
+    var sendbirdID : String!
+    var nickname : String!
+    var sendbirdUser : SBDUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         participants = [String]()
-        participants.append("myself") // TODO: instead of self display userID
+        participants.append(sendbirdID) // TODO: instead of self display userID
+        participantsTextView.text = sendbirdID
     }
     
     @IBAction func addParticipantButtonTapped(_ sender: Any) {
@@ -60,16 +64,16 @@ class CreateGroupViewController: UIViewController {
                 }
 
                 var newMetaData = [
-                    "rando1" : "accepted" // TODO: rando1 should be replaced by current user sendbird id
+                    self.sendbirdID : "accepted" // TODO: rando1 should be replaced by current user sendbird id
                 ]
                 for participant in self.participants {
                     newMetaData[participant] = "invited"
                 }
                 
-                channel?.createMetaData(newMetaData, completionHandler: { (metaData, error) in
+                channel?.createMetaData((newMetaData as? [String : String])!, completionHandler: { (metaData, error) in
                     guard error == nil else {   // Error.
                         print("error adding channel metadata")
-                        print(error)
+                        print(error as Any)
                         return
                     }
                 })

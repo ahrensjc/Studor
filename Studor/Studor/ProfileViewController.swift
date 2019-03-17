@@ -22,9 +22,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     var tagX: Double!
     var tagY: Double!
     
+    @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var tagTextView: UITextView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
     
     @IBOutlet weak var initializeBio: UITextView! //pull bio info from database to initialize
@@ -34,6 +34,37 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var pricingTextLabel: UILabel!
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let child = segue.destination as! TagSearchViewController
+        child.tagUpdatedList = tagTextView.text
+    }
+   
+    @IBAction func nicknameCancel(_ sender: Any) {
+        self.nicknamePopover.removeFromSuperview()
+    }
+    
+    @IBOutlet var bioPopover: UIView!
+    @IBOutlet weak var bioTextView: UITextView!
+    @IBAction func bioCancel(_ sender: Any) {
+        self.bioPopover.removeFromSuperview()
+    }
+    
+    @IBAction func bioDone(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "Bio": bioTextView.text
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            }
+            else {
+                self.bioText.text = self.bioTextView.text
+                print("Document successfully written!")
+            }
+        }
+        self.bioPopover.removeFromSuperview()
+    }
     
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
@@ -51,41 +82,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.nicknamePopover.removeFromSuperview()
     }
     
-    @IBAction func nicknameCancel(_ sender: Any) {
-        self.nicknamePopover.removeFromSuperview()
-    }
-    
-    @IBOutlet var bioPopover: UIView!
-    @IBOutlet weak var bioTextView: UITextView!
-    @IBAction func bioCancel(_ sender: Any) {
-        self.bioPopover.removeFromSuperview()
-    }
-    @IBAction func bioDone(_ sender: Any) {
-        let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "Bio": bioTextView.text
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            }
-            else {
-                self.bioText.text = self.bioTextView.text
-                print("Document successfully written!")
-            }
-        }
-        self.bioPopover.removeFromSuperview()
-    }
-    
     var db: DatabaseReference!
-    
-    @IBAction func nicknameEdit(_ sender: Any) {
-        // TODO
-        self.view.addSubview(nicknamePopover)
-        nicknamePopover.center = self.view.center
-        nicknameTextField.text = nicknameLabel.text
-        // set nicknameLabel text
-        // set database to new nickname
-    }
     
     @IBAction func logOutButton(_ sender: Any) {
         let firebaseAuth = Auth.auth()
@@ -114,7 +111,14 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+    @IBAction func nicknameEdit(_ sender: Any) {
+        // TODO
+        self.view.addSubview(nicknamePopover)
+        nicknamePopover.center = self.view.center
+        nicknameTextField.text = nicknameLabel.text
+        // set nicknameLabel text
+        // set database to new nickname
+    }
     @IBAction func bioEdit(_ sender: Any) {
         // TODO
         // call up modal?
@@ -229,7 +233,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
  */
     
     func updateProfileUI(){
-//        nicknameLabel.text = String(describing: profileData["username"])
+        nicknameLabel.text = profileData["NickName"] as? String ?? ""
         bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
@@ -250,7 +254,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                 for item in self.profileData["tags"] as? [String] ?? [] {
                     self.tagTextView.text.append("\(item)\n")
                 }
-                //self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
+                self.nicknameLabel.text = self.profileData["Nickname"] as? String ?? ""
+                
                 self.usernameLabel.text = self.profileData["username"] as? String ?? ""
                 if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
