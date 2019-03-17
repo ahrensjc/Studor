@@ -657,7 +657,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LqV-ES-bDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5366" y="-991"/>
+            <point key="canvasLocation" x="4508" y="-1438"/>
         </scene>
         <!--Title-->
         <scene sceneID="5Tb-Z1-kW4">
@@ -1085,6 +1085,9 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSM-dd-pFz">
                                 <rect key="frame" x="135" y="583" width="98" height="30"/>
                                 <state key="normal" title="Message User"/>
+                                <connections>
+                                    <action selector="messageButtonTapped:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="w28-U7-nNY"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tags" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpb-Yn-CPY">
                                 <rect key="frame" x="166" y="449" width="37" height="21"/>
