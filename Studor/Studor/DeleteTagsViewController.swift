@@ -35,13 +35,6 @@ class DeleteTagsViewController: UITableViewController {
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as? ProfileViewController ?? nil
-        if destination != nil {
-            destination!.profileData["tags"] = tagList
-        }
-    }
-    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -52,7 +45,7 @@ class DeleteTagsViewController: UITableViewController {
         if editingStyle == .delete {
             tagList.remove(at: indexPath.row)
             firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-                "tags": FieldValue.arrayUnion(tagList)
+                "tags": tagList
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")

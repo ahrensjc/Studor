@@ -128,6 +128,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
                     for entry in document.documents {
+                        self.searchResults.removeAll()
                         self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
                     self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in

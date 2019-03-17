@@ -255,14 +255,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHY-Q0-gdB">
-                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHY-Q0-gdB">
+                                            <rect key="frame" x="16" y="12" width="343" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="AHY-Q0-gdB" firstAttribute="trailing" secondItem="XeG-dT-So7" secondAttribute="trailingMargin" id="Z1m-9N-2pq"/>
+                                        <constraint firstItem="AHY-Q0-gdB" firstAttribute="leading" secondItem="XeG-dT-So7" secondAttribute="leadingMargin" id="j56-Ph-EAs"/>
+                                        <constraint firstItem="AHY-Q0-gdB" firstAttribute="bottom" secondItem="XeG-dT-So7" secondAttribute="bottomMargin" id="kZP-4O-cXL"/>
+                                        <constraint firstItem="AHY-Q0-gdB" firstAttribute="centerY" secondItem="XeG-dT-So7" secondAttribute="centerY" id="luq-8Q-uIq"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="label" destination="AHY-Q0-gdB" id="7tj-ZR-3Ye"/>
@@ -277,7 +282,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R6s-un-y5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2260" y="2119"/>
+            <point key="canvasLocation" x="2260" y="2117.9910044977514"/>
         </scene>
         <!--Tag Search View Controller-->
         <scene sceneID="iwb-M3-jv1">
