@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-let functionSingleton = StudorFunctions()
+let firebaseSingleton = StudorFunctions()
 
 class StudorFunctions {
     

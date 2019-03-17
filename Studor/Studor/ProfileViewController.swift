@@ -11,6 +11,10 @@ import Firebase
 import SendBirdSDK
 
 class ProfileViewController: UIViewController, UITextFieldDelegate {
+    
+    static var tagListDirty = false
+    
+    let notificationCenter: NotificationCenter = .default
 
     var commands: StudorFunctions!
     var profileData: [String : Any]!
@@ -18,15 +22,45 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     var tagX: Double!
     var tagY: Double!
     
+    @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var tagTextView: UITextView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
+    
+    @IBOutlet weak var initializeBio: UITextView! //pull bio info from database to initialize
+    
     
     //TODO: Pricing label for all users (will hide if student user)
     @IBOutlet weak var pricingTextLabel: UILabel!
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
+    
+   
+    @IBAction func nicknameCancel(_ sender: Any) {
+        self.nicknamePopover.removeFromSuperview()
+    }
+    
+    @IBOutlet var bioPopover: UIView!
+    @IBOutlet weak var bioTextView: UITextView!
+    @IBAction func bioCancel(_ sender: Any) {
+        self.bioPopover.removeFromSuperview()
+    }
+    
+    @IBAction func bioDone(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "Bio": bioTextView.text
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            }
+            else {
+                self.bioText.text = self.bioTextView.text
+                print("Document successfully written!")
+            }
+        }
+        self.bioPopover.removeFromSuperview()
+    }
     
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
@@ -44,41 +78,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.nicknamePopover.removeFromSuperview()
     }
     
-    @IBAction func nicknameCancel(_ sender: Any) {
-        self.nicknamePopover.removeFromSuperview()
-    }
-    
-    @IBOutlet var bioPopover: UIView!
-    @IBOutlet weak var bioTextView: UITextView!
-    @IBAction func bioCancel(_ sender: Any) {
-        self.bioPopover.removeFromSuperview()
-    }
-    @IBAction func bioDone(_ sender: Any) {
-        let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "Bio": bioTextView.text
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            }
-            else {
-                self.bioText.text = self.bioTextView.text
-                print("Document successfully written!")
-            }
-        }
-        self.bioPopover.removeFromSuperview()
-    }
-    
     var db: DatabaseReference!
-    
-    @IBAction func nicknameEdit(_ sender: Any) {
-        // TODO
-        self.view.addSubview(nicknamePopover)
-        nicknamePopover.center = self.view.center
-        nicknameTextField.text = nicknameLabel.text
-        // set nicknameLabel text
-        // set database to new nickname
-    }
     
     @IBAction func logOutButton(_ sender: Any) {
         let firebaseAuth = Auth.auth()
@@ -95,6 +95,26 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func updateTags(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "tags": FieldValue.arrayUnion([tagTextView.text])
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    @IBAction func nicknameEdit(_ sender: Any) {
+        // TODO
+        self.view.addSubview(nicknamePopover)
+        nicknamePopover.center = self.view.center
+        nicknameTextField.text = nicknameLabel.text
+        // set nicknameLabel text
+        // set database to new nickname
+    }
     @IBAction func bioEdit(_ sender: Any) {
         // TODO
         // call up modal?
@@ -105,12 +125,28 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         // set database to new bio text
     }
     
+    
     @IBAction func tagEdit(_ sender: Any) {
         // TODO
         // call up modal?
         // set tags
         // set database to new tags
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     /*
@@ -193,8 +229,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
  */
     
     func updateProfileUI(){
-//        nicknameLabel.text = String(describing: profileData["username"])
-        bioText.text! = String(describing: profileData["biography"])
+        nicknameLabel.text = profileData["NickName"] as? String ?? ""
+        bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
     }
@@ -205,28 +241,49 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.tagTextView.text = ""
+                self.profileData = document.data()!
+                self.bioText.text = self.profileData["Bio"] as? String ?? "" //Initialize bio from firebase
+                for item in self.profileData["tags"] as? [String] ?? [] {
+                    self.tagTextView.text.append("\(item)\n")
+                }
+                self.nicknameLabel.text = self.profileData["Nickname"] as? String ?? ""
+                self.usernameLabel.text = self.profileData["username"] as? String ?? ""
+                if self.profileData["accountType"] as! String == "Student" {
+                    self.pricingTextLabel.isHidden = true
+                }
+                self.updateProfileUI()
+                //do something to handle fetching tags
+            }
+        }
         self.nicknamePopover.layer.cornerRadius = 10
         self.bioPopover.layer.cornerRadius = 10
-        
-        commands = StudorFunctions()
-        profileData = commands.getProfileData(uid: commands.getId())
-        
-        updateProfileUI()
-        
-        if String(describing: profileData["accountType"]) == "Student" {
-            pricingTextLabel.isHidden = true
-        }
-
-        // This function runs when the page is opened for the first time in app
-        // TODO
-        // get and set username data label text
-        // get and set nickname data label text
-        // get and set bio data text
-        // get and set tag data
+        let _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.shouldUpdateTagList), userInfo: nil, repeats: true)
     }
     
-
+    func onTagListDirty(){
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.tagTextView.text = ""
+                self.profileData = document.data()!
+                for item in self.profileData["tags"] as? [String] ?? [] {
+                    self.tagTextView.text.append("\(item)\n")
+                }
+            }
+        }
+    }
+    
+    @objc func shouldUpdateTagList(){
+        if ProfileViewController.tagListDirty {
+            ProfileViewController.tagListDirty = false
+            onTagListDirty()
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -11,6 +11,7 @@ import UIKit
 import MessageKit
 import MessageInputBar
 import SendBirdSDK
+import Firebase
 
 struct Member {
     let name: String
@@ -37,13 +38,21 @@ extension Message: MessageType {
     }
 }
 
-class MessageKitViewController: MessagesViewController {
+class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invDelegate {
+    
+    
+    
+    // ...
+    
+    var delegateIdentifier : String!
     
     //var messages: [Message] = []
     var member: Member!
     
     var channelURL : String!
-    //var messages = [String]()
+    var sendbirdID : String!
+    var nickname : String!
+    var sendbirdUser : SBDUser!
     var messages = [Message]()
     var channel : SBDGroupChannel!
 
@@ -53,14 +62,26 @@ class MessageKitViewController: MessagesViewController {
         print(channelURL)
         
         getMessages()
+        
+        /*let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                print("stuff")""
+            }
+        }*/
+        
+        
 
-        member = Member(name: "bluemoon", color: .blue)
+        //TODO: how to get current user nickname
+        member = Member(name: sendbirdUser.nickname ?? "", color: .blue)
         //member = Member(name: .randomName, color: .random)
 
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
     }
     
 
@@ -121,23 +142,28 @@ class MessageKitViewController: MessagesViewController {
             //self.tableView.reloadData()
             
             self.channel = groupChannel
-            /*var a = groupChannel!.myRole
-             var b = groupChannel!.myMemberState
-             var ba = groupChannel!.myMutedState
-             var c = groupChannel!.members
-             var d = groupChannel!.memberCount
-             var e = groupChannel!.joinedMemberCount
-             */
             
-            /*let msg = "lovely weather today"
-             
-             self.channel.sendUserMessage(msg, data: nil, completionHandler: { (userMessage, error) in
-             guard error == nil else {   // Error.
-             return
-             }
-             
-             // ...
-             })*/
+            let keys = [self.sendbirdID]
+            
+            groupChannel!.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
+                guard error == nil else {   // Error.
+                    print("error getting channel metadata")
+                    print(error as Any)
+                    return
+                }
+                for data in metaData! {
+                    if data.value as! String == "invited" {
+                        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
+                        invViewController.delegate = self
+                        self.present(invViewController, animated: true, completion: {
+                            print("ran this code")
+                        })
+                    }
+                }
+            })
+            
+            
             
             let previousMessageQuery = self.channel.createPreviousMessageListQuery()
             previousMessageQuery?.loadPreviousMessages(withLimit: 30, reverse: true, completionHandler: { (oldMessages, error) in
@@ -145,38 +171,95 @@ class MessageKitViewController: MessagesViewController {
                     return
                 }
                 
-                // ..
-                
                 for item in oldMessages ?? [SBDBaseMessage]() {
                     
                     if item is SBDUserMessage {
                         // Do something when the received message is a UserMessage.
-                        print("user")
+                        //print("user")
                         let thing = item as! SBDUserMessage
                         let sender = thing.sender as! SBDUser
-                        let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
-                        //self.messages.append(thing.message!)
-                        self.messages.append(myMsg)
+                        print(sender.userId)
+                        if sender.nickname ?? "" == self.member.name {
+                            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.blue), text: thing.message!, messageId: thing.requestId!)
+                            self.messages.append(myMsg)
+                        } else {
+                            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
+                            self.messages.append(myMsg)
+                        }
                     }
                     else if item is SBDFileMessage {
                         // Do something when the received message is a FileMessage.
-                        print("file")
                     }
                     else if item is SBDAdminMessage {
-                        // Do something when the received message is an AdminMessage.
-                        print("admin")
                         let thing = item as! SBDAdminMessage
                         let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
-                        //self.messages.append(thing.message!)
                         self.messages.append(myMsg)
                     }
                 }
                 //self.tableView.reloadData()
+                self.messages.reverse()
+                self.messagesCollectionView.reloadData()
+                self.messagesCollectionView.scrollToBottom(animated: true)
             })
             
         }
     }
 
+    func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
+        if message is SBDUserMessage {
+            // Do something when the received message is a UserMessage.
+            let thing = message as! SBDUserMessage
+            let sender = thing.sender as! SBDUser
+            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
+            //self.messages.append(thing.message!)
+            self.messages.append(myMsg)
+        }
+        else if message is SBDFileMessage {
+            // Do something when the received message is a FileMessage.
+        }
+        else if message is SBDAdminMessage {
+            // Do something when the received message is an AdminMessage.
+            let thing = message as! SBDAdminMessage
+            let myMsg = Message(member: Member(name: "Admin", color: UIColor.green), text: thing.message!, messageId: "")
+            //self.messages.append(thing.message!)
+            self.messages.append(myMsg)
+        }
+        self.messagesCollectionView.reloadData()
+        self.messagesCollectionView.scrollToBottom(animated: true)
+    }
+    
+    func declined(child: InvitationViewController) {
+        child.dismiss(animated: true, completion: nil)
+        channel.leave { (error) in
+            guard error == nil else {   // Error.
+                print("error leaving channel")
+                print(error)
+                return
+            }
+            print("left channel")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func accepted(child: InvitationViewController) {
+        child.dismiss(animated: true, completion: nil)
+        let metaDataToUpdate = [
+            sendbirdID:"accepted"      // Adds this as a new item
+        ]
+        
+        channel?.updateMetaData(metaDataToUpdate as! [String : String], completionHandler: { (metaData, error) in
+            guard error == nil else {   // Error.
+                return
+            }
+        })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is InvitationViewController {
+            let child = segue.destination as! InvitationViewController
+            child.delegate = self
+        }
+    }
 }
 
 extension MessageKitViewController: MessagesDataSource {
@@ -251,5 +334,14 @@ extension MessageKitViewController: MessageInputBarDelegate {
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
+        
+        channel.sendUserMessage(text, data: nil, completionHandler: { (userMessage, error) in
+            guard error == nil else {   // Error.
+                print("failure sending message")
+                return
+            }
+            
+            // ...
+        })
     }
 }

@@ -10,20 +10,21 @@ import UIKit
 import Firebase
 
 class TagSearchViewController: UIViewController, UITextFieldDelegate{
+    
+    let notificationCenter: NotificationCenter = .default
 
     @IBOutlet weak var textThing: UITextField!
 
-    
-    
     @IBAction func updateTagsArray(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "tags": FieldValue.arrayUnion([textThing.text])
+            "tags": FieldValue.arrayUnion([textThing.text as Any])
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
+                ProfileViewController.tagListDirty = true
             }
         }
     }
