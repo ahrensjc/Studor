@@ -35,6 +35,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let child = segue.destination as! TagSearchViewController
+        child.tagUpdatedList = tagTextView.text
+    }
    
     @IBAction func nicknameCancel(_ sender: Any) {
         self.nicknamePopover.removeFromSuperview()
@@ -251,6 +255,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                     self.tagTextView.text.append("\(item)\n")
                 }
                 self.nicknameLabel.text = self.profileData["Nickname"] as? String ?? ""
+                
                 self.usernameLabel.text = self.profileData["username"] as? String ?? ""
                 if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
