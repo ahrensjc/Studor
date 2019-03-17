@@ -11,6 +11,10 @@ import Firebase
 import SendBirdSDK
 
 class ProfileViewController: UIViewController, UITextFieldDelegate {
+    
+    static var tagListDirty = false
+    
+    let notificationCenter: NotificationCenter = .default
 
     var commands: StudorFunctions!
     var profileData: [String : Any]!
@@ -95,6 +99,19 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             })
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
+        }
+    }
+    
+    @IBAction func updateTags(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "tags": FieldValue.arrayUnion([tagTextView.text])
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
         }
     }
     
@@ -213,7 +230,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     func updateProfileUI(){
 //        nicknameLabel.text = String(describing: profileData["username"])
-        bioText.text! = String(describing: profileData["biography"])
+        bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
     }
@@ -225,28 +242,48 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
-        var profileData = [String : Any]()
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
-                profileData = document.data()!
-                self.bioText.text = profileData["Bio"] as? String ?? ""
-                self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
-                self.usernameLabel.text = profileData["username"] as? String ?? ""
-                if profileData["accountType"] as! String == "Student" {
+                self.tagTextView.text = ""
+                self.profileData = document.data()!
+                self.bioText.text = self.profileData["Bio"] as? String ?? "" //Initialize bio from firebase
+                for item in self.profileData["tags"] as? [String] ?? [] {
+                    self.tagTextView.text.append("\(item)\n")
+                }
+                //self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
+                self.usernameLabel.text = self.profileData["username"] as? String ?? ""
+                if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
                 }
                 self.updateProfileUI()
-                self.initializeBio.text = self.bioText.text!
                 //do something to handle fetching tags
             }
         }
         self.nicknamePopover.layer.cornerRadius = 10
         self.bioPopover.layer.cornerRadius = 10
-        
-    
+        let _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.shouldUpdateTagList), userInfo: nil, repeats: true)
     }
     
-
+    func onTagListDirty(){
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.tagTextView.text = ""
+                self.profileData = document.data()!
+                for item in self.profileData["tags"] as? [String] ?? [] {
+                    self.tagTextView.text.append("\(item)\n")
+                }
+            }
+        }
+    }
+    
+    @objc func shouldUpdateTagList(){
+        if ProfileViewController.tagListDirty {
+            ProfileViewController.tagListDirty = false
+            onTagListDirty()
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
