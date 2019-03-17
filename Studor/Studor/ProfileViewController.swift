@@ -22,9 +22,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     var tagX: Double!
     var tagY: Double!
     
+    @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var tagTextView: UITextView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UITextView!
     
     @IBOutlet weak var initializeBio: UITextView! //pull bio info from database to initialize
@@ -229,7 +229,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
  */
     
     func updateProfileUI(){
-//      nicknameLabel.text = String(describing: profileData["username"]
+      //nicknameLabel.text = String(describing: profileData["username"]
         bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
@@ -250,7 +250,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                 for item in self.profileData["tags"] as? [String] ?? [] {
                     self.tagTextView.text.append("\(item)\n")
                 }
-                //self.nicknameLabel.text = profileData["Nickname"] as? String ?? ""
+                self.nicknameLabel.text = self.profileData["Nickname"] as? String ?? ""
                 self.usernameLabel.text = self.profileData["username"] as? String ?? ""
                 if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
