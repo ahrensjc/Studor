@@ -117,14 +117,10 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                         self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
                     self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
-                        var i = 0
-                        for tag in searchResult.tags {
-                            searchResult.tags[i] = tag.lowercased()
-                            i = i + 1
-                        }
+                        
                         if(self.profileData["username"] as! String != searchResult.name) {
                             for tag in self.profileData["tags"] as? [String] ?? []{
-                                if searchResult.tags.contains(tag.lowercased()) {
+                                if searchResult.tags.contains(tag) {
                                     return true
                                 }
                             }
@@ -240,7 +236,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 destination.nickname = profileInfo["NickName"] as? String ?? ""
                 destination.tags = profileInfo["tags"] as? [String] ?? []
                 destination.username = profileInfo["username"] as? String ?? ""
-                destination.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
                 destination.initialiseFields()
             } else {
                 print("Error retrieving profile data for user \(self.selectedResult.id)")
