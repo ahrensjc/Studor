@@ -34,7 +34,7 @@ class MessagesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // This should go in the login page later... (connects app to our sendbird project)
-        SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
+        //SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
         
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in

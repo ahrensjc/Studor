@@ -26,8 +26,6 @@ class StudorFunctions {
     // creates an event
     func createEvent(users: [String], date: Date, description: String, tags: [String]){
         
-        //var ret: Bool?
-        
         let dataToAdd: [String : Any] = [
             "creator" : getId(),
             "participants" : users,

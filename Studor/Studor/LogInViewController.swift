@@ -41,7 +41,8 @@ class LogInViewController: UIViewController {
                     
                     SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
                         guard error == nil else {
-                            print(error)
+                            print("failed logging in to sendbird")
+                            print(error as Any)
                             return
                         }
                         print("worked")
@@ -71,7 +72,20 @@ class LogInViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         if Auth.auth().currentUser != nil { // user is already logged in, so forward them to the home screen automatically
-            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+            
+            
+            SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
+            
+            SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+                guard error == nil else {
+                    print("failed logging in to sendbird")
+                    print(error as Any)
+                    self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                    return
+                }
+                print("worked")
+                self.performSegue(withIdentifier: "loginSuccess", sender: self)
+            }
         }
     }
     
