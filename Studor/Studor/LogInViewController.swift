@@ -21,6 +21,7 @@ class LogInViewController: UIViewController {
     @IBAction func forgotPasswordButtonTapped(_ sender: Any) {
         // Make google do this part
     }
+    
     @IBAction func logInButtonTapped(_ sender: Any) {
 
         if let email = usernameTextField.text, let password = passwordTextField.text{
@@ -36,9 +37,15 @@ class LogInViewController: UIViewController {
                     print("Login success")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
                     
-                    //SBDMain.connect(withUserId: "ZWPnpW3pBjTUXP9bEfLE3TMu8l23", completionHandler: { (user, error) in
-                        // ...
-                    //})
+                    SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
+                    
+                    SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+                        guard error == nil else {
+                            print(error)
+                            return
+                        }
+                        print("worked")
+                    }
                 } else {
                     print("Error:\(error!.localizedDescription)")
                 }
@@ -63,15 +70,13 @@ class LogInViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        if let user = Auth.auth().currentUser { // user is already logged in, so forward them to the home screen automatically
+        if Auth.auth().currentUser != nil { // user is already logged in, so forward them to the home screen automatically
             self.performSegue(withIdentifier: "loginSuccess", sender: self)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if !navigationItem.hidesBackButton {
-            navigationItem.hidesBackButton = true
-        }
+        navigationItem.hidesBackButton = true
     }
 
     func showMessagePrompt(withString: String, title: String){
@@ -85,14 +90,3 @@ class LogInViewController: UIViewController {
     }
 
 }
-
-/*
- func signout(){
-     let firebaseAuth = Auth.auth()
-     do {
-        try firebaseAuth.signOut()
-     } catch let signOutError as NSError {
-        print ("Error signing out: %@", signOutError)
-     }
- }
- */
