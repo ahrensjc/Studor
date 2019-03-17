@@ -37,7 +37,7 @@ extension Message: MessageType {
     }
 }
 
-class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
+class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invDelegate {
     
     
     
@@ -143,6 +143,13 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
                     if data.value as! String == "invited" {
                         print("OPEN MODAL TO ACCEPT INVITE")
                         // Open new
+                        
+                        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
+                        invViewController.delegate = self
+                        self.present(invViewController, animated: true, completion: {
+                            print("ran this code")
+                        })
                     }
                 }
             })
@@ -205,6 +212,39 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate {
             let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
             //self.messages.append(thing.message!)
             self.messages.append(myMsg)
+        }
+    }
+    
+    func declined(child: InvitationViewController) {
+        child.dismiss(animated: true, completion: nil)
+        channel.leave { (error) in
+            guard error == nil else {   // Error.
+                print("error leaving channel")
+                print(error)
+                return
+            }
+            print("left channel")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func accepted(child: InvitationViewController) {
+        child.dismiss(animated: true, completion: nil)
+        let metaDataToUpdate = [
+            "joe":"accepted"      // Adds this as a new item
+        ]
+        
+        channel?.updateMetaData(metaDataToUpdate, completionHandler: { (metaData, error) in
+            guard error == nil else {   // Error.
+                return
+            }
+        })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is InvitationViewController {
+            let child = segue.destination as! InvitationViewController
+            child.delegate = self
         }
     }
 }
