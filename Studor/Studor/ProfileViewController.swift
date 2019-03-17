@@ -35,22 +35,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nicknamePopover: UIView!
     @IBOutlet weak var nicknameTextField: UITextField!
     
-    @IBAction func nicknameDone(_ sender: Any) {
-        let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "NickName": nicknameTextField.text!
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            }
-            else {
-                self.nicknameLabel.text = self.nicknameTextField.text
-                print("Document successfully written!")
-            }
-        }
-        self.nicknamePopover.removeFromSuperview()
-    }
-    
+   
     @IBAction func nicknameCancel(_ sender: Any) {
         self.nicknamePopover.removeFromSuperview()
     }
@@ -60,6 +45,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     @IBAction func bioCancel(_ sender: Any) {
         self.bioPopover.removeFromSuperview()
     }
+    
     @IBAction func bioDone(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
@@ -76,16 +62,23 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.bioPopover.removeFromSuperview()
     }
     
-    var db: DatabaseReference!
-    
-    @IBAction func nicknameEdit(_ sender: Any) {
-        // TODO
-        self.view.addSubview(nicknamePopover)
-        nicknamePopover.center = self.view.center
-        nicknameTextField.text = nicknameLabel.text
-        // set nicknameLabel text
-        // set database to new nickname
+    @IBAction func nicknameDone(_ sender: Any) {
+        let db = Firestore.firestore()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            "NickName": nicknameTextField.text!
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            }
+            else {
+                self.nicknameLabel.text = self.nicknameTextField.text
+                print("Document successfully written!")
+            }
+        }
+        self.nicknamePopover.removeFromSuperview()
     }
+    
+    var db: DatabaseReference!
     
     @IBAction func logOutButton(_ sender: Any) {
         let firebaseAuth = Auth.auth()
@@ -114,7 +107,14 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+    @IBAction func nicknameEdit(_ sender: Any) {
+        // TODO
+        self.view.addSubview(nicknamePopover)
+        nicknamePopover.center = self.view.center
+        nicknameTextField.text = nicknameLabel.text
+        // set nicknameLabel text
+        // set database to new nickname
+    }
     @IBAction func bioEdit(_ sender: Any) {
         // TODO
         // call up modal?
@@ -229,7 +229,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
  */
     
     func updateProfileUI(){
-//        nicknameLabel.text = String(describing: profileData["username"])
+//      nicknameLabel.text = String(describing: profileData["username"]
         bioText.text! = profileData["Bio"] as? String ?? ""
         
         let tags = profileData["tags"]
