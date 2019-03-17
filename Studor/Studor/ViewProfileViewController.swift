@@ -50,17 +50,48 @@ class ViewProfileViewController: UIViewController {
             if let document = document, document.exists {
                 self.profileData = document.data()!
                 self.sendbirdID = self.profileData["sendbirdID"] as? String ?? "" //Initialize bio from firebase
+                var myNickname = self.profileData["NickName"] as? String ?? ""
                 print(self.thisSendbirdID)
                 print(self.sendbirdID)
                 
-                SBDGroupChannel.createChannel(withUserIds: [self.sendbirdID, self.thisSendbirdID], isDistinct: true) { (channel, error) in
+                var params = SBDGroupChannelParams()
+                params.isPublic = false
+                params.isEphemeral = false
+                params.isDistinct = true
+                params.addUserIds([self.sendbirdID, self.thisSendbirdID])
+                params.operatorUserIds = ["rando1"]
+                if myNickname == "" { myNickname = "no nickname" }
+                if self.nickname == "" { self.nickname = "no nickname" }
+                params.name = (myNickname + " & " + self.nickname)
+                
+                SBDGroupChannel.createChannel(with: params) { (channel, error) in
+                    guard error == nil else {   // Error.
+                        print("error creating channel")
+                        print(error as Any)
+                        return
+                    }
+                    print("created 1:1 channel")
+                    
+                    var newMetaData = [self.sendbirdID : "accepted", self.thisSendbirdID : "invited"]
+                    
+                    channel?.createMetaData((newMetaData as? [String : String])!, completionHandler: { (metaData, error) in
+                        guard error == nil else {   // Error.
+                            print("error adding channel metadata")
+                            print(error as Any)
+                            return
+                        }
+                        print("succesfully added metadata")
+                    })
+                }
+                
+                /*SBDGroupChannel.createChannel(withUserIds: [self.sendbirdID, self.thisSendbirdID], isDistinct: true) { (channel, error) in
                     guard error == nil else {   // Error.
                         print("Error creating 1:1 channel")
                         print(error as Any)
                         return
                     }
-                    
-                }
+                    print("created 1:1 channel")
+                }*/
             } else {
                 print("ERROR GETTING DATA")
             }
