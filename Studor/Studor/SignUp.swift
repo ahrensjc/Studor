@@ -68,7 +68,6 @@ class SignUp : UIViewController {
             "username": String(describing: Auth.auth().currentUser?.email!.dropLast(emailSuffix.count)),
             "accountType" : getAccountType(),
             "groups" : [],
-            
             "profImgSpecifier" : [0, 0],
             "sendbirdID" : Auth.auth().currentUser!.uid,
             "events" : [],

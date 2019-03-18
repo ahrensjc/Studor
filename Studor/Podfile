@@ -8,9 +8,6 @@ pod 'FirebaseUI'
 pod 'Firebase/Storage'
 pod 'MessageKit'
 pod 'MessageInputBar'
-pod 'Cosmos'
-pod 'TinyConstraints'
-
 # pod 'TwitterKit', '<3.3.0'
 # pod 'TwitterCore', '<3.1.0'
 
