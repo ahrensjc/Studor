@@ -24,14 +24,13 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(users: [String], date: Date, description: String, tags: [String]){
+    func createEvent(users: [String], date: Date, description: String){
         
         let dataToAdd: [String : Any] = [
             "creator" : getId(),
             "participants" : users,
             "date" : date,
             "description" : description,
-            "event_tags" : tags
         ]
         
         let eventId = getId() + "-e"
@@ -43,19 +42,20 @@ class StudorFunctions {
             } else {
                 print("Event created with event id: \(eventId)")
             }
+            
+            self.updateEventsForUserDocuments(users: users)
         }
     }
     
     
-    /* TODO: Sprint 2, update array in user object of current events.
-    func addEvents(to users: String){
+    
+    func updateEventsForUserDocuments(users: [String]){
         
         for u in users {
             
         }
         
     }
- */
     
     
     // Returns profile information of the user with the given firestore uID (bio, tags, nickname, etc.) in a [String : Any] if successful and nil otherwise
