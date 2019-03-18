@@ -16,7 +16,10 @@ class ViewProfileViewController: UIViewController {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UILabel!
     @IBOutlet weak var tagText : UILabel!
+    @IBOutlet weak var likeButton : UIButton!
+    @IBOutlet weak var dislikeButton : UIButton!
     
+    var accountType : String!
     var id : String!
     var username : String!
     var nickname : String!
@@ -33,7 +36,13 @@ class ViewProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    func doHideLikeButtons() {
+        if accountType.contains("Student"){
+            likeButton.isHidden = true
+            dislikeButton.isHidden = true
+        }
+    }
+    
     func initialiseFields(){
         usernameLabel.text = username ?? ""
         nicknameLabel.text = nickname ?? ""
