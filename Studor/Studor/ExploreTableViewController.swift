@@ -26,6 +26,8 @@ class SearchResult {
 
 class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
+    static var profileTagListDirty = false
+    
     var rowCount = 0
     
     var names : [String] = []
@@ -91,6 +93,16 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
+        doGrabProfileData()
+        let _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(shouldUpdateResults), userInfo: nil, repeats: true)
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func doGrabProfileData(){
         if Auth.auth().currentUser != nil {
             let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
             ref1.getDocument {(document, error) in
@@ -101,11 +113,13 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             }
             grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherData), userInfo: nil, repeats: true)
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func shouldUpdateResults(){
+        if(ExploreTableViewController.profileTagListDirty){
+            ExploreTableViewController.profileTagListDirty = false
+            doGrabProfileData()
+        }
     }
     
     @objc func grabOtherData() {
@@ -114,14 +128,24 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
                     for entry in document.documents {
+                        self.searchResults.removeAll()
                         self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
                     self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
-                        
+                        var i = 0
+                        for tag in searchResult.tags {
+                            searchResult.tags[i] = tag.lowercased()
+                            i = i + 1
+                        }
                         if(self.profileData["username"] as! String != searchResult.name) {
-                            for tag in self.profileData["tags"] as? [String] ?? []{
-                                if searchResult.tags.contains(tag) {
-                                    return true
+                            if self.profileData["tags"] == nil || (self.profileData["tags"] as! [String]).count == 0 {
+                                return true
+                            }
+                            else {
+                                for tag in self.profileData["tags"] as! [String]{
+                                    if searchResult.tags.contains(tag.lowercased()) {
+                                        return true
+                                    }
                                 }
                             }
                         }
@@ -236,6 +260,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 destination.nickname = profileInfo["NickName"] as? String ?? ""
                 destination.tags = profileInfo["tags"] as? [String] ?? []
                 destination.username = profileInfo["username"] as? String ?? ""
+                destination.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
                 destination.initialiseFields()
             } else {
                 print("Error retrieving profile data for user \(self.selectedResult.id)")

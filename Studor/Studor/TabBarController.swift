@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SendBirdSDK
 
 class TabBarController: UITabBarController {
     
@@ -22,6 +23,17 @@ class TabBarController: UITabBarController {
         // If user is not logged in while loading this view, log them out and navigate to login screen
         if Auth.auth().currentUser == nil {
             performSegue(withIdentifier: "requireLogin", sender: self)
+        } else {
+            SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
+            
+            SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+                guard error == nil else {
+                    print("failed logging in to sendbird")
+                    print(error as Any)
+                    return
+                }
+                print("worked")
+            }
         }
         
     }
