@@ -1020,6 +1020,9 @@
                                 <rect key="frame" x="129" y="169" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addParticipantsButton:" destination="xZR-sT-yI1" eventType="touchUpInside" id="ANk-37-Njh"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xnR-ip-bdr">
                                 <rect key="frame" x="24" y="375" width="240" height="128"/>
@@ -1042,7 +1045,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Create Event" id="3cE-yd-epN">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="OO2-ok-Vat"/>
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="HJ4-Hm-KOO"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="HJ4-Hm-KOO">
+                            <connections>
+                                <segue destination="wvq-iI-B4v" kind="unwind" unwindAction="unwindToScheduleWithSegue:" id="hxi-V5-ePn"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="aTh-AN-TYH">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kwD-F7-4az">
                                 <rect key="frame" x="304" y="7" width="55" height="30"/>
@@ -1052,6 +1059,9 @@
                                     <action selector="confirmButtonTapped:" destination="xZR-sT-yI1" eventType="touchUpInside" id="mfe-Ez-LNm"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <segue destination="wvq-iI-B4v" kind="unwind" unwindAction="unwindToScheduleWithSegue:" id="BZd-S4-v8t"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1064,6 +1074,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXL-ca-Kr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wvq-iI-B4v" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4381.6000000000004" y="2136.88155922039"/>
         </scene>
@@ -1243,7 +1254,7 @@
         <image name="profile" width="37.5" height="37.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yWa-aJ-mBg"/>
+        <segue reference="hYa-lu-hmu"/>
         <segue reference="ccL-Gp-Dot"/>
         <segue reference="dwS-zY-wM5"/>
     </inferredMetricsTieBreakers>
