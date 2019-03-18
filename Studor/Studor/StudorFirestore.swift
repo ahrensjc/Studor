@@ -52,12 +52,6 @@ class StudorFunctions {
     
     func updateEventsForUserDocuments(users: [String]){
         
-        let event_db = db.collection("Events")
-        
-        for u in users {
-            
-        }
-        
     }
     
     

@@ -13,6 +13,7 @@ class ScheduleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var eventLabel: UILabel!
     
+    
         // TODO
         // send filler event data to database
         //
