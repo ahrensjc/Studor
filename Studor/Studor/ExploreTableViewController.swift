@@ -261,6 +261,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             if let document = document, document.exists {
                 profileInfo = document.data()!
                 print(profileInfo["username"] as? String ?? "No username")
+                destination.id = self.selectedResult.id
                 destination.bio = profileInfo["Bio"] as? String ?? ""
                 destination.nickname = profileInfo["NickName"] as? String ?? ""
                 destination.tags = profileInfo["tags"] as? [String] ?? []

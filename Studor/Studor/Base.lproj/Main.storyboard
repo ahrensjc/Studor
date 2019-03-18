@@ -1183,6 +1183,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYm-z3-Fo7">
+                                <rect key="frame" x="312" y="140" width="47" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="unlike"/>
+                                <connections>
+                                    <action selector="doDislikeButton:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="5b4-m6-xhZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vU-4M-JkB">
+                                <rect key="frame" x="257" y="140" width="47" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="like"/>
+                                <connections>
+                                    <action selector="doLikeButton:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="Vka-fc-H1p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.9912648167" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1241,8 +1257,10 @@
         <image name="Events" width="37.5" height="37.5"/>
         <image name="Explore" width="37.5" height="37.5"/>
         <image name="Messages" width="37.5" height="37.5"/>
+        <image name="like" width="72" height="72"/>
         <image name="make group" width="37.5" height="37.5"/>
         <image name="profile" width="37.5" height="37.5"/>
+        <image name="unlike" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ccL-Gp-Dot"/>

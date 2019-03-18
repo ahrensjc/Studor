@@ -17,6 +17,7 @@ class ViewProfileViewController: UIViewController {
     @IBOutlet weak var bioText: UILabel!
     @IBOutlet weak var tagText : UILabel!
     
+    var id : String!
     var username : String!
     var nickname : String!
     var bio : String!
@@ -54,7 +55,7 @@ class ViewProfileViewController: UIViewController {
                 print(self.thisSendbirdID)
                 print(self.sendbirdID)
                 
-                var params = SBDGroupChannelParams()
+                let params = SBDGroupChannelParams()
                 params.isPublic = false
                 params.isEphemeral = false
                 params.isDistinct = true
@@ -72,7 +73,7 @@ class ViewProfileViewController: UIViewController {
                     }
                     print("created 1:1 channel")
                     
-                    var newMetaData = [self.sendbirdID : "accepted", self.thisSendbirdID : "invited"]
+                    let newMetaData = [self.sendbirdID : "accepted", self.thisSendbirdID : "invited"]
                     
                     channel?.createMetaData((newMetaData as? [String : String])!, completionHandler: { (metaData, error) in
                         guard error == nil else {   // Error.
@@ -97,6 +98,163 @@ class ViewProfileViewController: UIViewController {
             }
         }
         
+        
+    }
+    
+    @IBAction func doLikeButton(_ sender: Any) {
+        let ref = firebaseSingleton.db.collection("Users").document(id)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let profileData = document.data()
+                var didFindMe = false
+                for user in profileData!["usersWhoHaveLiked"] as? [String] ?? [] {
+                    if user == Auth.auth().currentUser!.uid {
+                        didFindMe = true
+                    }
+                }
+                var temp = profileData!["usersWhoHaveLiked"] as? [String] ?? []
+                if didFindMe {
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+                    ref1.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let profileData = document.data()
+                            var temp1 = profileData!["usersLiked"] as? [String] ?? []
+                            temp1.remove(at: temp1.firstIndex(of: self.id)!)
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+                                "usersLiked": temp1
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                }
+                                else {
+                                    print("Document successfully written!")
+                                }
+                            }
+                        }
+                    }
+                    temp.remove(at: temp.firstIndex(of: Auth.auth().currentUser!.uid)!)
+                    firebaseSingleton.db.collection("Users").document(self.id).updateData(
+                        ["usersWhoHaveLiked": temp]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            print("Document successfully written!")
+                        }
+                    }
+                }
+                else {
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+                    ref1.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let profileData = document.data()
+                            var temp1 = profileData!["usersLiked"] as? [String] ?? []
+                            temp1.append(self.id)
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+                                "usersLiked": temp1
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                }
+                                else {
+                                    print("Document successfully written!")
+                                }
+                            }
+                        }
+                    }
+                    temp.append(Auth.auth().currentUser!.uid)
+                    firebaseSingleton.db.collection("Users").document(self.id).updateData(
+                        ["usersWhoHaveLiked": temp]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            print("Document successfully written!")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func doDislikeButton(_ sender: Any) {
+        let ref = firebaseSingleton.db.collection("Users").document(id)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let profileData = document.data()
+                var didFindMe = false
+                for user in profileData!["usersWhoHaveDisliked"] as? [String] ?? [] {
+                    if user == Auth.auth().currentUser!.uid {
+                        didFindMe = true
+                    }
+                }
+                var temp = profileData!["usersWhoHaveDisliked"] as? [String] ?? []
+                if didFindMe {
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+                    ref1.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let profileData = document.data()
+                            var temp1 = profileData!["usersDisliked"] as? [String] ?? []
+                            temp1.remove(at: temp1.firstIndex(of: self.id)!)
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+                                "usersDisliked": temp1
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                }
+                                else {
+                                    print("Document successfully written!")
+                                }
+                            }
+                        }
+                    }
+                    temp.remove(at: temp.firstIndex(of: Auth.auth().currentUser!.uid)!)
+                    firebaseSingleton.db.collection("Users").document(self.id).updateData(
+                        ["usersWhoHaveDisliked": temp]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            print("Document successfully written!")
+                        }
+                    }
+                }
+                else {
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+                    ref1.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let profileData = document.data()
+                            var temp1 = profileData!["usersDisliked"] as? [String] ?? []
+                            temp1.append(self.id)
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+                                "usersDisliked": temp1
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                }
+                                else {
+                                    print("Document successfully written!")
+                                }
+                            }
+                        }
+                    }
+                    temp.append(Auth.auth().currentUser!.uid)
+                    firebaseSingleton.db.collection("Users").document(self.id).updateData(
+                        ["usersWhoHaveDisliked": temp]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            print("Document successfully written!")
+                        }
+                    }
+                }
+            }
+        }
         
     }
     
