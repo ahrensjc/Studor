@@ -22,6 +22,7 @@
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
 		651A83DB223EF4420054A69E /* DeleteTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */; };
 		651A83DF223F08380054A69E /* DeleteTagsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */; };
+		656E2051223F1B3F00524B07 /* SendbirdLoginUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656E2050223F1B3F00524B07 /* SendbirdLoginUITest.swift */; };
 		BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */; };
 		BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */; };
 		BE1547EE223B52BB00CA5A64 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547ED223B52BB00CA5A64 /* EventViewController.swift */; };
@@ -80,6 +81,7 @@
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTagsViewController.swift; sourceTree = "<group>"; };
 		651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTagsViewCell.swift; sourceTree = "<group>"; };
+		656E2050223F1B3F00524B07 /* SendbirdLoginUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdLoginUITest.swift; sourceTree = "<group>"; };
 		933E2813286819B28FAFF75F /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
 		BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreatorViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				0F86C079223EEA330062CB1C /* LogInUITest.swift */,
 				0F86C081223EEAB50062CB1C /* StudorUITests.swift */,
 				0F86C083223EEAB50062CB1C /* Info.plist */,
+				656E2050223F1B3F00524B07 /* SendbirdLoginUITest.swift */,
 			);
 			path = StudorUITests;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F86C082223EEAB50062CB1C /* StudorUITests.swift in Sources */,
+				656E2051223F1B3F00524B07 /* SendbirdLoginUITest.swift in Sources */,
 				0F86C089223EEABE0062CB1C /* LogInUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

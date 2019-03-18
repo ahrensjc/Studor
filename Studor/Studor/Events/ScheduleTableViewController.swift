@@ -23,6 +23,8 @@ class ScheduleTableViewController: UITableViewController {
         
             
         print("Event creation successful")
+        
+        
     }
     
     @IBAction func unwindToSchedule(segue:UIStoryboardSegue){

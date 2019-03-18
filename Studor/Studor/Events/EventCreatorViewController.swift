@@ -19,13 +19,19 @@ class EventCreatorViewController: UIViewController {
     @IBOutlet weak var eventDescriptionTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    var participants: [String] = []
+    
+    @IBAction func addParticipantsButton(_ sender: Any) {
+        if let participant = eventParticipantTextField.text {
+            participants.append(participant)
+        }
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
         if let title = eventNameTextField.text, let loc = eventLocationTextField.text, let description = eventDescriptionTextView.text{
-            firebaseSingleton.createEvent(users: [firebaseSingleton.getId()], date: eventDatePicker.date, description: description)
+            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, description: description)
         }
         else{
             self.showMessagePrompt(withString: "Please fill in all form fields.", title: "Missing Fields")
@@ -38,6 +44,15 @@ class EventCreatorViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func goBackToMessageKitVC(_ sender: Any) {
+        performSegue(withIdentifier: "unwindSegueToMessageKit", sender: self)
+    }
+    
+    @IBAction func goBackToScheduleTableVC(_ sender: Any) {
+        
+        performSegue(withIdentifier: "unwindSegueToSchedule", sender: self)
+        
+    }
     /*
     // MARK: - Navigation
 
