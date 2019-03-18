@@ -28,26 +28,105 @@ class LogInUITest: XCTestCase {
         app.terminate()
     }
     
-    func testGeneral() {
+    func testSignUp() {
+        let app = XCUIApplication()
+        app.buttons["Sign Up"].tap()
+        app.textFields["Email"].tap()
+        app.typeText("emailaddress4@gcc.edu")
+        let passwordTextField = app.textFields["Password"]
+        passwordTextField.tap()
+        passwordTextField.tap()
+        app.typeText("password")
+        let confirmPasswordTextField = app.textFields["Confirm Password"]
+        confirmPasswordTextField.tap()
+        confirmPasswordTextField.tap()
+        app.typeText("password")
+        app.buttons["Create Account"].tap()
+        app.tabBars.children(matching: .button).element(boundBy: 3).tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+    }
+    
+    func testTags() {
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
         app.textFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
-        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["tylerfehr4"].tap()
-        app.buttons["like"].tap()
-        
-        let profileNavigationBar = app.navigationBars["Profile"]
-        profileNavigationBar.buttons["Explore"].tap()
+        app.tabBars.children(matching: .button).element(boundBy: 3).tap()
+        app.buttons["TAGS"].tap()
+        app.textFields["Search Tags..."].tap()
+        app.typeText("Bio")
+        app.buttons["Add tag"].tap()
+        app.navigationBars["Studor.TagSearchView"].buttons["Profile"].tap()
+        app.buttons["Delete Tags"].tap()
+        app.tables.staticTexts["Bio"].tap()
+        app.navigationBars["Studor.DeleteTagsView"].buttons["Profile"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+    }
+    
+    func testMessages() {
+        let app = XCUIApplication()
+        app.textFields["email"].tap()
+        app.typeText("james@gcc.edu")
+        app.textFields["password"].tap()
+        app.typeText("1234567")
+        app.buttons["Log In"].tap()
         
         let tabBarsQuery = app.tabBars
         tabBarsQuery.children(matching: .button).element(boundBy: 1).tap()
-        tabBarsQuery.children(matching: .button).element(boundBy: 2).tap()
-        app.navigationBars["Schedule"].buttons["Add Event"].tap()
-        app.navigationBars["Create Event"].buttons["Cancel"].tap()
+        
+        
+        let label = app.tables/*@START_MENU_TOKEN@*/.staticTexts["new group 5"]/*[[".cells.staticTexts[\"new group 5\"]",".staticTexts[\"new group 5\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let exists = NSPredicate(format: "exists == 1")
+        
+        expectation(for: exists, evaluatedWith: label, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["new group 5"]/*[[".cells.staticTexts[\"new group 5\"]",".staticTexts[\"new group 5\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        app.textViews.staticTexts["New Message"].tap()
+        app.typeText("test message")
+        app.buttons["Send"].tap()
+        app.navigationBars["Title"].buttons["Messages"].tap()
         tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
-        profileNavigationBar.buttons["Sign Out"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+    }
+    
+    func testMakeGroup() {
+        let app = XCUIApplication()
+        app.textFields["email"].tap()
+        app.typeText("james@gcc.edu")
+        app.textFields["password"].tap()
+        app.typeText("1234567")
+        app.buttons["Log In"].tap()
+        
+        let tabBarsQuery = app.tabBars
+        tabBarsQuery.children(matching: .button).element(boundBy: 1).tap()
+        
+        let createGroupButton = app.navigationBars["Messages"].buttons["Create Group"]
+        createGroupButton.tap()
+        
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        element.children(matching: .textField).element(boundBy: 0).tap()
+        app.typeText("deleteMe")
+        
+        let textField = element.children(matching: .textField).element(boundBy: 1)
+        textField.tap()
+        app.typeText("user1")
+        
+        let addButton = app.buttons["Add"]
+        addButton.tap()
+        textField.tap()
+        app.typeText("user2")
+        addButton.tap()
+        app.buttons["Confirm"].tap()
+        createGroupButton.tap()
+        app.buttons["Cancel"].tap()
+        tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
+        
+        
     }
     
     func testLoginAndSignout() {
@@ -88,6 +167,52 @@ class LogInUITest: XCTestCase {
         textView.tap()
         textView.tap()
         cancelButton.tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
+    }
+    
+    func testEvents() {
+        
+        let app = XCUIApplication()
+        app.textFields["email"].tap()
+        app.typeText("james@gcc.edu")
+        app.textFields["password"].tap()
+        app.typeText("1234567")
+        app.buttons["Log In"].tap()
+        
+        let tabBarsQuery = app.tabBars
+        tabBarsQuery.children(matching: .button).element(boundBy: 2).tap()
+        
+        let addEventButton = app.navigationBars["Schedule"].buttons["Add Event"]
+        addEventButton.tap()
+        
+        let eventTitleTextField = app.textFields["Event Title"]
+        eventTitleTextField.tap()
+        app.typeText("deleteMe")
+        app.textFields["Participants"].tap()
+        app.typeText("user1")
+        app.buttons["Add"].tap()
+        app.datePickers.pickerWheels["Today"].swipeUp()
+        app.textFields["Location"].tap()
+        app.typeText("nowhere")
+        
+        let window = app.children(matching: .window).element(boundBy: 0)
+        let textView = window.children(matching: .other).element(boundBy: 2).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element
+        textView.tap()
+        textView.tap()
+        
+        let createEventNavigationBar = app.navigationBars["Create Event"]
+        createEventNavigationBar.buttons["Create"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Add Event"]/*[[".cells.staticTexts[\"Add Event\"]",".staticTexts[\"Add Event\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["Edit Event"].tap()
+        window.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textField).element(boundBy: 1).tap()
+        app.typeText("a")
+        app.buttons["Confirm"].tap()
+        app.navigationBars["Studor.EditEventView"].buttons["Back"].tap()
+        app.navigationBars["Studor.EventView"].buttons["Schedule"].tap()
+        addEventButton.tap()
+        createEventNavigationBar.buttons["Cancel"].tap()
+        tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
         
     }

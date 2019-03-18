@@ -72,6 +72,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0F86C07E223EEAB50062CB1C"
+            BuildableName = "StudorUITests.xctest"
+            BlueprintName = "StudorUITests"
+            ReferencedContainer = "container:Studor.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

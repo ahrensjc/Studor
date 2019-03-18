@@ -36,10 +36,8 @@
 		BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB95F220BADA6005903C1 /* LogInViewController.swift */; };
 		BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */; };
 		BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */; };
-		BEDFB968220DC801005903C1 /* ChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB967220DC801005903C1 /* ChatTableViewController.swift */; };
 		BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */; };
 		BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */; };
-		BEDFB96E220E4788005903C1 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */; };
 		BEFEBDEA22234EBB00EE9847 /* MessageKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,10 +95,8 @@
 		BEDFB95F220BADA6005903C1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		BEDFB963220CD618005903C1 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
-		BEDFB967220DC801005903C1 /* ChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewController.swift; sourceTree = "<group>"; };
 		BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
-		BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageKitViewController.swift; sourceTree = "<group>"; };
 		C3F2A43405E5A6339E092E11 /* Pods-Studor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,8 +239,6 @@
 		BEDFB970220E47C1005903C1 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				BEDFB96D220E4788005903C1 /* ChatTableViewCell.swift */,
-				BEDFB967220DC801005903C1 /* ChatTableViewController.swift */,
 				BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */,
 				BE1547F2223DCA7500CA5A64 /* InvitationViewController.swift */,
 			);
@@ -547,9 +541,7 @@
 				BEDFB964220CD618005903C1 /* ScheduleTableViewController.swift in Sources */,
 				BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */,
 				BEDFB960220BADA6005903C1 /* LogInViewController.swift in Sources */,
-				BEDFB96E220E4788005903C1 /* ChatTableViewCell.swift in Sources */,
 				BEBA46AC2206674D00E0D510 /* ExploreTableViewCell.swift in Sources */,
-				BEDFB968220DC801005903C1 /* ChatTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
