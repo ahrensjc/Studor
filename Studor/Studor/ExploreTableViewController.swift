@@ -127,6 +127,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         let ref = firebaseSingleton.db.collection("Users")
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
+                    self.searchResults.removeAll()
                     for entry in document.documents {
                         print(entry.data()["username"] as? String ?? "no username")
                         print(entry.data()["accountType"] as? String ?? "no account type")
