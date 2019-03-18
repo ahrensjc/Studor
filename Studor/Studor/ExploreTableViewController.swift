@@ -127,9 +127,14 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         let ref = firebaseSingleton.db.collection("Users")
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
+                    self.searchResults.removeAll()
                     for entry in document.documents {
-                        self.searchResults.removeAll()
-                        self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
+                        print(entry.data()["username"] as? String ?? "no username")
+                        print(entry.data()["accountType"] as? String ?? "no account type")
+                        for tag in entry.data()["tags"] as? [String] ?? [] {
+                            print(tag)
+                        }
+                        self.searchResults.append(SearchResult(entry.data()["username"] as? String ?? "no username", entry.data()["accountType"] as? String ?? "no account type", entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
                     self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
                         var i = 0
