@@ -12,15 +12,7 @@ class ScheduleTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var eventLabel: UILabel!
-    
-    
-        // TODO
-        // send filler event data to database
-        //
-        // for sprint 2:
-        // redo this entire part so it isn't on the table
-        // go to modal/new page to fill out event info
-        // get rid of this function
+    @IBOutlet weak var dateLabel: UILabel!
     
     
 

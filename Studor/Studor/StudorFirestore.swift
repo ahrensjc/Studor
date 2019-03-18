@@ -35,6 +35,20 @@ class StudorFunctions {
         
         let eventId = getId() + "-e"
         
+        
+        let docRef = db.collection("Users").document(firebaseSingleton.getId())
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                
+                self.db.collection("Users").document(firebaseSingleton.getId()).setData(["events": [eventId, document.data()!["events"]]], merge: true)
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
+        
         db.collection("Events").document(eventId).setData(dataToAdd) { err in
             if let err = err {
                 print("Error: \(err)")
@@ -75,18 +89,15 @@ class StudorFunctions {
     }
     
     // to create or OVERWRITE data for a current user
-    func add(data: [String : Any], user: String) -> Bool{
+    func add(data: [String : Any], user: String){
         
-        var ret = false
         db.collection("Users").document(user).setData(data) { err in
             if let err = err {
                 print("Error: \(err)")
             } else {
                 print("Added data successfully")
-                ret = true
             }
         }
-        return ret
     }
     
     func getId() -> String {
