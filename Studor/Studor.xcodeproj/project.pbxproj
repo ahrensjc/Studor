@@ -20,6 +20,8 @@
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
 		49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
+		651A83DB223EF4420054A69E /* DeleteTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */; };
+		651A83DF223F08380054A69E /* DeleteTagsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */; };
 		BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */; };
 		BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */; };
 		BE1547EE223B52BB00CA5A64 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547ED223B52BB00CA5A64 /* EventViewController.swift */; };
@@ -76,6 +78,8 @@
 		49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTagsViewController.swift; sourceTree = "<group>"; };
+		651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTagsViewCell.swift; sourceTree = "<group>"; };
 		933E2813286819B28FAFF75F /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
 		BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		BE1547EB223B4D2600CA5A64 /* EventCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreatorViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 				BEBA46A02204EEAA00E0D510 /* LaunchScreen.storyboard */,
 				BEBA46A32204EEAA00E0D510 /* Info.plist */,
 				0D032B82220A6D39001ED51E /* GoogleService-Info.plist */,
+				651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */,
+				651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */,
 			);
 			path = Studor;
 			sourceTree = "<group>";
@@ -519,6 +525,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				651A83DF223F08380054A69E /* DeleteTagsViewCell.swift in Sources */,
 				0D2C8FD4220A887800FC2AEA /* TagList.swift in Sources */,
 				0F29069022237318009E1B64 /* ViewProfileViewController.swift in Sources */,
 				BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */,
@@ -533,6 +540,7 @@
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */,
 				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,
+				651A83DB223EF4420054A69E /* DeleteTagsViewController.swift in Sources */,
 				BE1547F1223BDF4B00CA5A64 /* EditEventViewController.swift in Sources */,
 				BE1547F3223DCA7500CA5A64 /* InvitationViewController.swift in Sources */,
 				49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */,
