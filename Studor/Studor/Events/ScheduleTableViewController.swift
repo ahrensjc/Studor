@@ -5,12 +5,19 @@
 //  Created by James Ahrens on 2/7/19.
 //  Copyright © 2019 James Ahrens. All rights reserved.
 //
-
+import Firebase
 import UIKit
 
 class ScheduleTableViewController: UITableViewController {
 
     var studor: StudorFunctions?
+    var db: Firestore!
+    var data: [String : Any]?
+    var events: [String : Any] = [:]
+    
+    
+    
+    @IBOutlet var eventTableView: UITableView!
     
     @IBAction func addEventButtonTapped(_ sender: Any) {
         print("adding event with button")
@@ -19,39 +26,38 @@ class ScheduleTableViewController: UITableViewController {
         
         let date = Date()
         
-        studor!.createEvent(users: ["Billy's uID", "Tim's uID", "Jim's uID"], date: date, description: "A new event for studor")
-        
-            
-        print("Event creation successful")
-        
-        
+        //studor!.createEvent(users: ["Billy's uID", "Tim's uID", "Jim's uID"], date: date, description: "A new event for studor", title: "New Event")
+        //print("Event creation successful")
     }
     
     @IBAction func unwindToScheduleFromEventCreation(segue:UIStoryboardSegue){
         print("unwinding")
     }
     
-    func reloadTable(){
-        
-    }
-    
     func getFirestoreEventData(){
         
+        // Create a query against the collection.
+        let docRef = db.collection("Events").document(firebaseSingleton.getId()+"-e")
+
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                self.data = document.data()
+                print("Event data: \(self.data)")
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        db = Firestore.firestore()
+        getFirestoreEventData()
         
-        
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -59,53 +65,21 @@ class ScheduleTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! ScheduleTableViewCell
 
-        // Configure the cell...
-        cell.eventLabel.text = "Add Event"
+        //cell.eventLabel.text = self.data!["title"]! ?? "New Event"
+        //cell.dateLabel.text = self.data!["date"]! ?? "2019-3-18"
+        
+        cell.eventLabel.text = "New Event"
+        cell.dateLabel.text = "2019-3-18"
 
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -118,7 +92,7 @@ class ScheduleTableViewController: UITableViewController {
     */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("adding event...")
+        
     }
 
 }

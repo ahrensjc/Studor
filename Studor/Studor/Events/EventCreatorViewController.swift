@@ -26,6 +26,7 @@ class EventCreatorViewController: UIViewController {
     @IBAction func addParticipantsButton(_ sender: Any) {
         if let participant = eventParticipantTextField.text {
             participants.append(participant)
+            eventParticipantTextField.text = ""
             print("Participant: \(participant)")
         }
     }
@@ -35,7 +36,7 @@ class EventCreatorViewController: UIViewController {
         if let title = eventNameTextField.text, let loc = eventLocationTextField.text, let description = eventDescriptionTextView.text{
             
             // TODO: Get the firebase IDs of participants added, have autofill for them, and add the event reference to their document on firestore
-            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, description: description)
+            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, description: description, title: title)
             print("Event successfully created")
         }
         else{

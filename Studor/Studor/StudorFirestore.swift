@@ -24,9 +24,10 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(users: [String], date: Date, description: String){
+    func createEvent(users: [String], date: Date, description: String, title: String){
         
         let dataToAdd: [String : Any] = [
+            "title" : title,
             "creator" : getId(),
             "participants" : users,
             "date" : date,
@@ -35,19 +36,12 @@ class StudorFunctions {
         
         let eventId = getId() + "-e"
         
-        
-        let docRef = db.collection("Users").document(firebaseSingleton.getId())
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                
-                self.db.collection("Users").document(firebaseSingleton.getId()).setData(["events": [eventId, document.data()!["events"]]], merge: true)
-            } else {
-                print("Document does not exist")
-            }
-        }
-        
+        let eventRef = db.collection("Users").document(firebaseSingleton.getId())
+    
+        // Atomically add a new region to the "regions" array field.
+        eventRef.updateData([
+            "events": FieldValue.arrayUnion([eventId])
+            ])
         
         db.collection("Events").document(eventId).setData(dataToAdd) { err in
             if let err = err {
@@ -56,13 +50,9 @@ class StudorFunctions {
             } else {
                 print("Event created with event id: \(eventId)")
             }
-            
-            
         }
         self.updateEventsForUserDocuments(users: users)
     }
-    
-    
     
     func updateEventsForUserDocuments(users: [String]){
         
@@ -86,18 +76,6 @@ class StudorFunctions {
             }
         }
         return profileInfo
-    }
-    
-    // to create or OVERWRITE data for a current user
-    func add(data: [String : Any], user: String){
-        
-        db.collection("Users").document(user).setData(data) { err in
-            if let err = err {
-                print("Error: \(err)")
-            } else {
-                print("Added data successfully")
-            }
-        }
     }
     
     func getId() -> String {
