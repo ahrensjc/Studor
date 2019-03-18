@@ -43,13 +43,16 @@ class StudorFunctions {
                 print("Event created with event id: \(eventId)")
             }
             
-            self.updateEventsForUserDocuments(users: users)
+            
         }
+        self.updateEventsForUserDocuments(users: users)
     }
     
     
     
     func updateEventsForUserDocuments(users: [String]){
+        
+        let event_db = db.collection("Events")
         
         for u in users {
             
