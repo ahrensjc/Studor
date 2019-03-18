@@ -28,6 +28,26 @@ class LogInUITest: XCTestCase {
         app.terminate()
     }
     
+    func testSignUp() {
+        
+        let app = XCUIApplication()
+        app.buttons["Sign Up"].tap()
+        app.textFields["Email"].tap()
+        app.typeText("emailaddress4@gcc.edu")
+        let passwordTextField = app.textFields["Password"]
+        passwordTextField.tap()
+        passwordTextField.tap()
+        app.typeText("password")
+        let confirmPasswordTextField = app.textFields["Confirm Password"]
+        confirmPasswordTextField.tap()
+        confirmPasswordTextField.tap()
+        app.typeText("password")
+        app.buttons["Create Account"].tap()
+        app.tabBars.children(matching: .button).element(boundBy: 3).tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
+    }
+    
     func testGeneral() {
         let app = XCUIApplication()
         app.textFields["email"].tap()

@@ -44,9 +44,15 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     var profileDataCollected : Bool = false
     
+    var otherDataCollectedOnce : Bool = false
+    
     var profileData : [String : Any] = [:]
     
     var grabDataTimer : Timer!
+    
+    var filterData : Timer!
+    
+    var doOnce = false
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -94,12 +100,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         doGrabProfileData()
+        grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherDataOnce), userInfo: nil, repeats: true)
+        filterData = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(filterDataFunc), userInfo: nil, repeats: true)
         let _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(shouldUpdateResults), userInfo: nil, repeats: true)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     func doGrabProfileData(){
@@ -109,9 +112,11 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 if let document = document, document.exists {
                     self.profileData = document.data()!
                     self.profileDataCollected = true
+                    if self.otherDataCollectedOnce {
+                        self.filterDataFunc()
+                    }
                 }
             }
-            grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherData), userInfo: nil, repeats: true)
         }
     }
     
@@ -122,44 +127,44 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
     }
     
-    @objc func grabOtherData() {
+    @objc func grabOtherDataOnce() {
         if profileDataCollected {
-        let ref = firebaseSingleton.db.collection("Users")
+            self.grabDataTimer.invalidate()
+            let ref = firebaseSingleton.db.collection("Users")
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
-                    self.searchResults.removeAll()
                     for entry in document.documents {
-                        print(entry.data()["username"] as? String ?? "no username")
-                        print(entry.data()["accountType"] as? String ?? "no account type")
-                        for tag in entry.data()["tags"] as? [String] ?? [] {
-                            print(tag)
-                        }
                         self.searchResults.append(SearchResult(entry.data()["username"] as? String ?? "no username", entry.data()["accountType"] as? String ?? "no account type", entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
-                    self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
-                        var i = 0
-                        for tag in searchResult.tags {
-                            searchResult.tags[i] = tag.lowercased()
-                            i = i + 1
-                        }
-                        if(self.profileData["username"] as! String != searchResult.name) {
-                            if self.profileData["tags"] == nil || (self.profileData["tags"] as! [String]).count == 0 {
-                                return true
-                            }
-                            else {
-                                for tag in self.profileData["tags"] as! [String]{
-                                    if searchResult.tags.contains(tag.lowercased()) {
-                                        return true
-                                    }
-                                }
-                            }
-                        }
-                        return false
-                    })
-                    self.grabDataTimer!.invalidate()
+                    self.otherDataCollectedOnce = true
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+    
+    @objc func filterDataFunc() {
+        if otherDataCollectedOnce {
+            filterData.invalidate()
+            commonTagResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
+                if(profileData["username"] as! String != searchResult.name) {
+                    let selfTags = profileData["tags"] as? [String] ?? []
+                    if selfTags.count <= 0 || (selfTags.count == 1 && selfTags[0] == ""){
+                        return true
+                    }
+                    else {
+                        for tag in selfTags {
+                            for _tag in searchResult.tags {
+                                if tag.lowercased() == _tag.lowercased() {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+                return false
+            })
+            tableView.reloadData()
         }
     }
     
@@ -180,9 +185,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreTableViewCell
-        
-        // Configure the cell...
-        //cell.connect.text = String(indexPath.item)
         if isFiltering() {
             cell.nameText = filteredResults[indexPath.row].name
             cell.typeText = filteredResults[indexPath.row].type
@@ -199,10 +201,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         return 44
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        //navigationItem.hidesBackButton = true
-    }
-    
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if isFiltering() {
             selectedResult = filteredResults[indexPath.row]
@@ -213,47 +211,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         return indexPath;
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
         let destination = segue.destination as! ViewProfileViewController
         let ref = firebaseSingleton.db.collection("Users").document(selectedResult.id)
         var profileInfo: [String : Any] = [:]
