@@ -99,6 +99,8 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
             guard error == nil else {   // Error.
                 return
+                print("error getting channel")
+                print(error as Any)
             }
             
             

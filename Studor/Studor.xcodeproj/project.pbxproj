@@ -29,7 +29,6 @@
 		BE1547F1223BDF4B00CA5A64 /* EditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547F0223BDF4B00CA5A64 /* EditEventViewController.swift */; };
 		BE1547F3223DCA7500CA5A64 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547F2223DCA7500CA5A64 /* InvitationViewController.swift */; };
 		BEBA46982204EEA800E0D510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46972204EEA800E0D510 /* AppDelegate.swift */; };
-		BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA46992204EEA800E0D510 /* ViewController.swift */; };
 		BEBA469D2204EEA800E0D510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBA469B2204EEA800E0D510 /* Main.storyboard */; };
 		BEBA469F2204EEAA00E0D510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEBA469E2204EEAA00E0D510 /* Assets.xcassets */; };
 		BEBA46A22204EEAA00E0D510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBA46A02204EEAA00E0D510 /* LaunchScreen.storyboard */; };
@@ -91,7 +90,6 @@
 		BE1547F2223DCA7500CA5A64 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		BEBA46942204EEA800E0D510 /* Studor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBA46972204EEA800E0D510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BEBA46992204EEA800E0D510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BEBA469C2204EEA800E0D510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEBA469E2204EEAA00E0D510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEBA46A12204EEAA00E0D510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
-				BEBA46992204EEA800E0D510 /* ViewController.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
 				0F29068F22237318009E1B64 /* ViewProfileViewController.swift */,
 				BEDFB970220E47C1005903C1 /* Chat */,
@@ -460,6 +457,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Studor/Pods-Studor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -470,7 +468,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework",
-				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -484,6 +482,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -494,7 +493,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendBirdSDK.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/SendBirdSDK.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyConstraints.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -544,7 +543,6 @@
 				BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */,
 				BE1547EE223B52BB00CA5A64 /* EventViewController.swift in Sources */,
 				0D4762BE2210D94500A0F980 /* StudorFirestore.swift in Sources */,
-				BEBA469A2204EEA800E0D510 /* ViewController.swift in Sources */,
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */,
 				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,

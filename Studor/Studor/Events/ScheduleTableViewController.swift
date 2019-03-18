@@ -19,12 +19,13 @@ class ScheduleTableViewController: UITableViewController {
         
         let date = Date()
         
-        studor!.createEvent(users: ["Billy's uID", "Tim's uID", "Jim's uID"], date: date, description: "A new event for studor", tags: ["COMP 311", "COMP 512", "ACCT 101"])
+        studor!.createEvent(users: ["Billy's uID", "Tim's uID", "Jim's uID"], date: date, description: "A new event for studor")
         
             
         print("Event creation successful")
-            
-        
+    }
+    
+    @IBAction func unwindToSchedule(segue:UIStoryboardSegue){
         
     }
     

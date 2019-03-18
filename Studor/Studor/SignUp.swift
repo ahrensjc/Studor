@@ -70,6 +70,7 @@ class SignUp : UIViewController {
             "groups" : [],
             "profImgSpecifier" : [0, 0],
             "sendbirdID" : Auth.auth().currentUser!.uid,
+            "events" : [],
             "tags" : ["COMP 314", "COMP 435", "COMP 311"]
         ]
         db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
