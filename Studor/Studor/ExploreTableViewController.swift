@@ -26,6 +26,8 @@ class SearchResult {
 
 class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
+    static var profileTagListDirty = false
+    
     var rowCount = 0
     
     var names : [String] = []
@@ -91,6 +93,16 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
+        doGrabProfileData()
+        let _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(shouldUpdateResults), userInfo: nil, repeats: true)
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func doGrabProfileData(){
         if Auth.auth().currentUser != nil {
             let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
             ref1.getDocument {(document, error) in
@@ -101,11 +113,13 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             }
             grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherData), userInfo: nil, repeats: true)
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func shouldUpdateResults(){
+        if(ExploreTableViewController.profileTagListDirty){
+            ExploreTableViewController.profileTagListDirty = false
+            doGrabProfileData()
+        }
     }
     
     @objc func grabOtherData() {
@@ -114,6 +128,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
                     for entry in document.documents {
+                        self.searchResults.removeAll()
                         self.searchResults.append(SearchResult(entry.data()["username"] as! String, entry.data()["accountType"] as! String, entry.documentID, entry.data()["tags"] as? [String] ?? []))
                     }
                     self.commonTagResults = self.searchResults.filter({(searchResult : SearchResult) -> Bool in
