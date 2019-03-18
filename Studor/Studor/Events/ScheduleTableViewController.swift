@@ -31,9 +31,18 @@ class ScheduleTableViewController: UITableViewController {
         print("unwinding")
     }
     
+    func reloadTable(){
+        
+    }
+    
+    func getFirestoreEventData(){
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
