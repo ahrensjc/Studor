@@ -204,14 +204,14 @@
 		BEBA46962204EEA800E0D510 /* Studor */ = {
 			isa = PBXGroup;
 			children = (
-				BE1547EF223B52D100CA5A64 /* Events */,
-				BEDFB96F220E479E005903C1 /* Messages */,
-				BEDFB970220E47C1005903C1 /* Chat */,
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
 				0F29068F22237318009E1B64 /* ViewProfileViewController.swift */,
+				BEDFB970220E47C1005903C1 /* Chat */,
+				BEDFB96F220E479E005903C1 /* Messages */,
+				BE1547EF223B52D100CA5A64 /* Events */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
 				49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */,
