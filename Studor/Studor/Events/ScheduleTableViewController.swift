@@ -27,8 +27,8 @@ class ScheduleTableViewController: UITableViewController {
         
     }
     
-    @IBAction func unwindToSchedule(segue:UIStoryboardSegue){
-        
+    @IBAction func unwindToScheduleFromEventCreation(segue:UIStoryboardSegue){
+        print("unwinding")
     }
     
     

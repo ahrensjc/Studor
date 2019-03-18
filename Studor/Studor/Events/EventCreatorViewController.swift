@@ -26,26 +26,28 @@ class EventCreatorViewController: UIViewController {
     @IBAction func addParticipantsButton(_ sender: Any) {
         if let participant = eventParticipantTextField.text {
             participants.append(participant)
+            print("Participant: \(participant)")
         }
     }
     
+    
     @IBAction func confirmButtonTapped(_ sender: Any) {
         if let title = eventNameTextField.text, let loc = eventLocationTextField.text, let description = eventDescriptionTextView.text{
+            
+            // TODO: Get the firebase IDs of participants added, have autofill for them, and add the event reference to their document on firestore
             firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, description: description)
+            print("Event successfully created")
         }
         else{
             self.showMessagePrompt(withString: "Please fill in all form fields.", title: "Missing Fields")
         }
+        performSegue(withIdentifier: "unwindToSchedule", sender: self)
     }
     
     func showMessagePrompt(withString: String, title: String) {
         let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    @IBAction func goBackToMessageKitVC(_ sender: Any) {
-        performSegue(withIdentifier: "unwindSegueToMessageKit", sender: self)
     }
     
     @IBAction func goBackToScheduleTableVC(_ sender: Any) {
