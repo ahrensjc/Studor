@@ -19,17 +19,6 @@ class ScheduleTableViewController: UITableViewController {
     
     @IBOutlet var eventTableView: UITableView!
     
-    @IBAction func addEventButtonTapped(_ sender: Any) {
-        print("adding event with button")
-        
-        studor = StudorFunctions()
-        
-        let date = Date()
-        
-        //studor!.createEvent(users: ["Billy's uID", "Tim's uID", "Jim's uID"], date: date, description: "A new event for studor", title: "New Event")
-        //print("Event creation successful")
-    }
-    
     @IBAction func unwindToScheduleFromEventCreation(segue:UIStoryboardSegue){
         print("unwinding")
     }
