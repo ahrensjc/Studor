@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfj-TH-hBL">
-                                <rect key="frame" x="243.5" y="309" width="30" height="30"/>
+                                <rect key="frame" x="259.5" y="322.5" width="30" height="30"/>
                                 <state key="normal" title="Edit">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -28,7 +28,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-Y9-AgF">
-                                <rect key="frame" x="166" y="499" width="43" height="33"/>
+                                <rect key="frame" x="166" y="493.5" width="43" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="TAGS">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,7 +72,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Bio info ... and stuff so here's a little thing about me" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wOm-T5-OYd">
-                                <rect key="frame" x="16" y="363" width="343" height="115"/>
+                                <rect key="frame" x="16" y="357.5" width="343" height="115"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="Ngp-9l-Ucc"/>
@@ -81,14 +81,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODc-Ce-Zas">
-                                <rect key="frame" x="144" y="314" width="87.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INFORMATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODc-Ce-Zas">
+                                <rect key="frame" x="128" y="327" width="119.5" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="tag one" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6Q-bV-J0T">
-                                <rect key="frame" x="67.5" y="540" width="240" height="253"/>
+                                <rect key="frame" x="67.5" y="534.5" width="240" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="253" id="Ros-Zs-hqW"/>
@@ -99,7 +99,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6C-1q-k98" userLabel="Delete Tags">
-                                <rect key="frame" x="221" y="502" width="67" height="27"/>
+                                <rect key="frame" x="221" y="496.5" width="67" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Delete Tags">
                                     <color key="titleColor" red="1" green="0.0" blue="0.046772837529804434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -125,10 +125,10 @@
                             <constraint firstItem="a2Q-g7-Fb6" firstAttribute="top" secondItem="bJZ-wg-B07" secondAttribute="top" constant="25" id="Yp2-yt-K1l"/>
                             <constraint firstItem="a2Q-g7-Fb6" firstAttribute="leading" secondItem="tbW-ba-AzT" secondAttribute="trailing" constant="80" id="d3Q-gs-slK"/>
                             <constraint firstItem="mFp-Y9-AgF" firstAttribute="top" secondItem="wOm-T5-OYd" secondAttribute="bottom" constant="21" id="dEf-4g-xSr"/>
-                            <constraint firstItem="wOm-T5-OYd" firstAttribute="top" secondItem="yfj-TH-hBL" secondAttribute="bottom" constant="24" id="fGH-zq-h7T"/>
+                            <constraint firstItem="wOm-T5-OYd" firstAttribute="top" secondItem="yfj-TH-hBL" secondAttribute="bottom" constant="5" id="fGH-zq-h7T"/>
                             <constraint firstItem="uYU-Gc-uzQ" firstAttribute="top" secondItem="cad-3c-9pz" secondAttribute="bottom" constant="8" id="g7p-Od-aSz"/>
-                            <constraint firstItem="ODc-Ce-Zas" firstAttribute="top" secondItem="uYU-Gc-uzQ" secondAttribute="bottom" constant="67" id="iLw-tE-uky"/>
-                            <constraint firstItem="yfj-TH-hBL" firstAttribute="top" secondItem="bJZ-wg-B07" secondAttribute="top" constant="245" id="lKK-E5-oE2"/>
+                            <constraint firstItem="ODc-Ce-Zas" firstAttribute="top" secondItem="uYU-Gc-uzQ" secondAttribute="bottom" constant="80" id="iLw-tE-uky"/>
+                            <constraint firstItem="yfj-TH-hBL" firstAttribute="top" secondItem="bJZ-wg-B07" secondAttribute="top" constant="258.5" id="lKK-E5-oE2"/>
                             <constraint firstItem="x6C-1q-k98" firstAttribute="leading" secondItem="mFp-Y9-AgF" secondAttribute="trailing" constant="12" id="lv6-fa-Q0R"/>
                             <constraint firstItem="mFp-Y9-AgF" firstAttribute="centerX" secondItem="bxa-6N-aZW" secondAttribute="centerX" id="or2-sA-ETd"/>
                             <constraint firstItem="p6Q-bV-J0T" firstAttribute="centerX" secondItem="bxa-6N-aZW" secondAttribute="centerX" id="pah-Un-q2g"/>
