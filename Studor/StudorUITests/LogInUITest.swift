@@ -33,7 +33,7 @@ class LogInUITest: XCTestCase {
         app.buttons["Sign Up"].tap()
         app.textFields["Email"].tap()
         app.typeText("emailaddress4@gcc.edu")
-        let passwordTextField = app.textFields["Password"]
+        let passwordTextField = app.secureTextFields["Password"]
         passwordTextField.tap()
         passwordTextField.tap()
         app.typeText("password")
@@ -50,7 +50,7 @@ class LogInUITest: XCTestCase {
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
-        app.textFields["password"].tap()
+        app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         app.tabBars.children(matching: .button).element(boundBy: 3).tap()
@@ -69,7 +69,7 @@ class LogInUITest: XCTestCase {
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
-        app.textFields["password"].tap()
+        app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         
@@ -96,7 +96,7 @@ class LogInUITest: XCTestCase {
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
-        app.textFields["password"].tap()
+        app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         
@@ -133,7 +133,7 @@ class LogInUITest: XCTestCase {
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
-        app.textFields["password"].tap()
+        app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         app.tabBars.children(matching: .button).element(boundBy: 3).tap()
@@ -145,7 +145,7 @@ class LogInUITest: XCTestCase {
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
-        app.textFields["password"].tap()
+        app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         app.tabBars.children(matching: .button).element(boundBy: 3).tap()
@@ -171,12 +171,12 @@ class LogInUITest: XCTestCase {
         
     }
     
-    func testEvents() {
+    /*func testEvents() {
         
         let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
-        app.textFields["password"].tap()
+        app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         
@@ -215,6 +215,6 @@ class LogInUITest: XCTestCase {
         tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
         
-    }
+    }*/
 
 }
