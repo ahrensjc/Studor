@@ -27,7 +27,7 @@ class CreateGroupViewController: UIViewController {
         super.viewDidLoad()
 
         participants = [String]()
-        participants.append(sendbirdID) // TODO: instead of self display userID
+        participants.append(sendbirdID) // TODO:
         participantsTextView.text = sendbirdID
     }
     
@@ -67,6 +67,7 @@ class CreateGroupViewController: UIViewController {
                 for participant in self.participants {
                     newMetaData[participant] = "invited"
                 }
+                newMetaData[self.sendbirdID] = "accepted"
                 
                 channel?.createMetaData((newMetaData as? [String : String])!, completionHandler: { (metaData, error) in
                     guard error == nil else {   // Error.

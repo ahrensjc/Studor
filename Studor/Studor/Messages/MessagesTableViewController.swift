@@ -87,6 +87,35 @@ class MessagesTableViewController: UITableViewController {
         return indexPath
     }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //myChannels[indexPath].item
+        let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
+        let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
+        swipeConfig.performsFirstActionWithFullSwipe = false
+        return swipeConfig
+    }
+    
+    func contextualDeleteAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal,
+                                        title: "Delete") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+                                            self.myChannels[indexPath.item].chan.leave { (error) in
+                                                guard error == nil else {   // Error.
+                                                    print("error leaving channel")
+                                                    print(error as Any)
+                                                    return
+                                                }
+                                                self.myChannels.remove(at: indexPath.item)
+                                                DispatchQueue.main.async {
+                                                    self.tableView.reloadData()
+                                                }
+                                            }
+        }
+        
+        action.title = "Leave Group"
+        action.backgroundColor = UIColor.red
+        return action
+    }
+    
     @IBAction func createGroupButtonTapped(_ sender: Any) {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cgvc") as? CreateGroupViewController {
                 //viewController.newsObj = newsObj
@@ -165,10 +194,11 @@ class MessagesTableViewController: UITableViewController {
             self.sendbirdUser = user
             let query = SBDGroupChannel.createMyGroupChannelListQuery()
             query?.includeEmptyChannel = true
+            query?.limit = 100
             query?.loadNextPage(completionHandler: { (channels, error) in
                 guard error == nil else {   // Error.
                     print("error grabbing channel list")
-                    print(error)
+                    print(error as Any)
                     return
                 }
                 //self.myChannels = channels ?? [SBDGroupChannel]()

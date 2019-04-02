@@ -59,7 +59,9 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(channelURL)
+        //print(channelURL)
+        
+        
         
         getMessages()
         
@@ -98,9 +100,15 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     func getMessages() {
         SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
             guard error == nil else {   // Error.
-                return
                 print("error getting channel")
                 print(error as Any)
+                // TODO: print popover saying error
+                
+                self.messageInputBar.isUserInteractionEnabled = false
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                return
             }
             
             
@@ -144,6 +152,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             //self.tableView.reloadData()
             
             self.channel = groupChannel
+            self.navigationItem.title = self.channel.name
             
             let keys = [self.sendbirdID]
             
