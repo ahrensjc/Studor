@@ -28,9 +28,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-Y9-AgF">
-                                <rect key="frame" x="166" y="493.5" width="43" height="33"/>
+                                <rect key="frame" x="148.5" y="493.5" width="78" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="TAGS">
+                                <state key="normal" title="COURSES">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -99,9 +99,9 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6C-1q-k98" userLabel="Delete Tags">
-                                <rect key="frame" x="221" y="496.5" width="67" height="27"/>
+                                <rect key="frame" x="238.5" y="496.5" width="87" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Delete Tags">
+                                <state key="normal" title="Delete Courses">
                                     <color key="titleColor" red="1" green="0.0" blue="0.046772837529804434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -416,7 +416,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6xN-RZ-M9B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="V3x-rd-T0V" kind="show" identifier="requireLogin" id="ccL-Gp-Dot"/>
@@ -1494,7 +1494,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
-        <segue reference="ZqN-gz-AFu"/>
+        <segue reference="ccL-Gp-Dot"/>
         <segue reference="dwS-zY-wM5"/>
     </inferredMetricsTieBreakers>
 </document>
