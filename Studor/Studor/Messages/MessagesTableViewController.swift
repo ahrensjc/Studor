@@ -46,33 +46,23 @@ class MessagesTableViewController: UITableViewController {
                 print("ERROR GETTING DATA")
             }
         }
-        
-        
-        
-        
-        
         //print("attempting to print channels: \(String(describing: channelQuery))")
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return myChannels.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath) as! MessagesTableViewCell
-
-        // This should instead be the title of the channel if its a group or the person's nickname if it is 1:1 chat ???
-        //cell.titleLabel.text = myChannels[indexPath.count].name
-        //cell.titleLabel.text = myChannels[indexPath.item].name
+        
         if myChannels[indexPath.item].accepted {
             cell.titleLabel.text = myChannels[indexPath.item].chan.name
         } else {
@@ -88,7 +78,6 @@ class MessagesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        //myChannels[indexPath].item
         let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
         let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
         swipeConfig.performsFirstActionWithFullSwipe = false
@@ -110,7 +99,6 @@ class MessagesTableViewController: UITableViewController {
                                                 }
                                             }
         }
-        
         action.title = "Leave Group"
         action.backgroundColor = UIColor.red
         return action
@@ -118,7 +106,6 @@ class MessagesTableViewController: UITableViewController {
     
     @IBAction func createGroupButtonTapped(_ sender: Any) {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cgvc") as? CreateGroupViewController {
-                //viewController.newsObj = newsObj
                 if let navigator = navigationController {
                     navigator.pushViewController(viewController, animated: true)
             }
@@ -189,26 +176,22 @@ class MessagesTableViewController: UITableViewController {
     func login() {
         // Again this should go in the login page... (logs in user)
         SBDMain.connect(withUserId: sendbirdID, completionHandler: { (user, error) in
-            // ...
-            // Grab a list of channels the user is in
             self.sendbirdUser = user
+            //let query = SBDGroupChannel.createPublicGroupChannelListQuery()
             let query = SBDGroupChannel.createMyGroupChannelListQuery()
             query?.includeEmptyChannel = true
             query?.limit = 100
+            //query?.
+            
             query?.loadNextPage(completionHandler: { (channels, error) in
                 guard error == nil else {   // Error.
                     print("error grabbing channel list")
                     print(error as Any)
                     return
                 }
-                //self.myChannels = channels ?? [SBDGroupChannel]()
-                
-                
+
                 for myChannel in channels! {
-                    //SBDOpenChannel.getWithUrl(myChannel.channelUrl) { (channel, error) in
-                        //let keys : NSArray = ["key1", "key2"]
                     let keys = [self.sendbirdID] 
-                        
                     myChannel.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
                             guard error == nil else {   // Error.
                                 print("error getting channel metadata")
@@ -230,7 +213,6 @@ class MessagesTableViewController: UITableViewController {
                                 self.tableView.reloadData()
                             }
                         })
-                    //}
                     self.tableView.reloadData()
                 }
             })

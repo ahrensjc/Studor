@@ -8,12 +8,15 @@
 
 import UIKit
 import SendBirdSDK
+import iOSDropDown
 
 class CreateGroupViewController: UIViewController {
     
     @IBOutlet weak var groupNameTextField: UITextField!
     
-    @IBOutlet weak var addParticipantsTextField: UITextField!
+    @IBOutlet weak var addParticipantsDropDown: DropDown!
+    
+    //@IBOutlet weak var addParticipantsTextField: UITextField!
     
     @IBOutlet weak var participantsTextView: UITextView!
     
@@ -22,22 +25,47 @@ class CreateGroupViewController: UIViewController {
     var sendbirdID : String!
     var nickname : String!
     var sendbirdUser : SBDUser!
+    var usersList : [SBDUser]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let applicationUserListQuery = SBDMain.createApplicationUserListQuery()
+        //applicationUserListQuery?.userIdsFilter = ["jim"]
+        applicationUserListQuery?.limit = 100
+        applicationUserListQuery?.loadNextPage(completionHandler: { (users, error) in
+            guard error == nil else {
+                print("error getting user list")
+                print(error as Any)
+                return
+            }
+            self.usersList = users!
+            var usernames = [String]()
+            for user in users! {
+                usernames.append(user.userId)
+            }
+            self.addParticipantsDropDown.optionArray = usernames
+        })
 
+        addParticipantsDropDown.listHeight = 120
+        addParticipantsDropDown.selectedRowColor = UIColor.white
         participants = [String]()
         participants.append(sendbirdID) // TODO:
         participantsTextView.text = sendbirdID
     }
     
     @IBAction func addParticipantButtonTapped(_ sender: Any) {
-        if(addParticipantsTextField.text != "" || addParticipantsTextField != nil) {
-            participants.append(addParticipantsTextField.text!)
-            participantsTextView.text.append(", " + addParticipantsTextField.text!)
-            addParticipantsTextField.text = ""
+        if(addParticipantsDropDown.text != "" || addParticipantsDropDown != nil) {
+            participants.append(addParticipantsDropDown.text!)
+            participantsTextView.text.append(", " + addParticipantsDropDown.text!)
+            addParticipantsDropDown.text = ""
         }
+        
     }
+    
+    
+    
     
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
@@ -47,16 +75,12 @@ class CreateGroupViewController: UIViewController {
             // TODO: display error saying group cannot be just you
         } else {
             var params = SBDGroupChannelParams()
-            params.isPublic = false
+            params.isPublic = true
             params.isEphemeral = false
             params.isDistinct = false
             params.addUserIds(participants)
             params.operatorUserIds = ["rando1"]
             params.name = self.groupNameTextField.text!
-            //params.coverImage = FILE
-            //params.coverUrl = "COVER_URL"
-            //params.data = "DATA"
-            //params.customType = "CUSTOM_TYPE"
             
             SBDGroupChannel.createChannel(with: params) { (channel, error) in
                 guard error == nil else {   // Error.
