@@ -139,7 +139,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="kv3-qt-9zh">
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="Hl9-2g-gBM">
-                            <color key="tintColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logOutButton:" destination="FTr-9N-yEr" id="R6N-XJ-mit"/>
                             </connections>
@@ -155,6 +155,7 @@
                         <outlet property="nicknameTextField" destination="Ohc-SX-6Vu" id="QQY-aM-QID"/>
                         <outlet property="pricingTextLabel" destination="a2Q-g7-Fb6" id="h1f-G6-FdF"/>
                         <outlet property="tagTextView" destination="p6Q-bV-J0T" id="kUt-bi-toP"/>
+                        <outlet property="userName" destination="cad-3c-9pz" id="lTX-sp-dZa"/>
                         <outlet property="usernameLabel" destination="cad-3c-9pz" id="m4m-29-OO2"/>
                         <segue destination="V3x-rd-T0V" kind="show" identifier="logoutSuccess" id="ZqN-gz-AFu"/>
                     </connections>
@@ -377,7 +378,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
+                                            <color key="highlightedColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -1288,7 +1289,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3x-rd-T0V" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kAe-RR-UY3">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1323,7 +1323,7 @@
                                     <constraint firstAttribute="height" constant="21" id="qyE-PW-7n3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="19"/>
-                                <color key="textColor" red="0.96993559600000001" green="0.54713000460000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cz-vV-EMh">
@@ -1332,7 +1332,7 @@
                                     <constraint firstAttribute="height" constant="103" id="vYm-dD-awF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.96993559600000001" green="0.54713000460000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSM-dd-pFz">
@@ -1509,7 +1509,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
         <segue reference="ZqN-gz-AFu"/>
-        <segue reference="TKL-oa-ub7"/>
+        <segue reference="dwS-zY-wM5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

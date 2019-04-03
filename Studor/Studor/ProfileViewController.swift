@@ -9,8 +9,17 @@
 import UIKit
 import Firebase
 import SendBirdSDK
+import QuartzCore
 
-class ProfileViewController: UIViewController, UITextFieldDelegate {
+
+
+class ProfileViewController: UIViewController, UITextFieldDelegate{
+    
+    
+    @IBOutlet weak var userName: UILabel!
+    
+    
+    
     
     static var tagListDirty = false
     
@@ -250,6 +259,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.userName.layer.borderWidth = 1.5;
+        self.userName.layer.cornerRadius = 8;
+        self.userName.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor
+        
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
