@@ -75,7 +75,7 @@ class SignUp : UIViewController {
             "noLikes" : 0,
             "noDislikes" : 0,
             "profImgSpecifier" : [0, 0],
-            "sendbirdID" : Auth.auth().currentUser!.uid,
+            "sendbirdID" : String(describing: Auth.auth().currentUser?.email!.dropLast(emailSuffix.count)), //Auth.auth().currentUser!.uid,
             "events" : [],
             "tags" : ["COMP 314", "COMP 435", "COMP 311"]
         ]

@@ -244,12 +244,14 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         channel.leave { (error) in
             guard error == nil else {   // Error.
                 print("error leaving channel")
-                print(error)
+                print(error as Any)
                 return
             }
             print("left channel")
         }
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func accepted(child: InvitationViewController) {

@@ -38,6 +38,7 @@
 		BEDFB966220CD643005903C1 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */; };
 		BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */; };
 		BEDFB96C220E3654005903C1 /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */; };
+		BEFDE35922544020008C5E14 /* iOSDropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFDE35822544020008C5E14 /* iOSDropDown.framework */; };
 		BEFEBDEA22234EBB00EE9847 /* MessageKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		BEDFB965220CD643005903C1 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		BEDFB969220E24B7005903C1 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		BEDFB96B220E3654005903C1 /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
+		BEFDE35822544020008C5E14 /* iOSDropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = iOSDropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageKitViewController.swift; sourceTree = "<group>"; };
 		C3F2A43405E5A6339E092E11 /* Pods-Studor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFDE35922544020008C5E14 /* iOSDropDown.framework in Frameworks */,
 				3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +161,7 @@
 		AD3DF9A9B2FA290B2A996389 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEFDE35822544020008C5E14 /* iOSDropDown.framework */,
 				49F1A231BCC171631565A5B4 /* Pods_Studor.framework */,
 			);
 			name = Frameworks;
@@ -463,6 +467,7 @@
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -487,6 +492,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iOSDropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
