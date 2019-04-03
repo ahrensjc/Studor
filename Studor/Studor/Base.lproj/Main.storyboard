@@ -21,7 +21,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfj-TH-hBL">
                                 <rect key="frame" x="259.5" y="322.5" width="30" height="30"/>
                                 <state key="normal" title="Edit">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="bioEdit:" destination="FTr-9N-yEr" eventType="touchUpInside" id="uOO-RH-zf0"/>
@@ -59,13 +59,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cad-3c-9pz">
                                 <rect key="frame" x="133" y="180" width="109" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.96993559598922729" green="0.54713000462634631" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYU-Gc-uzQ">
                                 <rect key="frame" x="172.5" y="217" width="30" height="30"/>
                                 <state key="normal" title="Edit">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="nicknameEdit:" destination="FTr-9N-yEr" eventType="touchUpInside" id="jK9-O3-BwO"/>
@@ -94,7 +93,7 @@
                                     <constraint firstAttribute="height" constant="253" id="Ros-Zs-hqW"/>
                                     <constraint firstAttribute="width" constant="240" id="fu7-bu-G6F"/>
                                 </constraints>
-                                <color key="textColor" red="0.96993559600000001" green="0.54713000460000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -102,7 +101,7 @@
                                 <rect key="frame" x="221" y="496.5" width="67" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Delete Tags">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.046772837529804434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="Mzo-uB-WfC" kind="show" id="hiK-t6-o9O"/>
@@ -330,12 +329,13 @@
         <scene sceneID="nEW-7G-fji">
             <objects>
                 <navigationController id="Sxc-y2-Ozh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Explore" id="hoj-gh-4XE"/>
+                    <tabBarItem key="tabBarItem" title="" image="ex2" id="hoj-gh-4XE">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e2Z-5t-SpH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="QbF-nJ-xMD" kind="relationship" relationship="rootViewController" id="8QA-Zq-3oh"/>
@@ -417,6 +417,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="V3x-rd-T0V" kind="show" identifier="requireLogin" id="ccL-Gp-Dot"/>
@@ -440,7 +442,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDX-fw-j13">
                                 <rect key="frame" x="166.5" y="280" width="42" height="30"/>
-                                <state key="normal" title="Log In"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" red="0.64807764919999999" green="0.2222676525" blue="0.1775896317" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="logInButtonTapped:" destination="Ib6-tw-mOS" eventType="touchUpInside" id="khA-ZD-HEK"/>
                                 </connections>
@@ -486,6 +490,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aoN-kI-JIs" firstAttribute="centerX" secondItem="6Se-5n-r4R" secondAttribute="centerX" id="A0J-XI-EH2"/>
                             <constraint firstItem="PBp-gC-Bcg" firstAttribute="top" secondItem="aoN-kI-JIs" secondAttribute="bottom" constant="8" id="Dae-5H-G3d"/>
@@ -523,7 +528,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCR-Ls-0ND">
                                 <rect key="frame" x="134" y="414" width="107" height="30"/>
-                                <state key="normal" title="Create Account"/>
+                                <state key="normal" title="Create Account">
+                                    <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="tapSignUp:" destination="BEZ-zt-9L7" eventType="touchUpInside" id="YsZ-lW-gdn"/>
                                 </connections>
@@ -573,6 +580,7 @@
                                     <segment title="Student"/>
                                     <segment title="Tutor"/>
                                 </segments>
+                                <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6H9-uD-orp">
                                 <rect key="frame" x="177" y="360" width="20" height="20"/>
@@ -657,8 +665,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Channels" id="waV-Sa-ia2">
-                        <barButtonItem key="rightBarButtonItem" title="Create Group" image="make group" id="DHC-f5-gcf">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <barButtonItem key="rightBarButtonItem" title="Create Group" image="ussrs" id="DHC-f5-gcf">
+                            <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="SMX-YB-nTd" kind="show" id="UIO-Fv-OJh"/>
                             </connections>
@@ -831,7 +840,7 @@
                         <viewLayoutGuide key="safeArea" id="nUw-TI-5K1"/>
                     </view>
                     <navigationItem key="navigationItem" id="PeD-Vp-xxh">
-                        <barButtonItem key="rightBarButtonItem" title="Create Event" id="3xW-uR-uUg">
+                        <barButtonItem key="rightBarButtonItem" image="Add Event" id="3xW-uR-uUg">
                             <connections>
                                 <segue destination="g6l-0b-Hag" kind="show" id="hYa-lu-hmu"/>
                             </connections>
@@ -946,15 +955,17 @@
                             <outlet property="delegate" destination="KxB-dP-VfG" id="2WB-C1-L7z"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Schedule" id="DD3-7b-IKw">
-                        <barButtonItem key="rightBarButtonItem" title="Add Event" image="Add Event" style="plain" id="OZI-QZ-klb">
-                            <color key="tintColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="OZI-QZ-klb">
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addEventButtonTapped:" destination="KxB-dP-VfG" id="YPL-Wy-vka"/>
                                 <segue destination="g6l-0b-Hag" kind="show" id="yWa-aJ-mBg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="eventTableView" destination="fEW-jW-YCx" id="b9P-zf-4Hk"/>
                     </connections>
@@ -990,7 +1001,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZaG-u3-LfA">
-                                <rect key="frame" x="153" y="525" width="69" height="30"/>
+                                <rect key="frame" x="153" y="481" width="69" height="30"/>
                                 <state key="normal" title="Edit Event"/>
                                 <connections>
                                     <segue destination="RDu-vf-33n" kind="show" id="CsU-3i-UNw"/>
@@ -1232,12 +1243,13 @@
         <scene sceneID="Ber-kp-wTi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gey-kU-bVv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="profile" id="Ryt-Aq-lQy"/>
+                    <tabBarItem key="tabBarItem" title="" image="profile" id="Ryt-Aq-lQy">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Hl-Bt-M0l">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1252,12 +1264,14 @@
         <scene sceneID="V2p-uc-GBo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJc-gH-hXL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Messages" id="yjO-Nj-z78"/>
+                    <tabBarItem key="tabBarItem" title="" image="chh" id="yjO-Nj-z78">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
+                        <color key="badgeColor" red="0.64807764919999999" green="0.2222676525" blue="0.1775896317" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s5o-UV-6fG">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1276,7 +1290,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kAe-RR-UY3">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1363,6 +1376,7 @@
                                     <constraint firstAttribute="width" constant="47" id="0fv-yN-2Q0"/>
                                     <constraint firstAttribute="height" constant="47" id="P18-m2-chx"/>
                                 </constraints>
+                                <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="like"/>
                                 <connections>
                                     <action selector="doLikeButton:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="Vka-fc-H1p"/>
@@ -1450,7 +1464,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SrT-tE-Pk1">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1465,12 +1478,13 @@
         <scene sceneID="7O4-h8-Teq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CGM-qX-861" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Events" id="gbO-gD-bf5"/>
+                    <tabBarItem key="tabBarItem" title="" image="fil" id="gbO-gD-bf5">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="40Z-Ze-nYm">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1484,17 +1498,18 @@
     </scenes>
     <resources>
         <image name="Add Event" width="36" height="36"/>
-        <image name="Events" width="37.5" height="37.5"/>
-        <image name="Explore" width="37.5" height="37.5"/>
-        <image name="Messages" width="37.5" height="37.5"/>
+        <image name="chh" width="36" height="36"/>
         <image name="dislike" width="72" height="72"/>
+        <image name="ex2" width="36" height="36"/>
+        <image name="fil" width="36" height="36"/>
         <image name="like" width="72" height="72"/>
-        <image name="make group" width="37.5" height="37.5"/>
         <image name="profile" width="37.5" height="37.5"/>
+        <image name="ussrs" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
         <segue reference="ZqN-gz-AFu"/>
-        <segue reference="dwS-zY-wM5"/>
+        <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
