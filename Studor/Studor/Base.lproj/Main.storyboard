@@ -169,9 +169,7 @@
                         <outlet property="nicknamePopover" destination="Z1F-lf-H1W" id="Kr1-Qy-1zi"/>
                         <outlet property="nicknameTextField" destination="Ohc-SX-6Vu" id="QQY-aM-QID"/>
                         <outlet property="pricingTextLabel" destination="a2Q-g7-Fb6" id="h1f-G6-FdF"/>
-                        <outlet property="tagBorder" destination="p6Q-bV-J0T" id="LRa-2B-LXy"/>
                         <outlet property="tagTextView" destination="p6Q-bV-J0T" id="kUt-bi-toP"/>
-                        <outlet property="userName" destination="cad-3c-9pz" id="lTX-sp-dZa"/>
                         <outlet property="usernameLabel" destination="cad-3c-9pz" id="m4m-29-OO2"/>
                         <segue destination="V3x-rd-T0V" kind="show" identifier="logoutSuccess" id="ZqN-gz-AFu"/>
                     </connections>

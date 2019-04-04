@@ -15,6 +15,7 @@ import QuartzCore
 
 class ProfileViewController: UIViewController, UITextFieldDelegate{
     
+    
     static var tagListDirty = false
     
     let notificationCenter: NotificationCenter = .default
