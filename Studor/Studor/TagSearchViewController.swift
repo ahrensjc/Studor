@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import iOSDropDown
+import SendBirdSDK
 
 class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
@@ -16,6 +18,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var textThing: UITextField!
     @IBOutlet weak var tagPageTags: UITextView!
     
+    @IBOutlet weak var coursedDropDown: DropDown!
     var tagUpdatedList: String!
     
     @IBAction func updateTagsArray(_ sender: Any) {
@@ -37,7 +40,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     // autofill
     var rowCount = 1
     
-    var autoCompletionPossibilities = ["Comp", "Acct", "Fnce", "Bio"] //This is what we need to populate
+    var autoCompletionPossibilities = ["COMP 420", "COMP 300"] //This is what we need to populate
     var autoCompleteCharacterCount = 0
     var timer = Timer()
     
@@ -53,7 +56,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
         return true
     }
     func formatSubstring(subString: String) -> String {
-        let formatted = String(subString.dropLast(autoCompleteCharacterCount)).lowercased().capitalized //5
+        let formatted = String(subString.dropLast(autoCompleteCharacterCount)).uppercased().capitalized //5
         return formatted
     }
     
@@ -97,7 +100,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
     func putColourFormattedTextInTextField(autocompleteResult: String, userQuery : String) {
         let colouredString: NSMutableAttributedString = NSMutableAttributedString(string: userQuery + autocompleteResult)
-        colouredString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.blue, range: NSRange(location: userQuery.count,length:autocompleteResult.count))
+        colouredString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 137/250, green: 17/250, blue: 0/250, alpha: 1), range: NSRange(location: userQuery.count,length:autocompleteResult.count))
         self.textThing.attributedText = colouredString
     }
     func moveCaretToEndOfUserQueryPosition(userQuery : String) {
@@ -115,11 +118,16 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     }
     //// end of autofill ////
     
+    var courseList : [String]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //tagPageTags.text = tagUpdatedList
-
-        // Do any additional setup after loading the view.
+        self.coursedDropDown.optionArray = ["COMP 420", "COMP 300"]
+        coursedDropDown.listHeight = 120
+        coursedDropDown.selectedRowColor = UIColor.white
+        coursedDropDown.hideOptionsWhenSelect = false //list doesnt disspear when a course has been selected to avoid scrolling again if a course is accidentally tapped
+        
     }
 
 
