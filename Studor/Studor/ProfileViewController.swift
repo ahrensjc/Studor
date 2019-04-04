@@ -15,12 +15,6 @@ import QuartzCore
 
 class ProfileViewController: UIViewController, UITextFieldDelegate{
     
-    
-    @IBOutlet weak var userName: UILabel!
-    
-    
-    
-    
     static var tagListDirty = false
     
     let notificationCenter: NotificationCenter = .default
@@ -259,9 +253,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.userName.layer.borderWidth = 1.5;
-        self.userName.layer.cornerRadius = 8;
-        self.userName.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor
+        self.nicknameLabel.layer.borderWidth = 1.5; //this is the width of the border of nickname om profile page
+        self.nicknameLabel.layer.cornerRadius = 8; //rounded edges
+        self.nicknameLabel.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
