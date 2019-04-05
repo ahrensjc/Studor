@@ -415,7 +415,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcH-ot-XHF">
-                                            <rect key="frame" x="282" y="11" width="51" height="21"/>
+                                            <rect key="frame" x="282" y="11.5" width="51" height="20.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="51" id="oog-Zu-0Ha"/>
                                             </constraints>
@@ -754,8 +754,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="AvB-dG-vGA" id="vRj-XX-0O3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-Vn-m8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="AvB-dG-vGA">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="3751.1999999999998" y="-66.11694152923539"/>
         </scene>
@@ -809,7 +816,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-n7-AhI">
                                 <rect key="frame" x="172.5" y="354" width="30" height="30"/>
                                 <state key="normal" title="Add">
-                                    <color key="titleColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="0.49019607843137253" green="0.11764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
                                     <action selector="addParticipantButtonTapped:" destination="SMX-YB-nTd" eventType="touchUpInside" id="nS5-Mk-x0w"/>

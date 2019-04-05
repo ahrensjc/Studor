@@ -61,9 +61,9 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         
         //print(channelURL)
         
+        getChannel()
         
-        
-        getMessages()
+        //getMessages()
         
         /*let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
@@ -97,8 +97,54 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     */
     
-    func getMessages() {
+    func getChannel() {
         SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
+            guard error == nil else {   // Error.
+                print("error getting channel")
+                print(error as Any)
+                // TODO: print popover saying error
+                
+                self.messageInputBar.isUserInteractionEnabled = false
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                return
+            }
+            
+            self.channel = groupChannel
+            self.navigationItem.title = self.channel.name
+            
+            let keys = [self.sendbirdID]
+            
+            groupChannel!.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
+                guard error == nil else {   // Error.
+                    print("error getting channel metadata")
+                    print(error as Any)
+                    return
+                }
+                for data in metaData! {
+                    if data.value as! String == "invited" {
+                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inv") as? InvitationViewController {
+                            if let navigator = self.navigationController {
+                                viewController.delegate = self
+                                navigator.pushViewController(viewController, animated: false)
+                            }
+                        }
+                        
+                        //let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        //let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
+                        //invViewController.delegate = self
+                        //self.present(invViewController, animated: false, completion: { })
+                    } else {
+                        self.getMessages()
+                    }
+                }
+            })
+        }
+    }
+    
+    func getMessages() {
+        /*SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
             guard error == nil else {   // Error.
                 print("error getting channel")
                 print(error as Any)
@@ -172,7 +218,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                         })
                     }
                 }
-            })
+            })*/
             
             
             
@@ -213,7 +259,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                 self.messagesCollectionView.scrollToBottom(animated: true)
             })
             
-        }
+        //}
     }
 
     func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
@@ -240,7 +286,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     
     func declined(child: InvitationViewController) {
-        child.dismiss(animated: true, completion: nil)
+        child.dismiss(animated: false, completion: nil)
         channel.leave { (error) in
             guard error == nil else {   // Error.
                 print("error leaving channel")
@@ -248,17 +294,16 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                 return
             }
             print("left channel")
-        }
-        DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: false)
+            }
         }
     }
     
     func accepted(child: InvitationViewController) {
-        child.dismiss(animated: true, completion: nil)
-        let metaDataToUpdate = [
-            sendbirdID:"accepted"      // Adds this as a new item
-        ]
+        child.dismiss(animated: false, completion: nil)
+        getMessages()
+        let metaDataToUpdate = [sendbirdID:"accepted"]
         
         channel?.updateMetaData(metaDataToUpdate as! [String : String], completionHandler: { (metaData, error) in
             guard error == nil else {   // Error.
@@ -351,6 +396,7 @@ extension MessageKitViewController: MessageInputBarDelegate {
         channel.sendUserMessage(text, data: nil, completionHandler: { (userMessage, error) in
             guard error == nil else {   // Error.
                 print("failure sending message")
+                print(error as Any)
                 return
             }
             
