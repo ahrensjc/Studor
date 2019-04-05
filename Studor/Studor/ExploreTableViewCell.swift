@@ -8,7 +8,22 @@
 
 import UIKit
 
-class ExploreTableViewCell: UITableViewCell {
+class ExploreTableViewGroupCell: UITableViewCell {
+    @IBOutlet weak var channelName: UILabel!
+    
+    var channelNameText : String!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        initialiseData()
+    }
+    
+    func initialiseData() {
+        channelName.text = channelNameText ?? ""
+    }
+}
+
+class ExploreTableViewUserCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     
@@ -24,13 +39,7 @@ class ExploreTableViewCell: UITableViewCell {
         initialiseData()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    func initialiseData(){
+    func initialiseData() {
         name.text = nameText ?? ""
         type.text = typeText ?? ""
     }
