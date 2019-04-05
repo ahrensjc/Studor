@@ -58,6 +58,26 @@ class StudorFunctions {
         
     }
     
+    func getEventListForUser(user: String) -> [String : Any] {
+        return ["ex" : "ex"]
+    }
+    
+    func createGroup(channelName: String, sendbirdUrl: String){
+        
+        let groupData: [String: Any] = [
+            "sendbirdUrl" : sendbirdUrl,
+            "channelName" : channelName
+        ]
+        
+        db.collection("Groups").addDocument(data: groupData) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
     
     // Returns profile information of the user with the given firestore uID (bio, tags, nickname, etc.) in a [String : Any] if successful and nil otherwise
     func getProfileData(uid: String) -> [String : Any]{

@@ -25,10 +25,12 @@ class InvitationViewController: UIViewController {
     
     @IBAction func acceptButtonTapped(_ sender: Any) {
         delegate.accepted(child: self)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @IBAction func declineButtonTapped(_ sender: Any) {
         delegate.declined(child: self)
+        self.navigationController?.popViewController(animated: false)
     }
     /*
     // MARK: - Navigation

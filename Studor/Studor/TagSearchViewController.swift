@@ -24,7 +24,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     @IBAction func updateTagsArray(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "tags": FieldValue.arrayUnion([textThing.text as Any])
+            "tags": FieldValue.arrayUnion([coursedDropDown.text as Any])
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -38,6 +38,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
 
     
     // autofill
+    /*
     var rowCount = 1
     
     var autoCompletionPossibilities = ["COMP 420", "COMP 300"] //This is what we need to populate
@@ -115,7 +116,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
         autoCompleteResult.removeSubrange(autoCompleteResult.startIndex..<autoCompleteResult.index(autoCompleteResult.startIndex, offsetBy: substring.count))
         autoCompleteCharacterCount = autoCompleteResult.count
         return autoCompleteResult
-    }
+    }*/
     //// end of autofill ////
     
     var courseList : [String]!
@@ -123,7 +124,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         //tagPageTags.text = tagUpdatedList
-        self.coursedDropDown.optionArray = ["COMP 420", "COMP 300"]
+        coursedDropDown.optionArray = TagList().list
         coursedDropDown.listHeight = 120
         coursedDropDown.selectedRowColor = UIColor.white
         coursedDropDown.hideOptionsWhenSelect = false //list doesnt disspear when a course has been selected to avoid scrolling again if a course is accidentally tapped
