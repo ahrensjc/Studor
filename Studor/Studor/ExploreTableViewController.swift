@@ -95,6 +95,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.scopeButtonTitles = ["All", "Student", "Tutor"]
         searchController.searchBar.delegate = self
+        searchController.searchBar.accessibilityIdentifier = "Search Bar"
         navigationItem.searchController = searchController
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.hidesSearchBarWhenScrolling = false

@@ -12,12 +12,20 @@ import Firebase
 
 class MessagesTableViewController: UITableViewController {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
+    let loadingView = UIView()
+    let loadingLabel = UILabel()
+    
     //var myChannels = [SBDGroupChannel]()
     var myChannels = [(chan: SBDGroupChannel, accepted: Bool)]()
     var selected = -1
     var sendbirdID: String!
     var profileData: [String : Any]!
     var sendbirdUser: SBDUser!
+    var tableReady = false
+    
+    //internal let refreshControl = UIRefreshControl()
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +44,7 @@ class MessagesTableViewController: UITableViewController {
         // This should go in the login page later... (connects app to our sendbird project)
         //SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
         
+        setLoadingScreen()
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -46,7 +55,12 @@ class MessagesTableViewController: UITableViewController {
                 print("ERROR GETTING DATA")
             }
         }
-        //print("attempting to print channels: \(String(describing: channelQuery))")
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Channel Data...")
+        self.refreshControl = refreshControl
     }
 
     // MARK: - Table view data source
@@ -62,6 +76,11 @@ class MessagesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath) as! MessagesTableViewCell
+        
+        if !tableReady {
+            cell.titleLabel.text = "Loading..."
+            return cell
+        }
         
         if myChannels[indexPath.item].accepted {
             cell.titleLabel.text = myChannels[indexPath.item].chan.name
@@ -93,6 +112,7 @@ class MessagesTableViewController: UITableViewController {
                                                     print(error as Any)
                                                     return
                                                 }
+                                                //self.refreshData(self)
                                                 self.myChannels.remove(at: indexPath.item)
                                                 DispatchQueue.main.async {
                                                     self.tableView.reloadData()
@@ -178,56 +198,90 @@ class MessagesTableViewController: UITableViewController {
         SBDMain.connect(withUserId: sendbirdID, completionHandler: { (user, error) in
             self.sendbirdUser = user
             //let query = SBDGroupChannel.createPublicGroupChannelListQuery()
-            let query = SBDGroupChannel.createMyGroupChannelListQuery()
-            query?.includeEmptyChannel = true
-            query?.limit = 100
-            //query?.
-            
-            query?.loadNextPage(completionHandler: { (channels, error) in
-                guard error == nil else {   // Error.
-                    print("error grabbing channel list")
-                    print(error as Any)
-                    return
-                }
-
-                for myChannel in channels! {
-                    let keys = [self.sendbirdID] 
-                    myChannel.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
-                            guard error == nil else {   // Error.
-                                print("error getting channel metadata")
-                                print(error as Any)
-                                return
-                            }
-                            if metaData!.count == 0 {
-                                    self.myChannels.append((myChannel, true))
-                            } else {
-                                for data in metaData! {
-                                    if data.value as! String == "invited" {
-                                        self.myChannels.append((myChannel, false))
-                                    } else {
-                                        self.myChannels.append((myChannel, true))
-                                    }
-                                }
-                            }
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        })
-                    self.tableView.reloadData()
-                }
-            })
+            self.refreshData(self)
         })
+    }
+    
+    @objc private func refreshData(_ sender: Any) {
+        let query = SBDGroupChannel.createMyGroupChannelListQuery()
+        query?.includeEmptyChannel = true
+        query?.limit = 100
+        query?.loadNextPage(completionHandler: { (channels, error) in
+            guard error == nil else {   // Error.
+                print("error grabbing channel list")
+                print(error as Any)
+                return
+            }
+            
+            self.myChannels = [(chan: SBDGroupChannel, accepted: Bool)]()
+            self.tableReady = false
+            for myChannel in channels! {
+                let keys = [self.sendbirdID]
+                myChannel.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
+                    guard error == nil else {   // Error.
+                        print("error getting channel metadata")
+                        print(error as Any)
+                        return
+                    }
+                    if metaData!.count == 0 {
+                        self.myChannels.append((myChannel, true))
+                    } else {
+                        for data in metaData! {
+                            if data.value as! String == "invited" {
+                                self.myChannels.append((myChannel, false))
+                            } else {
+                                self.myChannels.append((myChannel, true))
+                            }
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.tableReady = true
+                        self.tableView.reloadData()
+                        self.refreshControl?.endRefreshing()
+                        self.removeLoadingScreen()
+                    }
+                })
+            }
+        })
+    }
+    
+    // Set the activity indicator into the main view
+    private func setLoadingScreen() {
+        
+        // Sets the view which contains the loading text and the spinner
+        let width: CGFloat = 120
+        let height: CGFloat = 30
+        let x = (tableView.frame.width / 2) - (width / 2)
+        let y = (tableView.frame.height / 2) - (height / 2) - (navigationController?.navigationBar.frame.height)!
+        loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        // Sets loading text
+        loadingLabel.textColor = .gray
+        loadingLabel.textAlignment = .center
+        loadingLabel.text = "Loading..."
+        loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
+        
+        // Sets spinner
+        //activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        activityIndicator.startAnimating()
+        
+        // Adds text and spinner to the view
+        loadingView.addSubview(activityIndicator)
+        loadingView.addSubview(loadingLabel)
+        
+        tableView.addSubview(loadingView)
+    }
+    
+    // Remove the activity indicator from the main view
+    private func removeLoadingScreen() {
+        
+        // Hides and stops the text and the spinner
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        loadingLabel.isHidden = true
     }
 
 }
-
-/*let ids = ["user1", "user2"]
- // Creates a group channel, delete this after one run
- SBDGroupChannel.createChannel(withUserIds: ids, isDistinct: true) { (channel, error) in
- guard error == nil else {   // Error.
- print("error creating channel")
- print(error)
- return
- }
- print("no error creating channel?")*/
-//}
