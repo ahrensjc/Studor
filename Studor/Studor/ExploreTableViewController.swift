@@ -24,6 +24,16 @@ class SearchResult {
     }
 }
 
+class GroupResult {
+    var sendbirdURL: String
+    var channelName: String
+    
+    init(_ _sendbirdURL : String, _ _channelName : String) {
+        sendbirdURL = _sendbirdURL
+        channelName = _channelName
+    }
+}
+
 class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
     static var profileTagListDirty = false
@@ -39,6 +49,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     var commonTagResults = [SearchResult]()
     
     var filteredResults = [SearchResult]()
+    
+    var groupResults = [GroupResult]()
     
     var selectedResult : SearchResult!
     
@@ -57,10 +69,14 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     let searchController = UISearchController(searchResultsController: nil)
     
     func updateSearchResults(for searchController: UISearchController) {
-        //do something here
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        if scope != "Groups" {
+            filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        }
+        else {
+            
+        }
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -93,7 +109,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.scopeButtonTitles = ["All", "Student", "Tutor"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Student", "Tutor", "Groups"]
         searchController.searchBar.delegate = self
         searchController.searchBar.accessibilityIdentifier = "Search Bar"
         navigationItem.searchController = searchController
