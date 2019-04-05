@@ -77,13 +77,16 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        print(scope)
         if scope != "Groups" {
             isSearchingGroups = false
-            filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+            tableView.reloadData()
         }
         else {
             isSearchingGroups = true
+            tableView.reloadData()
         }
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -95,6 +98,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All"){
+        print(scope)
         if !isSearchingGroups {
             filteredResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
                 let matcher = (scope == "All") || (searchResult.type == scope)
@@ -105,7 +109,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                     return matcher && searchResult.name.lowercased().contains(searchText.lowercased())
                 }
             })
-            tableView.reloadData()
         }
         else {
             filteredGroups = groupResults.filter({(groupResult : GroupResult) -> Bool in
@@ -118,6 +121,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 }
             })
         }
+        tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -240,6 +244,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isSearchingGroups {
+            for group in groupResults {
+                print(group.channelName)
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "exploreGroupCell", for: indexPath) as! ExploreTableViewGroupCell
             if isFiltering() {
                 cell.channelNameText = filteredGroups[indexPath.row].channelName

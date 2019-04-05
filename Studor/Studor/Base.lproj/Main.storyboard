@@ -462,6 +462,9 @@
                                         <constraint firstItem="OJx-vX-UvW" firstAttribute="centerY" secondItem="Ta5-2q-VGa" secondAttribute="centerY" id="dD0-W4-byW"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="channelName" destination="OJx-vX-UvW" id="ysQ-dz-Uo2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
