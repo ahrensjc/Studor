@@ -55,22 +55,15 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     var sendbirdUser : SBDUser!
     var messages = [Message]()
     var channel : SBDGroupChannel!
-    
-    let loadingView = UIView()
-    let loadingLabel = UILabel()
-    
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //print(channelURL)
         
-        setLoadingScreen()
-        getChannel()
         
-        //getMessages()
+        
+        getMessages()
         
         /*let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
@@ -104,54 +97,8 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     */
     
-    func getChannel() {
-        SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
-            guard error == nil else {   // Error.
-                print("error getting channel")
-                print(error as Any)
-                // TODO: print popover saying error
-                
-                self.messageInputBar.isUserInteractionEnabled = false
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                return
-            }
-            
-            self.channel = groupChannel
-            self.navigationItem.title = self.channel.name
-            
-            let keys = [self.sendbirdID]
-            
-            groupChannel!.getMetaData(withKeys: keys as? [String], completionHandler: { (metaData, error) in
-                guard error == nil else {   // Error.
-                    print("error getting channel metadata")
-                    print(error as Any)
-                    return
-                }
-                for data in metaData! {
-                    if data.value as! String == "invited" {
-                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inv") as? InvitationViewController {
-                            if let navigator = self.navigationController {
-                                viewController.delegate = self
-                                navigator.pushViewController(viewController, animated: false)
-                            }
-                        }
-                        
-                        //let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        //let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
-                        //invViewController.delegate = self
-                        //self.present(invViewController, animated: false, completion: { })
-                    } else {
-                        self.getMessages()
-                    }
-                }
-            })
-        }
-    }
-    
     func getMessages() {
-        /*SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
+        SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
             guard error == nil else {   // Error.
                 print("error getting channel")
                 print(error as Any)
@@ -225,7 +172,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                         })
                     }
                 }
-            })*/
+            })
             
             
             
@@ -262,12 +209,11 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                 }
                 //self.tableView.reloadData()
                 self.messages.reverse()
-                self.removeLoadingScreen()
                 self.messagesCollectionView.reloadData()
                 self.messagesCollectionView.scrollToBottom(animated: true)
             })
             
-        //}
+        }
     }
 
     func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
@@ -294,7 +240,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     
     func declined(child: InvitationViewController) {
-        child.dismiss(animated: false, completion: nil)
+        child.dismiss(animated: true, completion: nil)
         channel.leave { (error) in
             guard error == nil else {   // Error.
                 print("error leaving channel")
@@ -302,16 +248,17 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                 return
             }
             print("left channel")
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: false)
-            }
+        }
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
     func accepted(child: InvitationViewController) {
-        child.dismiss(animated: false, completion: nil)
-        getMessages()
-        let metaDataToUpdate = [sendbirdID:"accepted"]
+        child.dismiss(animated: true, completion: nil)
+        let metaDataToUpdate = [
+            sendbirdID:"accepted"      // Adds this as a new item
+        ]
         
         channel?.updateMetaData(metaDataToUpdate as! [String : String], completionHandler: { (metaData, error) in
             guard error == nil else {   // Error.
@@ -325,45 +272,6 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             let child = segue.destination as! InvitationViewController
             child.delegate = self
         }
-    }
-    
-    // Set the activity indicator into the main view
-    private func setLoadingScreen() {
-        
-        // Sets the view which contains the loading text and the spinner
-        let width: CGFloat = 120
-        let height: CGFloat = 30
-        let x = (view.frame.width / 2) - (width / 2)
-        let y = (view.frame.height / 2) - (height / 2) - (navigationController?.navigationBar.frame.height)!
-        loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
-        
-        // Sets loading text
-        loadingLabel.textColor = .gray
-        loadingLabel.textAlignment = .center
-        loadingLabel.text = "Loading..."
-        loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
-        
-        // Sets spinner
-        //activityIndicator.activityIndicatorViewStyle = .gray
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
-        activityIndicator.startAnimating()
-        
-        // Adds text and spinner to the view
-        loadingView.addSubview(activityIndicator)
-        loadingView.addSubview(loadingLabel)
-        
-        view.addSubview(loadingView)
-    }
-    
-    // Remove the activity indicator from the main view
-    private func removeLoadingScreen() {
-        
-        // Hides and stops the text and the spinner
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
-        loadingLabel.isHidden = true
     }
 }
 
@@ -443,7 +351,6 @@ extension MessageKitViewController: MessageInputBarDelegate {
         channel.sendUserMessage(text, data: nil, completionHandler: { (userMessage, error) in
             guard error == nil else {   // Error.
                 print("failure sending message")
-                print(error as Any)
                 return
             }
             
