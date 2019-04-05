@@ -119,7 +119,19 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             }
             
             self.channel = groupChannel
-            self.navigationItem.title = self.channel.name
+            
+            if groupChannel!.isPublic {
+                let button =  UIButton(type: .custom)
+                button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+                //button.backgroundColor = .red
+                //button.titleLabel?.textColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+                button.setTitleColor(UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0), for: .normal)
+                button.setTitle(self.channel.name, for: .normal)
+                button.addTarget(self, action: #selector(self.clickOnButton), for: .touchUpInside)
+                self.navigationItem.titleView = button
+            } else {
+                self.navigationItem.title = self.channel.name
+            }
             
             let keys = [self.sendbirdID]
             
@@ -325,6 +337,10 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             let child = segue.destination as! InvitationViewController
             child.delegate = self
         }
+    }
+    
+    @objc func clickOnButton() {
+        print("clicked on title")
     }
     
     // Set the activity indicator into the main view

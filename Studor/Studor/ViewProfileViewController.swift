@@ -96,15 +96,6 @@ class ViewProfileViewController: UIViewController {
                         print("succesfully added metadata")
                     })
                 }
-                
-                /*SBDGroupChannel.createChannel(withUserIds: [self.sendbirdID, self.thisSendbirdID], isDistinct: true) { (channel, error) in
-                    guard error == nil else {   // Error.
-                        print("Error creating 1:1 channel")
-                        print(error as Any)
-                        return
-                    }
-                    print("created 1:1 channel")
-                }*/
             } else {
                 print("ERROR GETTING DATA")
             }
