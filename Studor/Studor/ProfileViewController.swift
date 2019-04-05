@@ -19,6 +19,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     static var tagListDirty = false
     
     let notificationCenter: NotificationCenter = .default
+    
+    var suffix: String = "@gcc.edu"
 
     var commands: StudorFunctions!
     var profileData: [String : Any]!
@@ -56,7 +58,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func bioDone(_ sender: Any) {
         let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+        db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count))).updateData([
             "Bio": bioTextView.text
         ]) { err in
             if let err = err {
@@ -72,7 +74,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+        db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count))).updateData([
             "NickName": nicknameTextField.text!
         ]) { err in
             if let err = err {
@@ -105,7 +107,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func updateTags(_ sender: Any) {
         let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+        db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count))).updateData([
             "tags": FieldValue.arrayUnion([tagTextView.text])
         ]) { err in
             if let err = err {
@@ -147,19 +149,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
             destination!.tagList = profileData["tags"] as? [String] ?? []
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     /*
@@ -283,7 +272,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     }
     
     func onTagListDirty(){
-        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count)))
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.tagTextView.text = ""
@@ -314,6 +303,3 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     */
 
 }
-
-// Icon made by [author link] from www.flaticon.com
-// Icon made by [author link] from www.flaticon.com
