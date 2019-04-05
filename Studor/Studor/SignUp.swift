@@ -39,6 +39,7 @@ class SignUp : UIViewController {
         if let email = emailBox?.text, let password = passwordBox?.text, let passwordConfirm = confirmPasswordBox?.text {
 
             if !credentialsValid(password: password, confirmPassword: passwordConfirm, email: email){
+                self.createAccountAI.stopAnimating()
                 return
             }
 
@@ -63,9 +64,12 @@ class SignUp : UIViewController {
 
     func initializeUserAccount(){ // to firestore
 
+        let prefix = String((Auth.auth().currentUser?.email!.dropLast(emailSuffix.count))!)
+        
         let data: [String : Any] = [
             "email" : String(describing: Auth.auth().currentUser?.email!),
-            "username": String(describing: Auth.auth().currentUser?.email!.dropLast(emailSuffix.count)),
+            "username": prefix,
+            "nickname" : prefix,
             "accountType" : getAccountType(),
             "groups" : [],
             "usersLiked" : [],
@@ -75,15 +79,15 @@ class SignUp : UIViewController {
             "noLikes" : 0,
             "noDislikes" : 0,
             "profImgSpecifier" : [0, 0],
-            "sendbirdID" : String(describing: Auth.auth().currentUser?.email!.dropLast(emailSuffix.count)), //Auth.auth().currentUser!.uid,
+            "sendbirdID" : prefix,
             "events" : [],
-            "tags" : ["COMP 314", "COMP 435", "COMP 311"]
+            "tags" : []
         ]
-        db.collection("Users").document(Auth.auth().currentUser!.uid).setData(data) { err in
+        db.collection("Users").document(prefix).setData(data) { err in
             if let err = err {
                 print("Error: \(err)")
             } else {
-                print("User data document created with uID: \(Auth.auth().currentUser!.uid)")
+                print("User data document created with name: \(prefix)")
             }
         }
 
@@ -111,8 +115,7 @@ class SignUp : UIViewController {
      *      Error checking and input validation methods
      *
      */
-
-
+    
 func credentialsValid(password: String, confirmPassword: String, email: String) -> Bool{
 
         if !passwordsMatch(password: password, confirmPassword: confirmPassword) {
