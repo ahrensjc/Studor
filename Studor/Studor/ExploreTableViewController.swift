@@ -153,7 +153,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func grabProfileData(){
         if Auth.auth().currentUser != nil {
-            let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+            let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(8)))
             ref.getDocument {(document, error) in
                 if let document = document, document.exists {
                     self.profileData = document.data()!
