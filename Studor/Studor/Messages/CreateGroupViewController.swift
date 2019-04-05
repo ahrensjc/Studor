@@ -72,7 +72,7 @@ class CreateGroupViewController: UIViewController {
         if groupNameTextField.text == "" || groupNameTextField.text == nil {
             // TODO: display error saying group name cannot be empty
         } else if participants.count == 1 {
-            // TODO: display error saying group cannot be just you
+            self.showMessagePrompt(withString: "Groups must have at least 2 users.", title: "Error")
         } else {
             var params = SBDGroupChannelParams()
             params.isPublic = true
@@ -86,6 +86,8 @@ class CreateGroupViewController: UIViewController {
                 guard error == nil else {   // Error.
                     return
                 }
+                
+                firebaseSingleton.createGroup(channelName: channel!.name, sendbirdUrl: channel!.channelUrl)
 
                 var newMetaData = [self.sendbirdID : "accepted"]
                 for participant in self.participants {
@@ -111,6 +113,12 @@ class CreateGroupViewController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         //self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showMessagePrompt(withString: String, title: String) {
+        let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     /*
