@@ -402,7 +402,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="exploreCell" id="EhH-B4-rNM" customClass="ExploreTableViewCell" customModule="Studor" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="exploreUserCell" id="EhH-B4-rNM" customClass="ExploreTableViewUserCell" customModule="Studor" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EhH-B4-rNM" id="SqK-hm-wlK">
@@ -440,6 +440,28 @@
                                     <outlet property="type" destination="d6I-VC-Rl2" id="6eo-z2-1WA"/>
                                     <segue destination="Ex6-Sz-xa9" kind="show" id="IF8-s0-cBC"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="exploreGroupCell" id="X6i-m2-NM3" customClass="ExploreTableViewGroupCell" customModule="Studor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X6i-m2-NM3" id="Ta5-2q-VGa">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJx-vX-UvW">
+                                            <rect key="frame" x="16" y="0.0" width="325" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="OJx-vX-UvW" secondAttribute="trailing" constant="-8" id="9X9-qK-1yW"/>
+                                        <constraint firstItem="OJx-vX-UvW" firstAttribute="bottom" secondItem="Ta5-2q-VGa" secondAttribute="bottomMargin" constant="11" id="G2U-N5-JMo"/>
+                                        <constraint firstItem="OJx-vX-UvW" firstAttribute="leading" secondItem="Ta5-2q-VGa" secondAttribute="leadingMargin" id="Xbl-CX-ZZU"/>
+                                        <constraint firstItem="OJx-vX-UvW" firstAttribute="centerY" secondItem="Ta5-2q-VGa" secondAttribute="centerY" id="dD0-W4-byW"/>
+                                    </constraints>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
