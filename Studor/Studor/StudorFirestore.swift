@@ -18,6 +18,7 @@ class StudorFunctions {
     
     
     var db: Firestore!
+    var emailSuffix: String = "@gcc.edu"
     
     init(){
         db = Firestore.firestore()
@@ -26,36 +27,62 @@ class StudorFunctions {
     // creates an event
     func createEvent(users: [String], date: Date, description: String, title: String){
         
+        let thisUsername = Auth.auth().currentUser?.email?.dropLast(emailSuffix.count)
+        
         let dataToAdd: [String : Any] = [
             "title" : title,
-            "creator" : getId(),
+            "creator" : thisUsername,
             "participants" : users,
             "date" : date,
             "description" : description,
         ]
         
-        let eventId = getId() + "-e"
-        
-        let eventRef = db.collection("Users").document(firebaseSingleton.getId())
-    
-        // Atomically add a new region to the "regions" array field.
-        eventRef.updateData([
-            "events": FieldValue.arrayUnion([eventId])
-            ])
-        
-        db.collection("Events").document(eventId).setData(dataToAdd) { err in
+        var eventRef: DocumentReference? = nil
+        eventRef = db.collection("Events").addDocument(data: dataToAdd) { err in
             if let err = err {
-                print("Error: \(err)")
-                
+                print("Error adding document: \(err)")
             } else {
-                print("Event created with event id: \(eventId)")
+                print("Document added with ID: \(eventRef!.documentID)")
             }
         }
-        self.updateEventsForUserDocuments(users: users)
+        
+        let userRef = db.collection("Users").document(users[0])
+    
+        // Atomically add a new region to the "regions" array field.
+        userRef.updateData([
+                "events": FieldValue.arrayUnion([String(describing: eventRef!.documentID)])
+            ])
+        
+        self.updateEventsForUserDocuments(users: users, eventID: eventRef!.documentID)
     }
     
-    func updateEventsForUserDocuments(users: [String]){
+    func updateEventsForUserDocuments(users: [String], eventID: String){
         
+        for i in 1..<users.count{
+            
+            var ref = db.collection("Users").document(users[i])
+            ref.updateData([
+                    "events" : FieldValue.arrayUnion([eventID])
+                ])
+            
+        }
+        
+    }
+    
+    func createGroup(channelName: String, sendbirdUrl: String){
+        
+        let groupData: [String: Any] = [
+            "sendbirdUrl" : sendbirdUrl,
+            "channelName" : channelName
+        ]
+        
+        db.collection("Groups").addDocument(data: groupData) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
     }
     
     

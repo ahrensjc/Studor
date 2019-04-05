@@ -33,6 +33,9 @@ class ViewProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.nicknameLabel.layer.borderWidth = 1.5; //this is the width of the border of nickname om profile page
+        self.nicknameLabel.layer.cornerRadius = 8; //rounded edges
+        self.nicknameLabel.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         // Do any additional setup after loading the view.
     }
     
