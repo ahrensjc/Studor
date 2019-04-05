@@ -23,7 +23,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func updateTagsArray(_ sender: Any) {
         let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+        db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))).updateData([
             "tags": FieldValue.arrayUnion([coursedDropDown.text as Any])
         ]) { err in
             if let err = err {
