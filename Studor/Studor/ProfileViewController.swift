@@ -81,6 +81,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
                 print("Error writing document: \(err)")
             }
             else {
+                SBDMain.updateCurrentUserInfo(withNickname: self.nicknameTextField.text!, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
+                    // ...
+                })
                 self.nicknameLabel.text = self.nicknameTextField.text
                 print("Document successfully written!")
             }
@@ -95,6 +98,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         do {
             try firebaseAuth.signOut()
             print("Success logging out")
+            firebaseSingleton.sendbirdUser = nil
             self.performSegue(withIdentifier: "logoutSuccess", sender: self)
             
             SBDMain.disconnect(completionHandler: {

@@ -45,6 +45,7 @@ class LogInViewController: UIViewController {
                             print(error as Any)
                             return
                         }
+                        firebaseSingleton.sendbirdUser = user
                         print("worked")
                     }
                 } else {

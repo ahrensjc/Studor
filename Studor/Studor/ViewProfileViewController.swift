@@ -108,7 +108,7 @@ class ViewProfileViewController: UIViewController {
     
     @IBAction func messageButtonTapped(_ sender: Any) {
         // Get sendbird id for self and person
-        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.profileData = document.data()!
