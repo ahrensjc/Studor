@@ -83,6 +83,7 @@ class LogInViewController: UIViewController {
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
                     return
                 }
+                firebaseSingleton.sendbirdUser = user
                 print("worked")
                 self.performSegue(withIdentifier: "loginSuccess", sender: self)
             }

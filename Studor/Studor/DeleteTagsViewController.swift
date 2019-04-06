@@ -12,6 +12,7 @@ import Firebase
 class DeleteTagsViewController: UITableViewController {
     
     var tagList = [String]()
+    var suffix: String = "@gcc.edu"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class DeleteTagsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tagList.remove(at: indexPath.row)
-            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+            firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count))).updateData([
                 "tags": tagList
             ]) { err in
                 if let err = err {
