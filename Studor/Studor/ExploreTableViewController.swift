@@ -77,15 +77,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        print(scope)
-        if scope != "Groups" {
-            isSearchingGroups = false
-            tableView.reloadData()
-        }
-        else {
-            isSearchingGroups = true
-            tableView.reloadData()
-        }
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
     
@@ -98,7 +89,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All"){
-        print(scope)
         if !isSearchingGroups {
             filteredResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
                 let matcher = (scope == "All") || (searchResult.type == scope)
@@ -125,7 +115,10 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        let scope = searchBar.scopeButtonTitles![selectedScope]
+        isSearchingGroups = scope == "Groups"
+        tableView.reloadData()
+        filterContentForSearchText(searchBar.text!, scope: scope)
     }
     
     override func viewDidLoad() {
@@ -160,8 +153,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func grabProfileData(){
         if Auth.auth().currentUser != nil {
-            let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
-            ref1.getDocument {(document, error) in
+            let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(8)))
+            ref.getDocument {(document, error) in
                 if let document = document, document.exists {
                     self.profileData = document.data()!
                     self.profileDataCollected = true
@@ -244,9 +237,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isSearchingGroups {
-            for group in groupResults {
-                print(group.channelName)
-            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "exploreGroupCell", for: indexPath) as! ExploreTableViewGroupCell
             if isFiltering() {
                 cell.channelNameText = filteredGroups[indexPath.row].channelName
@@ -274,20 +264,12 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if isSearchingGroups {
-            if isFiltering() {
-                selectedGroup = filteredGroups[indexPath.row]
-            }
-            else {
-                selectedGroup = groupResults[indexPath.row]
-            }
+            selectedGroup = isFiltering() ? filteredGroups[indexPath.row] : groupResults[indexPath.row]
+            selectedResult = nil
         }
         else {
-            if isFiltering() {
-                selectedResult = filteredResults[indexPath.row]
-            }
-            else {
-                selectedResult = searchResults[indexPath.row]
-            }
+            selectedResult = isFiltering() ? filteredResults[indexPath.row] : searchResults[indexPath.row]
+            selectedGroup = nil
         }
         return indexPath;
     }

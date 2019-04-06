@@ -247,7 +247,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         self.nicknameLabel.layer.cornerRadius = 8; //rounded edges
         self.nicknameLabel.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         
-        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count)))
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.tagTextView.text = ""

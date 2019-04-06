@@ -22,31 +22,38 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     var tagUpdatedList: String!
     
     @IBAction func updateTagsArray(_ sender: Any) {
-        let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
-            "tags": FieldValue.arrayUnion([coursedDropDown.text as Any])
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-                ProfileViewController.tagListDirty = true
+        var foundTag = false
+        for tag in TagList.list {
+            if textThing.text! == tag {
+                foundTag = true
             }
         }
+        if foundTag {
+            let db = Firestore.firestore()
+            db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))).updateData ([
+                "tags": FieldValue.arrayUnion([coursedDropDown.text as  Any])
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                    ProfileViewController.tagListDirty = true
+                }
+            }
+        }
+        textThing.text = ""
     }
     
 
     
     // autofill
-    /*
-    var rowCount = 1
+    ///*
     
-    var autoCompletionPossibilities = ["COMP 420", "COMP 300"] //This is what we need to populate
     var autoCompleteCharacterCount = 0
     var timer = Timer()
     
     func textField(_ textThing: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { //1
-        var subString = (textThing.text!.capitalized as NSString).replacingCharacters(in: range, with: string) // 2
+        var subString = (textThing.text! as NSString).replacingCharacters(in: range, with: string) // 2
         subString = formatSubstring(subString: subString)
         
         if subString.count == 0 { // 3 when a user clears the textField
@@ -57,7 +64,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
         return true
     }
     func formatSubstring(subString: String) -> String {
-        let formatted = String(subString.dropLast(autoCompleteCharacterCount)).uppercased().capitalized //5
+        let formatted = String(subString.dropLast(autoCompleteCharacterCount)).uppercased() //5
         return formatted
     }
     
@@ -87,7 +94,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
     func getAutocompleteSuggestions(userText: String) -> [String]{
         var possibleMatches: [String] = []
-        for item in autoCompletionPossibilities { //2
+        for item in TagList.list { //2
             let myString:NSString! = item as NSString
             let substringRange :NSRange! = myString.range(of: userText)
             
@@ -116,7 +123,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
         autoCompleteResult.removeSubrange(autoCompleteResult.startIndex..<autoCompleteResult.index(autoCompleteResult.startIndex, offsetBy: substring.count))
         autoCompleteCharacterCount = autoCompleteResult.count
         return autoCompleteResult
-    }*/
+    }//*/
     //// end of autofill ////
     
     var courseList : [String]!
@@ -124,7 +131,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         //tagPageTags.text = tagUpdatedList
-        coursedDropDown.optionArray = TagList().list
+        coursedDropDown.optionArray = TagList.list
         coursedDropDown.listHeight = 120
         coursedDropDown.selectedRowColor = UIColor.white
         coursedDropDown.hideOptionsWhenSelect = false //list doesnt disspear when a course has been selected to avoid scrolling again if a course is accidentally tapped
