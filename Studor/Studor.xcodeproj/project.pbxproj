@@ -20,6 +20,7 @@
 		3122CC03ACC54F0244E91FBA /* Pods_Studor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1A231BCC171631565A5B4 /* Pods_Studor.framework */; };
 		49025BB12210A91A00CD1B07 /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */; };
 		49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D8DD22066A170039EE3F /* ProfileViewController.swift */; };
+		58C28F222258380E00E34B5D /* ViewGroupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C28F212258380E00E34B5D /* ViewGroupProfileViewController.swift */; };
 		651A83DB223EF4420054A69E /* DeleteTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */; };
 		651A83DF223F08380054A69E /* DeleteTagsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */; };
 		BE1547EA223B37EB00CA5A64 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1547E9223B37EB00CA5A64 /* CreateGroupViewController.swift */; };
@@ -77,6 +78,7 @@
 		49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		49A1D8DD22066A170039EE3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F1A231BCC171631565A5B4 /* Pods_Studor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58C28F212258380E00E34B5D /* ViewGroupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGroupProfileViewController.swift; sourceTree = "<group>"; };
 		651A83DA223EF4420054A69E /* DeleteTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTagsViewController.swift; sourceTree = "<group>"; };
 		651A83DE223F08380054A69E /* DeleteTagsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTagsViewCell.swift; sourceTree = "<group>"; };
 		933E2813286819B28FAFF75F /* Pods-Studor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studor/Pods-Studor.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
 				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
 				49025BB02210A91A00CD1B07 /* TagSearchViewController.swift */,
+				58C28F212258380E00E34B5D /* ViewGroupProfileViewController.swift */,
 				0D2C8FD3220A887800FC2AEA /* TagList.swift */,
 				0D7D25BA220BA6A1004A87C3 /* TagData.rtf */,
 				49A1D8DD22066A170039EE3F /* ProfileViewController.swift */,
@@ -540,6 +543,7 @@
 				49A1D8DE22066A170039EE3F /* ProfileViewController.swift in Sources */,
 				BE1547EC223B4D2600CA5A64 /* EventCreatorViewController.swift in Sources */,
 				BEDFB96A220E24B7005903C1 /* MessagesTableViewController.swift in Sources */,
+				58C28F222258380E00E34B5D /* ViewGroupProfileViewController.swift in Sources */,
 				651A83DB223EF4420054A69E /* DeleteTagsViewController.swift in Sources */,
 				BE1547F1223BDF4B00CA5A64 /* EditEventViewController.swift in Sources */,
 				BE1547F3223DCA7500CA5A64 /* InvitationViewController.swift in Sources */,
