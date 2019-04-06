@@ -240,8 +240,11 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if selectedResult is GroupResult {
-            
+        if selectedResult is GroupResult {        // lol this should be an if-let
+            let destination = segue.destination as! ViewGroupProfileViewController
+            let result = selectedResult as! GroupResult
+            destination.channelUrl = result.sendbirdURL
+            destination.channelName = result.channelName
         }
         else if selectedResult is SearchResult{
             let destination = segue.destination as! ViewProfileViewController

@@ -242,21 +242,19 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             
             
             let previousMessageQuery = self.channel.createPreviousMessageListQuery()
-            previousMessageQuery?.loadPreviousMessages(withLimit: 30, reverse: true, completionHandler: { (oldMessages, error) in
+            previousMessageQuery?.loadPreviousMessages(withLimit: 100, reverse: true, completionHandler: { (oldMessages, error) in
                 guard error == nil else {   // Error.
                     return
                 }
                 
                 for item in oldMessages ?? [SBDBaseMessage]() {
-                    
                     if item is SBDUserMessage {
-                        // Do something when the received message is a UserMessage.
-                        //print("user")
                         let thing = item as! SBDUserMessage
                         let sender = thing.sender as! SBDUser
                         print(sender.userId)
-                        if sender.nickname ?? "" == self.member.name {
-                            let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.blue), text: thing.message!, messageId: thing.requestId!)
+                        print(firebaseSingleton.sendbirdUser?.userId)
+                        if sender.userId == firebaseSingleton.sendbirdUser?.userId {
+                            let myMsg = Message(member: Member(name: firebaseSingleton.sendbirdUser?.nickname ?? "empty nickname", color: UIColor.blue), text: thing.message!, messageId: thing.requestId!)
                             self.messages.append(myMsg)
                         } else {
                             let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
@@ -268,7 +266,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                     }
                     else if item is SBDAdminMessage {
                         let thing = item as! SBDAdminMessage
-                        let myMsg = Message(member: Member(name: "Admin", color: UIColor.red), text: thing.message!, messageId: "")
+                        let myMsg = Message(member: Member(name: "Admin", color: UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)), text: thing.message!, messageId: "")
                         self.messages.append(myMsg)
                     }
                 }
@@ -297,7 +295,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         else if message is SBDAdminMessage {
             // Do something when the received message is an AdminMessage.
             let thing = message as! SBDAdminMessage
-            let myMsg = Message(member: Member(name: "Admin", color: UIColor.green), text: thing.message!, messageId: "")
+            let myMsg = Message(member: Member(name: "Admin", color: UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)), text: thing.message!, messageId: "")
             //self.messages.append(thing.message!)
             self.messages.append(myMsg)
         }

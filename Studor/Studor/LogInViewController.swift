@@ -38,8 +38,8 @@ class LogInViewController: UIViewController {
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
                     
                     SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
-                    
-                    SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+                    //print(firebaseSingleton.getId())
+                    SBDMain.connect(withUserId: firebaseSingleton.getSendbirdId() ) { (user, error) in
                         guard error == nil else {
                             print("failed logging in to sendbird")
                             print(error as Any)
@@ -77,7 +77,7 @@ class LogInViewController: UIViewController {
             
             SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
             
-            SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+            SBDMain.connect(withUserId: firebaseSingleton.getSendbirdId() ) { (user, error) in
                 guard error == nil else {
                     print("failed logging in to sendbird")
                     print(error as Any)

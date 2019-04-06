@@ -110,4 +110,8 @@ class StudorFunctions {
     func getId() -> String {
         return Auth.auth().currentUser!.uid
     }
+    
+    func getSendbirdId() -> String {
+        return String(Auth.auth().currentUser!.email!.dropLast(emailSuffix.count))
+    }
 }
