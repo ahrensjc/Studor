@@ -24,7 +24,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     @IBAction func updateTagsArray(_ sender: Any) {
         var foundTag = false
         for tag in TagList.list {
-            if textThing.text! == tag {
+            if coursedDropDown.text! == tag {
                 foundTag = true
             }
         }
@@ -41,90 +41,9 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
                 }
             }
         }
-        textThing.text = ""
+        coursedDropDown.text = ""
     }
     
-
-    
-    // autofill
-    ///*
-    
-    var autoCompleteCharacterCount = 0
-    var timer = Timer()
-    
-    func textField(_ textThing: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { //1
-        var subString = (textThing.text! as NSString).replacingCharacters(in: range, with: string) // 2
-        subString = formatSubstring(subString: subString)
-        
-        if subString.count == 0 { // 3 when a user clears the textField
-            resetValues()
-        } else {
-            searchAutocompleteEntriesWithSubstring(substring: subString) //4
-        }
-        return true
-    }
-    func formatSubstring(subString: String) -> String {
-        let formatted = String(subString.dropLast(autoCompleteCharacterCount)).uppercased() //5
-        return formatted
-    }
-    
-    func resetValues() {
-        autoCompleteCharacterCount = 0
-        textThing.text = ""
-    }
-    
-    func searchAutocompleteEntriesWithSubstring(substring: String) {
-        let userQuery = substring
-        let suggestions = getAutocompleteSuggestions(userText: substring) //1
-        // variable for timer interval; get rid of "magic number"
-        
-        if suggestions.count > 0 {
-            timer = .scheduledTimer(withTimeInterval: 0.01, repeats: false, block: { (timer) in //2
-                let autocompleteResult = self.formatAutocompleteResult(substring: substring, possibleMatches: suggestions) // 3
-                self.putColourFormattedTextInTextField(autocompleteResult: autocompleteResult, userQuery : userQuery) //4
-                self.moveCaretToEndOfUserQueryPosition(userQuery: userQuery) //5
-            })
-        } else {
-            timer = .scheduledTimer(withTimeInterval: 0.01, repeats: false, block: { (timer) in //7
-                self.textThing.text = substring
-            })
-            autoCompleteCharacterCount = 0
-        }
-    }
-    
-    func getAutocompleteSuggestions(userText: String) -> [String]{
-        var possibleMatches: [String] = []
-        for item in TagList.list { //2
-            let myString:NSString! = item as NSString
-            let substringRange :NSRange! = myString.range(of: userText)
-            
-            if (substringRange.location == 0)
-            {
-                possibleMatches.append(item)
-            }
-        }
-        return possibleMatches
-    }
-    
-    func putColourFormattedTextInTextField(autocompleteResult: String, userQuery : String) {
-        let colouredString: NSMutableAttributedString = NSMutableAttributedString(string: userQuery + autocompleteResult)
-        colouredString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 137/250, green: 17/250, blue: 0/250, alpha: 1), range: NSRange(location: userQuery.count,length:autocompleteResult.count))
-        self.textThing.attributedText = colouredString
-    }
-    func moveCaretToEndOfUserQueryPosition(userQuery : String) {
-        if let newPosition = self.textThing.position(from: self.textThing.beginningOfDocument, offset: userQuery.count) {
-            self.textThing.selectedTextRange = self.textThing.textRange(from: newPosition, to: newPosition)
-        }
-        let selectedRange: UITextRange? = textThing.selectedTextRange
-        textThing.offset(from: textThing.beginningOfDocument, to: (selectedRange?.start)!)
-    }
-    func formatAutocompleteResult(substring: String, possibleMatches: [String]) -> String {
-        var autoCompleteResult = possibleMatches[0]
-        autoCompleteResult.removeSubrange(autoCompleteResult.startIndex..<autoCompleteResult.index(autoCompleteResult.startIndex, offsetBy: substring.count))
-        autoCompleteCharacterCount = autoCompleteResult.count
-        return autoCompleteResult
-    }//*/
-    //// end of autofill ////
     
     var courseList : [String]!
     
