@@ -64,10 +64,12 @@ class SignUp : UIViewController {
 
     func initializeUserAccount(){ // to firestore
 
-        let prefix = String((Auth.auth().currentUser?.email!.dropLast(emailSuffix.count))!)
+        var email = String((Auth.auth().currentUser?.email!)!)
+        
+        let prefix = String(email.dropLast(emailSuffix.count))
         
         let data: [String : Any] = [
-            "email" : String(describing: Auth.auth().currentUser?.email!),
+            "email" : email,
             "username": prefix,
             "nickname" : prefix,
             "accountType" : getAccountType(),

@@ -52,9 +52,7 @@ class EventCreatorViewController: UIViewController {
     }
     
     @IBAction func goBackToScheduleTableVC(_ sender: Any) {
-        
         performSegue(withIdentifier: "unwindSegueToSchedule", sender: self)
-        
     }
     /*
     // MARK: - Navigation

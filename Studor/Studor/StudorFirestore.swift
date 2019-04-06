@@ -34,7 +34,6 @@ class StudorFunctions {
             "creator" : thisUsername,
             "participants" : users,
             "date" : date,
-            "description" : description,
         ]
         
         var eventRef: DocumentReference? = nil
@@ -42,7 +41,7 @@ class StudorFunctions {
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(eventRef!.documentID)")
+                print("Event document added with ID: \(eventRef!.documentID)")
             }
         }
         
@@ -50,7 +49,7 @@ class StudorFunctions {
     
         // Atomically add a new region to the "regions" array field.
         userRef.updateData([
-                "events": FieldValue.arrayUnion([String(describing: eventRef!.documentID)])
+                "events" : FieldValue.arrayUnion([String(describing: eventRef!.documentID)])
             ])
         
         self.updateEventsForUserDocuments(users: users, eventID: eventRef!.documentID)
