@@ -340,9 +340,6 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="MUZ-7K-9YM" id="zWe-I5-M6O"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COURSES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZM-Ps-cC0">
                                 <rect key="frame" x="155" y="306" width="104" height="28"/>
@@ -382,7 +379,6 @@
                     </view>
                     <connections>
                         <outlet property="coursedDropDown" destination="oku-pl-GUZ" id="k91-Mi-lsp"/>
-                        <outlet property="textThing" destination="oku-pl-GUZ" id="LUd-zg-def"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g27-vD-dvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,6 +476,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="channelName" destination="OJx-vX-UvW" id="ysQ-dz-Uo2"/>
+                                    <segue destination="G4f-Sb-0FI" kind="show" id="iJ6-JM-MmE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1621,6 +1618,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWK-Tw-Udk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4501.449275362319" y="-1468.5267857142856"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="d6t-24-tMd">
+            <objects>
+                <viewController id="G4f-Sb-0FI" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bDN-Oy-AzK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4MU-fw-RF4"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v6s-lE-vLm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4557" y="-762"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3E8-AY-pUd">
