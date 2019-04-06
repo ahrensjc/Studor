@@ -53,6 +53,7 @@ class MessagesTableViewController: UITableViewController {
                 self.login()
             } else {
                 print("ERROR GETTING DATA")
+                print(error as Any)
             }
         }
         
@@ -136,10 +137,10 @@ class MessagesTableViewController: UITableViewController {
         if segue.destination is MessageKitViewController{
             let child = segue.destination as! MessageKitViewController
             child.channelURL = myChannels[selected].chan.channelUrl
-            child.nickname = self.profileData["NickName"] as? String ?? ""
+            //child.nickname = self.profileData["NickName"] as? String ?? ""
             child.sendbirdID = self.sendbirdID
             child.sendbirdUser = self.sendbirdUser
-            print("checked correctly")
+            //print("checked correctly")
         } else if segue.destination is CreateGroupViewController {
             let child = segue.destination as! CreateGroupViewController
             child.nickname = self.profileData["NickName"] as? String ?? ""

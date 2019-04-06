@@ -51,7 +51,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     
     var channelURL : String!
     var sendbirdID : String!
-    var nickname : String!
+    //var nickname : String!
     var sendbirdUser : SBDUser!
     var messages = [Message]()
     var channel : SBDGroupChannel!
