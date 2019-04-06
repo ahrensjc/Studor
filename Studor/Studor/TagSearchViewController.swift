@@ -14,9 +14,6 @@ import SendBirdSDK
 class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
     let notificationCenter: NotificationCenter = .default
-
-    @IBOutlet weak var textThing: UITextField!
-    @IBOutlet weak var tagPageTags: UITextView!
     
     @IBOutlet weak var coursedDropDown: DropDown!
     var tagUpdatedList: String!
@@ -49,7 +46,6 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tagPageTags.text = tagUpdatedList
         coursedDropDown.optionArray = TagList.list
         coursedDropDown.listHeight = 120
         coursedDropDown.selectedRowColor = UIColor.white
