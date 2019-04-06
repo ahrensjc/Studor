@@ -10,27 +10,35 @@ import UIKit
 import FirebaseDatabase
 import Firebase
 
-class SearchResult {
-    var name: String
+class ResultParent {
     var type: String
+    
+    init(_ _type: String){
+        type = _type
+    }
+}
+
+class SearchResult : ResultParent {
+    var name: String
     var id: String
     var tags: [String] = []
     
     init(_ _name : String, _ _type : String, _ _id : String, _ _tags: [String]){
         name = _name
-        type = _type
         id = _id
         tags.append(contentsOf: _tags)
+        super.init(_type)
     }
 }
 
-class GroupResult {
+class GroupResult : ResultParent {
     var sendbirdURL: String
     var channelName: String
     
     init(_ _sendbirdURL : String, _ _channelName : String) {
         sendbirdURL = _sendbirdURL
         channelName = _channelName
+        super.init("Group")
     }
 }
 
@@ -38,25 +46,15 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     static var profileTagListDirty = false
     
-    var rowCount = 0
-    
     var names : [String] = []
     
     var types : [String] = []
     
-    var searchResults = [SearchResult]()
+    var searchResults = [ResultParent]()
     
-    var commonTagResults = [SearchResult]()
+    var filteredResults = [ResultParent]()
     
-    var filteredResults = [SearchResult]()
-    
-    var filteredGroups = [GroupResult]()
-    
-    var groupResults = [GroupResult]()
-    
-    var selectedResult : SearchResult!
-    
-    var selectedGroup : GroupResult!
+    var selectedResult : ResultParent!
     
     var profileDataCollected : Bool = false
     
@@ -69,8 +67,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     var filterData : Timer!
     
     var doOnce = false
-    
-    var isSearchingGroups = false
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -89,35 +85,21 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All"){
-        if !isSearchingGroups {
-            filteredResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
-                let matcher = (scope == "All") || (searchResult.type == scope)
-                if searchBarIsEmpty() {
-                    return matcher
-                }
-                else {
-                    return matcher && searchResult.name.lowercased().contains(searchText.lowercased())
-                }
-            })
-        }
-        else {
-            filteredGroups = groupResults.filter({(groupResult : GroupResult) -> Bool in
-                let matcher = scope == "Groups"
-                if searchBarIsEmpty() {
-                    return matcher
-                }
-                else {
-                    return matcher && groupResult.channelName.lowercased().contains(searchText.lowercased())
-                }
-            })
-        }
+        filteredResults = searchResults.filter({(searchResult : ResultParent) -> Bool in
+            let matcher = scope == "All" || searchResult.type == String(scope.dropLast(1))
+            if searchBarIsEmpty() {
+                return matcher
+            }
+            else {
+                return matcher && (searchResult is SearchResult && (searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) ||
+                (searchResult is GroupResult && (searchResult as! GroupResult).channelName.lowercased().contains(searchText.lowercased())))
+            }
+        })
         tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         let scope = searchBar.scopeButtonTitles![selectedScope]
-        isSearchingGroups = scope == "Groups"
-        tableView.reloadData()
         filterContentForSearchText(searchBar.text!, scope: scope)
     }
     
@@ -126,7 +108,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.scopeButtonTitles = ["All", "Student", "Tutor", "Groups"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Students", "Tutors", "Groups"]
         searchController.searchBar.delegate = self
         searchController.searchBar.accessibilityIdentifier = "Search Bar"
         navigationItem.searchController = searchController
@@ -134,9 +116,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         grabProfileData()
-        grabGroupData()
         grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherDataOnce), userInfo: nil, repeats: true)
-        filterData = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(filterDataFunc), userInfo: nil, repeats: true)
+        //filterData = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(filterDataFunc), userInfo: nil, repeats: true)
         let _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateResults), userInfo: nil, repeats: true)
     }
     
@@ -145,7 +126,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         ref.getDocuments { (document, error) in
             if let document = document, document.count > 0 {
                 for entry in document.documents {
-                    self.groupResults.append(GroupResult(entry.data()["sendbirdURL"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
+                    self.searchResults.append(GroupResult(entry.data()["sendbirdURL"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
                 }
             }
         }
@@ -158,9 +139,11 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 if let document = document, document.exists {
                     self.profileData = document.data()!
                     self.profileDataCollected = true
+                    /*
                     if self.otherDataCollectedOnce {
                         self.filterDataFunc()
                     }
+                    */
                 }
             }
         }
@@ -184,11 +167,13 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                     }
                     self.otherDataCollectedOnce = true
                     self.tableView.reloadData()
+                    self.grabGroupData()
                 }
             }
         }
     }
     
+    /*
     @objc func filterDataFunc() {
         if otherDataCollectedOnce {
             filterData.invalidate()
@@ -213,6 +198,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             tableView.reloadData()
         }
     }
+    */
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -223,12 +209,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearchingGroups {
-            if isFiltering() {
-                return filteredGroups.count
-            }
-            return groupResults.count
-        }
         if isFiltering() {
             return filteredResults.count
         }
@@ -236,51 +216,36 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isSearchingGroups {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "exploreGroupCell", for: indexPath) as! ExploreTableViewGroupCell
-            if isFiltering() {
-                cell.channelNameText = filteredGroups[indexPath.row].channelName
-            }
-            else {
-                cell.channelNameText = groupResults[indexPath.row].channelName
-            }
-            cell.initialiseData()
-            return cell
-        }
-        else {
+        let result = isFiltering() ? filteredResults[indexPath.row] : searchResults[indexPath.row]
+        if result is SearchResult {
             let cell = tableView.dequeueReusableCell(withIdentifier: "exploreUserCell", for: indexPath) as! ExploreTableViewUserCell
-            if isFiltering() {
-                cell.nameText = filteredResults[indexPath.row].name
-                cell.typeText = filteredResults[indexPath.row].type
-            }
-            else{
-                cell.nameText = searchResults[indexPath.row].name
-                cell.typeText = searchResults[indexPath.row].type
-            }
+            cell.nameText = (result as! SearchResult).name
+            cell.typeText = (result as! SearchResult).type
             cell.initialiseData()
             return cell
         }
+        else if result is GroupResult {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "exploreGroupCell", for: indexPath) as! ExploreTableViewGroupCell
+            cell.channelNameText = (result as! GroupResult).channelName
+            cell.initialiseData()
+            return cell
+        }
+        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if isSearchingGroups {
-            selectedGroup = isFiltering() ? filteredGroups[indexPath.row] : groupResults[indexPath.row]
-            selectedResult = nil
-        }
-        else {
-            selectedResult = isFiltering() ? filteredResults[indexPath.row] : searchResults[indexPath.row]
-            selectedGroup = nil
-        }
+        selectedResult = isFiltering() ? filteredResults[indexPath.row] : searchResults[indexPath.row]
         return indexPath;
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if isSearchingGroups {
+        if selectedResult is GroupResult {
             
         }
-        else {
+        else if selectedResult is SearchResult{
             let destination = segue.destination as! ViewProfileViewController
-            let ref = firebaseSingleton.db.collection("Users").document(selectedResult.id)
+            let result = selectedResult as! SearchResult
+            let ref = firebaseSingleton.db.collection("Users").document(result.id)
             var profileInfo: [String : Any] = [:]
             ref.getDocument { (document, error) in
                 if let document = document, document.exists {
@@ -288,7 +253,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                     print(profileInfo["username"] as? String ?? "No username")
                     destination.accountType = profileInfo["accountType"] as? String ?? ""
                     destination.doHideLikeButtons()
-                    destination.id = self.selectedResult.id
+                    destination.id = result.id
                     destination.bio = profileInfo["Bio"] as? String ?? ""
                     destination.nickname = profileInfo["NickName"] as? String ?? ""
                     destination.tags = profileInfo["tags"] as? [String] ?? []
@@ -296,7 +261,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                     destination.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
                     destination.initialiseFields()
                 } else {
-                    print("Error retrieving profile data for user \(self.selectedResult.id)")
+                    print("Error retrieving profile data for user \(result.id)")
                 }
             }
         }
