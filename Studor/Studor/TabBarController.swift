@@ -25,13 +25,14 @@ class TabBarController: UITabBarController {
             performSegue(withIdentifier: "requireLogin", sender: self)
         } else {
             SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
-            
-            SBDMain.connect(withUserId: firebaseSingleton.getId() ) { (user, error) in
+            //print(firebaseSingleton.getId())
+            SBDMain.connect(withUserId: firebaseSingleton.getSendbirdId() ) { (user, error) in
                 guard error == nil else {
                     print("failed logging in to sendbird")
                     print(error as Any)
                     return
                 }
+                firebaseSingleton.sendbirdUser = user
                 print("worked")
             }
         }

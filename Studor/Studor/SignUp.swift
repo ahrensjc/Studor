@@ -99,9 +99,13 @@ class SignUp : UIViewController {
 
         SBDMain.connect(withUserId: data["sendbirdID"] as! String) { (user, error) in
             guard error == nil else {   // Error.
-                print(error)
+                print(error as Any)
                 return
             }
+            firebaseSingleton.sendbirdUser = user
+            SBDMain.updateCurrentUserInfo(withNickname: prefix, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
+                // ...
+            })
             print("worked")
         }
 

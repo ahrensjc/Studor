@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SendBirdSDK
 
 let firebaseSingleton = StudorFunctions()
 
@@ -19,6 +20,7 @@ class StudorFunctions {
     
     var db: Firestore!
     var emailSuffix: String = "@gcc.edu"
+    var sendbirdUser: SBDUser?
     
     init(){
         db = Firestore.firestore()
@@ -106,5 +108,9 @@ class StudorFunctions {
     
     func getId() -> String {
         return Auth.auth().currentUser!.uid
+    }
+    
+    func getSendbirdId() -> String {
+        return String(Auth.auth().currentUser!.email!.dropLast(emailSuffix.count))
     }
 }

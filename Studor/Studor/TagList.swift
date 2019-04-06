@@ -16,7 +16,7 @@ class TagList{
     // TODO FOR SPRINT 2
     // Scrape all class course codes and add to list array
     
-    var list: [String] = ["COMP 314", "COMP 443", "ACCT 101", "HUMA 301",
+    static var list: [String] = ["COMP 314", "COMP 443", "ACCT 101", "HUMA 301",
                           "COMP 123", "COMP 222", "COMP 232", "COMP 221",
                           "COMP 201", "COMP 202", "COMP 313", "COMP 341",
                           "COMP 445", "COMP 401", "COMP 455", "COMP 402",]

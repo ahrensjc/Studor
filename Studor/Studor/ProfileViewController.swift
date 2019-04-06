@@ -81,6 +81,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
                 print("Error writing document: \(err)")
             }
             else {
+                SBDMain.updateCurrentUserInfo(withNickname: self.nicknameTextField.text!, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
+                    // ...
+                })
                 self.nicknameLabel.text = self.nicknameTextField.text
                 print("Document successfully written!")
             }
@@ -95,6 +98,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         do {
             try firebaseAuth.signOut()
             print("Success logging out")
+            firebaseSingleton.sendbirdUser = nil
             self.performSegue(withIdentifier: "logoutSuccess", sender: self)
             
             SBDMain.disconnect(completionHandler: {
@@ -247,7 +251,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         self.nicknameLabel.layer.cornerRadius = 8; //rounded edges
         self.nicknameLabel.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         
-        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count)))
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.tagTextView.text = ""

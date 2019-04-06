@@ -71,6 +71,7 @@ class CreateGroupViewController: UIViewController {
     @IBAction func confirmButtonTapped(_ sender: Any) {
         if groupNameTextField.text == "" || groupNameTextField.text == nil {
             // TODO: display error saying group name cannot be empty
+            self.showMessagePrompt(withString: "Group name cannot be empty.", title: "Error")
         } else if participants.count == 1 {
             self.showMessagePrompt(withString: "Groups must have at least 2 users.", title: "Error")
         } else {

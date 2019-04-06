@@ -42,5 +42,9 @@ class ExploreTableViewUserCell: UITableViewCell {
     func initialiseData() {
         name.text = nameText ?? ""
         type.text = typeText ?? ""
+        self.type.layer.borderWidth = 0.875; //this is the width of the border of nickname om profile page
+        self.type.layer.cornerRadius = 8; //rounded edges
+        self.type.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
+        
     }
 }
