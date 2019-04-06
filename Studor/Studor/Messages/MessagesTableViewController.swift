@@ -45,7 +45,8 @@ class MessagesTableViewController: UITableViewController {
         //SBDMain.initWithApplicationId("8414C656-F939-4B34-B56E-B2EBD373A6DC")
         
         setLoadingScreen()
-        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        //let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.profileData = document.data()!
@@ -212,6 +213,15 @@ class MessagesTableViewController: UITableViewController {
                 print("error grabbing channel list")
                 print(error as Any)
                 return
+            }
+            
+            if channels!.isEmpty {
+                DispatchQueue.main.async {
+                    self.tableReady = true
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+                    self.removeLoadingScreen()
+                }
             }
             
             self.myChannels = [(chan: SBDGroupChannel, accepted: Bool)]()
