@@ -32,6 +32,7 @@ class TabBarController: UITabBarController {
                     print(error as Any)
                     return
                 }
+                firebaseSingleton.sendbirdUser = user
                 print("worked")
             }
         }

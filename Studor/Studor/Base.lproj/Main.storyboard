@@ -14,7 +14,7 @@
         <scene sceneID="FKD-ko-Bnl">
             <objects>
                 <viewController id="FTr-9N-yEr" customClass="ProfileViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="bxa-6N-aZW">
+                    <view key="view" contentMode="scaleToFill" id="bxa-6N-aZW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -965,7 +965,7 @@
         <!--Message Kit View Controller-->
         <scene sceneID="5Tb-Z1-kW4">
             <objects>
-                <viewController id="lRi-3w-uOb" customClass="MessageKitViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="messageKit" id="lRi-3w-uOb" customClass="MessageKitViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E8Y-8O-h5z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1601,7 +1601,7 @@
                                     <color key="titleColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="messageButtonTapped:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="w28-U7-nNY"/>
+                                    <action selector="messageButtonTapped:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="lkW-Ur-pDh"/>
                                 </connections>
                             </button>
                         </barButtonItem>

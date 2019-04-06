@@ -56,8 +56,7 @@ class ViewProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func messageButtonTapped(_ sender: Any) {
-        // Get sendbird id for self and person
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -73,8 +72,8 @@ class ViewProfileViewController: UIViewController {
                 params.isDistinct = true
                 params.addUserIds([self.sendbirdID, self.thisSendbirdID])
                 params.operatorUserIds = ["rando1"]
-                if myNickname == "" { myNickname = "no nickname" }
-                if self.nickname == "" { self.nickname = "no nickname" }
+                if myNickname == "" { myNickname = String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)) }
+                if self.nickname == "" { self.nickname = self.username }
                 params.name = (myNickname + " & " + self.nickname)
                 
                 SBDGroupChannel.createChannel(with: params) { (channel, error) in
@@ -101,7 +100,66 @@ class ViewProfileViewController: UIViewController {
             }
         }
         
-        
+        let child = segue.destination as! MessageKitViewController
+        child.channelURL = channel!.channelUrl
+        child.sendbirdID = self.sendbirdID
+        child.sendbirdUser = nil
+    }*/
+    
+    @IBAction func messageButtonTapped(_ sender: Any) {
+        // Get sendbird id for self and person
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.profileData = document.data()!
+                self.sendbirdID = self.profileData["sendbirdID"] as? String ?? "" //Initialize bio from firebase
+                var myNickname = self.profileData["NickName"] as? String ?? ""
+                print(self.thisSendbirdID)
+                print(self.sendbirdID)
+                
+                let params = SBDGroupChannelParams()
+                params.isPublic = false
+                params.isEphemeral = false
+                params.isDistinct = true
+                params.addUserIds([self.sendbirdID, self.thisSendbirdID])
+                params.operatorUserIds = ["rando1"]
+                if myNickname == "" { myNickname = String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)) }
+                if self.nickname == "" { self.nickname = self.username }
+                params.name = (myNickname + " & " + self.nickname)
+                
+                SBDGroupChannel.createChannel(with: params) { (channel, error) in
+                    guard error == nil else {   // Error.
+                        print("error creating channel")
+                        print(error as Any)
+                        return
+                    }
+                    print("created 1:1 channel")
+                    
+                    let newMetaData = [self.sendbirdID : "accepted", self.thisSendbirdID : "invited"]
+                    
+                    channel?.createMetaData((newMetaData as? [String : String])!, completionHandler: { (metaData, error) in
+                        guard error == nil else {   // Error.
+                            print("error adding channel metadata")
+                            print(error as Any)
+                            return
+                        }
+                        print("succesfully added metadata")
+                    })
+                    
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let messageKitViewController = storyBoard.instantiateViewController(withIdentifier: "messageKit") as! MessageKitViewController
+                    messageKitViewController.channelURL = channel!.channelUrl
+                    messageKitViewController.sendbirdID = self.sendbirdID
+                    messageKitViewController.sendbirdUser = firebaseSingleton.sendbirdUser
+                    
+                    //self.present(newViewController, animated: true, completion: nil)
+                    self.navigationController?.pushViewController(messageKitViewController, animated: true)
+                    
+                }
+            } else {
+                print("ERROR GETTING DATA")
+            }
+        }
     }
     
     @IBAction func doLikeButton(_ sender: Any) {

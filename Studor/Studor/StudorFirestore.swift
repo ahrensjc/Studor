@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SendBirdSDK
 
 let firebaseSingleton = StudorFunctions()
 
@@ -19,6 +20,7 @@ class StudorFunctions {
     
     var db: Firestore!
     var emailSuffix: String = "@gcc.edu"
+    var sendbirdUser: SBDUser?
     
     init(){
         db = Firestore.firestore()
