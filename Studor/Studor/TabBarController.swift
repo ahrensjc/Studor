@@ -34,6 +34,13 @@ class TabBarController: UITabBarController {
                 }
                 firebaseSingleton.sendbirdUser = user
                 print("worked")
+                /*var autoAccept = true  // The value of `true` (default) means that a user will automatically join a group channel with no choice of accepting and declining an invitation.
+                SBDMain.setChannelInvitationPreferenceAutoAccept(autoAccept) { (error) in
+                    guard error == nil else {       // Error.
+                        return
+                    }
+                    print("auto accept invitations")
+                }*/
             }
         }
         

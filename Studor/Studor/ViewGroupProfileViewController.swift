@@ -65,6 +65,7 @@ class ViewGroupProfileViewController: UIViewController {
             self.groupName.text = groupChannel?.name
             self.channelMembers = (groupChannel!.members as! [SBDUser])
             self.memberList!.text = ""
+            self.channel = groupChannel
             
             for member in self.channelMembers {
                 let append =  "\n" + member.nickname!
@@ -83,15 +84,15 @@ class ViewGroupProfileViewController: UIViewController {
     }
     
     @IBAction func inviteUserButtonTapped(_ sender: Any) {
-        if(inviteUsersDropDown.text != "" || inviteUsersDropDown != nil) {
+        if(inviteUsersDropDown.text != "" && inviteUsersDropDown != nil) {
             //participants.append(addParticipantsDropDown.text!)
             //participantsTextView.text.append(", " + addParticipantsDropDown.text!)
-            inviteUsersDropDown.text = ""
+            //inviteUsersDropDown.text = ""
             channel.inviteUserIds([inviteUsersDropDown.text!]) { (error) in
                 guard error == nil else {   // Error.
                     return
                 }
-                
+                self.inviteUsersDropDown.text = ""
                 // ...
             }
         }

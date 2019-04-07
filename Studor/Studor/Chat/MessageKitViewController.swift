@@ -141,21 +141,30 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                     print(error as Any)
                     return
                 }
-                for data in metaData! {
-                    if data.value as! String == "invited" {
-                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inv") as? InvitationViewController {
-                            if let navigator = self.navigationController {
-                                viewController.delegate = self
-                                navigator.pushViewController(viewController, animated: false)
-                            }
+                if metaData!.count == 0 {
+                    if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inv") as? InvitationViewController {
+                        if let navigator = self.navigationController {
+                            viewController.delegate = self
+                            navigator.pushViewController(viewController, animated: false)
                         }
-                        
-                        //let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        //let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
-                        //invViewController.delegate = self
-                        //self.present(invViewController, animated: false, completion: { })
-                    } else {
-                        self.getMessages()
+                    }
+                } else {
+                    for data in metaData! {
+                        if data.value as! String == "invited" {
+                            if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inv") as? InvitationViewController {
+                                if let navigator = self.navigationController {
+                                    viewController.delegate = self
+                                    navigator.pushViewController(viewController, animated: false)
+                                }
+                            }
+                            
+                            //let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            //let invViewController = storyBoard.instantiateViewController(withIdentifier: "inv") as! InvitationViewController
+                            //invViewController.delegate = self
+                            //self.present(invViewController, animated: false, completion: { })
+                        } else {
+                            self.getMessages()
+                        }
                     }
                 }
             })
@@ -348,6 +357,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     @objc func clickOnButton() {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "groupProfile") as? ViewGroupProfileViewController {
             viewController.channelUrl = channelURL
+            viewController.channel = channel
             //viewController.channelName = channel.name
             if let navigator = navigationController {
                 navigator.pushViewController(viewController, animated: true)

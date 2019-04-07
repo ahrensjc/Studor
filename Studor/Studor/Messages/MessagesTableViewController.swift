@@ -245,7 +245,7 @@ class MessagesTableViewController: UITableViewController {
                         return
                     }
                     if metaData!.count == 0 {
-                        self.myChannels.append((myChannel, true))
+                        self.myChannels.append((myChannel, false))
                     } else {
                         for data in metaData! {
                             if data.value as! String == "invited" {
