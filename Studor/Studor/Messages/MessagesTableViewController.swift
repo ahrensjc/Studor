@@ -84,10 +84,20 @@ class MessagesTableViewController: UITableViewController {
             return cell
         }
         
+        var title = myChannels[indexPath.item].chan.name
+        if !myChannels[indexPath.item].chan.isPublic {
+            let mems = title.split(separator: " ")
+            if mems[0] == firebaseSingleton.getSendbirdId() {
+                title = String(mems[1]) //"Messages with " +
+            } else {
+                title = String(mems[0]) //"Messages with " + 
+            }
+        }
+        
         if myChannels[indexPath.item].accepted {
-            cell.titleLabel.text = myChannels[indexPath.item].chan.name
+            cell.titleLabel.text = title
         } else {
-            cell.titleLabel.text = "INVITITATION: " + myChannels[indexPath.item].chan.name
+            cell.titleLabel.text = "INVITITATION: " + title
         }
         
         return cell

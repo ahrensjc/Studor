@@ -123,9 +123,9 @@ class ViewProfileViewController: UIViewController {
                 params.isDistinct = true
                 params.addUserIds([self.sendbirdID, self.thisSendbirdID])
                 params.operatorUserIds = ["rando1"]
-                if myNickname == "" { myNickname = String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)) }
-                if self.nickname == "" { self.nickname = self.username }
-                params.name = (myNickname + " & " + self.nickname)
+                //myNickname = String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))
+                //if self.nickname == "" { self.nickname = self.username }
+                params.name = (firebaseSingleton.getSendbirdId() + " " + self.username)
                 
                 SBDGroupChannel.createChannel(with: params) { (channel, error) in
                     guard error == nil else {   // Error.
