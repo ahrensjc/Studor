@@ -33,11 +33,10 @@ class EventCreatorViewController: UIViewController {
     
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
-        if let title = eventNameTextField.text, let loc = eventLocationTextField.text, let description = eventDescriptionTextView.text{
+        if let title = eventNameTextField.text, let loc = eventLocationTextField.text{
             
             // TODO: Get the firebase IDs of participants added, have autofill for them, and add the event reference to their document on firestore
-            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, description: description, title: title)
-            print("Event successfully created")
+            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, title: title)
         }
         else{
             self.showMessagePrompt(withString: "Please fill in all form fields.", title: "Missing Fields")

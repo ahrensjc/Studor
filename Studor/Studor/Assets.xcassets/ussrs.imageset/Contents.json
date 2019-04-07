@@ -2,11 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ussrs.png",
+      "filename" : "users.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "ussrs.png",
       "scale" : "2x"
     },
     {
