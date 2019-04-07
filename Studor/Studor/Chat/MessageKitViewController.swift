@@ -304,7 +304,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     
     func declined(child: InvitationViewController) {
-        child.dismiss(animated: false, completion: nil)
+        //child.dismiss(animated: true, completion: nil)
         channel.leave { (error) in
             guard error == nil else {   // Error.
                 print("error leaving channel")
@@ -319,7 +319,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     
     func accepted(child: InvitationViewController) {
-        child.dismiss(animated: false, completion: nil)
+        //child.dismiss(animated: true, completion: nil)
         getMessages()
         let metaDataToUpdate = [sendbirdID:"accepted"]
         
@@ -330,12 +330,20 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         })
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func back(child: InvitationViewController) {
+        //child.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+            //self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is InvitationViewController {
             let child = segue.destination as! InvitationViewController
             child.delegate = self
         }
-    }
+    }*/
     
     @objc func clickOnButton() {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "groupProfile") as? ViewGroupProfileViewController {
