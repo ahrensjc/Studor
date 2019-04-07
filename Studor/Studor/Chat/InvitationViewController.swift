@@ -11,6 +11,7 @@ import UIKit
 protocol invDelegate {
     func accepted(child: InvitationViewController)
     func declined(child: InvitationViewController)
+    func back(child: InvitationViewController)
 }
 
 class InvitationViewController: UIViewController {
@@ -19,8 +20,10 @@ class InvitationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(InvitationViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     @IBAction func acceptButtonTapped(_ sender: Any) {
@@ -30,6 +33,11 @@ class InvitationViewController: UIViewController {
     
     @IBAction func declineButtonTapped(_ sender: Any) {
         delegate.declined(child: self)
+        self.navigationController?.popViewController(animated: false)
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        delegate.back(child: self)
         self.navigationController?.popViewController(animated: false)
     }
     /*

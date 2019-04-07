@@ -105,7 +105,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        searchController.searchBar.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
@@ -127,7 +127,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         ref.getDocuments { (document, error) in
             if let document = document, document.count > 0 {
                 for entry in document.documents {
-                    self.searchResults.append(GroupResult(entry.data()["sendbirdURL"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
+                    self.searchResults.append(GroupResult(entry.data()["sendbirdUrl"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
                 }
             }
         }

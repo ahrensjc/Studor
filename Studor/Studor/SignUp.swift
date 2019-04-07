@@ -83,7 +83,8 @@ class SignUp : UIViewController {
             "profImgSpecifier" : [0, 0],
             "sendbirdID" : prefix,
             "events" : [],
-            "tags" : []
+            "tags" : [],
+            "bio" : "Your bio here"
         ]
         db.collection("Users").document(prefix).setData(data) { err in
             if let err = err {

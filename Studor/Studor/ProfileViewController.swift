@@ -59,7 +59,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     @IBAction func bioDone(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count))).updateData([
-            "Bio": bioTextView.text
+            "bio": bioTextView.text
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
     @IBAction func nicknameDone(_ sender: Any) {
         let db = Firestore.firestore()
         db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count))).updateData([
-            "NickName": nicknameTextField.text!
+            "nickname": nicknameTextField.text!
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -235,8 +235,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
  */
     
     func updateProfileUI(){
-        nicknameLabel.text = profileData["NickName"] as? String ?? ""
-        bioText.text! = profileData["Bio"] as? String ?? ""
+        nicknameLabel.text = profileData["nickname"] as? String
+        bioText.text! = profileData["bio"] as? String ?? ""
         
         let tags = profileData["tags"]
     }
@@ -256,13 +256,14 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
             if let document = document, document.exists {
                 self.tagTextView.text = ""
                 self.profileData = document.data()!
-                self.bioText.text = self.profileData["Bio"] as? String ?? "" //Initialize bio from firebase
+                self.bioText.text = self.profileData["bio"] as? String ?? "" //Initialize bio from firebase
                 for item in self.profileData["tags"] as? [String] ?? [] {
                     self.tagTextView.text.append("\(item)\n")
                 }
-                self.nicknameLabel.text = self.profileData["Nickname"] as? String ?? ""
+                //print(self.profileData["nickname"])
+                self.nicknameLabel.text = self.profileData["nickname"] as? String
                 
-                self.usernameLabel.text = self.profileData["username"] as? String ?? ""
+                self.usernameLabel.text = self.profileData["username"] as? String
                 if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
                 }
