@@ -144,6 +144,10 @@ class MessagesTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 66.0
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is MessageKitViewController{
             let child = segue.destination as! MessageKitViewController
