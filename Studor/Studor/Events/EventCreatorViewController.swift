@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import iOSDropDown
+import SendBirdSDK
 
 class EventCreatorViewController: UIViewController {
 
@@ -16,20 +17,15 @@ class EventCreatorViewController: UIViewController {
     @IBOutlet weak var eventDatePicker: UIDatePicker!
     @IBOutlet weak var eventLocationTextField: UITextField!
     @IBOutlet weak var addParticipantButton: UIButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addParticipantsDropDown.listHeight = 120
-        addParticipantsDropDown.selectedRowColor = UIColor.white
-    }
-    @IBOutlet weak var addParticipantsDropDown: DropDown!
     
     var participants: [String] = []
+    var contacts = [String]()
+    
+    @IBOutlet weak var addParticipantsDropDown: DropDown!
     
     @IBAction func addParticipantsButton(_ sender: Any) {
-
+        
     }
-    
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
         if let title = eventNameTextField.text, let loc = eventLocationTextField.text{
@@ -41,6 +37,35 @@ class EventCreatorViewController: UIViewController {
             self.showMessagePrompt(withString: "Please fill in all form fields.", title: "Missing Fields")
         }
         performSegue(withIdentifier: "unwindToSchedule", sender: self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addParticipantsDropDown.listHeight = 120
+        addParticipantsDropDown.selectedRowColor = UIColor.white
+        
+        retrieveSBChannels()
+        
+    }
+    
+    func retrieveSBChannels(){
+        let query = SBDGroupChannel.createMyGroupChannelListQuery()
+        query?.includeEmptyChannel = false
+        
+        query?.loadNextPage(completionHandler: { (channels, error) in
+            guard error == nil else {
+                print(error as Any)
+                return
+            }
+            
+            for channel in channels! {
+                for member in channel.members! as! [SBDUser] {
+                    self.contacts.append(member.userId)
+                    print(member.userId + " added to event drop down")
+                }
+            }
+        })
     }
     
     func showMessagePrompt(withString: String, title: String) {

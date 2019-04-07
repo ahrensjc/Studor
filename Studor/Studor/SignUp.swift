@@ -86,6 +86,7 @@ class SignUp : UIViewController {
             "tags" : [],
             "bio" : "Your bio here"
         ]
+        
         db.collection("Users").document(prefix).setData(data) { err in
             if let err = err {
                 print("Error: \(err)")
