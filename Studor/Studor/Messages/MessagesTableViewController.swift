@@ -154,7 +154,7 @@ class MessagesTableViewController: UITableViewController {
             //print("checked correctly")
         } else if segue.destination is CreateGroupViewController {
             let child = segue.destination as! CreateGroupViewController
-            child.nickname = self.profileData["NickName"] as? String ?? ""
+            child.nickname = self.profileData["nickname"] as? String ?? ""
             child.sendbirdID = self.sendbirdID
             child.sendbirdUser = self.sendbirdUser
         }
