@@ -68,7 +68,7 @@ class ViewGroupProfileViewController: UIViewController {
             self.channel = groupChannel
             
             for member in self.channelMembers {
-                let append =  "\n" + member.nickname!
+                let append =  "\n" + member.nickname! + " (" + member.userId + ")"
                 self.memberList!.text.append(append)
                 if member.userId == firebaseSingleton.getSendbirdId() {
                     self.inviteButton.isHidden = false
