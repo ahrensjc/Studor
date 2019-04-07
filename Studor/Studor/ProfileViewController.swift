@@ -235,8 +235,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
  */
     
     func updateProfileUI(){
-        nicknameLabel.text = profileData["NickName"] as? String ?? ""
-        bioText.text! = profileData["Bio"] as? String ?? ""
+        nicknameLabel.text = profileData["nickname"] as? String
+        bioText.text! = profileData["bio"] as? String ?? ""
         
         let tags = profileData["tags"]
     }
@@ -260,9 +260,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
                 for item in self.profileData["tags"] as? [String] ?? [] {
                     self.tagTextView.text.append("\(item)\n")
                 }
-                self.nicknameLabel.text = self.profileData["Nickname"] as? String ?? ""
+                //print(self.profileData["nickname"])
+                self.nicknameLabel.text = self.profileData["nickname"] as? String
                 
-                self.usernameLabel.text = self.profileData["username"] as? String ?? ""
+                self.usernameLabel.text = self.profileData["username"] as? String
                 if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
                 }

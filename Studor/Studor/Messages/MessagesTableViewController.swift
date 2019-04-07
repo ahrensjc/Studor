@@ -50,7 +50,7 @@ class MessagesTableViewController: UITableViewController {
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.profileData = document.data()!
-                self.sendbirdID = self.profileData["sendbirdID"] as? String ?? "" //Initialize bio from firebase
+                self.sendbirdID = firebaseSingleton.getSendbirdId() //Initialize bio from firebase
                 self.login()
             } else {
                 print("ERROR GETTING DATA")
@@ -60,7 +60,7 @@ class MessagesTableViewController: UITableViewController {
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        refreshControl.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching Channel Data...")
         self.refreshControl = refreshControl
     }
@@ -276,7 +276,7 @@ class MessagesTableViewController: UITableViewController {
         //activityIndicator.activityIndicatorViewStyle = .gray
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        activityIndicator.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         activityIndicator.startAnimating()
         
         // Adds text and spinner to the view

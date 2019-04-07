@@ -105,7 +105,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        searchController.searchBar.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
