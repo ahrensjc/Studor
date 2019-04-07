@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +35,7 @@
                                     <constraint firstAttribute="width" constant="53" id="dd2-G7-mOV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.22120399869999999" green="0.72316224090000003" blue="0.19072226419999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="CustomCrimson"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEn-Gd-b9h">
@@ -44,7 +45,7 @@
                                     <constraint firstAttribute="height" constant="30" id="fg4-Kp-9qQ"/>
                                 </constraints>
                                 <state key="normal" title="up">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="CustomCrimson"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbW-ba-AzT">
@@ -54,7 +55,7 @@
                                     <constraint firstAttribute="height" constant="30" id="MF7-QA-PMA"/>
                                 </constraints>
                                 <state key="normal" title="down">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="CustomCrimson"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cad-3c-9pz" customClass="PaddingLabel" customModule="PaddingLabel">
@@ -1786,6 +1787,9 @@
         <image name="profile" width="37.5" height="37.5"/>
         <image name="ussrs" width="36" height="36"/>
         <image name="white_logo_color_background" width="816.7623291015625" height="357.93408203125"/>
+        <namedColor name="CustomCrimson">
+            <color red="0.53725490196078429" green="0.066666666666666666" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
