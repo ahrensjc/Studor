@@ -27,9 +27,9 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(users: [String], date: Date, description: String, title: String){
+    func createEvent(users: [String], date: Date, title: String){
         
-        let thisUsername = Auth.auth().currentUser?.email?.dropLast(emailSuffix.count)
+        let thisUsername = firebaseSingleton.getFirestoreIdForCurrentUser()
         
         let dataToAdd: [String : Any] = [
             "title" : title,
@@ -47,22 +47,26 @@ class StudorFunctions {
             }
         }
         
-        let userRef = db.collection("Users").document(users[0])
+        let eventId = String(eventRef!.documentID)
+        
+        let userRef = db.collection("Users").document(thisUsername)
     
         // Atomically add a new region to the "regions" array field.
         userRef.updateData([
-                "events" : FieldValue.arrayUnion([String(describing: eventRef!.documentID)])
+                "events" : FieldValue.arrayUnion([eventId])
             ])
         
-        self.updateEventsForUserDocuments(users: users, eventID: eventRef!.documentID)
+        self.updateEventsForUserDocuments(users: users, eventID: eventId)
     }
     
     func updateEventsForUserDocuments(users: [String], eventID: String){
         
+        var ref: DocumentReference?
+        
         for i in 1..<users.count{
             
-            var ref = db.collection("Users").document(users[i])
-            ref.updateData([
+            ref = db.collection("Users").document(users[i])
+            ref!.updateData([
                     "events" : FieldValue.arrayUnion([eventID])
                 ])
             
@@ -106,8 +110,8 @@ class StudorFunctions {
         return profileInfo
     }
     
-    func getId() -> String {
-        return Auth.auth().currentUser!.uid
+    func getFirestoreIdForCurrentUser() -> String {
+        return String(Auth.auth().currentUser!.email!.dropLast(emailSuffix.count))
     }
     
     func getSendbirdId() -> String {
