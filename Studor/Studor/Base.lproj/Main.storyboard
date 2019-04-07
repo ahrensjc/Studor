@@ -678,7 +678,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter GCC Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-zi-A79">
-                                <rect key="frame" x="37" y="260" width="113" height="18"/>
+                                <rect key="frame" x="57" y="260" width="113" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="lHp-mE-36Q"/>
                                     <constraint firstAttribute="width" constant="113" id="uCi-zb-ExQ"/>
@@ -688,7 +688,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8H-pn-K2I">
-                                <rect key="frame" x="37" y="328" width="107" height="18"/>
+                                <rect key="frame" x="57" y="328" width="107" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="Zvo-GS-Obe"/>
                                     <constraint firstAttribute="width" constant="107" id="mOo-PK-Zfe"/>
@@ -740,12 +740,11 @@
                         <constraints>
                             <constraint firstItem="GCR-Ls-0ND" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="3US-MV-sQS"/>
                             <constraint firstItem="xUa-Xb-2Lt" firstAttribute="top" secondItem="Q4S-D2-wsc" secondAttribute="bottom" constant="20" id="AaU-wM-cSe"/>
+                            <constraint firstItem="L8H-pn-K2I" firstAttribute="leading" secondItem="zFE-zi-A79" secondAttribute="leading" id="Cgw-Q6-tWZ"/>
                             <constraint firstItem="Q4S-D2-wsc" firstAttribute="top" secondItem="9xE-Vc-zu0" secondAttribute="bottom" constant="8" id="DKE-Kf-puw"/>
                             <constraint firstItem="L8H-pn-K2I" firstAttribute="top" secondItem="boa-rZ-3KQ" secondAttribute="bottom" constant="12" id="Fp6-gk-EUb"/>
-                            <constraint firstItem="zFE-zi-A79" firstAttribute="leading" secondItem="GGE-Pb-RDI" secondAttribute="leading" constant="37" id="Ivb-ES-BRf"/>
                             <constraint firstItem="MJ8-nC-pjp" firstAttribute="top" secondItem="GGE-Pb-RDI" secondAttribute="top" constant="43" id="Jrk-b5-AFM"/>
                             <constraint firstItem="zFE-zi-A79" firstAttribute="top" secondItem="MJ8-nC-pjp" secondAttribute="bottom" constant="34" id="MYg-ft-Vuw"/>
-                            <constraint firstItem="L8H-pn-K2I" firstAttribute="leading" secondItem="GGE-Pb-RDI" secondAttribute="leading" constant="37" id="PmD-BC-w7u"/>
                             <constraint firstItem="boa-rZ-3KQ" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="RCK-sP-NYE"/>
                             <constraint firstItem="xUa-Xb-2Lt" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="S3N-S1-Ag6"/>
                             <constraint firstItem="6H9-uD-orp" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="X7F-2f-SML"/>
@@ -756,6 +755,7 @@
                             <constraint firstItem="9xE-Vc-zu0" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="iE3-Oq-ZfD"/>
                             <constraint firstItem="boa-rZ-3KQ" firstAttribute="top" secondItem="zFE-zi-A79" secondAttribute="bottom" constant="8" id="ivl-Sc-Vn3"/>
                             <constraint firstItem="Q4S-D2-wsc" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="x0W-le-1qZ"/>
+                            <constraint firstItem="boa-rZ-3KQ" firstAttribute="leading" secondItem="zFE-zi-A79" secondAttribute="leading" id="z8X-L6-jYr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GGE-Pb-RDI"/>
                     </view>
@@ -1785,7 +1785,7 @@
         <image name="fil" width="72" height="72"/>
         <image name="like" width="72" height="72"/>
         <image name="profile" width="37.5" height="37.5"/>
-        <image name="ussrs" width="36" height="36"/>
+        <image name="ussrs" width="26.25" height="26.25"/>
         <image name="white_logo_color_background" width="816.7623291015625" height="357.93408203125"/>
         <namedColor name="CustomCrimson">
             <color red="0.53725490196078429" green="0.066666666666666666" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
