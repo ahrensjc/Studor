@@ -127,7 +127,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         ref.getDocuments { (document, error) in
             if let document = document, document.count > 0 {
                 for entry in document.documents {
-                    self.searchResults.append(GroupResult(entry.data()["sendbirdURL"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
+                    self.searchResults.append(GroupResult(entry.data()["sendbirdUrl"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
                 }
             }
         }
