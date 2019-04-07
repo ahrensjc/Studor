@@ -1639,31 +1639,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbR-QN-p6a">
-                                <rect key="frame" x="20" y="438" width="374" height="125"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEMBERS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3h-2A-LGt">
+                                <rect key="frame" x="164.66666666666666" y="411" width="85" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3h-2A-LGt">
-                                <rect key="frame" x="171" y="401" width="72" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GROUPNAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bl2-bu-ajl" customClass="PaddingLabel" customModule="PaddingLabel">
+                                <rect key="frame" x="141" y="247" width="132" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GROUP NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwM-Fn-NQ6">
+                                <rect key="frame" x="149.66666666666666" y="218" width="114.99999999999997" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GROUPNAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bl2-bu-ajl">
-                                <rect key="frame" x="154" y="238" width="106" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpC-0u-qqU">
+                                <rect key="frame" x="87" y="423" width="240" height="381"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="253" id="5d2-BS-2F8"/>
+                                    <constraint firstAttribute="width" constant="240" id="uhw-QV-rMw"/>
+                                </constraints>
+                                <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Bl2-bu-ajl" firstAttribute="top" secondItem="fwM-Fn-NQ6" secondAttribute="bottom" constant="8" id="0l0-1M-dm4"/>
+                            <constraint firstItem="fwM-Fn-NQ6" firstAttribute="top" secondItem="4MU-fw-RF4" secondAttribute="top" constant="130" id="5ZB-EL-ifw"/>
+                            <constraint firstItem="fwM-Fn-NQ6" firstAttribute="centerX" secondItem="bDN-Oy-AzK" secondAttribute="centerX" id="6UA-gU-510"/>
+                            <constraint firstItem="bpC-0u-qqU" firstAttribute="top" secondItem="e3h-2A-LGt" secondAttribute="bottom" constant="1" id="Ard-ND-acj"/>
+                            <constraint firstItem="Bl2-bu-ajl" firstAttribute="centerX" secondItem="bDN-Oy-AzK" secondAttribute="centerX" id="LFU-YS-brn"/>
+                            <constraint firstItem="e3h-2A-LGt" firstAttribute="centerX" secondItem="bDN-Oy-AzK" secondAttribute="centerX" id="N8b-Ou-TPc"/>
+                            <constraint firstItem="e3h-2A-LGt" firstAttribute="centerX" secondItem="bDN-Oy-AzK" secondAttribute="centerX" id="eyN-Dh-Hbc"/>
+                            <constraint firstItem="e3h-2A-LGt" firstAttribute="top" secondItem="Bl2-bu-ajl" secondAttribute="bottom" constant="131" id="jMb-96-qHS"/>
+                            <constraint firstItem="bpC-0u-qqU" firstAttribute="centerX" secondItem="bDN-Oy-AzK" secondAttribute="centerX" id="xbR-QB-Y2I"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4MU-fw-RF4"/>
                     </view>
+                    <connections>
+                        <outlet property="groupName" destination="Bl2-bu-ajl" id="t7X-KZ-bQ2"/>
+                        <outlet property="memberList" destination="bpC-0u-qqU" id="6nn-Ua-syu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6s-lE-vLm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
