@@ -8,29 +8,24 @@
 
 import UIKit
 import Firebase
+import iOSDropDown
+import SendBirdSDK
 
 class EventCreatorViewController: UIViewController {
 
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
     @IBOutlet weak var eventLocationTextField: UITextField!
-    @IBOutlet weak var eventParticipantTextField: UITextField!
     @IBOutlet weak var addParticipantButton: UIButton!
-    @IBOutlet weak var eventDescriptionTextView: UITextView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     var participants: [String] = []
+    var contacts = [String]()
+    
+    @IBOutlet weak var addParticipantsDropDown: DropDown!
     
     @IBAction func addParticipantsButton(_ sender: Any) {
-        if let participant = eventParticipantTextField.text {
-            participants.append(participant)
-            eventParticipantTextField.text = ""
-            print("Participant: \(participant)")
-        }
+        
     }
-    
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
         if let title = eventNameTextField.text, let loc = eventLocationTextField.text{
@@ -44,6 +39,35 @@ class EventCreatorViewController: UIViewController {
         performSegue(withIdentifier: "unwindToSchedule", sender: self)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addParticipantsDropDown.listHeight = 120
+        addParticipantsDropDown.selectedRowColor = UIColor.white
+        
+        retrieveSBChannels()
+        
+    }
+    
+    func retrieveSBChannels(){
+        let query = SBDGroupChannel.createMyGroupChannelListQuery()
+        query?.includeEmptyChannel = false
+        
+        query?.loadNextPage(completionHandler: { (channels, error) in
+            guard error == nil else {
+                print(error as Any)
+                return
+            }
+            
+            for channel in channels! {
+                for member in channel.members! as! [SBDUser] {
+                    self.contacts.append(member.userId)
+                    print(member.userId + " added to event drop down")
+                }
+            }
+        })
+    }
+    
     func showMessagePrompt(withString: String, title: String) {
         let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
@@ -53,14 +77,4 @@ class EventCreatorViewController: UIViewController {
     @IBAction func goBackToScheduleTableVC(_ sender: Any) {
         performSegue(withIdentifier: "unwindSegueToSchedule", sender: self)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
