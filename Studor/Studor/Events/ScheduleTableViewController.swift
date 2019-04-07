@@ -26,8 +26,7 @@ class ScheduleTableViewController: UITableViewController {
     func getFirestoreEventData(){
         
         // Create a query against the collection.
-        let docRef = db.collection("Events").document(firebaseSingleton.getId()+"-e")
-
+        let docRef = db.collection("Events").document()
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {

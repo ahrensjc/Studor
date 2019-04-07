@@ -125,7 +125,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                 button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
                 //button.backgroundColor = .red
                 //button.titleLabel?.textColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
-                button.setTitleColor(UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0), for: .normal)
+                button.setTitleColor(UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0), for: .normal)
                 button.setTitle(self.channel.name, for: .normal)
                 button.addTarget(self, action: #selector(self.clickOnButton), for: .touchUpInside)
                 self.navigationItem.titleView = button
@@ -266,7 +266,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                     }
                     else if item is SBDAdminMessage {
                         let thing = item as! SBDAdminMessage
-                        let myMsg = Message(member: Member(name: "Admin", color: UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)), text: thing.message!, messageId: "")
+                        let myMsg = Message(member: Member(name: "Admin", color: UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)), text: thing.message!, messageId: "")
                         self.messages.append(myMsg)
                     }
                 }
@@ -295,7 +295,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         else if message is SBDAdminMessage {
             // Do something when the received message is an AdminMessage.
             let thing = message as! SBDAdminMessage
-            let myMsg = Message(member: Member(name: "Admin", color: UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)), text: thing.message!, messageId: "")
+            let myMsg = Message(member: Member(name: "Admin", color: UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)), text: thing.message!, messageId: "")
             //self.messages.append(thing.message!)
             self.messages.append(myMsg)
         }
@@ -338,7 +338,13 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     }
     
     @objc func clickOnButton() {
-        print("clicked on title")
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "groupProfile") as? ViewGroupProfileViewController {
+            viewController.channelUrl = channelURL
+            //viewController.channelName = channel.name
+            if let navigator = navigationController {
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
     }
     
     // Set the activity indicator into the main view
@@ -361,7 +367,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         //activityIndicator.activityIndicatorViewStyle = .gray
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.tintColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
+        activityIndicator.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         activityIndicator.startAnimating()
         
         // Adds text and spinner to the view
