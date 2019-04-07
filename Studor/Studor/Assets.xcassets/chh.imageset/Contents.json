@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "chh.png",
+      "filename" : "icons8-communication-100.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-communication-64.png",
       "scale" : "2x"
     },
     {

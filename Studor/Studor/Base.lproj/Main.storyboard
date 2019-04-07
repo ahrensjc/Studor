@@ -389,13 +389,11 @@
             </objects>
             <point key="canvasLocation" x="3004" y="1368.6656671664168"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Explore-->
         <scene sceneID="nEW-7G-fji">
             <objects>
                 <navigationController id="Sxc-y2-Ozh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ex2" id="hoj-gh-4XE">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Explore" image="ex2" id="hoj-gh-4XE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e2Z-5t-SpH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1400,13 +1398,11 @@
             </objects>
             <point key="canvasLocation" x="4381.6000000000004" y="2136.88155922039"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Profile-->
         <scene sceneID="Ber-kp-wTi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gey-kU-bVv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="profile" id="Ryt-Aq-lQy">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="Ryt-Aq-lQy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Hl-Bt-M0l">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1421,12 +1417,11 @@
             </objects>
             <point key="canvasLocation" x="1522" y="1369"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Messages-->
         <scene sceneID="V2p-uc-GBo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJc-gH-hXL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="chh" id="yjO-Nj-z78">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
+                    <tabBarItem key="tabBarItem" title="Messages" image="chh" id="yjO-Nj-z78">
                         <color key="badgeColor" red="0.64807764919999999" green="0.2222676525" blue="0.1775896317" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1608,18 +1603,17 @@
                         <viewLayoutGuide key="safeArea" id="kcL-9g-CAD"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="357-MN-An0">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="vPw-HD-YJ5">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OSM-dd-pFz">
-                                <rect key="frame" x="357" y="3.6666666666666679" width="37" height="37"/>
+                        <barButtonItem key="rightBarButtonItem" image="Messages" style="plain" id="vPw-HD-YJ5">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OSM-dd-pFz">
+                                <rect key="frame" x="346" y="0.0" width="48" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" image="Messages">
-                                    <color key="titleColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
+                                <state key="normal" image="Messages"/>
                                 <connections>
                                     <action selector="messageButtonTapped:" destination="Ex6-Sz-xa9" eventType="touchUpInside" id="lkW-Ur-pDh"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1745,13 +1739,11 @@
             </objects>
             <point key="canvasLocation" x="4382" y="1420"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Events-->
         <scene sceneID="7O4-h8-Teq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CGM-qX-861" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="fil" id="gbO-gD-bf5">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-24"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Events" image="fil" id="gbO-gD-bf5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="40Z-Ze-nYm">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1769,12 +1761,12 @@
     </scenes>
     <resources>
         <image name="Add Event" width="36" height="36"/>
-        <image name="Messages" width="37.5" height="37.5"/>
+        <image name="Messages" width="48" height="48"/>
         <image name="Trash" width="48" height="48"/>
-        <image name="chh" width="36" height="36"/>
+        <image name="chh" width="48" height="48"/>
         <image name="dislike" width="72" height="72"/>
-        <image name="ex2" width="36" height="36"/>
-        <image name="fil" width="36" height="36"/>
+        <image name="ex2" width="72" height="72"/>
+        <image name="fil" width="72" height="72"/>
         <image name="like" width="72" height="72"/>
         <image name="profile" width="37.5" height="37.5"/>
         <image name="ussrs" width="36" height="36"/>
@@ -1782,7 +1774,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
-        <segue reference="ZqN-gz-AFu"/>
+        <segue reference="ccL-Gp-Dot"/>
         <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
