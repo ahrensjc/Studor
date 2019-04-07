@@ -91,7 +91,13 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 return matcher
             }
             else {
-                return matcher && (searchResult is SearchResult && (searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) ||
+                var tagsContainsSearchText = false
+                if searchResult is SearchResult {
+                    for tag in (searchResult as! SearchResult).tags {
+                        if tag.lowercased().contains(searchText.lowercased()) {tagsContainsSearchText = true}
+                    }
+                }
+                return matcher && (searchResult is SearchResult && ((searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) || tagsContainsSearchText) ||
                 (searchResult is GroupResult && (searchResult as! GroupResult).channelName.lowercased().contains(searchText.lowercased())))
             }
         })
@@ -118,7 +124,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         definesPresentationContext = true
         grabProfileData()
         grabDataTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(grabOtherDataOnce), userInfo: nil, repeats: true)
-        //filterData = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(filterDataFunc), userInfo: nil, repeats: true)
         let _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateResults), userInfo: nil, repeats: true)
     }
     
@@ -129,6 +134,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 for entry in document.documents {
                     self.searchResults.append(GroupResult(entry.data()["sendbirdUrl"] as? String ?? "no url", entry.data()["channelName"] as? String ?? "no channel name"))
                 }
+                self.tableView.reloadData()
             }
         }
     }
@@ -140,11 +146,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                 if let document = document, document.exists {
                     self.profileData = document.data()!
                     self.profileDataCollected = true
-                    /*
-                    if self.otherDataCollectedOnce {
-                        self.filterDataFunc()
-                    }
-                    */
                 }
             }
         }
@@ -173,33 +174,6 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             }
         }
     }
-    
-    /*
-    @objc func filterDataFunc() {
-        if otherDataCollectedOnce {
-            filterData.invalidate()
-            commonTagResults = searchResults.filter({(searchResult : SearchResult) -> Bool in
-                if(profileData["username"] as! String != searchResult.name) {
-                    let selfTags = profileData["tags"] as? [String] ?? []
-                    if selfTags.count <= 0 || (selfTags.count == 1 && selfTags[0] == ""){
-                        return true
-                    }
-                    else {
-                        for tag in selfTags {
-                            for _tag in searchResult.tags {
-                                if tag.lowercased() == _tag.lowercased() {
-                                    return true
-                                }
-                            }
-                        }
-                    }
-                }
-                return false
-            })
-            tableView.reloadData()
-        }
-    }
-    */
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -258,8 +232,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                     destination.accountType = profileInfo["accountType"] as? String ?? ""
                     destination.doHideLikeButtons()
                     destination.id = result.id
-                    destination.bio = profileInfo["Bio"] as? String ?? ""
-                    destination.nickname = profileInfo["NickName"] as? String ?? ""
+                    destination.bio = profileInfo["bio"] as? String ?? ""
+                    destination.nickname = profileInfo["nickname"] as? String ?? ""
                     destination.tags = profileInfo["tags"] as? [String] ?? []
                     destination.username = profileInfo["username"] as? String ?? ""
                     destination.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
