@@ -782,28 +782,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelCell" id="X52-IO-6Fv" customClass="MessagesTableViewCell" customModule="Studor" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="channelCell" id="X52-IO-6Fv" customClass="MessagesTableViewCell" customModule="Studor" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X52-IO-6Fv" id="MaA-GS-bUt">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title/Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp5-gB-JyC">
-                                            <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                            <rect key="frame" x="20" y="11.666666666666666" width="83.333333333333329" height="20.333333333333336"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXT-Dk-bHh">
+                                            <rect key="frame" x="277" y="14" width="91" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="hp5-gB-JyC" firstAttribute="trailing" secondItem="MaA-GS-bUt" secondAttribute="trailingMargin" id="CHl-8w-i3w"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="hp5-gB-JyC" secondAttribute="bottom" constant="1" id="hqt-4B-0PI"/>
-                                        <constraint firstItem="hp5-gB-JyC" firstAttribute="top" secondItem="MaA-GS-bUt" secondAttribute="topMargin" id="oBB-c6-hie"/>
-                                        <constraint firstItem="hp5-gB-JyC" firstAttribute="leading" secondItem="MaA-GS-bUt" secondAttribute="leadingMargin" id="yuo-gC-nHG"/>
+                                        <constraint firstItem="hp5-gB-JyC" firstAttribute="leading" secondItem="MaA-GS-bUt" secondAttribute="leadingMargin" id="Gxf-Ox-VG3"/>
+                                        <constraint firstItem="RXT-Dk-bHh" firstAttribute="trailing" secondItem="MaA-GS-bUt" secondAttribute="trailingMargin" id="j1T-SO-KVf"/>
+                                        <constraint firstItem="RXT-Dk-bHh" firstAttribute="centerY" secondItem="MaA-GS-bUt" secondAttribute="centerY" id="tb1-dj-936"/>
+                                        <constraint firstItem="hp5-gB-JyC" firstAttribute="centerY" secondItem="MaA-GS-bUt" secondAttribute="centerY" id="vWH-d3-ytw"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="groupLabel" destination="RXT-Dk-bHh" id="3mO-XB-VUJ"/>
                                     <outlet property="titleLabel" destination="hp5-gB-JyC" id="ZEx-fy-Fti"/>
                                     <segue destination="lRi-3w-uOb" kind="show" id="Kx8-iB-CSX"/>
                                 </connections>

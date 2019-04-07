@@ -86,6 +86,7 @@ class MessagesTableViewController: UITableViewController {
         
         var title = myChannels[indexPath.item].chan.name
         if !myChannels[indexPath.item].chan.isPublic {
+            cell.groupLabel.text = "1:1 Channel"
             let mems = title.split(separator: " ")
             if mems[0] == firebaseSingleton.getSendbirdId() {
                 title = String(mems[1]) //"Messages with " +
