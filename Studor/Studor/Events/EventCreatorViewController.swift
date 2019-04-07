@@ -8,27 +8,26 @@
 
 import UIKit
 import Firebase
+import iOSDropDown
 
 class EventCreatorViewController: UIViewController {
 
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
     @IBOutlet weak var eventLocationTextField: UITextField!
-    @IBOutlet weak var eventParticipantTextField: UITextField!
     @IBOutlet weak var addParticipantButton: UIButton!
-    @IBOutlet weak var eventDescriptionTextView: UITextView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addParticipantsDropDown.listHeight = 120
+        addParticipantsDropDown.selectedRowColor = UIColor.white
     }
+    @IBOutlet weak var addParticipantsDropDown: DropDown!
     
     var participants: [String] = []
     
     @IBAction func addParticipantsButton(_ sender: Any) {
-        if let participant = eventParticipantTextField.text {
-            participants.append(participant)
-            eventParticipantTextField.text = ""
-            print("Participant: \(participant)")
-        }
+
     }
     
     
@@ -53,14 +52,4 @@ class EventCreatorViewController: UIViewController {
     @IBAction func goBackToScheduleTableVC(_ sender: Any) {
         performSegue(withIdentifier: "unwindSegueToSchedule", sender: self)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
