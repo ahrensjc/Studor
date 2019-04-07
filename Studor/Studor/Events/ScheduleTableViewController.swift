@@ -93,8 +93,10 @@ class ScheduleTableViewController: UITableViewController {
     
     @objc private func refreshData(_ sender: Any) {
         print("reloading table")
+        
         DispatchQueue.main.async {
-            
+            self.events.removeAll()
+            self.getCompleteEventData()
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
@@ -114,7 +116,6 @@ class ScheduleTableViewController: UITableViewController {
         db = Firestore.firestore()
         initializeRefreshControl()
         getCompleteEventData()
-
     }
 
     func getCompleteEventData(){
