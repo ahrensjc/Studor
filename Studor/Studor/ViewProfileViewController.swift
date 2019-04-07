@@ -15,7 +15,7 @@ class ViewProfileViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var bioText: UILabel!
-    @IBOutlet weak var tagText : UILabel!
+    @IBOutlet weak var tagText : UITextView!
     @IBOutlet weak var likeButton : UIButton!
     @IBOutlet weak var dislikeButton : UIButton!
     
@@ -50,7 +50,6 @@ class ViewProfileViewController: UIViewController {
         usernameLabel.text = username ?? ""
         nicknameLabel.text = nickname ?? ""
         bioText.text = bio ?? ""
-        tagText.numberOfLines = tags.count
         for tag in tags {
             tagText.text!.append("\(tag)\n")
         }
