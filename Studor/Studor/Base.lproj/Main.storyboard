@@ -93,7 +93,7 @@
                                     <action selector="nicknameEdit:" destination="FTr-9N-yEr" eventType="touchUpInside" id="jK9-O3-BwO"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Bio info ... and stuff so here's a little thing about me" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wOm-T5-OYd">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Bio info ... and stuff so here's a little thing about me" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wOm-T5-OYd">
                                 <rect key="frame" x="35.666666666666657" y="382" width="343" height="115"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -647,15 +647,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCR-Ls-0ND">
-                                <rect key="frame" x="134" y="510" width="107" height="30"/>
-                                <state key="normal" title="Create Account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapSignUp:" destination="BEZ-zt-9L7" eventType="touchUpInside" id="YsZ-lW-gdn"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9xE-Vc-zu0">
                                 <rect key="frame" x="57" y="354" width="300" height="30"/>
                                 <constraints>
@@ -707,7 +698,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-Xb-2Lt">
-                                <rect key="frame" x="37" y="448" width="125" height="29"/>
+                                <rect key="frame" x="144.66666666666666" y="442" width="124.99999999999997" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="z9W-J9-Wbc"/>
+                                    <constraint firstAttribute="width" constant="125" id="zt4-Dq-MQw"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Student"/>
                                     <segment title="Tutor"/>
@@ -715,7 +710,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </segmentedControl>
                             <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6H9-uD-orp">
-                                <rect key="frame" x="177" y="456" width="20" height="20"/>
+                                <rect key="frame" x="197" y="487" width="20" height="20"/>
                                 <rect key="contentStretch" x="1" y="0.0" width="0.90000000000000002" height="1"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
@@ -727,24 +722,37 @@
                                     <constraint firstAttribute="width" constant="211" id="T85-7H-git"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCR-Ls-0ND">
+                                <rect key="frame" x="153.66666666666666" y="515" width="106.99999999999997" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="107" id="To9-Ui-USk"/>
+                                    <constraint firstAttribute="height" constant="30" id="Y4R-wH-VS0"/>
+                                </constraints>
+                                <state key="normal" title="Create Account">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapSignUp:" destination="BEZ-zt-9L7" eventType="touchUpInside" id="YsZ-lW-gdn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.49099999999999999" green="0.11914237588644028" blue="0.21175861358642578" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="xUa-Xb-2Lt" firstAttribute="leading" secondItem="GGE-Pb-RDI" secondAttribute="leading" constant="37" id="AYI-ah-Hqh"/>
+                            <constraint firstItem="GCR-Ls-0ND" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="3US-MV-sQS"/>
+                            <constraint firstItem="xUa-Xb-2Lt" firstAttribute="top" secondItem="Q4S-D2-wsc" secondAttribute="bottom" constant="20" id="AaU-wM-cSe"/>
                             <constraint firstItem="Q4S-D2-wsc" firstAttribute="top" secondItem="9xE-Vc-zu0" secondAttribute="bottom" constant="8" id="DKE-Kf-puw"/>
-                            <constraint firstItem="xUa-Xb-2Lt" firstAttribute="top" secondItem="Q4S-D2-wsc" secondAttribute="bottom" constant="26" id="FCV-U7-7Xd"/>
                             <constraint firstItem="L8H-pn-K2I" firstAttribute="top" secondItem="boa-rZ-3KQ" secondAttribute="bottom" constant="12" id="Fp6-gk-EUb"/>
-                            <constraint firstItem="GCR-Ls-0ND" firstAttribute="top" secondItem="xUa-Xb-2Lt" secondAttribute="bottom" constant="34" id="Ihi-Db-BYU"/>
                             <constraint firstItem="zFE-zi-A79" firstAttribute="leading" secondItem="GGE-Pb-RDI" secondAttribute="leading" constant="37" id="Ivb-ES-BRf"/>
                             <constraint firstItem="MJ8-nC-pjp" firstAttribute="top" secondItem="GGE-Pb-RDI" secondAttribute="top" constant="43" id="Jrk-b5-AFM"/>
                             <constraint firstItem="zFE-zi-A79" firstAttribute="top" secondItem="MJ8-nC-pjp" secondAttribute="bottom" constant="34" id="MYg-ft-Vuw"/>
                             <constraint firstItem="L8H-pn-K2I" firstAttribute="leading" secondItem="GGE-Pb-RDI" secondAttribute="leading" constant="37" id="PmD-BC-w7u"/>
-                            <constraint firstItem="6H9-uD-orp" firstAttribute="leading" secondItem="xUa-Xb-2Lt" secondAttribute="trailing" constant="15" id="PoC-ea-zce"/>
                             <constraint firstItem="boa-rZ-3KQ" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="RCK-sP-NYE"/>
-                            <constraint firstItem="6H9-uD-orp" firstAttribute="top" secondItem="Q4S-D2-wsc" secondAttribute="bottom" constant="34" id="Wbi-fN-u97"/>
+                            <constraint firstItem="xUa-Xb-2Lt" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="S3N-S1-Ag6"/>
+                            <constraint firstItem="6H9-uD-orp" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="X7F-2f-SML"/>
                             <constraint firstItem="9xE-Vc-zu0" firstAttribute="top" secondItem="L8H-pn-K2I" secondAttribute="bottom" constant="8" id="Xpo-vo-o6Z"/>
+                            <constraint firstItem="6H9-uD-orp" firstAttribute="top" secondItem="xUa-Xb-2Lt" secondAttribute="bottom" constant="17" id="axs-Tj-sx7"/>
                             <constraint firstItem="MJ8-nC-pjp" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="ciH-Cq-6NO"/>
-                            <constraint firstItem="GCR-Ls-0ND" firstAttribute="leading" secondItem="GGE-Pb-RDI" secondAttribute="leading" constant="134" id="ePA-dG-WgP"/>
+                            <constraint firstItem="GCR-Ls-0ND" firstAttribute="top" secondItem="6H9-uD-orp" secondAttribute="bottom" constant="8" id="g6o-PZ-dBK"/>
                             <constraint firstItem="9xE-Vc-zu0" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="iE3-Oq-ZfD"/>
                             <constraint firstItem="boa-rZ-3KQ" firstAttribute="top" secondItem="zFE-zi-A79" secondAttribute="bottom" constant="8" id="ivl-Sc-Vn3"/>
                             <constraint firstItem="Q4S-D2-wsc" firstAttribute="centerX" secondItem="vm5-2t-DhL" secondAttribute="centerX" id="x0W-le-1qZ"/>
@@ -1792,7 +1800,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
-        <segue reference="ccL-Gp-Dot"/>
+        <segue reference="ZqN-gz-AFu"/>
         <segue reference="TKL-oa-ub7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
