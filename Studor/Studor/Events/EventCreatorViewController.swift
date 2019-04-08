@@ -30,6 +30,7 @@ class EventCreatorViewController: UIViewController {
         let note = UNMutableNotificationContent()
         
         note.title = "Notice"
+        
         note.body = contacts[addParticipantsDropDown.selectedIndex!] + " added to event."
         note.sound = UNNotificationSound.default
         note.categoryIdentifier = "Note"
@@ -55,7 +56,6 @@ class EventCreatorViewController: UIViewController {
     @IBAction func confirmButtonTapped(_ sender: Any) {
         if let title = eventNameTextField.text, let loc = eventLocationTextField.text{
             
-            // TODO: Get the firebase IDs of participants added, have autofill for them, and add the event reference to their document on firestore
             firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, title: title)
         }
         else{
