@@ -27,7 +27,7 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(users: [String], date: Date, title: String){
+    func createEvent(users: [String], date: Date, title: String, location: String){
         
         let thisUsername = firebaseSingleton.getFirestoreIdForCurrentUser()
         
@@ -36,6 +36,7 @@ class StudorFunctions {
             "creator" : thisUsername,
             "participants" : users,
             "date" : date,
+            "location" : location
         ]
         
         var eventRef: DocumentReference? = nil
@@ -50,8 +51,7 @@ class StudorFunctions {
         let eventId = String(eventRef!.documentID)
         
         let userRef = db.collection("Users").document(thisUsername)
-    
-        // Atomically add a new region to the "regions" array field.
+
         userRef.updateData([
                 "events" : FieldValue.arrayUnion([eventId])
             ])

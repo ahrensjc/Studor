@@ -171,6 +171,31 @@ class LogInUITest: XCTestCase {
         
     }
     
+    func testLikeDislike() {
+        /*
+        let app = XCUIApplication()
+        app.textFields["email"].tap()
+        let passwordSecureTextField = app.secureTextFields["password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.tap()
+        app.buttons["Log In"].tap()
+         */
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["ayyyy"]/*[[".cells.staticTexts[\"ayyyy\"]",".staticTexts[\"ayyyy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let likeButton = app.buttons["like"]
+        likeButton.tap()
+        app.buttons["likeColor"].tap()
+        
+        let dislikeButton = app.buttons["dislike"]
+        dislikeButton.tap()
+        app.buttons["dislikeColor"].tap()
+        likeButton.tap()
+        dislikeButton.tap()
+        likeButton.tap()
+        app.navigationBars["Profile"].buttons["Explore"].tap()
+        
+    }
+    
     /*func testEvents() {
         
         let app = XCUIApplication()
