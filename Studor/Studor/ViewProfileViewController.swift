@@ -59,7 +59,7 @@ class ViewProfileViewController: UIViewController {
     }
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".length)))
+        let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
                 self.profileData = document.data()!
@@ -115,7 +115,7 @@ class ViewProfileViewController: UIViewController {
             if let document = document, document.exists {
                 self.profileData = document.data()!
                 self.sendbirdID = self.profileData["sendbirdID"] as? String ?? "" //Initialize bio from firebase
-                var myNickname = self.profileData["nickname"] as? String ?? ""
+                var myNickname = self.profileData["NickName"] as? String ?? ""
                 print(self.thisSendbirdID)
                 print(self.sendbirdID)
                 
@@ -171,19 +171,19 @@ class ViewProfileViewController: UIViewController {
                 let profileData = document.data()
                 var didFindMe = false
                 for user in profileData!["usersWhoHaveLiked"] as? [String] ?? [] {
-                    if user == String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)) {
+                    if user == Auth.auth().currentUser!.uid {
                         didFindMe = true
                     }
                 }
                 var temp = profileData!["usersWhoHaveLiked"] as? [String] ?? []
                 if didFindMe {
-                    let ref1 = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
                     ref1.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let profileData = document.data()
                             var temp1 = profileData!["usersLiked"] as? [String] ?? []
                             temp1.remove(at: temp1.firstIndex(of: self.id)!)
-                            firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))).updateData([
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
                                 "usersLiked": temp1
                             ]) { err in
                                 if let err = err {
@@ -195,7 +195,7 @@ class ViewProfileViewController: UIViewController {
                             }
                         }
                     }
-                    temp.remove(at: temp.firstIndex(of: String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))!)
+                    temp.remove(at: temp.firstIndex(of: Auth.auth().currentUser!.uid)!)
                     firebaseSingleton.db.collection("Users").document(self.id).updateData(
                         ["usersWhoHaveLiked": temp]
                     ) { err in
@@ -208,13 +208,13 @@ class ViewProfileViewController: UIViewController {
                     }
                 }
                 else {
-                    let ref1 = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
                     ref1.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let profileData = document.data()
                             var temp1 = profileData!["usersLiked"] as? [String] ?? []
                             temp1.append(self.id)
-                            firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))).updateData([
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
                                 "usersLiked": temp1
                             ]) { err in
                                 if let err = err {
@@ -226,7 +226,7 @@ class ViewProfileViewController: UIViewController {
                             }
                         }
                     }
-                    temp.append(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
+                    temp.append(Auth.auth().currentUser!.uid)
                     firebaseSingleton.db.collection("Users").document(self.id).updateData(
                         ["usersWhoHaveLiked": temp]
                     ) { err in
@@ -249,19 +249,19 @@ class ViewProfileViewController: UIViewController {
                 let profileData = document.data()
                 var didFindMe = false
                 for user in profileData!["usersWhoHaveDisliked"] as? [String] ?? [] {
-                    if user == String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)) {
+                    if user == Auth.auth().currentUser!.uid {
                         didFindMe = true
                     }
                 }
                 var temp = profileData!["usersWhoHaveDisliked"] as? [String] ?? []
                 if didFindMe {
-                    let ref1 = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
                     ref1.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let profileData = document.data()
                             var temp1 = profileData!["usersDisliked"] as? [String] ?? []
                             temp1.remove(at: temp1.firstIndex(of: self.id)!)
-                            firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))).updateData([
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
                                 "usersDisliked": temp1
                             ]) { err in
                                 if let err = err {
@@ -273,7 +273,7 @@ class ViewProfileViewController: UIViewController {
                             }
                         }
                     }
-                    temp.remove(at: temp.firstIndex(of: String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))!)
+                    temp.remove(at: temp.firstIndex(of: Auth.auth().currentUser!.uid)!)
                     firebaseSingleton.db.collection("Users").document(self.id).updateData(
                         ["usersWhoHaveDisliked": temp]
                     ) { err in
@@ -286,13 +286,13 @@ class ViewProfileViewController: UIViewController {
                     }
                 }
                 else {
-                    let ref1 = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
+                    let ref1 = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
                     ref1.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let profileData = document.data()
                             var temp1 = profileData!["usersDisliked"] as? [String] ?? []
                             temp1.append(self.id)
-                            firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count))).updateData([
+                            firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
                                 "usersDisliked": temp1
                             ]) { err in
                                 if let err = err {
@@ -304,7 +304,7 @@ class ViewProfileViewController: UIViewController {
                             }
                         }
                     }
-                    temp.append(String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)))
+                    temp.append(Auth.auth().currentUser!.uid)
                     firebaseSingleton.db.collection("Users").document(self.id).updateData(
                         ["usersWhoHaveDisliked": temp]
                     ) { err in

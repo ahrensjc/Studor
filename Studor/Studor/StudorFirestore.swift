@@ -63,7 +63,7 @@ class StudorFunctions {
         
         var ref: DocumentReference?
         
-        for i in 0..<users.count{
+        for i in 1..<users.count{
             
             ref = db.collection("Users").document(users[i])
             ref!.updateData([
