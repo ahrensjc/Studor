@@ -50,14 +50,14 @@ class LogInViewController: UIViewController {
                     }
                 } else {
                     print("Error:\(error!.localizedDescription)")
+                    self.showMessagePrompt(withString: "Username or password fields are incorrect/missing", title: "Error")
                 }
-
-                
             }
         }
             
         else {
-            self.showMessagePrompt(withString: "Username or password fields are missing", title: "Error")
+            
+            self.showMessagePrompt(withString: "Username or password fields are incorrect/missing", title: "Error")
         }
     }
     

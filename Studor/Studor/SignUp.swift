@@ -149,7 +149,7 @@ func credentialsValid(password: String, confirmPassword: String, email: String) 
     }
 
     func isPasswordValidLength(password: String) -> Bool {
-        return password.count >= 6 ? true : false
+        return password.count >= 7 ? true : false
     }
 
     func isValidEmail(email: String) -> Bool {
