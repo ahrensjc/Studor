@@ -1120,9 +1120,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xr9-kw-uT7">
-                                            <rect key="frame" x="155" y="11.333333333333336" width="134" height="21"/>
+                                            <rect key="frame" x="155" y="11.333333333333336" width="213" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="134" id="NRL-UM-XNC"/>
+                                                <constraint firstAttribute="width" constant="213" id="tIx-Wa-Q3U"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -1130,9 +1130,9 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="xr9-kw-uT7" firstAttribute="centerY" secondItem="JdZ-o5-ZmW" secondAttribute="centerY" id="Jhw-1Z-McS"/>
+                                        <constraint firstItem="xr9-kw-uT7" firstAttribute="centerY" secondItem="JdZ-o5-ZmW" secondAttribute="centerY" id="KQB-eE-KwH"/>
                                         <constraint firstItem="vsa-13-qLZ" firstAttribute="leading" secondItem="JdZ-o5-ZmW" secondAttribute="leading" constant="10" id="cXU-xk-p3p"/>
-                                        <constraint firstItem="xr9-kw-uT7" firstAttribute="leading" secondItem="vsa-13-qLZ" secondAttribute="trailing" constant="8" id="imo-Xm-gQo"/>
+                                        <constraint firstItem="xr9-kw-uT7" firstAttribute="leading" secondItem="vsa-13-qLZ" secondAttribute="trailing" constant="8" id="xCJ-5b-63i"/>
                                         <constraint firstItem="vsa-13-qLZ" firstAttribute="centerY" secondItem="JdZ-o5-ZmW" secondAttribute="centerY" id="ytY-4a-zBs"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -1166,7 +1166,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqJ-xf-JYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3199.1999999999998" y="631.93403298350825"/>
+            <point key="canvasLocation" x="3198.5507246376815" y="631.47321428571422"/>
         </scene>
         <!--Event View Controller-->
         <scene sceneID="h4V-xk-hPP">
