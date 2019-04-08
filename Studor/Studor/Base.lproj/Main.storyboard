@@ -603,7 +603,7 @@
                                     <constraint firstAttribute="height" constant="16" id="tKe-1b-hMz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_logo_color_background" translatesAutoresizingMaskIntoConstraints="NO" id="2eK-hH-ypA">
@@ -1819,7 +1819,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="hYa-lu-hmu"/>
         <segue reference="ZqN-gz-AFu"/>
-        <segue reference="TKL-oa-ub7"/>
+        <segue reference="dwS-zY-wM5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

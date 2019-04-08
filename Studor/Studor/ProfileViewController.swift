@@ -123,21 +123,121 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         }
     }
     @IBAction func nicknameEdit(_ sender: Any) {
-        // TODO
-        self.view.addSubview(nicknamePopover)
-        nicknamePopover.center = self.view.center
-        nicknameTextField.text = nicknameLabel.text
-        // set nicknameLabel text
-        // set database to new nickname
+        // 1.
+        var nicknameTextField: UITextField?
+        
+        // 2.
+        let alertController = UIAlertController(
+            title: "Edit Nickname",
+            message: "",
+            preferredStyle: .alert)
+        
+        // 3.
+        let saveNicknameAction = UIAlertAction(
+        title: "Save", style: .default) {
+            (action) -> Void in
+            
+            if let nickname = nicknameTextField?.text {
+                let db = Firestore.firestore()
+                db.collection("Users").document(firebaseSingleton.getFirestoreIdForCurrentUser()).updateData([
+                    "nickname": nickname
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    }
+                    else {
+                        SBDMain.updateCurrentUserInfo(withNickname: self.nicknameTextField.text!, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
+                            // ...
+                        })
+                        self.nicknameLabel.text = nickname
+                        print("Document successfully written!")
+                    }
+                }
+            }
+        }
+        
+        let cancelNicknameAction = UIAlertAction(
+        title: "Cancel", style: .cancel) {
+            (action) -> Void in
+            print("canceled")
+        }
+        
+        //editNicknameAction.
+        
+        // 4.
+        alertController.addTextField {
+            (txtUsername) -> Void in
+            nicknameTextField = txtUsername
+            nicknameTextField!.text = self.nicknameLabel.text
+        }
+        
+        // 5.
+        alertController.addAction(saveNicknameAction)
+        alertController.addAction(cancelNicknameAction)
+        alertController.view.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
+        present(alertController, animated: true, completion: nil)
+        
+        //self.view.addSubview(nicknamePopover)
+        //nicknamePopover.center = self.view.center
+        //nicknameTextField.text = nicknameLabel.text
     }
     @IBAction func bioEdit(_ sender: Any) {
-        // TODO
-        // call up modal?
-        self.view.addSubview(bioPopover)
-        bioPopover.center = self.view.center
-        bioTextView.text = bioText.text
-        // set bio text
-        // set database to new bio text
+        // 1.
+        //var nicknameTextField: UITextField?
+        var bioEdit: UITextField?
+        
+        // 2.
+        let alertController = UIAlertController(
+            title: "Edit Bio",
+            message: "",
+            preferredStyle: .alert)
+        
+        // 3.
+        let saveBioAction = UIAlertAction(
+        title: "Save", style: .default) {
+            (action) -> Void in
+            
+            if let bio = bioEdit?.text {
+                let db = Firestore.firestore()
+                db.collection("Users").document(firebaseSingleton.getFirestoreIdForCurrentUser()).updateData([
+                    "bio": bio
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    }
+                    else {
+                        self.bioText.text = bio
+                        print("Document successfully written!")
+                    }
+                }
+            }
+        }
+        
+        let cancelBioAction = UIAlertAction(
+        title: "Cancel", style: .cancel) {
+            (action) -> Void in
+            print("canceled")
+        }
+        
+        //editNicknameAction.
+        
+        // 4.
+        alertController.addTextField {
+            (txtUsername) -> Void in
+            bioEdit = txtUsername
+            bioEdit!.text = self.bioText.text
+        }
+        
+        // 5.
+        alertController.addAction(saveBioAction)
+        alertController.addAction(cancelBioAction)
+        alertController.view.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
+        present(alertController, animated: true, completion: nil)
+        
+        
+        //self.view.addSubview(bioPopover)
+        //bioPopover.center = self.view.center
+        //bioTextView.text = bioText.text
     }
     
     
