@@ -12,15 +12,29 @@ class EventViewController: UIViewController {
 
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
-    @IBOutlet weak var eventLocationLabel: UILabel!
     @IBOutlet weak var eventOwnerLabel: UILabel!
     @IBOutlet weak var editEventButton: UIButton!
+    @IBOutlet weak var eventLocationLabel: UILabel!
+    @IBOutlet weak var participantsLabel: UILabel!
     
+    var selectedEvent: Event?
+    var timeOfEvent: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // TODO: Hide edit event button if user is not owner of event
+        setSelectedEventElements()
+    }
+    
+    func setSelectedEventElements(){
+        eventNameLabel.text = selectedEvent!.title!
+        eventOwnerLabel.text = "Created by: " + selectedEvent!.creator!
+        eventLocationLabel.text = "Meeting in " + selectedEvent!.loc!
+        eventDateLabel.text = "at " + timeOfEvent!
+        
+        for p in selectedEvent!.participants! {
+            participantsLabel.text! += p + "\n"
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

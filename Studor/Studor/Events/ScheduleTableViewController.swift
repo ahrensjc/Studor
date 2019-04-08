@@ -14,12 +14,16 @@ class Event{
     var title: String?
     var participants: [String]?
     var eventId: String?
+    var creator: String?
+    var loc: String?
     
-    init(date: Date, title: String, participants: [String], eventId: String){
+    init(date: Date, title: String, participants: [String], eventId: String, creator: String, loc: String){
         self.date = date
         self.title = title
         self.participants = participants
         self.eventId = eventId
+        self.creator = creator
+        self.loc = loc
     }
 }
 
@@ -30,6 +34,7 @@ class ScheduleTableViewController: UITableViewController {
     var events: [Event] = []
     var rawData: [String]?
     var selectedEvent: Event?
+    var selectedTime: String?
     
     @IBOutlet var eventTableView: UITableView!
     
@@ -75,6 +80,7 @@ class ScheduleTableViewController: UITableViewController {
         var date: Date?
         var title: String?
         var participants: [String]?
+        var location: String?
     
         let docRef = db.collection("Events").document(id)
         docRef.getDocument { (document, error) in
@@ -89,7 +95,8 @@ class ScheduleTableViewController: UITableViewController {
                 
                 title = (document.data()!["title"] as! String)
                 participants = (document.data()!["participants"] as! [String])
-                let newEvent = Event(date: date!, title: title!, participants: participants!, eventId: id)
+                location = (document.data()?["location"]  ?? "HAL") as? String
+                let newEvent = Event(date: date!, title: title!, participants: participants!, eventId: id, creator: firebaseSingleton.getFirestoreIdForCurrentUser(), loc: location!)
                 completion(newEvent)
             } else {
                 print("Event does not exist")
@@ -99,7 +106,6 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     @objc private func refreshData(_ sender: Any) {
-        print("reloading table")
         
         DispatchQueue.main.async {
             self.events.removeAll()
@@ -202,12 +208,27 @@ class ScheduleTableViewController: UITableViewController {
         // TODO: Navigate to event details page from row tap
         
         selectedEvent = events[indexPath.row]
+        selectedTime = convertTimeToTwelveHourFormat(date: events[indexPath.row].date!)
         
+        performSegue(withIdentifier: "eventInTableTapped", sender: self)
     }
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowHeight = CGFloat(66.0)
         return rowHeight
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "eventInTableTapped") {
+
+            var dest = segue.destination as! EventViewController
+
+            dest.selectedEvent = self.selectedEvent!
+            dest.timeOfEvent = selectedTime!
+            print("segue to details page")
+        }
     }
 
 }

@@ -27,7 +27,7 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(users: [String], date: Date, title: String){
+    func createEvent(users: [String], date: Date, title: String, location: String){
         
         let thisUsername = firebaseSingleton.getFirestoreIdForCurrentUser()
         
@@ -36,6 +36,7 @@ class StudorFunctions {
             "creator" : thisUsername,
             "participants" : users,
             "date" : date,
+            "location" : location
         ]
         
         var eventRef: DocumentReference? = nil
