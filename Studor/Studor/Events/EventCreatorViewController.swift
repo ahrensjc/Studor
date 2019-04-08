@@ -25,38 +25,50 @@ class EventCreatorViewController: UIViewController {
     @IBOutlet weak var addParticipantsDropDown: DropDown!
     
     @IBAction func addParticipantsButton(_ sender: Any) {
-        
+
         let center = UNUserNotificationCenter.current()
         let note = UNMutableNotificationContent()
+        let newParticipant = contacts[addParticipantsDropDown.selectedIndex!]
         
-        note.title = "Notice"
+        if !participants.contains(newParticipant){
+            participants.append(newParticipant)
+            note.title = "Notice:"
+            note.body = newParticipant + " added to event."
+            
+            note.categoryIdentifier = "Note"
+            note.sound = UNNotificationSound.default
+            
+            // clear it after adding
+            addParticipantsDropDown.text = ""
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "Note", content: note, trigger: trigger)
+            
+            center.add(request, withCompletionHandler: {
+                (error) in
+                if error != nil {
+                    print("Something went wrong")
+                }
+                else{
+                    print("Notifying user")
+                }
+            })
+        }
+        else{
+            showMessagePrompt(withString: "User already added to event.", title: "ERR")
+        }
         
-        note.body = contacts[addParticipantsDropDown.selectedIndex!] + " added to event."
-        note.sound = UNNotificationSound.default
-        note.categoryIdentifier = "Note"
-        
-        // clear it after adding
-        addParticipantsDropDown.text = ""
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.3, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "Note", content: note, trigger: trigger)
-        
-        center.add(request, withCompletionHandler: {
-            (error) in
-            if error != nil {
-                print("Something went wrong")
-            }
-            else{
-                print("Notifying user")
-            }
-        })
+
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
-        if let title = eventNameTextField.text, let loc = eventLocationTextField.text{
+        
+        if let title = eventNameTextField.text, let loc = eventLocationTextField.text {
             
-            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, title: title)
+            firebaseSingleton.createEvent(users: participants, date: eventDatePicker.date, title: title, location: loc)
+            
+            participants.removeAll()
         }
         else{
             self.showMessagePrompt(withString: "Please fill in all form fields.", title: "Missing Fields")
@@ -82,11 +94,13 @@ class EventCreatorViewController: UIViewController {
                 print(error as Any)
                 return
             }
-            
 
             for channel in channels! {
                 for member in channel.members! as! [SBDUser] {
-                    self.contacts.append(member.userId)
+                    
+                    if member.userId != firebaseSingleton.getFirestoreIdForCurrentUser(){
+                        self.contacts.append(member.userId)
+                    }
                 }
             }
             
