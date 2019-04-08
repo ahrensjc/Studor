@@ -156,7 +156,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         }
         
         let cancelNicknameAction = UIAlertAction(
-        title: "Cancel", style: .default) {
+        title: "Cancel", style: .cancel) {
             (action) -> Void in
             print("canceled")
         }
@@ -173,6 +173,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         // 5.
         alertController.addAction(saveNicknameAction)
         alertController.addAction(cancelNicknameAction)
+        alertController.view.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         present(alertController, animated: true, completion: nil)
         
         //self.view.addSubview(nicknamePopover)
@@ -212,7 +213,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         }
         
         let cancelBioAction = UIAlertAction(
-        title: "Cancel", style: .default) {
+        title: "Cancel", style: .cancel) {
             (action) -> Void in
             print("canceled")
         }
@@ -229,6 +230,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         // 5.
         alertController.addAction(saveBioAction)
         alertController.addAction(cancelBioAction)
+        alertController.view.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         present(alertController, animated: true, completion: nil)
         
         
