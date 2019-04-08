@@ -61,6 +61,7 @@ class ScheduleTableViewController: UITableViewController {
                 if let newEvent = newEvent{
                     self.events.append(newEvent)
                     self.eventTableView.reloadData()
+                    self.sortTableByDate()
                 }
                 else{
                     print("error initializing event for id: " + eventId)
@@ -97,6 +98,8 @@ class ScheduleTableViewController: UITableViewController {
         DispatchQueue.main.async {
             self.events.removeAll()
             self.getCompleteEventData()
+            
+            self.sortTableByDate()
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
@@ -126,6 +129,13 @@ class ScheduleTableViewController: UITableViewController {
             else{
                 print("Error reading eventIds; value is nil")
             }
+        })
+    }
+    
+    func sortTableByDate(){
+        print("Sort table view")
+        events.sort(by: {
+            $0.date!.compare($1.date!) == .orderedAscending
         })
     }
     
@@ -176,6 +186,11 @@ class ScheduleTableViewController: UITableViewController {
         
         selectedEvent = events[indexPath.row]
         
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let rowHeight = CGFloat(66.0)
+        return rowHeight
     }
 
 }
