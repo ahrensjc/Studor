@@ -592,15 +592,8 @@
                                     <segue destination="BEZ-zt-9L7" kind="show" id="eaD-ft-N8k"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_logo_color_background" translatesAutoresizingMaskIntoConstraints="NO" id="2eK-hH-ypA">
-                                <rect key="frame" x="101.66666666666669" y="145" width="211" height="95"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="6m9-QJ-ZTw"/>
-                                    <constraint firstAttribute="width" constant="211" id="Cc2-EQ-XHg"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Don't Have an Account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoN-kI-JIs">
-                                <rect key="frame" x="128" y="488" width="158" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't Have an Account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoN-kI-JIs">
+                                <rect key="frame" x="134.66666666666666" y="488" width="144.99999999999997" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="145" id="YRy-jS-UB1"/>
                                     <constraint firstAttribute="height" constant="16" id="tKe-1b-hMz"/>
@@ -609,6 +602,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_logo_color_background" translatesAutoresizingMaskIntoConstraints="NO" id="2eK-hH-ypA">
+                                <rect key="frame" x="101.66666666666669" y="145" width="211" height="95"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="6m9-QJ-ZTw"/>
+                                    <constraint firstAttribute="width" constant="211" id="Cc2-EQ-XHg"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.49241620302200317" green="0.12042336910963058" blue="0.21176186203956604" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -637,7 +637,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccf-QS-Ajw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="386.95652173913044" y="-762.05357142857144"/>
+            <point key="canvasLocation" x="388" y="-761.46926536731644"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="FQ7-fk-2GX">
@@ -677,8 +677,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enter GCC Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-zi-A79">
-                                <rect key="frame" x="57" y="260" width="140" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter GCC Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-zi-A79">
+                                <rect key="frame" x="57" y="260" width="113" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="lHp-mE-36Q"/>
                                     <constraint firstAttribute="width" constant="113" id="uCi-zb-ExQ"/>
@@ -687,8 +687,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enter Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8H-pn-K2I">
-                                <rect key="frame" x="57" y="328" width="130" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8H-pn-K2I">
+                                <rect key="frame" x="57" y="328" width="107" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="Zvo-GS-Obe"/>
                                     <constraint firstAttribute="width" constant="107" id="mOo-PK-Zfe"/>
