@@ -93,6 +93,8 @@ class MessagesTableViewController: UITableViewController {
             } else {
                 title = String(mems[0]) //"Messages with " + 
             }
+        } else {
+            cell.groupLabel.text = "Group Channel"
         }
         
         if myChannels[indexPath.item].accepted {
