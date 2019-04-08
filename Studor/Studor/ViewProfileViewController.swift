@@ -53,6 +53,9 @@ class ViewProfileViewController: UIViewController {
         for tag in tags {
             tagText.text!.append("\(tag)\n")
         }
+        self.tagText.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
+        self.tagText.layer.cornerRadius = 8; //rounded edges
+        self.tagText.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
     }
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

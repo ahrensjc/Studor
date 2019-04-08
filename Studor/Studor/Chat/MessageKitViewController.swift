@@ -64,7 +64,28 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "bg.png")
+        imageView.contentMode = .scaleAspectFill
         
+        self.messagesCollectionView.backgroundView = imageView
+        
+        /*view.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0)
+        // Adding the image view to the view hierarchy
+        view.addSubview(imageView)
+        
+        // Make image view to fit entire screen
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])*/
+        
+      
+        
+       // view.sendSubviewToBack(imageView)
         //print(channelURL)
         
         setLoadingScreen()
@@ -82,7 +103,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         
 
         //TODO: how to get current user nickname
-        member = Member(name: sendbirdUser.nickname ?? "", color: .blue)
+        member = Member(name: sendbirdUser.nickname ?? "", color: .darkGray)
         //member = Member(name: .randomName, color: .random)
 
         messagesCollectionView.messagesDataSource = self
@@ -263,7 +284,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
                         print(sender.userId)
                         print(firebaseSingleton.sendbirdUser?.userId)
                         if sender.userId == firebaseSingleton.sendbirdUser?.userId {
-                            let myMsg = Message(member: Member(name: firebaseSingleton.sendbirdUser?.nickname ?? "empty nickname", color: UIColor.blue), text: thing.message!, messageId: thing.requestId!)
+                            let myMsg = Message(member: Member(name: firebaseSingleton.sendbirdUser?.nickname ?? "empty nickname", color: UIColor.darkGray), text: thing.message!, messageId: thing.requestId!)
                             self.messages.append(myMsg)
                         } else {
                             let myMsg = Message(member: Member(name: sender.nickname ?? "", color: UIColor.red), text: thing.message!, messageId: thing.requestId!)
@@ -376,7 +397,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
         
         // Sets loading text
-        loadingLabel.textColor = .gray
+        loadingLabel.textColor = .white
         loadingLabel.textAlignment = .center
         loadingLabel.text = "Loading..."
         loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
@@ -387,6 +408,7 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         activityIndicator.hidesWhenStopped = true
         activityIndicator.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
         activityIndicator.startAnimating()
+        
         
         // Adds text and spinner to the view
         loadingView.addSubview(activityIndicator)
@@ -460,6 +482,10 @@ extension MessageKitViewController: MessagesDisplayDelegate {
         let message = messages[indexPath.section]
         let color = message.member.color
         avatarView.backgroundColor = color
+    }
+    
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        return isFromCurrentSender(message: message) ? .darkGray : .white
     }
 }
 
