@@ -48,6 +48,20 @@
                BlueprintName = "StudorUITests"
                ReferencedContainer = "container:Studor.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "LogInUITest/testEvents()">
+               </Test>
+               <Test
+                  Identifier = "LogInUITest/testMakeGroup()">
+               </Test>
+               <Test
+                  Identifier = "LogInUITest/testMessages()">
+               </Test>
+               <Test
+                  Identifier = "LogInUITest/testProfileEdit()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">

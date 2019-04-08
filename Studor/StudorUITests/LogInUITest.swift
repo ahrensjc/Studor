@@ -29,21 +29,24 @@ class LogInUITest: XCTestCase {
     }
     
     func testSignUp() {
+        
         let app = XCUIApplication()
         app.buttons["Sign Up"].tap()
         app.textFields["Email"].tap()
-        app.typeText("emailaddress4@gcc.edu")
-        let passwordTextField = app.secureTextFields["Password"]
-        passwordTextField.tap()
-        passwordTextField.tap()
-        app.typeText("password")
-        let confirmPasswordTextField = app.textFields["Confirm Password"]
-        confirmPasswordTextField.tap()
-        confirmPasswordTextField.tap()
-        app.typeText("password")
+        app.typeText("woooooow@gcc.edu")
+        
+        let passwordSecureTextField = app.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.tap()
+        app.typeText("1234567")
+        app.secureTextFields["Confirm Password"].tap()
+        app.typeText("1234567")
+        app/*@START_MENU_TOKEN@*/.buttons["Tutor"]/*[[".segmentedControls.buttons[\"Tutor\"]",".buttons[\"Tutor\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.buttons["Create Account"].tap()
         app.tabBars.children(matching: .button).element(boundBy: 3).tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
+        
     }
     
     func testTags() {
@@ -53,47 +56,32 @@ class LogInUITest: XCTestCase {
         app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
-        app.tabBars.children(matching: .button).element(boundBy: 3).tap()
-        app.buttons["TAGS"].tap()
-        app.textFields["Search Tags..."].tap()
-        app.typeText("Bio")
-        app.buttons["Add tag"].tap()
+        
+        _ = XCUIApplication()
+        app.tabBars.buttons["Profile"].tap()
+        app.buttons["+"].tap()
+        app.textFields["Search Courses..."].tap()
+        
+        let tablesQuery = app.tables
+        let comp314StaticText = tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["COMP 314"]/*[[".cells.staticTexts[\"COMP 314\"]",".staticTexts[\"COMP 314\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        comp314StaticText.tap()
+        app.buttons["Add Course"].tap()
         app.navigationBars["Studor.TagSearchView"].buttons["Profile"].tap()
-        app.buttons["Delete Tags"].tap()
-        app.tables.staticTexts["Bio"].tap()
+        app.buttons["Trash"].tap()
+        comp314StaticText.swipeLeft()
+        tablesQuery.buttons["Delete"].tap()
         app.navigationBars["Studor.DeleteTagsView"].buttons["Profile"].tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
     }
     
     func testMessages() {
-        let app = XCUIApplication()
-        app.textFields["email"].tap()
-        app.typeText("james@gcc.edu")
-        app.secureTextFields["password"].tap()
-        app.typeText("1234567")
-        app.buttons["Log In"].tap()
         
-        let tabBarsQuery = app.tabBars
-        tabBarsQuery.children(matching: .button).element(boundBy: 1).tap()
-        
-        
-        let label = app.tables/*@START_MENU_TOKEN@*/.staticTexts["new group 5"]/*[[".cells.staticTexts[\"new group 5\"]",".staticTexts[\"new group 5\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        let exists = NSPredicate(format: "exists == 1")
-        
-        expectation(for: exists, evaluatedWith: label, handler: nil)
-        waitForExpectations(timeout: 5, handler: nil)
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["new group 5"]/*[[".cells.staticTexts[\"new group 5\"]",".staticTexts[\"new group 5\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        
-        app.textViews.staticTexts["New Message"].tap()
-        app.typeText("test message")
-        app.buttons["Send"].tap()
-        app.navigationBars["Title"].buttons["Messages"].tap()
-        tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
-        app.navigationBars["Profile"].buttons["Sign Out"].tap()
     }
     
     func testMakeGroup() {
-        let app = XCUIApplication()
+        
+        /*let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
         app.secureTextFields["password"].tap()
@@ -101,29 +89,26 @@ class LogInUITest: XCTestCase {
         app.buttons["Log In"].tap()
         
         let tabBarsQuery = app.tabBars
-        tabBarsQuery.children(matching: .button).element(boundBy: 1).tap()
+        tabBarsQuery.buttons["Messages"].tap()
+        app.navigationBars["My Channels"].buttons["Create Group"].tap()
         
-        let createGroupButton = app.navigationBars["Messages"].buttons["Create Group"]
-        createGroupButton.tap()
-        
-        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
-        element.children(matching: .textField).element(boundBy: 0).tap()
-        app.typeText("deleteMe")
-        
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
         let textField = element.children(matching: .textField).element(boundBy: 1)
-        textField.tap()
-        app.typeText("user1")
+        app.textFields["groupName"].tap()
+        app.typeText("newgroup5")
+        
+        let tablesQuery = app.tables
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["test5"]/*[[".cells.staticTexts[\"test5\"]",".staticTexts[\"test5\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
         let addButton = app.buttons["Add"]
         addButton.tap()
         textField.tap()
-        app.typeText("user2")
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["test4"]/*[[".cells.staticTexts[\"test4\"]",".staticTexts[\"test4\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         addButton.tap()
+        element.children(matching: .textField).element(boundBy: 0).tap()
         app.buttons["Confirm"].tap()
-        createGroupButton.tap()
-        app.buttons["Cancel"].tap()
-        tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
-        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        tabBarsQuery.buttons["Profile"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()*/
         
         
         
@@ -142,7 +127,7 @@ class LogInUITest: XCTestCase {
     
     func testProfileEdit() {
         
-        let app = XCUIApplication()
+        /*let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
         app.secureTextFields["password"].tap()
@@ -167,24 +152,29 @@ class LogInUITest: XCTestCase {
         textView.tap()
         textView.tap()
         cancelButton.tap()
-        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()*/
         
     }
     
     func testLikeDislike() {
-        /*
+        
         let app = XCUIApplication()
         app.textFields["email"].tap()
-        let passwordSecureTextField = app.secureTextFields["password"]
-        passwordSecureTextField.tap()
-        passwordSecureTextField.tap()
+        app.typeText("james@gcc.edu")
+        app.secureTextFields["password"].tap()
+        app.typeText("1234567")
         app.buttons["Log In"].tap()
-         */
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["ayyyy"]/*[[".cells.staticTexts[\"ayyyy\"]",".staticTexts[\"ayyyy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tables.cells.containing(.staticText, identifier:"ayyyy").staticTexts["Tutor"].tap()
+        
+        
+        _ = XCUIApplication()
+        //app.tables/*@START_MENU_TOKEN@*/.staticTexts["ayyyy"]/*[[".cells.staticTexts[\"ayyyy\"]",".staticTexts[\"ayyyy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
         let likeButton = app.buttons["like"]
         likeButton.tap()
-        app.buttons["likeColor"].tap()
+        
+        let likecolorButton = app.buttons["likeColor"]
+        likecolorButton.tap()
         
         let dislikeButton = app.buttons["dislike"]
         dislikeButton.tap()
@@ -192,13 +182,17 @@ class LogInUITest: XCTestCase {
         likeButton.tap()
         dislikeButton.tap()
         likeButton.tap()
-        app.navigationBars["Profile"].buttons["Explore"].tap()
+        likecolorButton.tap()
+        app.tabBars.buttons["Profile"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
+        
         
     }
     
-    /*func testEvents() {
+    func testEvents() {
         
-        let app = XCUIApplication()
+        /*let app = XCUIApplication()
         app.textFields["email"].tap()
         app.typeText("james@gcc.edu")
         app.secureTextFields["password"].tap()
@@ -239,7 +233,7 @@ class LogInUITest: XCTestCase {
         createEventNavigationBar.buttons["Cancel"].tap()
         tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
-        
-    }*/
+        */
+    }
 
 }
