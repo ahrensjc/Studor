@@ -38,7 +38,7 @@ class EventCreatorViewController: UIViewController {
         // clear it after adding
         addParticipantsDropDown.text = ""
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.3, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
         
         let request = UNNotificationRequest(identifier: "Note", content: note, trigger: trigger)
         
@@ -82,11 +82,13 @@ class EventCreatorViewController: UIViewController {
                 print(error as Any)
                 return
             }
-            
 
             for channel in channels! {
                 for member in channel.members! as! [SBDUser] {
-                    self.contacts.append(member.userId)
+                    
+                    if member.userId != firebaseSingleton.getFirestoreIdForCurrentUser(){
+                        self.contacts.append(member.userId)
+                    }
                 }
             }
             

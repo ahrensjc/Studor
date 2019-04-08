@@ -50,8 +50,7 @@ class StudorFunctions {
         let eventId = String(eventRef!.documentID)
         
         let userRef = db.collection("Users").document(thisUsername)
-    
-        // Atomically add a new region to the "regions" array field.
+
         userRef.updateData([
                 "events" : FieldValue.arrayUnion([eventId])
             ])

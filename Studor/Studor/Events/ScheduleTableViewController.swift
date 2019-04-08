@@ -58,7 +58,7 @@ class ScheduleTableViewController: UITableViewController {
 
         for eventId in eventIds {
             createEventFromId(id: eventId, completion:{ (newEvent) in
-                if let newEvent = newEvent{
+                if let newEvent = newEvent {
                     self.events.append(newEvent)
                     self.eventTableView.reloadData()
                     self.sortTableByDate()
@@ -81,6 +81,12 @@ class ScheduleTableViewController: UITableViewController {
             if let document = document, document.exists {
                 
                 date = Date(timeIntervalSince1970: TimeInterval((document.data()!["date"] as! Timestamp).seconds))
+                
+                if Date() > date! {
+                    completion(nil)
+                    return
+                }
+                
                 title = (document.data()!["title"] as! String)
                 participants = (document.data()!["participants"] as! [String])
                 let newEvent = Event(date: date!, title: title!, participants: participants!, eventId: id)
@@ -98,7 +104,6 @@ class ScheduleTableViewController: UITableViewController {
         DispatchQueue.main.async {
             self.events.removeAll()
             self.getCompleteEventData()
-            
             self.sortTableByDate()
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
@@ -139,6 +144,19 @@ class ScheduleTableViewController: UITableViewController {
         })
     }
     
+    func removeExpiredEvents(){
+        
+        let currentTime = Date()
+        
+        for (i, event) in events.enumerated() {
+            if event.date! < currentTime {
+                events.remove(at: i)
+                print("removed " + event.title!)
+                
+            }
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -146,7 +164,6 @@ class ScheduleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! ScheduleTableViewCell
