@@ -1179,6 +1179,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="at Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW3-qj-3NR">
                                 <rect key="frame" x="219" y="150" width="157" height="17"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="157" id="VmV-Dt-6kc"/>
                                     <constraint firstAttribute="width" constant="157" id="fRA-pa-IC2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1188,6 +1189,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Event Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wip-dN-8qL">
                                 <rect key="frame" x="31" y="154" width="180" height="17"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="MCQ-80-mjW"/>
                                     <constraint firstAttribute="width" constant="180" id="dMH-8g-Xgu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1228,7 +1230,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aW3-qj-3NR" firstAttribute="top" secondItem="fBK-eF-m4v" secondAttribute="bottom" constant="4" id="1ph-Of-auQ"/>
+                            <constraint firstItem="kgD-tL-mz1" firstAttribute="trailing" secondItem="aW3-qj-3NR" secondAttribute="trailing" constant="38" id="Iay-2g-OBW"/>
                             <constraint firstItem="wip-dN-8qL" firstAttribute="top" secondItem="fBK-eF-m4v" secondAttribute="bottom" constant="8" id="MRq-n5-LI5"/>
+                            <constraint firstItem="aW3-qj-3NR" firstAttribute="top" secondItem="fBK-eF-m4v" secondAttribute="bottom" constant="4" id="cvm-Ft-Uxp"/>
+                            <constraint firstItem="aW3-qj-3NR" firstAttribute="leading" secondItem="wip-dN-8qL" secondAttribute="trailing" constant="8" id="mvT-o6-LLd"/>
+                            <constraint firstItem="aW3-qj-3NR" firstAttribute="leading" secondItem="wip-dN-8qL" secondAttribute="trailing" constant="8" id="poL-Si-Tnj"/>
+                            <constraint firstItem="wip-dN-8qL" firstAttribute="top" secondItem="fBK-eF-m4v" secondAttribute="bottom" constant="8" id="qD1-o2-gdF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kgD-tL-mz1"/>
                     </view>
