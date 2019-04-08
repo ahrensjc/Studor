@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import iOSDropDown
 import SendBirdSDK
+import UserNotifications
 
 class EventCreatorViewController: UIViewController {
 
@@ -25,6 +26,30 @@ class EventCreatorViewController: UIViewController {
     
     @IBAction func addParticipantsButton(_ sender: Any) {
         
+        let center = UNUserNotificationCenter.current()
+        let note = UNMutableNotificationContent()
+        
+        note.title = "Notice"
+        note.body = contacts[addParticipantsDropDown.selectedIndex!] + " added to event."
+        note.sound = UNNotificationSound.default
+        note.categoryIdentifier = "Note"
+        
+        // clear it after adding
+        addParticipantsDropDown.text = ""
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.3, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "Note", content: note, trigger: trigger)
+        
+        center.add(request, withCompletionHandler: {
+            (error) in
+            if error != nil {
+                print("Something went wrong")
+            }
+            else{
+                print("Notifying user")
+            }
+        })
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
@@ -44,9 +69,8 @@ class EventCreatorViewController: UIViewController {
         
         addParticipantsDropDown.listHeight = 120
         addParticipantsDropDown.selectedRowColor = UIColor.white
-        
+        addParticipantsDropDown.optionArray = contacts
         retrieveSBChannels()
-        
     }
     
     func retrieveSBChannels(){
@@ -59,12 +83,14 @@ class EventCreatorViewController: UIViewController {
                 return
             }
             
+
             for channel in channels! {
                 for member in channel.members! as! [SBDUser] {
                     self.contacts.append(member.userId)
-                    print(member.userId + " added to event drop down")
                 }
             }
+            
+            self.addParticipantsDropDown.optionArray = self.contacts
         })
     }
     
