@@ -31,8 +31,11 @@ class EventViewController: UIViewController {
         eventLocationLabel.text = "Meeting in " + selectedEvent!.loc!
         eventDateLabel.text = "at " + timeOfEvent!
         
+        participantsLabel.text! += "\n"
+        
         for p in selectedEvent!.participants! {
-            participantsLabel.text! += p + "\n"
+            print(p)
+            participantsLabel.text! += p + "  \n"
         }
         
     }
