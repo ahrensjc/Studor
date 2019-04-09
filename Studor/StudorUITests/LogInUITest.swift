@@ -75,11 +75,51 @@ class LogInUITest: XCTestCase {
         
     }
     
-    func testMessages() {
+    func testMessage() {
+        
+        let app = XCUIApplication()
+        app.textFields["email"].tap()
+        app.typeText("james@gcc.edu")
+        app.secureTextFields["password"].tap()
+        app.typeText("1234567")
+        app.buttons["Log In"].tap()
+        
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["ayyyy"]/*[[".cells.staticTexts[\"ayyyy\"]",".staticTexts[\"ayyyy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Profile"].buttons["Messages"].tap()
+        app.textViews.containing(.staticText, identifier:"New Message").element.tap()
+        app.typeText("Message")
+        app.buttons["Send"].tap()
+        app.navigationBars["james ayyyy"].buttons["Profile"].tap()
+        app.tabBars.buttons["Profile"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
         
     }
     
-    func testMakeGroup() {
+    func testBasic() {
+        let app = XCUIApplication()
+        app.textFields["email"].tap()
+        app.typeText("james@gcc.edu")
+        app.secureTextFields["password"].tap()
+        app.typeText("1234567")
+        app.buttons["Log In"].tap()
+        
+        let tabBarsQuery = app.tabBars
+        tabBarsQuery.buttons["Messages"].tap()
+        tabBarsQuery.buttons["Events"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Wow look at all this stuff"]/*[[".cells.staticTexts[\"Wow look at all this stuff\"]",".staticTexts[\"Wow look at all this stuff\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Studor.EventView"].buttons["Schedule"].tap()
+        tabBarsQuery.buttons["Profile"].tap()
+        app.navigationBars["Profile"].buttons["Sign Out"].tap()
+        
+        
+    }
+    
+    //func testMessages() {
+        
+    //}
+    
+    //func testMakeGroup() {
         
         /*let app = XCUIApplication()
         app.textFields["email"].tap()
@@ -112,7 +152,7 @@ class LogInUITest: XCTestCase {
         
         
         
-    }
+    //}
     
     func testLoginAndSignout() {
         let app = XCUIApplication()
@@ -125,7 +165,7 @@ class LogInUITest: XCTestCase {
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
     }
     
-    func testProfileEdit() {
+    //func testProfileEdit() {
         
         /*let app = XCUIApplication()
         app.textFields["email"].tap()
@@ -154,7 +194,7 @@ class LogInUITest: XCTestCase {
         cancelButton.tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()*/
         
-    }
+    //}
     
     func testLikeDislike() {
         
@@ -190,7 +230,7 @@ class LogInUITest: XCTestCase {
         
     }
     
-    func testEvents() {
+    //func testEvents() {
         
         /*let app = XCUIApplication()
         app.textFields["email"].tap()
@@ -234,6 +274,6 @@ class LogInUITest: XCTestCase {
         tabBarsQuery.children(matching: .button).element(boundBy: 3).tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
         */
-    }
+    //}
 
 }
