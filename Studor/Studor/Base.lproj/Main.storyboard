@@ -1368,6 +1368,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="VMw-ST-k28">
+                                <rect key="frame" x="47" y="395" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="574312462.37785101">
+                                    <!--2019-03-15 03:14:22 +0000-->
+                                </date>
+                            </datePicker>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Participants" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YG-yF-Igl" customClass="DropDown" customModule="iOSDropDown">
                                 <rect key="frame" x="57" y="155" width="300" height="30"/>
                                 <constraints>
@@ -1377,14 +1383,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxV-TW-rc2">
-                                <rect key="frame" x="355" y="150" width="30" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="+"/>
-                                <connections>
-                                    <action selector="addParticipantsButton:" destination="xZR-sT-yI1" eventType="touchUpInside" id="ANk-37-Njh"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-ZX-wVg">
                                 <rect key="frame" x="57" y="345" width="300" height="30"/>
                                 <constraints>
@@ -1394,25 +1392,31 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="VMw-ST-k28">
-                                <rect key="frame" x="47" y="395" width="320" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="574312462.37785101">
-                                    <!--2019-03-15 03:14:22 +0000-->
-                                </date>
-                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxV-TW-rc2">
+                                <rect key="frame" x="364" y="150" width="30" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="Z52-7H-UpZ"/>
+                                    <constraint firstAttribute="width" constant="30" id="dSP-m4-r2E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="addParticipantsButton:" destination="xZR-sT-yI1" eventType="touchUpInside" id="ANk-37-Njh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Q3m-Dy-fv0" firstAttribute="top" secondItem="Jwx-uy-1Uu" secondAttribute="top" constant="29" id="A21-wO-3sD"/>
                             <constraint firstItem="Q3m-Dy-fv0" firstAttribute="centerX" secondItem="HfK-YC-vhd" secondAttribute="centerX" id="A95-29-PZT"/>
-                            <constraint firstItem="bxV-TW-rc2" firstAttribute="leading" secondItem="Jwx-uy-1Uu" secondAttribute="leading" constant="355" id="CAh-hJ-IGZ"/>
                             <constraint firstItem="1nc-ZX-wVg" firstAttribute="centerX" secondItem="HfK-YC-vhd" secondAttribute="centerX" id="QQl-cw-lb7"/>
-                            <constraint firstItem="bxV-TW-rc2" firstAttribute="top" secondItem="Jwx-uy-1Uu" secondAttribute="top" constant="62" id="SkL-wE-gMi"/>
+                            <constraint firstItem="bxV-TW-rc2" firstAttribute="top" secondItem="Jwx-uy-1Uu" secondAttribute="top" constant="62" id="R1N-Qs-B5W"/>
                             <constraint firstItem="1nc-ZX-wVg" firstAttribute="top" secondItem="4YG-yF-Igl" secondAttribute="bottom" constant="160" id="bEw-gl-POe"/>
                             <constraint firstItem="VMw-ST-k28" firstAttribute="top" secondItem="1nc-ZX-wVg" secondAttribute="bottom" constant="20" id="gfm-OU-eyM"/>
                             <constraint firstItem="VMw-ST-k28" firstAttribute="centerX" secondItem="HfK-YC-vhd" secondAttribute="centerX" id="l5s-lE-k5O"/>
                             <constraint firstItem="4YG-yF-Igl" firstAttribute="top" secondItem="Q3m-Dy-fv0" secondAttribute="bottom" constant="8" id="lBz-6L-hKC"/>
                             <constraint firstItem="4YG-yF-Igl" firstAttribute="centerX" secondItem="HfK-YC-vhd" secondAttribute="centerX" id="qo8-At-jYq"/>
+                            <constraint firstItem="bxV-TW-rc2" firstAttribute="leading" secondItem="4YG-yF-Igl" secondAttribute="trailing" constant="7" id="u9I-90-7Cy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jwx-uy-1Uu"/>
                     </view>
