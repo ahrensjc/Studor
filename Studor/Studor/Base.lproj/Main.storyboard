@@ -1229,10 +1229,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ifi-pz-6Gq">
-                                <rect key="frame" x="115" y="482" width="184" height="191"/>
+                                <rect key="frame" x="115" y="482" width="184" height="132"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="191" id="0nd-Aw-08j"/>
+                                    <constraint firstAttribute="height" constant="132" id="0nd-Aw-08j"/>
                                     <constraint firstAttribute="width" constant="184" id="87y-VH-yzx"/>
                                 </constraints>
                                 <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1267,7 +1267,7 @@
                             <constraint firstItem="stV-L7-HF4" firstAttribute="centerX" secondItem="H4E-dS-bpb" secondAttribute="centerX" id="t7s-VN-Ual"/>
                             <constraint firstItem="EoO-C4-KkF" firstAttribute="centerX" secondItem="H4E-dS-bpb" secondAttribute="centerX" id="xWA-7p-rAK"/>
                             <constraint firstItem="stV-L7-HF4" firstAttribute="top" secondItem="nMI-5u-Cir" secondAttribute="bottom" constant="30" id="xu5-Gd-PhY"/>
-                            <constraint firstItem="kgD-tL-mz1" firstAttribute="bottom" secondItem="ifi-pz-6Gq" secondAttribute="bottom" constant="8" id="y3l-dc-2o7"/>
+                            <constraint firstItem="kgD-tL-mz1" firstAttribute="bottom" secondItem="ifi-pz-6Gq" secondAttribute="bottom" constant="67" id="y3l-dc-2o7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kgD-tL-mz1"/>
                     </view>
