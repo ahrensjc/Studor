@@ -53,6 +53,9 @@
                   Identifier = "LogInUITest/testEvents()">
                </Test>
                <Test
+                  Identifier = "LogInUITest/testExplorePage()">
+               </Test>
+               <Test
                   Identifier = "LogInUITest/testMakeGroup()">
                </Test>
                <Test
@@ -60,6 +63,12 @@
                </Test>
                <Test
                   Identifier = "LogInUITest/testProfileEdit()">
+               </Test>
+               <Test
+                  Identifier = "LogInUITest/testSignUp()">
+               </Test>
+               <Test
+                  Identifier = "LogInUITest/testTags()">
                </Test>
             </SkippedTests>
          </TestableReference>
