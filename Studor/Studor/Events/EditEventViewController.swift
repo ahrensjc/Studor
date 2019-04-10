@@ -22,10 +22,13 @@ class EditEventViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    @IBAction func cancelButtonTapped(_ sender: Any){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func confirmButtonTapped(_ sender: Any) {
         
         var changeTitle = false
-        var changeDate = false
         var changeLocation = false
         
         if let newTitle = eventNameTextField.text {
@@ -36,10 +39,8 @@ class EditEventViewController: UIViewController {
             changeLocation = (newLocation != editedEvent!.loc!)
         }
         
-        changeDate = (editedEvent!.date! != eventDatePicker.date)
         
-        
-        if changeDate || changeTitle || changeLocation {
+        if changeTitle || changeLocation {
             
             let batch = db.batch()
             
@@ -48,16 +49,16 @@ class EditEventViewController: UIViewController {
             
             
             if changeTitle {
-                batch.updateData(["title": eventNameTextField.text! ], forDocument: eventRef)
+                batch.updateData([ "title": eventNameTextField.text! ], forDocument: eventRef)
             }
             
             if changeLocation {
-                batch.updateData(["location": eventLocationTextField.text! ], forDocument: eventRef)
+                batch.updateData([ "location": eventLocationTextField.text! ], forDocument: eventRef)
             }
             
-            if changeDate {
-                batch.updateData(["date": eventDatePicker.date ], forDocument: eventRef)
-            }
+            
+            batch.updateData([ "date": eventDatePicker.date ], forDocument: eventRef)
+            
             
             // Commit the batch
             batch.commit() { err in
@@ -68,6 +69,7 @@ class EditEventViewController: UIViewController {
                 }
             }
         }
-        self.dismiss(animated: false, completion: nil)
+        
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

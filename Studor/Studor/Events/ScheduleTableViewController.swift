@@ -89,6 +89,7 @@ class ScheduleTableViewController: UITableViewController {
                 date = Date(timeIntervalSince1970: TimeInterval((document.data()!["date"] as! Timestamp).seconds))
                 
                 if Date() > date! {
+                    print("Removing Event because it's date has already passed")
                     completion(nil)
                     return
                 }

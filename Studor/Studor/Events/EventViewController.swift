@@ -30,10 +30,10 @@ class EventViewController: UIViewController {
         eventLocationLabel.text = selectedEvent!.loc!
         eventDateLabel.text = timeOfEvent!
         
-        participantsTextView.text! += "\n"
-        
         for p in selectedEvent!.participants! {
-            participantsTextView.text! += p + "  \n"
+
+            participantsTextView.text! += p + "\n"
+            
         }
         
     }
