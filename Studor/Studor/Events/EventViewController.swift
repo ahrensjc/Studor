@@ -22,6 +22,10 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setSelectedEventElements()
+        
+        if firebaseSingleton.getFirestoreIdForCurrentUser() != selectedEvent!.creator!{
+            editEventButton.isHidden = true
+        }
     }
     
     func setSelectedEventElements(){
