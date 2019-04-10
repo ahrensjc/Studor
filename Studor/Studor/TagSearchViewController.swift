@@ -47,7 +47,7 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         coursedDropDown.optionArray = TagList.list
-        coursedDropDown.listHeight = 120
+        coursedDropDown.listHeight = 300 //list size
         coursedDropDown.selectedRowColor = UIColor.white
         coursedDropDown.hideOptionsWhenSelect = false //list doesnt disspear when a course has been selected to avoid scrolling again if a course is accidentally tapped
         

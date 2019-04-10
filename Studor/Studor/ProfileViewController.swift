@@ -128,7 +128,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         
         // 2.
         let alertController = UIAlertController(
-            title: "Edit Nickname",
+            title: "Edit Display Name",
             message: "",
             preferredStyle: .alert)
         
@@ -146,11 +146,11 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
                         print("Error writing document: \(err)")
                     }
                     else {
-                        SBDMain.updateCurrentUserInfo(withNickname: self.nicknameTextField.text!, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
+                        SBDMain.updateCurrentUserInfo(withNickname: nickname, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
                             // ...
                         })
                         self.nicknameLabel.text = nickname
-                        print("Document successfully written!")
+                        print("updated sendbird nickname with: '\(nickname)'")
                     }
                 }
             }
