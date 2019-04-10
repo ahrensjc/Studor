@@ -11,6 +11,7 @@ import FirebaseDatabase
 import Firebase
 import SendBirdSDK
 import iOSDropDown
+import QuartzCore
 
 class ViewGroupProfileViewController: UIViewController {
     
@@ -30,10 +31,13 @@ class ViewGroupProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.memberList?.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
+        self.memberList?.layer.cornerRadius = 8; //rounded edges
+        self.memberList?.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         let applicationUserListQuery = SBDMain.createApplicationUserListQuery()
         //applicationUserListQuery?.userIdsFilter = ["jim"]
         applicationUserListQuery?.limit = 100
+        
         applicationUserListQuery?.loadNextPage(completionHandler: { (users, error) in
             guard error == nil else {
                 print("error getting user list")

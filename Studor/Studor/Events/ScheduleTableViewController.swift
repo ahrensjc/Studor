@@ -38,6 +38,11 @@ class ScheduleTableViewController: UITableViewController {
     
     @IBOutlet var eventTableView: UITableView!
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     @IBAction func unwindToScheduleFromEventCreation(segue:UIStoryboardSegue){
         print("unwinding")
     }
@@ -89,6 +94,7 @@ class ScheduleTableViewController: UITableViewController {
                 date = Date(timeIntervalSince1970: TimeInterval((document.data()!["date"] as! Timestamp).seconds))
                 
                 if Date() > date! {
+                    print("Removing Event because it's date has already passed")
                     completion(nil)
                     return
                 }
@@ -127,6 +133,8 @@ class ScheduleTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         db = Firestore.firestore()
         initializeRefreshControl()
         getCompleteEventData()

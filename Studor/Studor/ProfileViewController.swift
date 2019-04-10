@@ -128,7 +128,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         
         // 2.
         let alertController = UIAlertController(
-            title: "Edit Nickname",
+            title: "Edit Display Name",
             message: "",
             preferredStyle: .alert)
         
@@ -146,11 +146,11 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
                         print("Error writing document: \(err)")
                     }
                     else {
-                        SBDMain.updateCurrentUserInfo(withNickname: self.nicknameTextField.text!, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
+                        SBDMain.updateCurrentUserInfo(withNickname: nickname, profileUrl: "http://www.newdesignfile.com/postpic/2014/07/generic-profile-avatar_352864.jpg", completionHandler: { (error) in
                             // ...
                         })
                         self.nicknameLabel.text = nickname
-                        print("Document successfully written!")
+                        print("updated sendbird nickname with: '\(nickname)'")
                     }
                 }
             }
@@ -355,6 +355,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         self.tagTextView.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
         self.tagTextView.layer.cornerRadius = 8; //rounded edges
         self.tagTextView.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
+        
+        self.bioText.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
+        self.bioText.layer.cornerRadius = 8; //rounded edges
+        self.bioText.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         
         let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count)))
         ref.getDocument { (document, error) in

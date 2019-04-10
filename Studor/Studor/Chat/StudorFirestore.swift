@@ -27,16 +27,16 @@ class StudorFunctions {
     }
     
     // creates an event
-    func createEvent(users: [String], date: Date, description: String, title: String){
+    func createEvent(users: [String], date: Date, title: String, location: String){
         
-        let thisUsername = Auth.auth().currentUser?.email?.dropLast(emailSuffix.count)
+        let thisUsername = firebaseSingleton.getFirestoreIdForCurrentUser()
         
         let dataToAdd: [String : Any] = [
             "title" : title,
             "creator" : thisUsername,
             "participants" : users,
             "date" : date,
-            "description" : description,
+            "location" : location
         ]
         
         var eventRef: DocumentReference? = nil
@@ -44,26 +44,29 @@ class StudorFunctions {
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(eventRef!.documentID)")
+                print("Event document added with ID: \(eventRef!.documentID)")
             }
         }
         
-        let userRef = db.collection("Users").document(users[0])
-    
-        // Atomically add a new region to the "regions" array field.
+        let eventId = String(eventRef!.documentID)
+        
+        let userRef = db.collection("Users").document(thisUsername)
+
         userRef.updateData([
-                "events": FieldValue.arrayUnion([String(describing: eventRef!.documentID)])
+                "events" : FieldValue.arrayUnion([eventId])
             ])
         
-        self.updateEventsForUserDocuments(users: users, eventID: eventRef!.documentID)
+        self.updateEventsForUserDocuments(users: users, eventID: eventId)
     }
     
     func updateEventsForUserDocuments(users: [String], eventID: String){
         
-        for i in 1..<users.count{
+        var ref: DocumentReference?
+        
+        for i in 0..<users.count{
             
-            var ref = db.collection("Users").document(users[i])
-            ref.updateData([
+            ref = db.collection("Users").document(users[i])
+            ref!.updateData([
                     "events" : FieldValue.arrayUnion([eventID])
                 ])
             
@@ -107,7 +110,11 @@ class StudorFunctions {
         return profileInfo
     }
     
-    func getId() -> String {
-        return Auth.auth().currentUser!.uid
+    func getFirestoreIdForCurrentUser() -> String {
+        return String(Auth.auth().currentUser!.email!.dropLast(emailSuffix.count))
+    }
+    
+    func getSendbirdId() -> String {
+        return String(Auth.auth().currentUser!.email!.dropLast(emailSuffix.count))
     }
 }
