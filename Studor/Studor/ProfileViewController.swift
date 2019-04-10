@@ -356,6 +356,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         self.tagTextView.layer.cornerRadius = 8; //rounded edges
         self.tagTextView.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
         
+        self.bioText.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
+        self.bioText.layer.cornerRadius = 8; //rounded edges
+        self.bioText.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
+        
         let ref = firebaseSingleton.db.collection("Users").document(String(Auth.auth().currentUser!.email!.dropLast(suffix.count)))
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
