@@ -1635,7 +1635,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cn9-bA-7uC">
-                                <rect key="frame" x="181" y="122" width="52" height="13"/>
+                                <rect key="frame" x="27" y="122" width="360" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="ylf-F5-ceJ"/>
                                 </constraints>
@@ -1644,7 +1644,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNk-sJ-D5s" customClass="PaddingLabel" customModule="PaddingLabel">
-                                <rect key="frame" x="163" y="191" width="88" height="30"/>
+                                <rect key="frame" x="143" y="191" width="128" height="30"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="19"/>
                                 <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -1695,7 +1695,7 @@
                             <constraint firstItem="PNk-sJ-D5s" firstAttribute="top" secondItem="v9F-nS-cD9" secondAttribute="bottom" constant="4" id="GTB-W6-aJc"/>
                             <constraint firstItem="6cc-VU-cXz" firstAttribute="centerY" secondItem="4vU-4M-JkB" secondAttribute="centerY" id="HAL-dD-d2e"/>
                             <constraint firstItem="v9F-nS-cD9" firstAttribute="centerX" secondItem="o9J-V9-OTD" secondAttribute="centerX" id="Jen-bB-NLC"/>
-                            <constraint firstItem="cn9-bA-7uC" firstAttribute="leading" secondItem="kcL-9g-CAD" secondAttribute="leading" constant="181" id="Lse-mm-xSN"/>
+                            <constraint firstItem="cn9-bA-7uC" firstAttribute="leading" secondItem="kcL-9g-CAD" secondAttribute="leading" constant="27" id="Lse-mm-xSN"/>
                             <constraint firstItem="bMp-Ke-Xez" firstAttribute="top" secondItem="eZr-Pl-UjN" secondAttribute="bottom" constant="4" id="Obt-nn-azh"/>
                             <constraint firstItem="t6A-pY-cpU" firstAttribute="top" secondItem="kcL-9g-CAD" secondAttribute="top" constant="15" id="Tee-BA-9Zs"/>
                             <constraint firstItem="cn9-bA-7uC" firstAttribute="centerX" secondItem="o9J-V9-OTD" secondAttribute="centerX" id="Tfd-Ip-WXN"/>
