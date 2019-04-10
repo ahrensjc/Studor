@@ -19,8 +19,15 @@ class EventViewController: UIViewController {
     var selectedEvent: Event?
     var timeOfEvent: String?
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         setSelectedEventElements()
     self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.participantsTextView.layer.borderWidth = 1; //this is the width of the border of nickname om profile page

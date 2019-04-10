@@ -24,6 +24,11 @@ class EventCreatorViewController: UIViewController {
     
     @IBOutlet weak var addParticipantsDropDown: DropDown!
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     @IBAction func addParticipantsButton(_ sender: Any) {
 
         let center = UNUserNotificationCenter.current()
@@ -79,6 +84,8 @@ class EventCreatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         addParticipantsDropDown.listHeight = 120
         addParticipantsDropDown.selectedRowColor = UIColor.white
         addParticipantsDropDown.optionArray = contacts
