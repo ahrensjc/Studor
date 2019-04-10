@@ -99,7 +99,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                         if tag.lowercased().contains(searchText.lowercased()) {tagsContainsSearchText = true}
                     }
                 }
-                return matcher && (searchResult is SearchResult && ((searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) || tagsContainsSearchText) ||
+                return matcher && (searchResult is SearchResult && ((searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) || tagsContainsSearchText || (searchResult as! SearchResult).nickname.lowercased().contains(searchText.lowercased())) ||
                 (searchResult is GroupResult && (searchResult as! GroupResult).channelName.lowercased().contains(searchText.lowercased())))
             }
         })
