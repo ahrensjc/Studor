@@ -22,6 +22,11 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setSelectedEventElements()
+    self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.participantsTextView.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
+        self.participantsTextView.layer.cornerRadius = 8; //rounded edges
+        self.participantsTextView.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
+        
         
         if firebaseSingleton.getFirestoreIdForCurrentUser() != selectedEvent!.creator!{
             editEventButton.isHidden = true
