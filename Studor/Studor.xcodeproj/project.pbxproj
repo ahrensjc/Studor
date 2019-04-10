@@ -212,7 +212,6 @@
 				BEBA46972204EEA800E0D510 /* AppDelegate.swift */,
 				0D7D25B5220B9D01004A87C3 /* SignUp.swift */,
 				BEDFB95F220BADA6005903C1 /* LogInViewController.swift */,
-				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
 				BEBA469B2204EEA800E0D510 /* Main.storyboard */,
 				0F29068F22237318009E1B64 /* ViewProfileViewController.swift */,
 				0D4762B9220F8F8D00A0F980 /* TabBarController.swift */,
@@ -248,6 +247,7 @@
 			children = (
 				BEFEBDE922234EBB00EE9847 /* MessageKitViewController.swift */,
 				BE1547F2223DCA7500CA5A64 /* InvitationViewController.swift */,
+				0D4762BD2210D94500A0F980 /* StudorFirestore.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";

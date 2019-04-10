@@ -42,6 +42,8 @@ class ViewProfileViewController: UIViewController {
     var upvoteCount: Int!
     var downvoteCount: Int!
     
+    var fromChat = false
+    
     //TODO: Pricing label for all users (will hide if student user)
     
     override func viewDidLoad() {
@@ -56,6 +58,10 @@ class ViewProfileViewController: UIViewController {
         countsDirty = true
         let _ = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(setLikeButtonColours), userInfo: nil, repeats: true)
         let _ = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateLikeDislikeCount), userInfo: nil, repeats: true)
+        if fromChat {
+            doHideLikeButtons()
+            initialiseFields()
+        }
     }
     
     @objc func setLikeButtonColours() {
