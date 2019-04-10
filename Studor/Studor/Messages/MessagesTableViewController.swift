@@ -84,24 +84,58 @@ class MessagesTableViewController: UITableViewController {
             return cell
         }
         
+        var startString = ""
+        if myChannels[indexPath.item].accepted {
+            startString = ""
+            //cell.titleLabel.text = ""
+        } else {
+            startString = "INVITATION: "
+            //cell.titleLabel.text = "INVITITATION: "
+        }
+        
         var title = myChannels[indexPath.item].chan.name
         if !myChannels[indexPath.item].chan.isPublic {
             cell.groupLabel.text = "1:1 Channel"
             let mems = title.split(separator: " ")
             if mems[0] == firebaseSingleton.getSendbirdId() {
                 title = String(mems[1]) //"Messages with " +
+                let ref = Firestore.firestore().collection("Users").document(title)
+                var profileInfo: [String : Any] = [:]
+                ref.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                        print("Document data: \(dataDescription)")
+                        profileInfo = document.data()!
+                        title = profileInfo["nickname"] as! String
+                        cell.titleLabel.text = startString + title
+                    } else {
+                        print("Error retrieving profile data for user \(title)")
+                        cell.titleLabel.text = startString + title
+                    }
+                }
             } else {
-                title = String(mems[0]) //"Messages with " + 
+                title = String(mems[0]) //"Messages with " +
+                let ref = Firestore.firestore().collection("Users").document(title)
+                var profileInfo: [String : Any] = [:]
+                ref.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                        print("Document data: \(dataDescription)")
+                        profileInfo = document.data()!
+                        title = profileInfo["nickname"] as! String
+                        cell.titleLabel.text = startString + title
+                    } else {
+                        print("Error retrieving profile data for user \(title)")
+                        cell.titleLabel.text = startString + title
+                    }
+                }
             }
         } else {
+            cell.titleLabel.text = startString + title
             cell.groupLabel.text = "Group Channel"
         }
         
-        if myChannels[indexPath.item].accepted {
-            cell.titleLabel.text = title
-        } else {
-            cell.titleLabel.text = "INVITITATION: " + title
-        }
+        
         
         return cell
     }
@@ -222,6 +256,7 @@ class MessagesTableViewController: UITableViewController {
     }
     
     @objc private func refreshData(_ sender: Any) {
+        self.sendbirdUser = SBDMain.getCurrentUser()!
         let query = SBDGroupChannel.createMyGroupChannelListQuery()
         query?.includeEmptyChannel = true
         query?.limit = 100

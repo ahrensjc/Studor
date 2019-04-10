@@ -37,6 +37,8 @@ class ViewProfileViewController: UIViewController {
     var profileData: [String : Any]!
     var thisSendbirdID: String!
     
+    var fromChat = false
+    
     //TODO: Pricing label for all users (will hide if student user)
     
     override func viewDidLoad() {
@@ -49,6 +51,11 @@ class ViewProfileViewController: UIViewController {
         dislikeButton.setImage(dislikeButtonImage, for: .normal)
         likeListDirty = true
         let _ = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(setLikeButtonColours), userInfo: nil, repeats: true)
+        
+        if fromChat {
+            doHideLikeButtons()
+            initialiseFields()
+        }
     }
     
     @objc func setLikeButtonColours() {

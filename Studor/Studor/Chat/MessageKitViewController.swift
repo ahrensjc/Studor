@@ -40,24 +40,20 @@ extension Message: MessageType {
 
 class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invDelegate {
     
-    
-    
-    // ...
-    
     var delegateIdentifier : String!
     
-    //var messages: [Message] = []
     var member: Member!
     
     var channelURL : String!
     var sendbirdID : String!
-    //var nickname : String!
     var sendbirdUser : SBDUser!
     var messages = [Message]()
     var channel : SBDGroupChannel!
     
     let loadingView = UIView()
     let loadingLabel = UILabel()
+    
+    var profileId: String!
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
@@ -70,41 +66,12 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
         
         self.messagesCollectionView.backgroundView = imageView
         
-        /*view.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0)
-        // Adding the image view to the view hierarchy
-        view.addSubview(imageView)
-        
-        // Make image view to fit entire screen
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])*/
-        
-      
-        
-       // view.sendSubviewToBack(imageView)
-        //print(channelURL)
+        member = Member(name: sendbirdUser.nickname ?? "", color: .darkGray)
         
         setLoadingScreen()
         getChannel()
         
-        //getMessages()
         
-        /*let ref = firebaseSingleton.db.collection("Users").document(Auth.auth().currentUser!.uid)
-        ref.getDocument { (document, error) in
-            if let document = document, document.exists {
-                print("stuff")""
-            }
-        }*/
-        
-        
-
-        //TODO: how to get current user nickname
-        member = Member(name: sendbirdUser.nickname ?? "", color: .darkGray)
-        //member = Member(name: .randomName, color: .random)
 
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -144,14 +111,25 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             if groupChannel!.isPublic {
                 let button =  UIButton(type: .custom)
                 button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-                //button.backgroundColor = .red
-                //button.titleLabel?.textColor = UIColor(red:0.581, green:0.088, blue:0.319, alpha:1.0)
                 button.setTitleColor(UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0), for: .normal)
                 button.setTitle(self.channel.name, for: .normal)
                 button.addTarget(self, action: #selector(self.clickOnButton), for: .touchUpInside)
                 self.navigationItem.titleView = button
             } else {
-                self.navigationItem.title = self.channel.name
+                let button =  UIButton(type: .custom)
+                button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+                button.setTitleColor(UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0), for: .normal)
+                let mems = self.channel.name.split(separator: " ")
+                if mems[0] == firebaseSingleton.getSendbirdId() {
+                    self.profileId = String(mems[1])
+                    button.setTitle(self.profileId, for: .normal) //"Messages with " +
+                    button.addTarget(self, action: #selector(self.clickOnProfile), for: .touchUpInside)
+                } else {
+                    self.profileId = String(mems[0])
+                    button.setTitle(self.profileId, for: .normal) //"Messages with " +
+                    button.addTarget(self, action: #selector(self.clickOnProfile), for: .touchUpInside)
+                }
+                self.navigationItem.titleView = button
             }
             
             let keys = [self.sendbirdID]
@@ -382,6 +360,32 @@ class MessageKitViewController: MessagesViewController, SBDChannelDelegate, invD
             //viewController.channelName = channel.name
             if let navigator = navigationController {
                 navigator.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    @objc func clickOnProfile() {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "differentProfile") as? ViewProfileViewController {
+            let ref = firebaseSingleton.db.collection("Users").document(profileId)
+            var profileInfo: [String : Any] = [:]
+            ref.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    profileInfo = document.data()!
+                    print(profileInfo["username"] as? String ?? "No username")
+                    viewController.accountType = profileInfo["accountType"] as? String ?? ""
+                    viewController.id = self.profileId
+                    viewController.bio = profileInfo["bio"] as? String ?? ""
+                    viewController.nickname = profileInfo["nickname"] as? String ?? ""
+                    viewController.tags = profileInfo["tags"] as? [String] ?? []
+                    viewController.username = profileInfo["username"] as? String ?? ""
+                    viewController.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
+                    viewController.fromChat = true
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    }
+                } else {
+                    print("Error retrieving profile data for user \(self.profileId)")
+                }
             }
         }
     }
