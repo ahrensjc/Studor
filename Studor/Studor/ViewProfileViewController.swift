@@ -14,6 +14,8 @@ class ViewProfileViewController: UIViewController {
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var upCount: UILabel!
+    @IBOutlet weak var downCount: UILabel!
     @IBOutlet weak var bioText: UILabel!
     @IBOutlet weak var tagText : UITextView!
     @IBOutlet weak var likeButton : UIButton!
@@ -26,6 +28,7 @@ class ViewProfileViewController: UIViewController {
     
     var likeListDirty = false
     var dislikeListDirty = false
+    var countsDirty = false
     
     var accountType : String!
     var id : String!
@@ -36,6 +39,8 @@ class ViewProfileViewController: UIViewController {
     var sendbirdID: String!
     var profileData: [String : Any]!
     var thisSendbirdID: String!
+    var upvoteCount: Int!
+    var downvoteCount: Int!
     
     //TODO: Pricing label for all users (will hide if student user)
     
@@ -48,7 +53,9 @@ class ViewProfileViewController: UIViewController {
         likeButton.setImage(likeButtonImage, for: .normal)
         dislikeButton.setImage(dislikeButtonImage, for: .normal)
         likeListDirty = true
+        countsDirty = true
         let _ = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(setLikeButtonColours), userInfo: nil, repeats: true)
+        let _ = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateLikeDislikeCount), userInfo: nil, repeats: true)
     }
     
     @objc func setLikeButtonColours() {
@@ -88,16 +95,35 @@ class ViewProfileViewController: UIViewController {
         }
     }
     
+    @objc func updateLikeDislikeCount() {
+        if username != nil && countsDirty {
+            countsDirty = false
+            let ref = firebaseSingleton.db.collection("Users").document(username)
+            ref.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let profileData = document.data()
+                    self.downvoteCount = profileData!["noDislikes"] as? Int ?? 0
+                    self.upvoteCount = profileData!["noLikes"] as? Int ?? 0
+                    self.upCount.text = "\(self.upvoteCount ?? 0)"
+                    self.downCount.text = "\(self.downvoteCount ?? 0)"
+                }
+            }
+        }
+    }
+    
     func doHideLikeButtons() {
         if accountType.contains("Student"){
             likeButton.isHidden = true
             dislikeButton.isHidden = true
+            upCount.isHidden = true
+            downCount.isHidden = true
         }
     }
     
     func initialiseFields(){
         usernameLabel.text = username ?? ""
         nicknameLabel.text = nickname ?? ""
+        updateLikeDislikeCount()
         bioText.text = bio ?? ""
         for tag in tags {
             tagText.text!.append("\(tag)\n")
@@ -238,9 +264,6 @@ class ViewProfileViewController: UIViewController {
                                 if let err = err {
                                     print("Error writing document: \(err)")
                                 }
-                                else {
-                                    print("Document successfully written!")
-                                }
                             }
                         }
                     }
@@ -252,8 +275,17 @@ class ViewProfileViewController: UIViewController {
                             print("Error writing document: \(err)")
                         }
                         else {
-                            print("Document successfully written!")
                             self.likeListDirty = true
+                        }
+                    }
+                    firebaseSingleton.db.collection("Users").document(self.username).updateData(
+                            ["noLikes" : self.upvoteCount - 1]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            self.countsDirty = true
                         }
                     }
                 }
@@ -290,9 +322,6 @@ class ViewProfileViewController: UIViewController {
                                 if let err = err {
                                     print("Error writing document: \(err)")
                                 }
-                                else {
-                                    print("Document successfully written!")
-                                }
                             }
                         }
                     }
@@ -310,8 +339,12 @@ class ViewProfileViewController: UIViewController {
                             if let err = err {
                                 print("Error writing document: \(err)")
                             }
-                            else {
-                                print("Document successfully written!")
+                        }
+                        firebaseSingleton.db.collection("Users").document(self.username).updateData(
+                                ["noDislikes" : self.downvoteCount - 1]
+                        ) {
+                            err in if let err = err {
+                                print("error writing document: \(err)")
                             }
                         }
                     }
@@ -323,8 +356,17 @@ class ViewProfileViewController: UIViewController {
                             print("Error writing document: \(err)")
                         }
                         else {
-                            print("Document successfully written!")
                             self.likeListDirty = true
+                        }
+                    }
+                    firebaseSingleton.db.collection("Users").document(self.username).updateData(
+                            ["noLikes": self.upvoteCount + 1]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            self.countsDirty = true
                         }
                     }
                 }
@@ -357,9 +399,6 @@ class ViewProfileViewController: UIViewController {
                                 if let err = err {
                                     print("Error writing document: \(err)")
                                 }
-                                else {
-                                    print("Document successfully written!")
-                                }
                             }
                         }
                     }
@@ -371,8 +410,17 @@ class ViewProfileViewController: UIViewController {
                             print("Error writing document: \(err)")
                         }
                         else {
-                            print("Document successfully written!")
                             self.dislikeListDirty = true
+                        }
+                    }
+                    firebaseSingleton.db.collection("Users").document(self.username).updateData(
+                            ["noDislikes" : self.downvoteCount - 1]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            self.countsDirty = true
                         }
                     }
                 }
@@ -397,9 +445,6 @@ class ViewProfileViewController: UIViewController {
                                     if let err = err {
                                         print("Error writing document: \(err)")
                                     }
-                                    else {
-                                        print("Document successfully written!")
-                                    }
                                 }
                             }
                             temp1.append(self.username)
@@ -408,9 +453,6 @@ class ViewProfileViewController: UIViewController {
                             ]) { err in
                                 if let err = err {
                                     print("Error writing document: \(err)")
-                                }
-                                else {
-                                    print("Document successfully written!")
                                 }
                             }
                         }
@@ -429,8 +471,15 @@ class ViewProfileViewController: UIViewController {
                             if let err = err {
                                 print("Error writing document: \(err)")
                             }
+                        }
+                        firebaseSingleton.db.collection("Users").document(self.username).updateData(
+                                ["noLikes" : self.upvoteCount - 1]
+                        ) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            }
                             else {
-                                print("Document successfully written!")
+                                self.countsDirty = true
                             }
                         }
                     }
@@ -442,8 +491,17 @@ class ViewProfileViewController: UIViewController {
                             print("Error writing document: \(err)")
                         }
                         else {
-                            print("Document successfully written!")
                             self.dislikeListDirty = true
+                        }
+                    }
+                    firebaseSingleton.db.collection("Users").document(self.username).updateData(
+                            ["noDislikes" : self.downvoteCount + 1]
+                    ) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        }
+                        else {
+                            self.countsDirty = true
                         }
                     }
                 }
