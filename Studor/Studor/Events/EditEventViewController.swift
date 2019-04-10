@@ -20,7 +20,6 @@ class EditEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationBar.backgroundColor = UIColor.white
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any){
