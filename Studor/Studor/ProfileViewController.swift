@@ -128,7 +128,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         
         // 2.
         let alertController = UIAlertController(
-            title: "Edit Nickname",
+            title: "Edit Display Name",
             message: "",
             preferredStyle: .alert)
         
