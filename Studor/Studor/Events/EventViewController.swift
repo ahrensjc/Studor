@@ -21,9 +21,21 @@ class EventViewController: UIViewController {
     var timeOfEvent: String?
     let db = Firestore.firestore()
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         setSelectedEventElements()
+    self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.participantsTextView.layer.borderWidth = 1; //this is the width of the border of nickname om profile page
+        self.participantsTextView.layer.cornerRadius = 8; //rounded edges
+        self.participantsTextView.layer.borderColor = UIColor(red:137/250, green:17/250, blue:0/250, alpha: 1).cgColor //the color of the border
+        
         
         if firebaseSingleton.getFirestoreIdForCurrentUser() != selectedEvent!.creator!{
             editEventButton.isHidden = true

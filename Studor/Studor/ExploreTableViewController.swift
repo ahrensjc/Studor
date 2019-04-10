@@ -20,13 +20,15 @@ class ResultParent {
 
 class SearchResult : ResultParent {
     var name: String
+    var nickname: String
     var id: String
     var tags: [String] = []
     
-    init(_ _name : String, _ _type : String, _ _id : String, _ _tags: [String]){
+    init(_ _nickname : String, _ _name : String, _ _type : String, _ _id : String, _ _tags: [String]){
         name = _name
         id = _id
         tags.append(contentsOf: _tags)
+        nickname = _nickname
         super.init(_type)
     }
 }
@@ -97,7 +99,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                         if tag.lowercased().contains(searchText.lowercased()) {tagsContainsSearchText = true}
                     }
                 }
-                return matcher && (searchResult is SearchResult && ((searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) || tagsContainsSearchText) ||
+                return matcher && (searchResult is SearchResult && ((searchResult as! SearchResult).name.lowercased().contains(searchText.lowercased()) || tagsContainsSearchText || (searchResult as! SearchResult).nickname.lowercased().contains(searchText.lowercased())) ||
                 (searchResult is GroupResult && (searchResult as! GroupResult).channelName.lowercased().contains(searchText.lowercased())))
             }
         })
@@ -165,7 +167,9 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
             ref.getDocuments { (document, error) in
                 if let document = document, document.count > 0 {
                     for entry in document.documents {
-                        self.searchResults.append(SearchResult(entry.data()["username"] as? String ?? "no username", entry.data()["accountType"] as? String ?? "no account type", entry.documentID, entry.data()["tags"] as? [String] ?? []))
+                        if (entry.data()["username"] as? String ?? "no username") != String(Auth.auth().currentUser!.email!.dropLast("@gcc.edu".count)) {
+                            self.searchResults.append(SearchResult(entry.data()["nickname"] as? String ?? "no nickname",     entry.data()["username"] as? String ?? "no username", entry.data()["accountType"] as? String ?? "no account type", entry.documentID, entry.data()["tags"] as? [String] ?? []))
+                        }
                     }
                     self.otherDataCollectedOnce = true
                     self.tableView.reloadData()
@@ -194,7 +198,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
         let result = isFiltering() ? filteredResults[indexPath.row] : searchResults[indexPath.row]
         if result is SearchResult {
             let cell = tableView.dequeueReusableCell(withIdentifier: "exploreUserCell", for: indexPath) as! ExploreTableViewUserCell
-            cell.nameText = (result as! SearchResult).name
+            cell.nameText = (result as! SearchResult).nickname
             cell.typeText = (result as! SearchResult).type
             cell.initialiseData()
             return cell
@@ -214,7 +218,7 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if selectedResult is GroupResult {        // lol this should be an if-let
+        if selectedResult is GroupResult {
             let destination = segue.destination as! ViewGroupProfileViewController
             let result = selectedResult as! GroupResult
             destination.channelUrl = result.sendbirdURL
@@ -237,6 +241,8 @@ class ExploreTableViewController: UITableViewController, UITextFieldDelegate, UI
                     destination.tags = profileInfo["tags"] as? [String] ?? []
                     destination.username = profileInfo["username"] as? String ?? ""
                     destination.thisSendbirdID = profileInfo["sendbirdID"] as? String ?? ""
+                    destination.upvoteCount = profileInfo["noLikes"] as? Int ?? 0
+                    destination.downvoteCount = profileInfo["noDislikes"] as? Int ?? 0
                     destination.initialiseFields()
                 } else {
                     print("Error retrieving profile data for user \(result.id)")

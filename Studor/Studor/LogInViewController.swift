@@ -22,6 +22,11 @@ class LogInViewController: UIViewController {
         // Make google do this part
     }
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     @IBAction func logInButtonTapped(_ sender: Any) {
 
         if let email = usernameTextField.text, let password = passwordTextField.text{
@@ -67,6 +72,8 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
     }
     
