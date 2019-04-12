@@ -74,7 +74,7 @@ class ScheduleTableViewController: UITableViewController {
                     self.sortTableByDate()
                 }
                 else{
-                    print("error initializing event for id: " + eventId)
+                    print("Error retrieving event " + eventId + "\nIt is likely it expired")
                 }
             })
         }
@@ -133,8 +133,13 @@ class ScheduleTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        /* This breaks it
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+         */
         db = Firestore.firestore()
         initializeRefreshControl()
         getCompleteEventData()
@@ -218,6 +223,7 @@ class ScheduleTableViewController: UITableViewController {
         selectedEvent = events[indexPath.row]
         selectedTime = convertTimeToTwelveHourFormat(date: events[indexPath.row].date!)
         
+        print("table tapped")
         performSegue(withIdentifier: "eventInTableTapped", sender: self)
     }
     

@@ -1469,6 +1469,9 @@
                                     <action selector="confirmButtonTapped:" destination="xZR-sT-yI1" eventType="touchUpInside" id="mfe-Ez-LNm"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <segue destination="wvq-iI-B4v" kind="unwind" unwindAction="unwindToScheduleFromEventCreationWithSegue:" id="uF0-HP-cXj"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1644,7 +1647,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNk-sJ-D5s" customClass="PaddingLabel" customModule="PaddingLabel">
-                                <rect key="frame" x="143" y="191" width="128" height="30"/>
+                                <rect key="frame" x="163" y="191" width="88" height="30"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="19"/>
                                 <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>

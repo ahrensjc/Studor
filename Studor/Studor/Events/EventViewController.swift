@@ -56,6 +56,7 @@ class EventViewController: UIViewController {
         
     }
     
+    /*
     func reloadEventDataAfterEdit(id: String, completion: @escaping (Event?, String?) -> Void){
         
         let ref = db.collection("Events").document(id).getDocument{ (document, error) in
@@ -76,7 +77,9 @@ class EventViewController: UIViewController {
             }
         }
     }
+    */
     
+    /*
     @IBAction func unwindToEventViewAndReload(segue: UIStoryboardSegue){
         
         print("unwind and reload")
@@ -87,6 +90,7 @@ class EventViewController: UIViewController {
         self.setSelectedEventElements()
         
     }
+ */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dest = segue.destination as! EditEventViewController

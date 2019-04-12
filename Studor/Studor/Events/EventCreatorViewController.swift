@@ -33,6 +33,7 @@ class EventCreatorViewController: UIViewController {
 
         let center = UNUserNotificationCenter.current()
         let note = UNMutableNotificationContent()
+        print("new participant: " + contacts[addParticipantsDropDown.selectedIndex!])
         let newParticipant = contacts[addParticipantsDropDown.selectedIndex!]
         
         if !participants.contains(newParticipant){
@@ -84,15 +85,22 @@ class EventCreatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+
+        
+        retrieveSBChannels()
         addParticipantsDropDown.listHeight = 120
         addParticipantsDropDown.selectedRowColor = UIColor.white
         addParticipantsDropDown.optionArray = contacts
-        retrieveSBChannels()
+        
+        
+        /*
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+ */
     }
     
     func retrieveSBChannels(){
+        print("retrieving channels for user")
         let query = SBDGroupChannel.createMyGroupChannelListQuery()
         query?.includeEmptyChannel = false
         
