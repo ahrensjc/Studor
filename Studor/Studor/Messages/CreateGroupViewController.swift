@@ -35,8 +35,8 @@ class CreateGroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        //view.addGestureRecognizer(tap)
         
         let applicationUserListQuery = SBDMain.createApplicationUserListQuery()
         //applicationUserListQuery?.userIdsFilter = ["jim"]
@@ -127,6 +127,10 @@ class CreateGroupViewController: UIViewController {
         let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        addParticipantsDropDown.resignFirstResponder()
     }
     
     /*

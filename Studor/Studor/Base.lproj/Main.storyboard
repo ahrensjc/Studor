@@ -855,7 +855,7 @@
         <scene sceneID="uUU-ba-hRf">
             <objects>
                 <viewController storyboardIdentifier="cgvc" id="SMX-YB-nTd" customClass="CreateGroupViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8Nr-mU-w9J">
+                    <view key="view" contentMode="scaleToFill" id="8Nr-mU-w9J" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -957,6 +957,9 @@
                             <constraint firstItem="LVV-XR-8NK" firstAttribute="top" secondItem="BoM-xc-qva" secondAttribute="bottom" constant="20" id="vCV-K4-ksX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vXw-oT-r12"/>
+                        <connections>
+                            <action selector="hideKeyboardWithSender:" destination="SMX-YB-nTd" eventType="touchDown" id="cVR-bO-DZb"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="addParticipantsDropDown" destination="HdN-zx-3aF" id="Eg8-YC-Zx3"/>
@@ -1387,7 +1390,7 @@
         <scene sceneID="gsU-Yw-BTd">
             <objects>
                 <viewController id="xZR-sT-yI1" customClass="EventCreatorViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HfK-YC-vhd">
+                    <view key="view" contentMode="scaleToFill" id="HfK-YC-vhd" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1451,6 +1454,9 @@
                             <constraint firstItem="bxV-TW-rc2" firstAttribute="leading" secondItem="4YG-yF-Igl" secondAttribute="trailing" constant="7" id="u9I-90-7Cy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jwx-uy-1Uu"/>
+                        <connections>
+                            <action selector="hideKeyboardWithSender:" destination="xZR-sT-yI1" eventType="touchDown" id="hEH-z4-4rs"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Create Event" id="3cE-yd-epN">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="OO2-ok-Vat"/>

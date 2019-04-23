@@ -24,9 +24,13 @@ class EventCreatorViewController: UIViewController {
     
     @IBOutlet weak var addParticipantsDropDown: DropDown!
     
-    @objc func dismissKeyboard() {
+    //@objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+    //    view.endEditing(true)
+    //}
+    
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        addParticipantsDropDown.resignFirstResponder()
     }
     
     @IBAction func addParticipantsButton(_ sender: Any) {
