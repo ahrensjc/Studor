@@ -348,7 +348,7 @@
         <scene sceneID="iwb-M3-jv1">
             <objects>
                 <viewController id="MUZ-7K-9YM" customClass="TagSearchViewController" customModule="Studor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6yr-n9-X3m">
+                    <view key="view" contentMode="scaleToFill" id="6yr-n9-X3m" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -397,6 +397,9 @@
                             <constraint firstItem="iZM-Ps-cC0" firstAttribute="top" secondItem="I6a-df-ACO" secondAttribute="top" constant="218" id="qNL-7t-9ci"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I6a-df-ACO"/>
+                        <connections>
+                            <action selector="hideKeyboardWithSender:" destination="MUZ-7K-9YM" eventType="touchDown" id="0Ck-s6-Imm"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="coursedDropDown" destination="oku-pl-GUZ" id="k91-Mi-lsp"/>

@@ -41,6 +41,10 @@ class TagSearchViewController: UIViewController, UITextFieldDelegate{
         coursedDropDown.text = ""
     }
     
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        coursedDropDown.resignFirstResponder()
+    }
+    
     
     var courseList : [String]!
     
