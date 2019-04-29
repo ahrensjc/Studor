@@ -131,6 +131,7 @@ class CreateGroupViewController: UIViewController {
     
     @IBAction func hideKeyboard(sender: AnyObject) {
         addParticipantsDropDown.resignFirstResponder()
+        groupNameTextField.resignFirstResponder()
     }
     
     /*
