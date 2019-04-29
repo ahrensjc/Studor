@@ -26,6 +26,8 @@ class EventCreatorViewController: UIViewController {
     
     @IBAction func hideKeyboard(sender: AnyObject) {
         addParticipantsDropDown.resignFirstResponder()
+        eventNameTextField.resignFirstResponder()
+        eventLocationTextField.resignFirstResponder()
     }
     
     @IBAction func addParticipantsButton(_ sender: Any) {

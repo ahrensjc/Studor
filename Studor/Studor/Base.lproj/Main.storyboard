@@ -146,8 +146,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ds-6v-GYG">
-                                <rect key="frame" x="176" y="125" width="62" height="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ds-6v-GYG">
+                                <rect key="frame" x="6" y="125" width="401" height="13"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.492416203" green="0.1204233691" blue="0.211761862" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -183,7 +183,7 @@
                             <constraint firstItem="bJZ-wg-B07" firstAttribute="bottom" secondItem="p6Q-bV-J0T" secondAttribute="bottom" constant="30" id="OeT-jF-I3m"/>
                             <constraint firstItem="Dm3-Is-FSZ" firstAttribute="top" secondItem="7Ds-6v-GYG" secondAttribute="bottom" constant="36" id="QKW-Wm-ISc"/>
                             <constraint firstItem="yfj-TH-hBL" firstAttribute="top" secondItem="cad-3c-9pz" secondAttribute="bottom" constant="83" id="Rug-TX-9C4"/>
-                            <constraint firstItem="7Ds-6v-GYG" firstAttribute="leading" secondItem="bJZ-wg-B07" secondAttribute="leading" constant="176" id="Ulb-Vj-PjZ"/>
+                            <constraint firstItem="7Ds-6v-GYG" firstAttribute="leading" secondItem="bJZ-wg-B07" secondAttribute="leading" constant="6" id="Ulb-Vj-PjZ"/>
                             <constraint firstItem="wOm-T5-OYd" firstAttribute="centerX" secondItem="bxa-6N-aZW" secondAttribute="centerX" id="XP1-84-2bI"/>
                             <constraint firstItem="uYU-Gc-uzQ" firstAttribute="centerX" secondItem="bxa-6N-aZW" secondAttribute="centerX" id="XXB-iq-PWa"/>
                             <constraint firstItem="p6Q-bV-J0T" firstAttribute="centerX" secondItem="bxa-6N-aZW" secondAttribute="centerX" id="Xqo-LJ-4oJ"/>
