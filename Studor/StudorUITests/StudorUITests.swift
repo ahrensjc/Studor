@@ -56,7 +56,8 @@ class StudorUITests: XCTestCase {
         app.textViews.staticTexts["New Message"].tap()
         app.typeText("Hello There")
         app.buttons["Send"].tap()
-        app.navigationBars["james billy"].children(matching: .button).element(boundBy: 1).tap()
+        app.navigationBars["billy"].children(matching: .button).element(boundBy: 2).tap()
+        sleep(5)
         app.textFields["Event Title"].tap()
         app.typeText("New Event")
         
@@ -98,9 +99,9 @@ class StudorUITests: XCTestCase {
         let createEventNavigationBar = app.navigationBars["Create Event"]
         createEventNavigationBar.buttons["Create"].tap()
         
-        let emptyListTable = app.tables["Empty list"]
-        emptyListTable.swipeDown()
-        emptyListTable.swipeDown()
+        //let emptyListTable = app.tables["Empty list"]
+        //emptyListTable.swipeDown()
+        //emptyListTable.swipeDown()
         app.navigationBars["Schedule"].buttons["Add"].tap()
         createEventNavigationBar.buttons["Cancel"].tap()
         app.tabBars.buttons["Profile"].tap()
@@ -115,7 +116,7 @@ class StudorUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.textFields["email"].tap()
-        app.typeText("james@gcc.edu")
+        app.typeText("johnnytest@gcc.edu")
         app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
@@ -128,10 +129,15 @@ class StudorUITests: XCTestCase {
         
         
         _ = XCUIApplication()
+        sleep(2)
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).matching(identifier: "Edit").element(boundBy: 0).tap()
-        app.alerts["Edit Nickname"].buttons["Save"].tap()
+        app.alerts["Edit Pricing"].buttons["Save"].tap()
         //element.children(matching: .button).matching(identifier: "Edit").element(boundBy: 1).tap()
         //app.alerts["Edit Bio"].buttons["Save"].tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).matching(identifier: "Edit").element(boundBy: 1).tap()
+        app.alerts["Edit Display Name"].buttons["Save"].tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).matching(identifier: "Edit").element(boundBy: 2).tap()
+        app.alerts["Edit Bio"].buttons["Save"].tap()
         app.buttons["+"].tap()
         app.textFields["Search Courses..."].tap()
         
@@ -153,7 +159,7 @@ class StudorUITests: XCTestCase {
         let app = XCUIApplication()
         app.buttons["Sign Up"].tap()
         app.textFields["Email"].tap()
-        app.typeText("yaaay@gcc.edu")
+        app.typeText("anothertest4@gcc.edu")
         
         let passwordSecureTextField = app.secureTextFields["Password"]
         passwordSecureTextField.tap()
@@ -214,12 +220,12 @@ class StudorUITests: XCTestCase {
         app.typeText("1234567")
         app.buttons["Log In"].tap()
         
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["ayyyy"]/*[[".cells.staticTexts[\"ayyyy\"]",".staticTexts[\"ayyyy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tables.staticTexts["John Doe"].tap()
         app.navigationBars["Profile"].buttons["Messages"].tap()
         app.textViews.containing(.staticText, identifier:"New Message").element.tap()
         app.typeText("Message")
         app.buttons["Send"].tap()
-        app.navigationBars["james ayyyy"].buttons["Profile"].tap()
+        app.navigationBars["ayyyy"].buttons["Profile"].tap()
         app.tabBars.buttons["Profile"].tap()
         app.navigationBars["Profile"].buttons["Sign Out"].tap()
         
@@ -234,7 +240,7 @@ class StudorUITests: XCTestCase {
         app.secureTextFields["password"].tap()
         app.typeText("1234567")
         app.buttons["Log In"].tap()
-        app.tables.cells.containing(.staticText, identifier:"ayyyy").staticTexts["Tutor"].tap()
+        app.tables.cells.containing(.staticText, identifier:"John Doe").staticTexts["Tutor"].tap()
         
         
         _ = XCUIApplication()
@@ -329,17 +335,18 @@ class StudorUITests: XCTestCase {
         app.tabBars.buttons["Messages"].tap()
         app.tabBars.buttons["Messages"].tap()
         
+        sleep(5)
         let tablesQuery = app.tables
-        tablesQuery.cells.containing(.staticText, identifier:"newgroup6").staticTexts["Group Channel"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Group Channel"].tap()
         app.textViews.staticTexts["New Message"].tap()
         app.typeText("Hello There")
         app.buttons["Send"].tap()
-        app.navigationBars["newgroup6"].buttons["My Channels"].tap()
+        app.navigationBars["Test Group 7"].buttons["My Channels"].tap()
         app.navigationBars["My Channels"].buttons["Create Group"].tap()
         
         let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
         element.children(matching: .textField).element(boundBy: 0).tap()
-        element.children(matching: .textField).element(boundBy: 0).typeText("Test Group 3")
+        element.children(matching: .textField).element(boundBy: 0).typeText("Test Group 8")
         element.children(matching: .textField).element(boundBy: 1).tap()
         tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["yaay"]/*[[".cells.staticTexts[\"yaay\"]",".staticTexts[\"yaay\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.buttons["Add"].tap()
