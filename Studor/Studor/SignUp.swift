@@ -91,7 +91,8 @@ class SignUp : UIViewController {
             "sendbirdID" : prefix,
             "events" : [],
             "tags" : [],
-            "bio" : "Your bio here"
+            "bio" : "Your bio here",
+            "pricing" : "0"
         ]
         
         db.collection("Users").document(prefix).setData(data) { err in

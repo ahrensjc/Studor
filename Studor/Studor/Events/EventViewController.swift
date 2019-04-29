@@ -44,7 +44,7 @@ class EventViewController: UIViewController {
     
     func setSelectedEventElements(){
         self.title! = selectedEvent!.title!
-        eventOwnerLabel.text = "Creator: " + selectedEvent!.creator!
+        eventOwnerLabel.text = selectedEvent!.creator! + "'s event"
         eventLocationLabel.text = selectedEvent!.loc!
         eventDateLabel.text = timeOfEvent!
         

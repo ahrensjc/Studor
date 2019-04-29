@@ -24,52 +24,13 @@ class EventCreatorViewController: UIViewController {
     
     @IBOutlet weak var addParticipantsDropDown: DropDown!
     
-    //@objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-    //    view.endEditing(true)
-    //}
-    
     @IBAction func hideKeyboard(sender: AnyObject) {
         addParticipantsDropDown.resignFirstResponder()
     }
     
     @IBAction func addParticipantsButton(_ sender: Any) {
-
-        let center = UNUserNotificationCenter.current()
-        let note = UNMutableNotificationContent()
-        print("new participant: " + contacts[addParticipantsDropDown.selectedIndex!])
-        let newParticipant = contacts[addParticipantsDropDown.selectedIndex!]
-        
-        if !participants.contains(newParticipant){
-            participants.append(newParticipant)
-            note.title = "Notice:"
-            note.body = newParticipant + " added to event."
-            
-            note.categoryIdentifier = "Note"
-            note.sound = UNNotificationSound.default
-            
-            // clear it after adding
-            addParticipantsDropDown.text = ""
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: "Note", content: note, trigger: trigger)
-            
-            center.add(request, withCompletionHandler: {
-                (error) in
-                if error != nil {
-                    print("Something went wrong")
-                }
-                else{
-                    print("Notifying user")
-                }
-            })
-        }
-        else{
-            showMessagePrompt(withString: "User already added to event.", title: "ERR")
-        }
-        
-
+    
+        addParticipantToEventFromDropDown()
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
@@ -88,19 +49,54 @@ class EventCreatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        
         retrieveSBChannels()
         addParticipantsDropDown.listHeight = 120
         addParticipantsDropDown.selectedRowColor = UIColor.white
         addParticipantsDropDown.optionArray = contacts
+    }
+    
+    
+    // add user that's currently in the drop down index to the current event object.
+    // Sends a local notification afterwards
+    func addParticipantToEventFromDropDown(){
+        let center = UNUserNotificationCenter.current()
+        let note = UNMutableNotificationContent()
+        let pIndex = addParticipantsDropDown.selectedIndex ?? -1
         
-        
-        /*
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
- */
+        if pIndex != -1 {
+            
+            let newParticipant = contacts[pIndex]
+            print("new participant: " + newParticipant )
+            
+            if !participants.contains(newParticipant){
+                participants.append(newParticipant)
+                note.title = "Notice:"
+                note.body = newParticipant + " added to event."
+                
+                note.categoryIdentifier = "Note"
+                note.sound = UNNotificationSound.default
+                
+                // clear it after adding
+                addParticipantsDropDown.text = ""
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: "addUserToEvent", content: note, trigger: trigger)
+                
+                center.add(request, withCompletionHandler: {
+                    (error) in
+                    if error != nil {
+                        print("Something went wrong")
+                    }
+                    else{
+                        print("Notifying user")
+                    }
+                })
+            }
+            else{
+                showMessagePrompt(withString: "User already added to event.", title: "ERR")
+            }
+        }
     }
     
     func retrieveSBChannels(){

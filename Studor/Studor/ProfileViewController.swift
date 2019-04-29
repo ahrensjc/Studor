@@ -240,6 +240,79 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
         //bioTextView.text = bioText.text
     }
     
+    @IBAction func priceEdit(_ sender: Any) {
+        // 1.
+        //var nicknameTextField: UITextField?
+        var priceEdit: UITextField?
+        
+        // 2.
+        let alertController = UIAlertController(
+            title: "Edit Pricing",
+            message: "",
+            preferredStyle: .alert)
+        
+        // 3.
+        let savePriceAction = UIAlertAction(
+        title: "Save", style: .default) {
+            (action) -> Void in
+            
+            if let newPrice = priceEdit?.text {
+                let db = Firestore.firestore()
+                
+                
+                let numericalPrice = Int(newPrice)
+                if numericalPrice != nil{
+                   
+                    if numericalPrice! >= 0 && numericalPrice! <= 200 {
+                        db.collection("Users").document(firebaseSingleton.getFirestoreIdForCurrentUser()).updateData([
+                            "pricing": newPrice
+                        ]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            }
+                            else {
+                                self.pricingTextLabel.text = "$" + newPrice
+                                print("Document successfully written!")
+                            }
+                        }
+                    }
+                    else{
+                        self.showMessagePrompt(withString: "New price not in reasonable range.", title: "Error")
+                    }
+                }
+                else{
+                    self.showMessagePrompt(withString: "New price is not a number.", title: "Error")
+                }
+                
+            }
+        }
+        
+        let cancelPriceAction = UIAlertAction(
+        title: "Cancel", style: .cancel) {
+            (action) -> Void in
+            print("canceled")
+        }
+        
+        alertController.addTextField {
+            (txtUsername) -> Void in
+            priceEdit = txtUsername
+            
+            var curPrice = self.pricingTextLabel.text!
+            
+            if curPrice.first == "$"{
+                curPrice = String(curPrice.dropFirst(1))
+            }
+            
+            priceEdit!.text = curPrice
+        }
+        
+        // 5.
+        alertController.addAction(savePriceAction)
+        alertController.addAction(cancelPriceAction)
+        alertController.view.tintColor = UIColor(red:0.491, green:0.119, blue:0.212, alpha:1.0)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     
     @IBAction func tagEdit(_ sender: Any) {
         // TODO
@@ -254,86 +327,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
             destination!.tagList = profileData["tags"] as? [String] ?? []
         }
     }
-    
-    
-    /*
-    func frameOfTextInRange(range: NSRange, tag: UITextView) -> CGRect {
-        let beginning = tag.beginningOfDocument
-        let start = tag.positionFromPosition(beginning, offset: range.location)!
-        let end = tag.positionFromPosition(start, offset: range.length)!
-        let textRange = tag.textRangeFromPosition(start, toPosition: end)!
-        let rect = tag.firstRectForRange(textRange)
-        return tag.convertRect(rect, fromView: tagTextView)
-    }
-    
-    func drawTags(){
-        let pattern = "[a-zA-Z0-9]+"
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-        let matches = regex.matches(in: tagTextView.text!, options: [], range: NSMakeRange(0, tagTextView.text!.characters.count))
-        
-        for m in matches {
-            let range = m.range
-            let frame = frameOfTextInRange(range: range, tag: tagTextView)
-            let v = UIView(frame: frame)
-            v.layer.borderWidth = 1
-            v.layer.borderColor = UIColor.blue.cgColor
-            tagTextView.addSubview(v)
-        }
-    }
- */
-    /*
-    func frameOfTextInRange(range:NSRange, inTextView textView:UITextView) -> CGRect {
-        let beginning = textView.beginningOfDocument
-        let start = textView.positionFromPosition(beginning, offset: range.location)!
-        let end = textView.positionFromPosition(start, offset: range.length)!
-        let textRange = textView.textRangeFromPosition(start, toPosition: end)!
-        let rect = textView.firstRectForRange(textRange)
-        return textView.convertRect(rect, fromView: textView)
-    }
-    
-    let string = "Lorem ipsum dolor sit amet"
-    
-    let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    textView.backgroundColor = UIColor.clearColor()
-    
-    textView.attributedText = {
-    let attributedString = NSMutableAttributedString(string: string)
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineHeightMultiple = 1.25
-    attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, string.characters.count))
-    attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, string.characters.count))
-    
-    let regex = try! NSRegularExpression(pattern: "\\s", options: [])
-    let matches = regex.matchesInString(string, options: [], range: NSMakeRange(0, string.characters.count))
-    for m in matches {
-    attributedString.addAttribute(NSKernAttributeName, value: 6, range: m.range)
-    }
-    return NSAttributedString(attributedString: attributedString)
-    }()
-    
-    let textViewBG = UIView(frame: textView.bounds)
-    textViewBG.backgroundColor = UIColor.whiteColor()
-    
-    
-    let pattern = "[^ ]+"
-    let regex = try! NSRegularExpression(pattern: pattern, options: [])
-    let matches = regex.matchesInString(string, options: [], range: NSMakeRange(0, string.characters.count))
-    
-    for m in matches {
-    textViewBG.addSubview({
-    let range = m.range
-    var frame = frameOfTextInRange(range, inTextView: textView)
-    frame = CGRectInset(frame, CGFloat(-3), CGFloat(2))
-    frame = CGRectOffset(frame, CGFloat(0), CGFloat(3))
-    let v = UIView(frame: frame)
-    v.layer.cornerRadius = 2
-    v.backgroundColor = UIColor(hue: 211.0/360.0, saturation: 0.35, brightness: 0.78    , alpha: 1)
-    return v
-    }())
-    }
-    
-    textViewBG.addSubview(textView)
- */
     
     func updateProfileUI(){
         nicknameLabel.text = profileData["nickname"] as? String
@@ -373,11 +366,14 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
                 self.nicknameLabel.text = self.profileData["nickname"] as? String
                 
                 self.usernameLabel.text = self.profileData["username"] as? String
+                
                 if self.profileData["accountType"] as! String == "Student" {
                     self.pricingTextLabel.isHidden = true
                 }
+                
+                self.pricingTextLabel.text! = "$" + String(self.profileData["pricing"] as? String ?? "0")
                 self.updateProfileUI()
-                //do something to handle fetching tags
+
             }
         }
         self.nicknamePopover.layer.cornerRadius = 10
@@ -405,15 +401,11 @@ class ProfileViewController: UIViewController, UITextFieldDelegate{
             ExploreTableViewController.profileTagListDirty = true
         }
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func showMessagePrompt(withString: String, title: String) {
+        let alert = UIAlertController(title: title, message: withString, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
-    */
 
 }

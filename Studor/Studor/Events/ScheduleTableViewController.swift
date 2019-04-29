@@ -237,7 +237,7 @@ class ScheduleTableViewController: UITableViewController {
         
         if (segue.identifier == "eventInTableTapped") {
 
-            var dest = segue.destination as! EventViewController
+            let dest = segue.destination as! EventViewController
 
             dest.selectedEvent = self.selectedEvent!
             dest.timeOfEvent = selectedTime!

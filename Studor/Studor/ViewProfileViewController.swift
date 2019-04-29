@@ -44,7 +44,6 @@ class ViewProfileViewController: UIViewController {
     
     var fromChat = false
     
-    //TODO: Pricing label for all users (will hide if student user)
     
     override func viewDidLoad() {
         super.viewDidLoad()
